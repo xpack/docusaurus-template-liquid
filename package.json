@@ -1,0 +1,29 @@
+{
+  "name": "@xpack/docusaurus-template-liquid",
+  "version": "1.0.0",
+  "description": "The template used to generate the Docusaurus web sites for the xPack projects from files with liquid substitutions.",
+  "main": "",
+  "scripts": {
+    "npm link": "npm link"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xpack/docusaurus-template-liquid.git"
+  },
+  "keywords": [
+    "docusaurus",
+    "xpack",
+    "template",
+    "liquid"
+  ],
+  "author": {
+    "name": "Liviu Ionescu",
+    "email": "ilg@livius.net",
+    "url": "https://github.com/ilg-ul"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xpack/docusaurus-template-liquid/issues"
+  },
+  "homepage": "https://github.com/xpack/docusaurus-template-liquid#readme"
+}
