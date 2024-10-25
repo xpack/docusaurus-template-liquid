@@ -44,7 +44,8 @@ website_folder_path="${project_folder_path}/website"
 templates_folder_path="$(dirname "${script_folder_path}")/templates"
 
 export npm_package_scoped_name="$(liquidjs --context "@${project_folder_path}/package.json" --template '{{name}}')"
-export npm_package_name="$(echo "${npm_package_scoped_name}" | sed -e 's|@[a-zA-Z0-9-]*/||')"
+export npm_package_scope="$(echo "${npm_package_scoped_name}" | sed -e 's|^@||' -e 's|/.*||' )"
+export npm_package_name="$(echo "${npm_package_scoped_name}" | sed -e 's|^@[a-zA-Z0-9-]*/||')"
 export npm_package_version="$(liquidjs --context "@${project_folder_path}/package.json" --template '{{version}}')"
 export npm_package_description="$(liquidjs --context "@${project_folder_path}/package.json" --template '{{description}}')"
 
@@ -55,7 +56,7 @@ export github_project_name="$(echo "${github_full_name}" | sed -e 's|.*/||')"
 
 export npm_package_website_config="$(liquidjs --context "@${project_folder_path}/package.json" --template '{{websiteConfig | json}}')"
 
-export context="{ \"packageScopedName\": \"${npm_package_scoped_name}\", \"packageName\": \"${npm_package_name}\", \"packageVersion\": \"${npm_package_version}\", \"packageDescription\": \"${npm_package_description}\", \"githubProjectOrganization\": \"${github_project_organization}\", \"githubProjectName\": \"${github_project_name}\", \"packageWebsiteConfig\": ${npm_package_website_config} }"
+export context="{ \"packageScopedName\": \"${npm_package_scoped_name}\", \"packageScope\": \"${npm_package_scope}\", \"packageName\": \"${npm_package_name}\", \"packageVersion\": \"${npm_package_version}\", \"packageDescription\": \"${npm_package_description}\", \"githubProjectOrganization\": \"${github_project_organization}\", \"githubProjectName\": \"${github_project_name}\", \"packageWebsiteConfig\": ${npm_package_website_config} }"
 
 echo "context=${context}"
 
@@ -109,7 +110,7 @@ then
   exit 0
 fi
 
-if [ -f "${to_path}" ] && [ "${doForce}" == "n" ]
+if [ -f "${to_path}" ] && [ "${do_force}" == "n" ]
 then
   echo "${to_path} already present"
   exit 0
@@ -148,6 +149,32 @@ echo "Common files, cleanups..."
 find . -type d -name '_common' -print0 | sort -zn | \
   xargs -0 -I '{}' rm -rfv "${website_folder_path}"/'{}'
 
+echo
+echo "Common files, overriden..."
+
 # Main pass to copy/generate common
 find . -type f -print0 | sort -zn | \
   xargs -0 -I '{}' bash "${tmp_script_file}" --force '{}' "${website_folder_path}"
+
+cd "${templates_folder_path}/docusaurus/first-time"
+
+echo
+echo "First time proposals..."
+
+find . -type f -print0 | sort -zn | \
+  xargs -0 -I '{}' bash "${tmp_script_file}" '{}' "${website_folder_path}"
+
+cd "${templates_folder_path}/docusaurus/other"
+
+echo
+echo "Regenerate top README.md..."
+
+if [ $(cat "${project_folder_path}/README.md" | wc -l | tr -d '[:blank:]') -ge 42 ]
+then
+  mv -v "${project_folder_path}/README.md" "${project_folder_path}/README-long.md"
+fi
+echo
+echo liquidjs "@README-TOP-liquid.md" '->' "${project_folder_path}/README.md"
+liquidjs --context "${context}" --template "@README-TOP-liquid.md" --output "${project_folder_path}/README.md" --strict-variables --strict-filters
+
+rm -rf "${tmp_script_file}"
