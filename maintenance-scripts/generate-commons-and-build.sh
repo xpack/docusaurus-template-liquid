@@ -106,7 +106,7 @@ fi
 
 if [ "$(basename "${from_path}")" == ".DS_Store" ]
 then
-  echo "ignored" # Skip macOS specifics.
+  echo "${from_path} ignored" # Skip macOS specifics.
   exit 0
 fi
 
