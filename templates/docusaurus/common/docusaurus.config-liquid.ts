@@ -100,6 +100,13 @@ const config: Config = {
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
         },
+        sitemap: {
+          // https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-sitemap
+          changefreq: 'weekly',
+          priority: 0.5,
+          // ignorePatterns: ['/tags/**'],
+          filename: 'sitemap.xml',
+        },
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -153,17 +160,6 @@ const config: Config = {
       {
         trackingID: 'G-T50NMR8JZ1',
         anonymizeIP: false,
-      }
-    ],
-    [
-      // https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-sitemap
-      // https://cronica-it.github.io/sitemap.xml
-      '@docusaurus/plugin-sitemap',
-      {
-        changefreq: 'weekly',
-        priority: 0.5,
-        // ignorePatterns: ['/tags/**'],
-        filename: 'sitemap.xml',
       }
     ],
     [
@@ -234,14 +230,14 @@ const config: Config = {
             {
               label: 'Help Centre',
               to: '/docs/support'
-            }, /*
+            },
             {
               label: 'Releases',
               to: '/docs/releases'
-            }, */
+            },
             {
               label: 'About',
-              to: '/docs/about'
+              to: '/docs/project/about'
             }
           ],
         },

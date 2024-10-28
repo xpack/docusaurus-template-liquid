@@ -12,6 +12,11 @@ For information on how to install and use this project,
 please refer to the
 [project web site](https://{{githubProjectOrganization}}.github.io/{{githubProjectName}}/).
 
+## Project source
+
+The source code of the current release is available
+on [GitHub tag v{{packageVersion}} tree](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/tree/v{{packageVersion}}).
+
 ## License
 
 Unless otherwise stated, the original content is released under the terms of the
