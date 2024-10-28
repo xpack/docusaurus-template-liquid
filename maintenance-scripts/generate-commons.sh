@@ -1,6 +1,19 @@
 #!/usr/bin/env bash
 
 # -----------------------------------------------------------------------------
+#
+# This file is part of the xPack project (http://xpack.github.io).
+# Copyright (c) 2024 Liviu Ionescu.  All rights reserved.
+#
+# Permission to use, copy, modify, and/or distribute this software
+# for any purpose is hereby granted, under the terms of the MIT license.
+#
+# If a copy of the license was not distributed with this file, it can
+# be obtained from https://opensource.org/licenses/mit/.
+#
+# -----------------------------------------------------------------------------
+
+# -----------------------------------------------------------------------------
 # Safety settings (see https://gist.github.com/ilg-ul/383869cbb01f61a51c4d).
 
 if [[ ! -z ${DEBUG} ]]
@@ -37,28 +50,11 @@ script_folder_name="$(basename "${script_folder_path}")"
 # set -x
 
 # The script is invoked via the following npm script:
-# "website-generate-commons-and-build": "bash website/node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-commons-and-build.sh"
+# "website-generate-commons-and-build": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-commons-and-build.sh"
 
-project_folder_path="$(dirname $(dirname $(dirname $(dirname $(dirname "${script_folder_path}")))))"
-website_folder_path="${project_folder_path}/website"
-templates_folder_path="$(dirname "${script_folder_path}")/templates"
+project_folder_path="$(dirname $(dirname $(dirname $(dirname "${script_folder_path}"))))"
 
-export npm_package_scoped_name="$(liquidjs --context "@${project_folder_path}/package.json" --template '{{name}}')"
-export npm_package_scope="$(echo "${npm_package_scoped_name}" | sed -e 's|^@||' -e 's|/.*||' )"
-export npm_package_name="$(echo "${npm_package_scoped_name}" | sed -e 's|^@[a-zA-Z0-9-]*/||')"
-export npm_package_version="$(liquidjs --context "@${project_folder_path}/package.json" --template '{{version}}')"
-export npm_package_description="$(liquidjs --context "@${project_folder_path}/package.json" --template '{{description}}')"
-
-github_full_name="$(liquidjs --context "@${project_folder_path}/package.json" --template '{{repository.url}}' | sed -e 's|^https://github.com/||' -e 's|[.]git$||')"
-
-export github_project_organization="$(echo "${github_full_name}" | sed -e 's|/.*||')"
-export github_project_name="$(echo "${github_full_name}" | sed -e 's|.*/||')"
-
-export npm_package_website_config="$(liquidjs --context "@${project_folder_path}/package.json" --template '{{websiteConfig | json}}')"
-
-export context="{ \"packageScopedName\": \"${npm_package_scoped_name}\", \"packageScope\": \"${npm_package_scope}\", \"packageName\": \"${npm_package_name}\", \"packageVersion\": \"${npm_package_version}\", \"packageDescription\": \"${npm_package_description}\", \"githubProjectOrganization\": \"${github_project_organization}\", \"githubProjectName\": \"${github_project_name}\", \"packageWebsiteConfig\": ${npm_package_website_config} }"
-
-echo "context=${context}"
+source "${script_folder_path}/compute-context.sh"
 
 tmp_script_file="$(mktemp) -t script"
 # Note: __EOF__ is quoted to prevent substitutions.
@@ -178,3 +174,9 @@ echo liquidjs "@README-TOP-liquid.md" '->' "${project_folder_path}/README.md"
 liquidjs --context "${context}" --template "@README-TOP-liquid.md" --output "${project_folder_path}/README.md" --strict-variables --strict-filters
 
 rm -rf "${tmp_script_file}"
+
+echo
+echo "${script_name} done"
+
+# Completed successfully.
+exit 0
