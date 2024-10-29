@@ -25,11 +25,13 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Multi-configurations, cross-platform',
+    title: 'Multi-language, cross-platform',
     Svg: require('@site/static/img/mosaic.svg').default,
     description: (
       <>
-        The <b>xPack Framework</b> aims to automate building and testing of <b>multiple configuration</b> projects, and installing <b>multiple versions</b> of packages, across multiple platforms (<b>Windows</b>, <b>macOS</b>, <b>GNU/Linux</b>).
+        The module can be added to TypeScript and JavaScript projects,
+        and can be used across multiple platforms
+        (<b>Windows</b>, <b>macOS</b>, <b>GNU/Linux</b>).
       </>
     ),
   },
@@ -38,10 +40,9 @@ const FeatureList: FeatureItem[] = [
     Svg: require('@site/static/img/check-badge.svg').default,
     description: (
       <>
-        Source libraries and binary packages can be added to projects
-        as <b>dependencies</b>,
-        and conveniently installed with <code>xpm install</code>.
-        This feature also ensures reproducibility, which is particularly
+        The module can be added to projects
+        as an explicitly versioned <b>dependency</b>.
+        This feature ensures reproducibility, which is especially
         beneficial in <b>CI/CD</b> environments.
       </>
     ),
@@ -51,12 +52,10 @@ const FeatureList: FeatureItem[] = [
     Svg: require('@site/static/img/globe.svg').default,
     description: (
       <>
-        The <b><Link to="https://xpack.github.io/xpm/">xpm</Link></b> CLI tool
-        complements <b><Link to="https://docs.npmjs.com/cli/">npm</Link></b> with
-        several extra features specific to <b>C/C++ projects</b>.
-        This allows source libraries and
-        binary packages to nicely integrate into the Node.js ecosystem,
-        while still allowing them to be installed manually.
+        The module is available on the <b>npmjs.com</b> public
+        repository and can be conveniently
+        installed using <b>npm</b>,
+        just like millions of other packages.
       </>
     ),
   },
