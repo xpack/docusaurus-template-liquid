@@ -29,8 +29,8 @@ const FeatureList: FeatureItem[] = [
     Svg: require('@site/static/img/mosaic.svg').default,
     description: (
       <>
-        The module can be added to TypeScript and JavaScript projects,
-        and can be used across multiple platforms
+        The module is compatible with <b>TypeScript</b> and <b>JavaScript</b> projects,
+        and can be utilized across multiple platforms
         (<b>Windows</b>, <b>macOS</b>, <b>GNU/Linux</b>).
       </>
     ),
@@ -40,9 +40,9 @@ const FeatureList: FeatureItem[] = [
     Svg: require('@site/static/img/check-badge.svg').default,
     description: (
       <>
-        The module can be added to projects
-        as an explicitly versioned <b>dependency</b>.
-        This feature ensures reproducibility, which is especially
+        Projects refer to this module
+        via an explicitly versioned <b>dependency</b>.
+        This ensures reproducibility, which is especially
         beneficial in <b>CI/CD</b> environments.
       </>
     ),
@@ -52,9 +52,8 @@ const FeatureList: FeatureItem[] = [
     Svg: require('@site/static/img/globe.svg').default,
     description: (
       <>
-        The module is available on the <b>npmjs.com</b> public
-        repository and can be conveniently
-        installed using <b>npm</b>,
+        The module can be installed with <b>npm</b> from
+        the <b>npmjs.com</b> public repository,
         just like millions of other packages.
       </>
     ),
