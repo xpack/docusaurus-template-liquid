@@ -49,14 +49,26 @@ script_folder_name="$(basename "${script_folder_path}")"
 
 # set -x
 
-# The script is invoked via the following npm script:
+# The script is invoked from the website via the following npm script:
 # "website-generate-commons-and-build": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-commons-and-build.sh"
 
-project_folder_path="$(dirname $(dirname $(dirname $(dirname "${script_folder_path}"))))"
+current_folder_path="$(dirname $(dirname $(dirname $(dirname "${script_folder_path}"))))"
+if [ "$(basename "${current_folder_path}")" == "website" ]
+then
+  website_folder_path="${current_folder_path}"
+  project_folder_path="$(dirname "${current_folder_path}")"
+else
+  echo "Not callled from the website folder"
+  exit 1
+fi
 
-source "${script_folder_path}/compute-context.sh"
+templates_folder_path="$(dirname "${script_folder_path}")/templates"
+
+source "${current_folder_path}/node_modules/@xpack/node-modules-helper/maintenance-scripts/compute-context.sh"
 
 post_file_path="${website_folder_path}/blog/$(date -u '+%Y-%m-%d')-${npm_package_name}-v$(echo ${npm_package_version} | tr '.' '-')-released.mdx"
+
+# -----------------------------------------------------------------------------
 
 echo
 
@@ -74,3 +86,5 @@ echo "${script_name} done"
 
 # Completed successfully.
 exit 0
+
+# -----------------------------------------------------------------------------

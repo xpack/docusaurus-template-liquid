@@ -49,14 +49,30 @@ script_folder_name="$(basename "${script_folder_path}")"
 
 # set -x
 
-# The script is invoked via the following npm script:
-# "website-generate-commons-and-build": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-commons-and-build.sh"
+# The script is invoked from the website via the following npm script:
+# "website-generate-commons": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-commons.sh",
 
-project_folder_path="$(dirname $(dirname $(dirname $(dirname "${script_folder_path}"))))"
+current_folder_path="$(dirname $(dirname $(dirname $(dirname "${script_folder_path}"))))"
+if [ "$(basename "${current_folder_path}")" == "website" ]
+then
+  website_folder_path="${current_folder_path}"
+  project_folder_path="$(dirname "${current_folder_path}")"
+else
+  echo "Not callled from the website folder"
+  exit 1
 
-source "${script_folder_path}/compute-context.sh"
+  # When called from the top folder.
+  # website_folder_path="${current_folder_path}/website"
+  # project_folder_path="${current_folder_path}"
+fi
 
-tmp_script_file="$(mktemp) -t script"
+templates_folder_path="$(dirname "${script_folder_path}")/templates"
+
+source "${current_folder_path}/node_modules/@xpack/node-modules-helper/maintenance-scripts/compute-context.sh"
+
+# -----------------------------------------------------------------------------
+
+tmp_script_file="$(mktemp -t script)"
 # Note: __EOF__ is quoted to prevent substitutions.
 cat <<'__EOF__' >"${tmp_script_file}"
 
@@ -136,6 +152,8 @@ fi
 
 __EOF__
 
+# -----------------------------------------------------------------------------
+
 cd "${templates_folder_path}/docusaurus/common"
 
 echo
@@ -180,3 +198,5 @@ echo "${script_name} done"
 
 # Completed successfully.
 exit 0
+
+# -----------------------------------------------------------------------------
