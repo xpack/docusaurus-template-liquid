@@ -1,7 +1,7 @@
 ---
-title: xPack {{packageWebsiteConfig.name}} {% raw %}v{{packageVersion}}{% endraw %} released
-seo_tile: Version {% raw %}{{packageVersion}}{% endraw %} released
-description: Version {% raw %}v{{packageVersion}}{% endraw %} is a TODO new/maintenance release
+title: xPack {{packageWebsiteConfig.name}} {% raw %}v{{npmVersion}}{% endraw %} released
+seo_tile: Version {% raw %}{{npmVersion}}{% endraw %} released
+description: Version {% raw %}v{{npmVersion}}{% endraw %} is a TODO new/maintenance release
 keywords:
   - xpack
   - {{packageName}}
@@ -17,9 +17,9 @@ tags:
 
 # ----- Custom properties -----------------------------------------------------
 
-version: "{% raw %}{{packageVersion}}{% endraw %}"
+version: "{% raw %}{{npmVersion}}{% endraw %}"
 
-release_tag_url: "https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/tree/v{% raw %}{{packageVersion}}{% endraw %}"
+release_tag_url: "https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/tree/v{% raw %}{{npmVersion}}{% endraw %}"
 
 ---
 
@@ -33,9 +33,9 @@ import DownloadAnalytics from './_common/_download-analytics.mdx'
 
 TODO: select one summary
 
-Version **{% raw %}{{packageVersion}}{% endraw %}** is a maintenance release; it fixes ...
+Version **{% raw %}{{npmVersion}}{% endraw %}** is a maintenance release; it fixes ...
 
-Version **{% raw %}{{packageVersion}}{% endraw %}** is a new release; it adds ....
+Version **{% raw %}{{npmVersion}}{% endraw %}** is a new release; it adds ....
 
 <!-- truncate -->
 
@@ -52,18 +52,18 @@ For installation instructions, please refer to the
 [Install Guide](/docs/install/)
 page.
 
-## import
+## Import
 
 To include this module in TypeScript and ECMAScript modules, use `import`:
 
 ```typescript
-import { XXX } from '@{{packageScope}}/{{packageName}}'
+import { Xxx } from '@{{packageScope}}/{{packageName}}'
 ```
 
 In JavaScript with CommonJS, use `require()`:
 
 ```javascript
-const { XXX } = request('@{{packageScope}}/{{packageName}}')
+const { Xxx } = request('@{{packageScope}}/{{packageName}}')
 ```
 
 ## Source code

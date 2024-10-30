@@ -15,7 +15,7 @@ please refer to the
 ## Project source
 
 The source code of the current release is available
-on [GitHub tag v{{packageVersion}} tree](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/tree/v{{packageVersion}}).
+on [GitHub tag v{{npmVersion}} tree](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/tree/v{{npmVersion}}).
 
 ## License
 
