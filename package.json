@@ -4,7 +4,7 @@
   "description": "The template used to generate the Docusaurus web sites for the xPack projects from files with liquid substitutions.",
   "main": "",
   "scripts": {
-    "npm link": "npm link"
+    "npm-link": "npm link"
   },
   "repository": {
     "type": "git",
