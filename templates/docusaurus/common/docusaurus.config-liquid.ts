@@ -55,7 +55,7 @@ logger.info(customFields);
 
 const config: Config = {
   title: '{{ packageWebsiteConfig.title }}',
-  tagline: '{{ packageDescription }}',
+  tagline: '{% if packageWebsiteConfig.tagline %}{{packageWebsiteConfig.tagline}}{% else %}{{ packageDescription }}{% endif %}',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here

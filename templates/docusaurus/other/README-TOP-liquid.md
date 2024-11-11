@@ -4,7 +4,7 @@
 
 # The {{packageWebsiteConfig.longName}}
 
-{{packageDescription}}.
+{% if packageWebsiteConfig.tagline %}{{packageWebsiteConfig.tagline}}{% else %}{{ packageDescription }}{% endif %}.
 
 ## Project documentation
 
