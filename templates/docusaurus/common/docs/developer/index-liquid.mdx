@@ -71,6 +71,7 @@ this, start it in `watch` mode.
 npm --prefix ~/Work/npm-modules/{{githubProjectName}}.git run compile-watch
 ```
 
+{% if packageDependenciesTypescriptVersion != "" %}
 ## Language standard compliance
 
 The current version is compiled with TypeScript {{packageDependenciesTypescriptVersion}}:
@@ -85,6 +86,7 @@ by any other project either via `require()` or `import`.
 For more details on how to configure `tsconfig.json`, please see:
 
 - [TSConfig](https://www.typescriptlang.org/tsconfig/)
+{% endif %}
 
 ## Standard style
 
