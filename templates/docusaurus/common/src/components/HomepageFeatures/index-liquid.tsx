@@ -17,12 +17,12 @@ import Heading from '@theme/Heading';
 import styles from './styles.module.css';
 import Link from '@docusaurus/Link';
 
-type FeatureItem = {
-  title: string;
-  Svg: React.ComponentType<React.ComponentProps<'svg'>>;
-  description: JSX.Element;
-};
+import type {FeatureItem} from './FeatureItem'
 
+{% if packageWebsiteConfig.hasCustomHomepageFeatures == "true" %}
+import {FeatureList} from './FeatureList';
+{% else %}
+// Feature list for TypeScript module projects.
 const FeatureList: FeatureItem[] = [
   {
     title: 'Multi-language, cross-platform',
@@ -59,6 +59,7 @@ const FeatureList: FeatureItem[] = [
     ),
   },
 ];
+{% endif %}
 
 function Feature({title, Svg, description}: FeatureItem) {
   return (

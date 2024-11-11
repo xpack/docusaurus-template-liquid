@@ -14,11 +14,11 @@ import Website from './_website.mdx'
 
 {/* ------------------------------------------------------------------------ */}
 
-# About the xPack {{packageWebsiteConfig.name}}
+# About {% if packageWebsiteConfig.shortName %}{{packageWebsiteConfig.shortName}}{% else %}the {{packageWebsiteConfig.longName}}{% endif %}
 
 ## The project
 
-The **xPack {{packageWebsiteConfig.name}}** project is part of the
+The **{{packageWebsiteConfig.longName}}** project is part of the
 [xPack Reproducible Build Framework](https://xpack.github.io)
 and is hosted on GitHub as
 [`{{githubProjectOrganization}}/{{githubProjectName}}`](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/).
@@ -38,5 +38,5 @@ and Internet technologies.
 He can be reached at [`<ilg@livius.net>`](mailto:ilg@livius.net).
 Please note, this email address is provided as a courtesy.
 For all correspondence related to
-the **xPack {{packageWebsiteConfig.name}}**
+the **{{packageWebsiteConfig.longName}}**
 project, kindly use the project [support](/docs/support/) page).

@@ -31,10 +31,10 @@ import TestResults from './_test-results.mdx';
 [![GitHub pulls](https://img.shields.io/github/issues-pr/{{githubProjectOrganization}}/{{githubProjectName}}.svg)](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/pulls/)
 [![TS-Standard - TypeScript Standard Style Guide](https://badgen.net/badge/code%20style/ts-standard/blue?icon=typescript)](https://github.com/standard/ts-standard/)
 
-# How to build the xPack {{packageWebsiteConfig.name}}
+# How to build {% if packageWebsiteConfig.shortName %}{{packageWebsiteConfig.shortName}}{% else %}the {{packageWebsiteConfig.longName}}{% endif %}
 
 This page is designed for developers of the
-**xPack {{packageWebsiteConfig.name}}**
+**{{packageWebsiteConfig.longName}}**
 project and provides documentation on how to build and test the package.
 
 <Prerequisites nodeVersion="{{packageEnginesNodeVersion}}" nodeVersionMajor="{{packageEnginesNodeVersionMajor}}"/>
@@ -59,7 +59,7 @@ npm --prefix ~/Work/npm-modules/{{githubProjectName}}.git link
 And in the projects referring it:
 
 ```sh
-npm link @{{packageScope}}/{{packageName}}
+npm link {{packageScopedName}}
 ```
 
 ## Start the compile background task
@@ -116,7 +116,7 @@ To manually fix compliance with the style guide (where possible):
 <CodeBlock language="console"> {
 `% npm run fix
 
-> @{{packageScope}}/{{packageName}}@{customField('version')} fix
+> {{packageScopedName}}@${customField('version')} fix
 > ts-standard --fix src && standard --fix test
 ...
 `} </CodeBlock>
@@ -156,6 +156,7 @@ npm --prefix ~/Work/npm-modules/{{githubProjectName}}.git run test
 
 <TestResults />
 
+{% if packageWebsiteConfig.has100coverage == "true" %}
 ### Coverage tests
 
 Coverage tests are a good indication on how much of the source files is
@@ -172,16 +173,18 @@ and `/* c8 ignore start */` `/* c8 ignore stop */` for
 [c8](https://github.com/bcoe/c8).
 
 - none
+{% endif %}
 
 ### Continuous Integration (CI)
 
-The continuous integration tests are performed via
-[GitHub Actions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions) on Ubuntu,
-Windows and macOS, using node 16, 18.
+The module is {% if packageWebsiteConfig.has100coverage == "true" %}tested with 100% coverage and{% endif %}
+CI tested on every push via
+[GitHub Actions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions), on Ubuntu,
+Windows and macOS, using node 18 and 20.
 
 ## Tricks & tips
 
-To trace module resolution:
+To trace TypeScript module resolution:
 
 ```json
     "compile": "tsc --traceResolution  -p ./",

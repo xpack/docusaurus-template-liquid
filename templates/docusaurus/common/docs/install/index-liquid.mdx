@@ -15,39 +15,71 @@ keywords:
 
 date: 2024-10-24 23:57:00 +0300
 
+node_version: "{{packageWebsiteConfig.nodeVersion}}"
+
 ---
 
-[![GitHub package.json version](https://img.shields.io/github/package-json/v/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/mater/package.json)
-[![npm (scoped)](https://img.shields.io/npm/v/@{{packageScope}}/{{packageName}}.svg)](https://www.npmjs.com/package/@{{packageScope}}/{{packageName}}/)
-[![NPM Downloads](https://img.shields.io/npm/dw/%40{{packageScope}}%2F{{packageName}})](https://www.npmjs.com/package/@{{packageScope}}/{{packageName}}/)
-[![NPM Downloads](https://img.shields.io/npm/d18m/%40{{packageScope}}%2F{{packageName}})](https://www.npmjs.com/package/@{{packageScope}}/{{packageName}}/)
+{% if packageWebsiteConfig.hasCustomUserInformation == "true" %}
+import CustomInstall from './_custom-install.mdx'
+{% endif %}
 
-# How to install the xPack {{packageWebsiteConfig.name}}
+{/* ------------------------------------------------------------------------ */}
 
+[![GitHub package.json version](https://img.shields.io/github/package-json/v/{{githubProjectOrganization}}/{{githubProjectName}}?color=green)](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/mater/package.json)
+[![npm (scoped)](https://img.shields.io/npm/v/{{packageScopedName}}.svg?color=green)](https://www.npmjs.com/package/{{packageScopedName}}/)
+[![NPM Downloads](https://img.shields.io/npm/dw/{% if packageScope != "" %}%40{{packageScope}}%2F{% endif %}{{packageName}})](https://www.npmjs.com/package/{{packageScopedName}}/)
+[![NPM Downloads](https://img.shields.io/npm/d18m/{% if packageScope != "" %}%40{{packageScope}}%2F{% endif %}{{packageName}})](https://www.npmjs.com/package/{{packageScopedName}}/)
+
+# How to install {% if packageWebsiteConfig.shortName %}{{packageWebsiteConfig.shortName}}{% else %}the {{packageWebsiteConfig.longName}}{% endif %}
+
+{% if packageWebsiteConfig.hasCustomUserInformation == "true" %}
+<CustomInstall nodeVersion={frontMatter.node_version}/>
+{% else %}
 ## Prerequisites
 
-A recent [Node.js](https://nodejs.org) (>=18.0.0), since the TypeScript code
+A recent [Node.js](https://nodejs.org) (>=**{{packageEnginesNodeVersion}}**),
+since the TypeScript code
 is compiled into ECMAScript 2020 code, and the tests use ES6 modules.
 
 ## Install
 
-The module is available as
-[`@{{packageScope}}/{{packageName}}`](https://www.npmjs.com/package/@{{packageScope}}/{{packageName}}/)
+The package is available as
+[`{{packageScopedName}}`](https://www.npmjs.com/package/{{packageScopedName}}/)
 from the public [`npmjs`](https://www.npmjs.com) repository;
-it can be added as a dependency to any TypeScript or JavaScript
+it can be added as a
+{% if packageWebsiteConfig.hasCli != "true" %}dependency to any TypeScript or JavaScript{% else %}development dependency to any **npm**{% endif %}
 project with `npm install`:
 
 ```console
-npm install @{{packageScope}}/{{packageName}}@latest
+npm install {{packageScopedName}}@latest --save-dev
 ```
 
-The module does not provide any executables, and generally there are no
-reasons to install it globally.
+{% if packageWebsiteConfig.hasCli != "true" %}
+The package does not provide any executables, and generally there are no
+reasons to install it globally.{% else %}
+The package does provides executables, and can also
+be installed globally.
+
+```console
+npm install --location=global {{packageScopedName}}@latest
+```
+
+{% endif %}
 
 ## Uninstall
 
-As any Node.js module, it can be uninstalled:
+As any **npm** package, it can be uninstalled from the project with:
 
 ```console
-npm uninstall @{{packageScope}}/{{packageName}}
+npm uninstall {{packageScopedName}}
 ```
+
+{% if packageWebsiteConfig.hasCli == "true" %}
+It can also be uninstalled if installed globally:
+
+```console
+npm uninstall --location=global {{packageScopedName}}
+```
+
+{% endif %}
+{% endif %}

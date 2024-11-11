@@ -1,8 +1,8 @@
 [![GitHub package.json version](https://img.shields.io/github/package-json/v/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/master/package.json)
-[![npm (scoped)](https://img.shields.io/npm/v/@{{packageScope}}/{{packageName}}.svg?color=blue)](https://www.npmjs.com/package/@{{packageScope}}/{{packageName}}/)
+[![npm (scoped)](https://img.shields.io/npm/v/{{packageScopedName}}.svg?color=blue)](https://www.npmjs.com/package/{{packageScopedName}}/)
 [![license](https://img.shields.io/github/license/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/master/LICENSE)
 
-# The xPack {{packageWebsiteConfig.name}}
+# The {{packageWebsiteConfig.longName}}
 
 {{packageDescription}}.
 
@@ -10,12 +10,12 @@
 
 For information on how to install and use this project,
 please refer to the
-[project web site](https://{{githubProjectOrganization}}.github.io/{{githubProjectName}}/).
+[project web site]({{packageHomepage}}).
 
 ## Project source
 
 The source code of the current release is available
-on [GitHub tag v{{npmVersion}} tree](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/tree/v{{npmVersion}}).
+on [GitHub tag v{{releaseVersion}} tree](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/tree/v{{releaseVersion}}).
 
 ## License
 

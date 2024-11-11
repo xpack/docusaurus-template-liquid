@@ -18,7 +18,7 @@ date: 2020-07-21 17:54:00 +0300
 
 {/* ------------------------------------------------------------------------ */}
 
-# How to get help for the xPack {{packageWebsiteConfig.name}}
+# How to get help for {% if packageWebsiteConfig.shortName %}{{packageWebsiteConfig.shortName}}{% else %}the {{packageWebsiteConfig.longName}}{% endif %}
 
 ## Quick links
 
@@ -57,7 +57,7 @@ and enter a **New discussion**; use the **Q&A** category for questions, **Ideas*
 
 If you are convinced that you identified a bug
 or if want to contribute code to enhance the
-**xPack {{packageWebsiteConfig.name}}**
+**{{packageWebsiteConfig.longName}}**
 project, register a **New Issue** in the
 [GitHub Issues](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/issues)
 tracker.

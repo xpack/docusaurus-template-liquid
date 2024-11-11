@@ -12,31 +12,36 @@ date: 2024-10-24 23:58:00 +0300
 
 ---
 
-# How to use the xPack {{packageWebsiteConfig.name}}
+# How to use {% if packageWebsiteConfig.shortName %}{{packageWebsiteConfig.shortName}}{% else %}the {{packageWebsiteConfig.longName}}{% endif %}
 
-This section is intended for those who plan to use this module in their
+This section is intended for those who plan to use this
+{% if packageWebsiteConfig.hasCli == "true" %}package{% else %}module{% endif %} in their
 own projects.
 
-The `@{{packageScope}}/{{packageName}}` module can be imported into both TypeScript
+{% if packageWebsiteConfig.hasCli != "true" %}
+The `{{packageScopedName}}` module can be imported into both TypeScript
 and JavaScript Node.js code.
 
 In TypeScript and ECMAScript modules, use `import`:
 
 ```typescript
-import { Xxx } from '@{{packageScope}}/{{packageName}}'
+import { Xxx } from '{{packageScopedName}}'
 ```
 
 In JavaScript with CommonJS, use `require()`:
 
 ```javascript
-const { Xxx } = request('@{{packageScope}}/{{packageName}}')
+const { Xxx } = request('{{packageScopedName}}')
 ```
+{% endif %}
 
 TODO
 
+{% if packageWebsiteConfig.hasApi == "true" %}
 ### Reference
 
 For more details on the available class definitions, including all methods,
 accessors, properties, etc,
 please see the TypeDoc
 [API](/docs/api/) pages.
+{% endif %}

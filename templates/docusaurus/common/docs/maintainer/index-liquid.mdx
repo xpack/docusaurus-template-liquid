@@ -28,18 +28,18 @@ import More from './_more.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
-[![GitHub package.json version](https://img.shields.io/github/package-json/v/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/mater/package.json)
-[![npm (scoped)](https://img.shields.io/npm/v/@{{packageScope}}/{{packageName}}.svg)](https://www.npmjs.com/package/@{{packageScope}}/{{packageName}}/)
+[![GitHub package.json version](https://img.shields.io/github/package-json/v/{{githubProjectOrganization}}/{{githubProjectName}}?color=green)](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/mater/package.json)
+[![npm (scoped)](https://img.shields.io/npm/v/{{packageScopedName}}.svg?color=green)](https://www.npmjs.com/package/{{packageScopedName}}/)
 [![license](https://img.shields.io/github/license/{{githubProjectOrganization}}/{{githubProjectName}}.svg)](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/xpack/LICENSE)
 [![CI on Push](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions/workflows/test-ci.yml/badge.svg)](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions/workflows/test-ci.yml)
 [![GitHub issues](https://img.shields.io/github/issues/{{githubProjectOrganization}}/{{githubProjectName}}.svg)](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/issues)
 [![GitHub pulls](https://img.shields.io/github/issues-pr/{{githubProjectOrganization}}/{{githubProjectName}}.svg)](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/pulls)
 [![TS-Standard - TypeScript Standard Style Guide](https://badgen.net/badge/code%20style/ts-standard/blue?icon=typescript)](https://github.com/standard/ts-standard/)
 
-# How to make new xPack {{packageWebsiteConfig.name}} releases
+# How to make new {% if packageWebsiteConfig.shortName %}{{packageWebsiteConfig.shortName}}{% else %}{{packageWebsiteConfig.longName}}{% endif %} releases
 
 This page is designed for maintainers of the
-**xPack {{packageWebsiteConfig.name}}**
+**{{packageWebsiteConfig.longName}}**
 project and provides documentation on how to create new releases.
 
 <Prerequisites nodeVersion="{{packageEnginesNodeVersion}}" nodeVersionMajor="{{packageEnginesNodeVersionMajor}}"/>
@@ -93,11 +93,11 @@ Keep:
 
 ### Increase the version and update it in the top `package.json`
 
-As required by npm modules, this one also uses [semver](https://semver.org).
+As required by npm modules, this one also uses [SemVer](https://semver.org).
 
-- determine the next version (like <code>{customField('npmVersion')}</code>)
+- determine the next version (like <code>{customField('releaseVersion')}</code>)
 - update the version in the top `package.json` file
-- use the new version, suffixed by `-pre`, like <code>{customField('npmVersion')}-pre</code>.
+- use the new version, suffixed by `-pre`, like <code>{customField('releaseVersion')}-pre</code>.
 
 ### Update the `websiteConfig` in top `package.json` (if necessary)
 
@@ -124,7 +124,7 @@ Check GitHub issues and pull requests:
 - https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/pulls
 
 and fix them; assign them to a milestone
-(like <code>{customField('npmVersion')}</code>).
+(like <code>{customField('releaseVersion')}</code>).
 
 ### Update `CHANGELOG.md`
 
@@ -163,8 +163,8 @@ to:
 *
 ```
 
-- add a new entry like _**\* v{customField('npmVersion')} prepared**_
-- commit with a message like _**prepare v{customField('npmVersion')}**_
+- add a new entry like _**\* v{customField('releaseVersion')} prepared**_
+- commit with a message like _**prepare v{customField('releaseVersion')}**_
 
 ### Prepare the release
 
@@ -178,10 +178,13 @@ to:
   update `.npmignore`
 
 <CodeBlock language="sh"> {
-`npm version ${customField('npmVersion')}
+`npm version ${customField('releaseVersion')}
 `} </CodeBlock>
 
 - push all changes to GitHub
+
+### CI tests
+
 - the `postversion` npm script should also update tags via
   `git push origin --tags`; this should trigger CI
 - **wait for CI tests to complete**
@@ -198,7 +201,7 @@ npm --prefix ~/Work/npm-modules/{{githubProjectName}}.git/website run generate-w
 
 - edit the front matter properties
 - select the correct summary
-- commit with _**website: blog post release {customField('npmVersion')} published**_
+- commit with _**website: blog post release {customField('releaseVersion')} published**_
 - push the `development` branch
 
 ## Publish the release to npmjs.com
@@ -214,17 +217,25 @@ npm publish --access public
 ```
 
 After a few moments the version will be visible at
-[@{{packageScope}}/{{packageName}} Versions](https://www.npmjs.com/package/@{{packageScope}}/{{packageName}}?activeTab=versions).
+[{{packageScopedName}} Versions](https://www.npmjs.com/package/{{packageScopedName}}?activeTab=versions).
 
-### Test locally
+### Manual install test
 
-Test it the module can be installed locally:
+{% if packageWebsiteConfig.hasCli != "true" %}
+Test if the package can be installed in a project:
 
 ```bash
 rm -rf ~/tmp/{{packageName}}-test && mkdir ~/tmp/{{packageName}}-test
 npm --prefix ~/tmp/{{packageName}}-test init --yes
-npm --prefix ~/tmp/{{packageName}}-test install @{{packageScope}}/{{packageName}}@next
+npm --prefix ~/tmp/{{packageName}}-test install {{packageScopedName}}@next
 ```
+{% else %}
+Test if the package can be installed globally:
+
+```bash
+npm install ----location=global {{packageScopedName}}@next
+```
+{% endif %}
 
 Validate the web site content in a local build via the npm `build` script:
 
@@ -279,17 +290,28 @@ In https://github.com/xpack/xpm-liquid-ts/milestones:
 
 When the release is considered stable, promote it as `latest`:
 
-- `npm dist-tag ls @{{packageScope}}/{{packageName}}`
-- <code>npm dist-tag add @{{packageScope}}/{{packageName}}@{customField('npmVersion')} latest</code>
-- `npm dist-tag ls @{{packageScope}}/{{packageName}}`
+- `npm dist-tag ls {{packageScopedName}}`
+- <code>npm dist-tag add {{packageScopedName}}@{customField('releaseVersion')} latest</code>
+- `npm dist-tag ls {{packageScopedName}}`
+
+{% if packageWebsiteConfig.shareOnTwitter == "true" %}
+## Share on X/Twitter
+
+- in a separate browser windows, open [X/Twitter](https://x.com/)
+- using the `@xpack_project` account
+- paste the release name like **xPack xpm v0.19.4 released**
+- paste the link to the Web page
+  [release](/docs/releases/)
+- click the **Tweet** button
+{% endif %}
 
 ## Analytics
 
-- npmjs.com [`@{{packageScope}}/{{packageName}}`](https://www.npmjs.com/package/@{{packageScope}}/{{packageName}}/) package
+- npmjs.com [`{{packageScopedName}}`](https://www.npmjs.com/package/{{packageScopedName}}/) package
   - latest release, per month
-[![npm (scoped)](https://img.shields.io/npm/v/@{{packageScope}}/{{packageName}}.svg)](https://www.npmjs.com/package/@{{packageScope}}/{{packageName}}/)
-[![npm](https://img.shields.io/npm/dm/@{{packageScope}}/{{packageName}}.svg)](https://www.npmjs.com/package/@{{packageScope}}/{{packageName}}/)
-  - all releases [![npm](https://img.shields.io/npm/dt/@{{packageScope}}/{{packageName}}.svg)](https://www.npmjs.com/package/@{{packageScope}}/{{packageName}}/)
+[![npm (scoped)](https://img.shields.io/npm/v/{{packageScopedName}}.svg)](https://www.npmjs.com/package/{{packageScopedName}}/)
+[![npm](https://img.shields.io/npm/dm/{{packageScopedName}}.svg)](https://www.npmjs.com/package/{{packageScopedName}}/)
+  - all releases [![npm](https://img.shields.io/npm/dt/{{packageScopedName}}.svg)](https://www.npmjs.com/package/{{packageScopedName}}/)
 
 Credit to [Shields IO](https://shields.io) for the badges.
 
