@@ -181,6 +181,17 @@ find . -type f -print0 | sort -zn | \
 cd "${templates_folder_path}/docusaurus/other"
 
 echo
+echo "Regenerate website package.json..."
+
+# Be sure destination is writable.
+chmod -f +w "${website_folder_path}/package.json"
+
+# https://trentm.com/json
+cat "${website_folder_path}/package.json" "package.json" | json --deep-merge >"${website_folder_path}/package-new.json"
+rm "${website_folder_path}/package.json"
+mv -v "${website_folder_path}/package-new.json" "${website_folder_path}/package.json"
+
+echo
 echo "Regenerate top README.md..."
 
 if [ $(cat "${project_folder_path}/README.md" | wc -l | tr -d '[:blank:]') -ge 42 ]
