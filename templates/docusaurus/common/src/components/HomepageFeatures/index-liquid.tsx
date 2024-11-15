@@ -19,8 +19,10 @@ import Link from '@docusaurus/Link';
 
 import type {FeatureItem} from './FeatureItem'
 
-{% if packageWebsiteConfig.hasCustomHomepageFeatures == "true" %}
-import {FeatureList} from './FeatureList';
+{% if packageWebsiteConfig.hasTopHomepageFeatures == "true" %}
+import {FeatureList} from './TopFeatureList';
+{% elsif packageWebsiteConfig.hasCustomHomepageFeatures == "true" %}
+import {FeatureList} from './CustomFeatureList';
 {% else %}
 // Feature list for TypeScript module projects.
 const FeatureList: FeatureItem[] = [

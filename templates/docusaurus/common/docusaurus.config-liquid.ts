@@ -7,7 +7,9 @@ import type * as Preset from '@docusaurus/preset-classic';
 import logger from '@docusaurus/logger';
 {% if packageWebsiteConfig.hasCli == "true" %}
 import cliNavbar from './docusaurus-config-navbar-cli'
-{% endif%}
+{% endif%}{% if packageWebsiteConfig.hasCustomDocsNavbarItem == "true" %}
+import {customDocsNavbarItem} from './navbar-docs-items'
+{% endif %}
 
 import {redirects} from './docusaurus-config-redirects'
 
@@ -263,7 +265,9 @@ const config: Config = {
           // label: 'Home',
           className: 'header-home-link',
           position: 'left'
-        },
+        },{% if packageWebsiteConfig.hasCustomDocsNavbarItem == "true" %}
+        customDocsNavbarItem,
+        {% else %}
         {
           type: 'dropdown',
           label: 'Documentation',
@@ -295,7 +299,7 @@ const config: Config = {
               to: '/docs/project/about'
             }
           ],
-        },{% if packageWebsiteConfig.hasCli == "true" %}
+        },{% endif %}{% if packageWebsiteConfig.hasCli == "true" %}
         cliNavbar,{% endif %}{% if packageWebsiteConfig.hasApi == "true" %}
         {
           to: '/docs/api',
@@ -327,12 +331,12 @@ const config: Config = {
           position: 'right',
           className: 'header-github-link',
           'aria-label': 'GitHub repository',
-        },
+        },{% if packageConfig.isOrganizationWeb != "true" %}
         {
           label: `v${customFields.releaseVersion}`,
           position: 'right',
           href: `https://www.npmjs.com/package/{{ packageScopedName }}/v/${customFields.releaseVersion}`,
-        },
+        },{% endif %}
         {
           href: 'https://github.com/xpack/',
           label: 'xpack',
@@ -350,7 +354,15 @@ const config: Config = {
       links: [
         {
           title: 'Pages',
-          items: [
+          items: [{% if packageConfig.isOrganizationWeb == "true" %}
+            {
+              label: 'Getting Started',
+              to: '/docs/getting-started',
+            },
+            {
+              label: 'About',
+              to: '/docs/project/about',
+            },{% else %}
             {
               label: 'Install',
               to: '/docs/install',
@@ -362,7 +374,7 @@ const config: Config = {
             {
               label: 'Releases',
               to: '/docs/releases',
-            },
+            },{% endif %}
             {
               label: 'Blog',
               to: '/blog',

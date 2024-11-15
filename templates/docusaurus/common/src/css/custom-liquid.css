@@ -41,7 +41,7 @@ p.hero__code code  {
   color: var(--ifm-font-color-base)
 }
 
-{% if customFields.isOrganizationWeb == "true" %}
+{% if packageConfig.isOrganizationWeb == "true" %}
 p.hero__subtitle {
   margin: 0 0 0 0; /* 0 0 var(--ifm-paragraph-margin-bottom) */
 }

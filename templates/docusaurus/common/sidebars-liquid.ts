@@ -4,7 +4,8 @@
 import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';{% if packageWebsiteConfig.hasApi == "true" %}
 import typedocSidebarItems from "./docs/api/typedoc-sidebar.cjs";{% endif %}{% if packageWebsiteConfig.hasCli == "true" %}
 import cliSidebar from "./sidebar-cli";{% endif %}{% if packageWebsiteConfig.hasCustomUserSidebar == "true" %}
-import {userSidebarCategory} from "./sidebar-user";{% endif %}
+import {userSidebarCategory} from "./sidebar-user";{% endif %}{% if packageWebsiteConfig.hasCustomSidebar == "true" %}
+import {customDocsSidebar} from "./sidebar-docs-custom";{% endif %}
 
 /**
  * Creating a sidebar enables you to:
@@ -18,6 +19,9 @@ import {userSidebarCategory} from "./sidebar-user";{% endif %}
  */
 const sidebars: SidebarsConfig = {
 
+  {% if packageWebsiteConfig.hasCustomSidebar == "true" %}
+  docsSidebar: customDocsSidebar,
+  {% else %}
   docsSidebar: [
     {
       type: 'doc',
@@ -82,7 +86,7 @@ const sidebars: SidebarsConfig = {
       id: 'maintainer/index',
       label: 'Maintainer Information'
     },
-  ],{% if packageWebsiteConfig.hasApi == "true" %}
+  ],{% endif %}{% if packageWebsiteConfig.hasApi == "true" %}
   typedocSidebar: [
     {
       type: "category",

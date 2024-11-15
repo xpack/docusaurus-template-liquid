@@ -49,6 +49,24 @@ script_folder_name="$(basename "${script_folder_path}")"
 
 # set -x
 
+do_init="false"
+
+while [ $# -gt 0 ]
+do
+  case "$1" in
+    --init )
+      do_init="true"
+      shift
+      ;;
+
+    * )
+      echo "Unsupported option $1"
+      shift
+  esac
+done
+
+# -----------------------------------------------------------------------------
+
 # The script is invoked from the website via the following npm script:
 # "website-generate-commons": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-commons.sh",
 
@@ -58,8 +76,16 @@ then
   website_folder_path="${current_folder_path}"
   project_folder_path="$(dirname "${current_folder_path}")"
 else
-  echo "Not callled from the website folder"
-  exit 1
+  if [ "${do_init}" == "true" ]
+  then
+    project_folder_path="${current_folder_path}"
+    website_folder_path="${project_folder_path}/website"
+
+    mkdir -pv "${website_folder_path}"
+  else
+    echo "Not callled from the website folder"
+    exit 1
+  fi
 
   # When called from the top folder.
   # website_folder_path="${current_folder_path}/website"
@@ -128,6 +154,28 @@ then
   exit 0
 fi
 
+if [ "${is_organization_web}" == "true" ]
+then
+  skip_pages_array=(\
+    "docs/developer/_test-results.mdx" \
+    "docs/faq/index-liquid.mdx" "docs/user/index-liquid.mdx" \
+    "docs/getting-started/_common/_commonjs-compatibility.mdx" \
+    "docs/getting-started/_common/_github-and-npmjs-liquid.mdx" \
+    "docs/getting-started/_compatibility.mdx" \
+    "docs/getting-started/_overview.mdx" \
+    "docs/getting-started/_status-liquid.mdx" \
+    "docs/install/index-liquid.mdx" \
+    "docs/maintainer/_more.mdx" \
+    "docs/releases/index-liquid.mdx" \
+  )
+
+  if [[ ${skip_pages_array[@]} =~ "${from_path}" ]]
+  then
+    echo "${from_path} skipped for organisation web"
+    exit 0
+  fi
+fi
+
 if [ -f "${to_path}" ]
 then
     # Be sure destination is writable.
@@ -154,53 +202,68 @@ __EOF__
 
 # -----------------------------------------------------------------------------
 
-cd "${templates_folder_path}/docusaurus/common"
+if [ "${do_init}" != "true" ]
+then
 
-echo
-echo "Common files, cleanups..."
+  cd "${templates_folder_path}/docusaurus/common"
 
-# Preliminary pass to remove _common folders.
-find . -type d -name '_common' -print0 | sort -zn | \
-  xargs -0 -I '{}' rm -rfv "${website_folder_path}"/'{}'
+  echo
+  echo "Common files, cleanups..."
 
-echo
-echo "Common files, overriden..."
+  # Preliminary pass to remove _common folders.
+  find . -type d -name '_common' -print0 | sort -zn | \
+    xargs -0 -I '{}' rm -rfv "${website_folder_path}"/'{}'
 
-# Main pass to copy/generate common
-find . -type f -print0 | sort -zn | \
-  xargs -0 -I '{}' bash "${tmp_script_file}" --force '{}' "${website_folder_path}"
+  echo
+  echo "Common files, overriden..."
 
-cd "${templates_folder_path}/docusaurus/first-time"
+  # Main pass to copy/generate common
+  find . -type f -print0 | sort -zn | \
+    xargs -0 -I '{}' bash "${tmp_script_file}" --force '{}' "${website_folder_path}"
 
-echo
-echo "First time proposals..."
+  cd "${templates_folder_path}/docusaurus/first-time"
 
-find . -type f -print0 | sort -zn | \
-  xargs -0 -I '{}' bash "${tmp_script_file}" '{}' "${website_folder_path}"
+  echo
+  echo "First time proposals..."
 
-cd "${templates_folder_path}/docusaurus/other"
+  find . -type f -print0 | sort -zn | \
+    xargs -0 -I '{}' bash "${tmp_script_file}" '{}' "${website_folder_path}"
+
+fi
 
 echo
 echo "Regenerate website package.json..."
 
-# Be sure destination is writable.
-chmod -f +w "${website_folder_path}/package.json"
-
 # https://trentm.com/json
-cat "${website_folder_path}/package.json" "package.json" | json --deep-merge >"${website_folder_path}/package-new.json"
-rm "${website_folder_path}/package.json"
-mv -v "${website_folder_path}/package-new.json" "${website_folder_path}/package.json"
-
-echo
-echo "Regenerate top README.md..."
-
-if [ $(cat "${project_folder_path}/README.md" | wc -l | tr -d '[:blank:]') -ge 42 ]
+if [ -f "${website_folder_path}/package.json" ]
 then
-  mv -v "${project_folder_path}/README.md" "${project_folder_path}/README-long.md"
+  # Be sure destination is writable.
+  chmod -f +w "${website_folder_path}/package.json"
+
+  # Pass the existing json first, then the template one.
+  cat "${website_folder_path}/package.json" "${templates_folder_path}/docusaurus/other/package.json" | json --deep-merge > "${website_folder_path}/package-new.json"
+
+  rm "${website_folder_path}/package.json"
+  mv -v "${website_folder_path}/package-new.json" "${website_folder_path}/package.json"
+else
+  cat "${templates_folder_path}/docusaurus/other/package.json" | json --deep-merge > "${website_folder_path}/package.json"
 fi
-echo
-echo liquidjs "@README-TOP-liquid.md" '->' "${project_folder_path}/README.md"
-liquidjs --context "${context}" --template "@README-TOP-liquid.md" --output "${project_folder_path}/README.md" --strict-variables --strict-filters
+
+if [ "${do_init}" != "true" ] && [ "${is_organization_web}" != "true" ]
+then
+
+  echo
+  echo "Regenerate top README.md..."
+
+  if [ $(cat "${project_folder_path}/README.md" | wc -l | tr -d '[:blank:]') -ge 42 ]
+  then
+    mv -v "${project_folder_path}/README.md" "${project_folder_path}/README-long.md"
+  fi
+  echo
+  echo liquidjs "@README-TOP-liquid.md" '->' "${project_folder_path}/README.md"
+  liquidjs --context "${context}" --template "@${templates_folder_path}/docusaurus/other/README-TOP-liquid.md" --output "${project_folder_path}/README.md" --strict-variables --strict-filters
+
+fi
 
 rm -rf "${tmp_script_file}"
 

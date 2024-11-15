@@ -16,6 +16,15 @@ date: 2024-10-25 13:10:00 +0300
 
 ---
 
+{% if packageWebsiteConfig.hasCustomDeveloper == "true" %}
+
+import CustomDeveloper from './_custom-developer.mdx'
+
+{/* ------------------------------------------------------------------------ */}
+
+<CustomDeveloper />
+
+{% else %}
 import customField from '@site/src/libs/customField';
 import CodeBlock from '@theme/CodeBlock';
 
@@ -191,3 +200,5 @@ To trace TypeScript module resolution:
 ```json
     "compile": "tsc --traceResolution  -p ./",
 ```
+
+{% endif %}

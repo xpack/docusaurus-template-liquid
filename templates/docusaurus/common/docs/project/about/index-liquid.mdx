@@ -10,6 +10,9 @@ date: 2024-10-24 23:58:00 +0300
 
 ---
 
+{% if packageWebsiteConfig.hasCustomAbout == "true" %}
+import CustomAbout from './_custom-about.mdx'
+{% endif %}
 import Website from './_website.mdx'
 
 {/* ------------------------------------------------------------------------ */}
@@ -18,10 +21,19 @@ import Website from './_website.mdx'
 
 ## The project
 
+{% if packageWebsiteConfig.hasCustomAbout == "true" %}
+<CustomAbout />
+{% else %}
 The **{{packageWebsiteConfig.longName}}** project is part of the
 [xPack Reproducible Build Framework](https://xpack.github.io)
 and is hosted on GitHub as
 [`{{githubProjectOrganization}}/{{githubProjectName}}`](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/).
+{% endif %}
+
+## The project history
+
+The **{{packageWebsiteConfig.longName}}** history is presented
+in a separate [History](/docs/project/history/) page.
 
 ## The web site
 
@@ -35,8 +47,9 @@ a senior computer engineer, with expertise in **C++/C embedded systems**,
 **RTOSes**, **build tools**, operating systems, compilers
 and Internet technologies.
 
+{% assign last_word = packageWebsiteConfig.longName | split: " " | last | downcase %}
 He can be reached at [`<ilg@livius.net>`](mailto:ilg@livius.net).
 Please note, this email address is provided as a courtesy.
 For all correspondence related to
-the **{{packageWebsiteConfig.longName}}**
-project, kindly use the project [support](/docs/support/) page).
+the **{{packageWebsiteConfig.longName}}**{% if last_word != "project" %} project{% endif %},
+kindly use the project [support](/docs/support/) page).

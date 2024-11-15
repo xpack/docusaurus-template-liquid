@@ -21,7 +21,7 @@ import HeadTitle from '@site/src/components/HeadTitle';
 
 import styles from './index.module.css';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
-{%- if customFields.isOrganizationWeb == "true" %}
+{%- if packageConfig.isOrganizationWeb == "true" %}
 import HomepageTools from '@site/src/components/HomepageTools';
 {%- endif %}
 import InstallWithCopy from '@site/src/components/InstallWithCopy';
@@ -36,7 +36,7 @@ function HomepageHeader() {
           {siteConfig.title}
         </Heading>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
-{% if customFields.isOrganizationWeb != "true" %}
+{% if packageConfig.isOrganizationWeb != "true" %}
         <div className={styles.installWithCopy}>
           <InstallWithCopy>npm install {% if packageWebsiteConfig.isInstallGlobally == "true" %}--location=global {% endif %}{{packageScopedName}}@latest</InstallWithCopy>
         </div>
