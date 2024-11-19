@@ -83,7 +83,7 @@ else
 
     mkdir -pv "${website_folder_path}"
   else
-    echo "Not callled from the website folder"
+    echo "Not called from the website folder"
     exit 1
   fi
 
@@ -94,7 +94,7 @@ fi
 
 templates_folder_path="$(dirname "${script_folder_path}")/templates"
 
-source "${current_folder_path}/node_modules/@xpack/node-modules-helper/maintenance-scripts/compute-context.sh"
+source "${current_folder_path}/node_modules/@xpack/npm-packages-helper/maintenance-scripts/compute-context.sh"
 
 # -----------------------------------------------------------------------------
 
