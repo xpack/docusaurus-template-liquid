@@ -42,8 +42,7 @@ function getCustomFields() {
   const enginesNodeVersionMajor = enginesNodeVersion.replace(/[.].*/, '');
   const customFields = {
     enginesNodeVersion,
-    enginesNodeVersionMajor,
-    baseUrl: process.env.DOCUSAURUS_BASEURL ?? '{% if baseUrlPreview != baseUrl %}{{ baseUrlPreview }}{% else %}{{ baseUrl }}{% endif %}'
+    enginesNodeVersionMajor
   }
 
   return {
@@ -62,7 +61,8 @@ logger.info(customFields);
 // ----------------------------------------------------------------------------
 
 const config: Config = {
-  title: '{{ packageWebsiteConfig.title }}',
+  title: '{{ packageWebsiteConfig.title }}' +
+    ((process.env.DOCUSAURUS_IS_PREVIEW === 'true') ? ' (preview)' : ''),
   tagline: '{% if packageWebsiteConfig.tagline %}{{packageWebsiteConfig.tagline}}{% else %}{{ packageDescription }}{% endif %}',
   favicon: 'img/favicon.ico',
 
@@ -70,7 +70,8 @@ const config: Config = {
   url: 'https://{{ githubProjectOrganization }}.github.io/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: customFields.baseUrl,
+  baseUrl: process.env.DOCUSAURUS_BASEURL ??
+    '{% if baseUrlPreview != baseUrl %}{{ baseUrlPreview }}{% else %}{{ baseUrl }}{% endif %}',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
