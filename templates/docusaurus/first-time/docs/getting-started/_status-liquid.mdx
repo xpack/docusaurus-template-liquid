@@ -1,7 +1,9 @@
 
 {/* ------------------------------------------------------------------------ */}
 
-The `{{packageScopedName}}` module is fully functional and stable.
+The `{{packageScopedName}}` project is fully functional and stable.
 
+{% if packageWebsiteConfig.hasCli != "true" %}
 This module is primarily intended to be included in projects
 like the `xpm` CLI application.
+{% endif %}

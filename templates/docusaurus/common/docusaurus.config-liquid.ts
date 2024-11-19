@@ -38,7 +38,13 @@ function getCustomFields() {
 
   logger.info(`package version: ${topPackageJson.version}`);
 
-  const customFields = {}
+  const enginesNodeVersion = topPackageJson.engines.node.replace(/[^0-9]*/, '') || '';
+  const enginesNodeVersionMajor = enginesNodeVersion.replace(/[.].*/, '');
+  const customFields = {
+    enginesNodeVersion,
+    enginesNodeVersionMajor,
+    baseUrl: process.env.DOCUSAURUS_BASEURL ?? '{% if baseUrlPreview != baseUrl %}{{ baseUrlPreview }}{% else %}{{ baseUrl }}{% endif %}'
+  }
 
   return {
     releaseVersion,
@@ -64,7 +70,7 @@ const config: Config = {
   url: 'https://{{ githubProjectOrganization }}.github.io/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '{{ baseUrl }}',
+  baseUrl: customFields.baseUrl,
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.

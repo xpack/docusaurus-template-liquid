@@ -119,8 +119,8 @@ Execute the npm script `clean` then `start` in the website sub-project,
 or run the following in a terminal:
 
 ```sh
-npm --prefix ~/Work/npm-modules/{{githubProjectName}}.git/website run clean
-npm --prefix ~/Work/npm-modules/{{githubProjectName}}.git/website run start
+npm --prefix ~/Work/npm-packages/{{githubProjectName}}.git/website run clean
+npm --prefix ~/Work/npm-packages/{{githubProjectName}}.git/website run start
 ```
 
 Navigate to the **Maintainer Info** page,
@@ -206,7 +206,7 @@ to:
 - run the `generate-website-blog-post` npm script; this will add a file in the `website/blog` folder:
 
 ```sh
-npm --prefix ~/Work/npm-modules/{{githubProjectName}}.git/website run generate-website-blog-post
+npm --prefix ~/Work/npm-packages/{{githubProjectName}}.git/website run generate-website-blog-post
 ```
 
 - edit the front matter properties
@@ -250,7 +250,7 @@ npm install ----location=global {{packageScopedName}}@next
 Validate the web site content in a local build via the npm `build` script:
 
 ```sh
-npm --prefix ~/Work/npm-modules/{{githubProjectName}}.git/website run build
+npm --prefix ~/Work/npm-packages/{{githubProjectName}}.git/website run build
 ```
 
 ## Publish the website

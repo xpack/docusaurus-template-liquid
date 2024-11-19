@@ -53,7 +53,7 @@ project and provides documentation on how to build and test the package.
 ## Satisfy dependencies
 
 ```sh
-npm --prefix ~/Work/npm-modules/{{githubProjectName}}.git install
+npm --prefix ~/Work/npm-packages/{{githubProjectName}}.git install
 ```
 
 ## Add links for development
@@ -62,7 +62,7 @@ To facilitate the use of this module in other packages, add a link
 from the central npm storage to this local development folder:
 
 ```sh
-npm --prefix ~/Work/npm-modules/{{githubProjectName}}.git link
+npm --prefix ~/Work/npm-packages/{{githubProjectName}}.git link
 ```
 
 And in the projects referring it:
@@ -77,7 +77,7 @@ The TypeScript compiler can automatically recompile modified files. For
 this, start it in `watch` mode.
 
 ```sh
-npm --prefix ~/Work/npm-modules/{{githubProjectName}}.git run compile-watch
+npm --prefix ~/Work/npm-packages/{{githubProjectName}}.git run compile-watch
 ```
 
 {% if packageDependenciesTypescriptVersion != "" %}
@@ -161,8 +161,8 @@ As for any `npm` package, the standard way to run the project tests is via
 `npm run test`:
 
 ```sh
-npm --prefix ~/Work/npm-modules/{{githubProjectName}}.git install
-npm --prefix ~/Work/npm-modules/{{githubProjectName}}.git run test
+npm --prefix ~/Work/npm-packages/{{githubProjectName}}.git install
+npm --prefix ~/Work/npm-packages/{{githubProjectName}}.git run test
 ```
 
 <TestResults />
