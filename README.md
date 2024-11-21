@@ -50,6 +50,7 @@ if missing, the long name is used
 For the xpm web
 
 - hasTopHomepageFeatures
+- hasCustomHomepageFeatures
 - hasCustomUserSidebar
 - hasCustomUserInformation
 
