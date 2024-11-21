@@ -58,6 +58,10 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'Project',
       collapsed: false,
+      link: {
+        type: "doc",
+        id: "project/about/index",
+      },
       items: [
         {
           type: 'doc',
