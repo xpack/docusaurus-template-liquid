@@ -3,8 +3,8 @@
 # DO NOT EDIT!
 # Automatically generated from docusaurus-template-liquid/templates/docusaurus.
 
-title: Developer Information
-description: Assistance for developers looking to build the module, including prerequisites, repositories used, and scripts.
+title: Contributor's Guide
+description: Guidance for developers aiming to contribute new features or bug fixes, detailing how to build the module, including prerequisites, repositories utilised, and scripts.
 keywords:
   - xpack
   - {{packageName}}
@@ -40,9 +40,10 @@ import TestResults from './_test-results.mdx';
 [![GitHub pulls](https://img.shields.io/github/issues-pr/{{githubProjectOrganization}}/{{githubProjectName}}.svg)](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/pulls/)
 [![TS-Standard - TypeScript Standard Style Guide](https://badgen.net/badge/code%20style/ts-standard/blue?icon=typescript)](https://github.com/standard/ts-standard/)
 
-# How to build {% if packageWebsiteConfig.shortName %}{{packageWebsiteConfig.shortName}}{% else %}the {{packageWebsiteConfig.longName}}{% endif %}
+# How to contribute to {% if packageWebsiteConfig.shortName %}{{packageWebsiteConfig.shortName}}{% else %} the {{packageWebsiteConfig.longName}}{% endif %}
 
-This page is designed for developers of the
+This page is designed for developers who plan to contribute new features
+or fix bugs in the
 **{{packageWebsiteConfig.longName}}**
 project and provides documentation on how to build and test the package.
 
@@ -50,10 +51,19 @@ project and provides documentation on how to build and test the package.
 
 <GetProjectSources />
 
+:::tip
+
+To contribute Pull Requests, fork the project and be sure the **Copy the master branch only** is **disabled**.
+
+Use the `xpack-development` branch and be sure you contribute the
+Pull Requests back to the `xpack-development` branch.
+
+:::
+
 ## Satisfy dependencies
 
 ```sh
-npm --prefix ~/Work/npm-packages/{{githubProjectName}}.git install
+npm install
 ```
 
 ## Add links for development
@@ -62,7 +72,7 @@ To facilitate the use of this module in other packages, add a link
 from the central npm storage to this local development folder:
 
 ```sh
-npm --prefix ~/Work/npm-packages/{{githubProjectName}}.git link
+npm link
 ```
 
 And in the projects referring it:
@@ -77,7 +87,7 @@ The TypeScript compiler can automatically recompile modified files. For
 this, start it in `watch` mode.
 
 ```sh
-npm --prefix ~/Work/npm-packages/{{githubProjectName}}.git run compile-watch
+npm run compile-watch
 ```
 
 {% if packageDependenciesTypescriptVersion != "" %}
@@ -90,7 +100,7 @@ The current version is compiled with TypeScript {{packageDependenciesTypescriptV
 
 The compiler is configured to produce `es2020` & `commonjs` files,
 which means ECMAScript6 with legacy CommonJS modules, that can be imported
-by any other project either via `require()` or `import`.
+by any other project either via `require()` or `import`.
 
 For more details on how to configure `tsconfig.json`, please see:
 
@@ -161,8 +171,8 @@ As for any `npm` package, the standard way to run the project tests is via
 `npm run test`:
 
 ```sh
-npm --prefix ~/Work/npm-packages/{{githubProjectName}}.git install
-npm --prefix ~/Work/npm-packages/{{githubProjectName}}.git run test
+npm install
+npm run test
 ```
 
 <TestResults />

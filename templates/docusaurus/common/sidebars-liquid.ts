@@ -57,11 +57,11 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'Project',
-      collapsed: false,
       link: {
-        type: "doc",
-        id: "project/about/index",
+        type: 'doc',
+        id: 'project/about/index',
       },
+      collapsed: false,
       items: [
         {
           type: 'doc',
@@ -93,12 +93,13 @@ const sidebars: SidebarsConfig = {
   ],{% endif %}{% if packageWebsiteConfig.hasApi == "true" %}
   typedocSidebar: [
     {
-      type: "category",
-      label: "API Reference (TypeDoc)",
+      type: 'category',
+      label: 'API Reference (TypeDoc)',
       link: {
-        type: "doc",
-        id: "api/index",
+        type: 'doc',
+        id: 'api/index',
       },
+      collapsed: false,
       items: typedocSidebarItems,
     },
   ],{% endif %}{% if packageWebsiteConfig.hasCli == "true" %}

@@ -5,6 +5,10 @@
 
 title: About
 description: Details about the project, including the history of the website and details about the author.
+keywords:
+  - xpack
+  - {{packageName}}
+  - about
 
 date: 2024-10-24 23:58:00 +0300
 
@@ -32,7 +36,7 @@ and is hosted on GitHub as
 
 ## The project history
 
-The **{{packageWebsiteConfig.longName}}** history is presented
+The {% if packageWebsiteConfig.shortName %}**{{packageWebsiteConfig.shortName}}**{% else %}**{{packageWebsiteConfig.longName}}**{% endif %} history is presented
 in a separate [History](/docs/project/history/) page.
 
 ## The web site
