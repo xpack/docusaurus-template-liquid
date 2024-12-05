@@ -1,19 +1,6 @@
 #!/usr/bin/env bash
 
 # -----------------------------------------------------------------------------
-#
-# This file is part of the xPack project (http://xpack.github.io).
-# Copyright (c) 2024 Liviu Ionescu.  All rights reserved.
-#
-# Permission to use, copy, modify, and/or distribute this software
-# for any purpose is hereby granted, under the terms of the MIT license.
-#
-# If a copy of the license was not distributed with this file, it can
-# be obtained from https://opensource.org/licenses/mit/.
-#
-# -----------------------------------------------------------------------------
-
-# -----------------------------------------------------------------------------
 # Safety settings (see https://gist.github.com/ilg-ul/383869cbb01f61a51c4d).
 
 if [[ ! -z ${DEBUG} ]]
@@ -47,10 +34,10 @@ script_folder_name="$(basename "${script_folder_path}")"
 
 # =============================================================================
 
-# set -x
-
 # The script is invoked from the website via the following npm script:
-# "website-generate-commons-and-build": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-commons-and-build.sh"
+# "website-generate-commons": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-commons.sh",
+
+# set -x
 
 current_folder_path="$(dirname $(dirname $(dirname $(dirname "${script_folder_path}"))))"
 if [ "$(basename "${current_folder_path}")" == "website" ]
@@ -66,25 +53,40 @@ templates_folder_path="$(dirname "${script_folder_path}")/templates"
 
 source "${current_folder_path}/node_modules/@xpack/npm-packages-helper/maintenance-scripts/compute-context.sh"
 
-post_file_path="${website_folder_path}/blog/$(date -u '+%Y-%m-%d')-${npm_package_name}-v$(echo ${release_version} | tr '.' '-')-released.mdx"
-
 # -----------------------------------------------------------------------------
 
-echo
+export do_force="y"
+export xpack_www_releases="$(dirname $(dirname $(dirname "${project_folder_path}")))/xpack.github/www/web-jekyll-xpack.git/_posts/releases"
 
-if [ -f "${post_file_path}" ]
+if [ ! -d "${xpack_www_releases}/${npm_package_name}" ]
 then
-    echo "${post_file_path} already there! Remove it to force regenerate."
-    exit 1
+  echo "No ${xpack_www_releases}/${npm_package_name}, nothing to do..."
+  exit 0
 fi
 
-echo "liquidjs -> ${post_file_path}"
-liquidjs --context "${context}" --template "@${website_folder_path}/blog/_templates/blog-post-release-liquid.mdx" > "${post_file_path}"
+cd "${xpack_www_releases}/${npm_package_name}"
+
+echo
+echo "Release posts..."
+
+find . -type f -print0 | \
+   xargs -0 -I '{}' bash "${script_folder_path}/website-convert-release-post.sh" '{}' "${website_folder_path}/blog"
+
+echo
+echo "Validating liquidjs..."
+
+if grep -r -e '{{' "${website_folder_path}/blog"/*.md* | grep -v '/website/blog/_' || \
+   grep -r -e '{%' "${website_folder_path}/blog"/*.md* | grep -v '/website/blog/_'
+then
+  exit 1
+fi
+
+echo
+echo "Showing descriptions..."
+
+egrep -h -e "(title:|description:)" "${website_folder_path}/blog"/*.md*
 
 echo
 echo "${script_name} done"
-
-# Completed successfully.
-exit 0
 
 # -----------------------------------------------------------------------------
