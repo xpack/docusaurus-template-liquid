@@ -114,7 +114,7 @@ unfortunately use the same name
 :::
 {% endif %}
 
-With the environment properly set, the command to install **{{packageWebsiteConfig.shortName}}** is:
+With the environment properly set, the command to install **{{packageScopedName}}** is:
 
 ```sh
 npm install --location=global {{packageScopedName}}@latest
@@ -137,18 +137,18 @@ user home folder, in `%APPDATA%\npm`
 (like `C:\Users\ilg\AppData\Roaming\npm`), and managing packages
 does not require administrative rights.
 
-The result of installing **{{packageWebsiteConfig.shortName}}** is a set of files in the `%APPDATA%\npm` folder:
+The result of installing **{{packageScopedName}}** is a set of files in the `%APPDATA%\npm` folder:
 
 ```txt
-C:\>dir "%APPDATA%"\npm\{{packageName}}*
+C:\>dir "%APPDATA%"\npm\{{packageWebsiteConfig.programName}}*
  Volume in drive C has no label.
  Volume Serial Number is B02D-925C
 
  Directory of C:\Users\ilg\AppData\Roaming\npm
 
-29/07/2024  07:24               397 {{packageName}}
-29/07/2024  07:24               329 {{packageName}}.cmd
-29/07/2024  07:24               821 {{packageName}}.ps1
+29/07/2024  07:24               397 {{packageWebsiteConfig.programName}}
+29/07/2024  07:24               329 {{packageWebsiteConfig.programName}}.cmd
+29/07/2024  07:24               821 {{packageWebsiteConfig.programName}}.ps1
                3 File(s)          1,547 bytes
                0 Dir(s)  39,088,439,296 bytes free
 ```
@@ -158,7 +158,7 @@ prerequisites section, you should
 already have this path configured and the program should start normally:
 
 <CodeBlock language="console"> {
-`C:\>{{packageName}} --version
+`C:\>{{packageWebsiteConfig.programName}} --version
 ${customField('releaseVersion')}
 `} </CodeBlock>
 
@@ -171,14 +171,14 @@ in the previous section, you should
 already have **npm** correctly configured to use a location in the home folder.
 
 <CodeBlock language="console"> {
-`% which {{packageName}}
-/Users/ilg/.nvm/versions/node/${props.nodeVersion}/bin/{{packageName}}
+`% which {{packageWebsiteConfig.programName}}
+/Users/ilg/.nvm/versions/node/${props.nodeVersion}/bin/{{packageWebsiteConfig.programName}}
 `} </CodeBlock>
 
-To test if **{{packageWebsiteConfig.shortName}}** starts:
+To test if **{{packageWebsiteConfig.programName}}** starts:
 
 <CodeBlock language="console"> {
-`% {{packageName}} --version
+`% {{packageWebsiteConfig.programName}} --version
 ${customField('releaseVersion')}
 `} </CodeBlock>
 
@@ -236,12 +236,12 @@ added in the 0.6.2 release of xpm.
 :::
 {% endif %}
 
-To test if {{packageWebsiteConfig.shortName}} starts:
+To test if {{packageWebsiteConfig.programName}} starts:
 
 <CodeBlock language="console"> {
-`$ which {{packageName}}
-/home/ilg/.nvm/versions/node/${props.nodeVersion}/bin/{{packageName}}
-$ {{packageName}} --version
+`$ which {{packageWebsiteConfig.programName}}
+/home/ilg/.nvm/versions/node/${props.nodeVersion}/bin/{{packageWebsiteConfig.programName}}
+$ {{packageWebsiteConfig.programName}} --version
 ${customField('releaseVersion')}
 `} </CodeBlock>
 
@@ -251,7 +251,7 @@ ${customField('releaseVersion')}
 
 ## Uninstall
 
-The command to remove **{{packageWebsiteConfig.shortName}}** is:
+The command to remove **{{packageScopedName}}** is:
 
 ```sh
 npm uninstall --location=global {{packageScopedName}}
@@ -261,11 +261,11 @@ npm uninstall --location=global {{packageScopedName}}
 
 ## npx
 
-If, for any reason, you decide not to install **{{packageWebsiteConfig.shortName}}**, you can still
-benefit from it by using the `npx` command, as a trampoline to start **{{packageWebsiteConfig.shortName}}**:
+If, for any reason, you decide not to install **{{packageScopedName}}**, you can still
+benefit from it by using the `npx` command, as a trampoline to start **{{packageWebsiteConfig.programName}}**:
 
 <CodeBlock language="console"> {
-`$ npx {{packageName}} --version
+`$ npx {{packageWebsiteConfig.programName}} --version
 ${customField('releaseVersion')}
 `} </CodeBlock>
 

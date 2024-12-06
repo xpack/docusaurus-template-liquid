@@ -241,9 +241,9 @@ After a few moments the version will be visible at
 Test if the package can be installed in a project:
 
 ```bash
-rm -rf ~/tmp/{{packageName}}-test && mkdir ~/tmp/{{packageName}}-test
-npm --prefix ~/tmp/{{packageName}}-test init --yes
-npm --prefix ~/tmp/{{packageName}}-test install {{packageScopedName}}@next
+rm -rf ~/tmp/{{packageName}}-test && mkdir ~/tmp/{{packageName}}-test && cd ~/tmp/{{packageName}}-test
+npm init --yes
+npm install {{packageScopedName}}@next
 ```
 {% else %}
 Test if the package can be installed globally:
