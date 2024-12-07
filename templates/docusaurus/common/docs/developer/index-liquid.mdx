@@ -47,6 +47,11 @@ or fix bugs in the
 **{{packageWebsiteConfig.longName}}**
 project and provides documentation on how to build and test the package.
 
+{% if isJavaScript == "true" %}
+This project is currently written in JavaScript, but a rewrite in
+TypeScript is planned.
+{% endif %}
+
 <Prerequisites nodeVersion="{{packageEnginesNodeVersion}}" nodeVersionMajor="{{packageEnginesNodeVersionMajor}}"/>
 
 <GetProjectSources />
@@ -89,10 +94,9 @@ this, start it in `watch` mode.
 ```sh
 npm run compile-watch
 ```
-
-{% if packageDependenciesTypescriptVersion != "" %}
 ## Language standard compliance
 
+{% if isTypeScript == "true" %}
 The current version is compiled with TypeScript {{packageDependenciesTypescriptVersion}}:
 
 - https://www.typescriptlang.org
@@ -105,13 +109,20 @@ by any other project either via `require()` or `import`.
 For more details on how to configure `tsconfig.json`, please see:
 
 - [TSConfig](https://www.typescriptlang.org/tsconfig/)
+{% elsif isJavaScript == "true" %}
+The module uses ECMAScript 6 class definitions and modules.
+{% else %}
+TBD
 {% endif %}
 
 ## Standard style
 
+{% if isTypeScript == "true" %}
 As style, the project uses `ts-standard`, the TypeScript variant of
 [Standard Style](https://standardjs.com/#typescript),
 automatically checked at each commit via CI.
+
+For spacial cases, it is possible to configure/disable some rules.
 
 ```js
 // eslint-disable-next-line @typescript-eslint/no-xxx-yyy
@@ -120,6 +131,23 @@ automatically checked at each commit via CI.
 The known rules are documented in the
 [typescript-eslint](https://github.com/typescript-eslint/typescript-eslint/tree/main/packages/eslint-plugin/docs/rules)
 project.
+{% elsif isJavaScript == "true" %}
+As style, the project uses the
+[JavaScript Standard Style](https://standardjs.com/),
+automatically checked at each commit via CI.
+
+For spacial cases, it is possible to configure/disable some rules.
+
+```js
+/* eslint-disable-next-line no-xxx-yyy */
+```
+
+The known rules are documented in the
+[eslint](https://eslint.org/docs/latest/rules/)
+project.
+{% else %}
+TBD
+{% endif %}
 
 Generally, to fit two editor windows side by side in a screen,
 all files should limit the line length to 80.
@@ -138,12 +166,13 @@ To manually fix compliance with the style guide (where possible):
 `% npm run fix
 
 > {{packageScopedName}}@${customField('version')} fix
-> ts-standard --fix src && standard --fix test
+> {% if isTypeScript == "true" %}ts-standard --fix src && {% endif %}standard --fix test
 ...
 `} </CodeBlock>
 
 ## Documentation metadata
 
+{% if isTypeScript == "true" %}
 The documentation metadata uses the
 [TypeDoc](https://typedoc.org/guides/doccomments/) tags, without
 explicit types, since they are provided by TypeScript.
@@ -153,19 +182,35 @@ explicit types, since they are provided by TypeScript.
 Microsoft is currently developing a new project ([TSDoc](https://tsdoc.org))
 which tries to standardise TypeScript documentation metadata.
 
-This standard is generaly compatible with TypeDoc; at the time of
+This standard is generally compatible with TypeDoc; at the time of
 this writing, among the visible differences is the lack
 of the `@category` or `@group` tags.
 
 :::
+{% elsif isJavaScript == "true" %}
+The documentation metadata follows the [JSdoc](http://usejsdoc.org) tags.
+
+To enforce checking at file level, add the following comments right after
+the `use strict`:
+
+```js
+'use strict'
+/* eslint valid-jsdoc: "error" */
+/* eslint max-len: [ "error", 80, { "ignoreUrls": true } ] */
+```
+
+Note: be sure C style comments are used, C++ styles are not parsed by
+[ESLint](http://eslint.org).
+{% else %}
+TBD
+{% endif %}
 
 ## Tests
 
 The tests use the [`node-tap`](http://www.node-tap.org) framework
 (_A Test-Anything-Protocol library for Node.js_, written by Isaac Schlueter).
 
-Tests can be written in TypeScript, assuming `ts-node` is also installed
-(https://node-tap.org/docs/using-with/#using-tap-with-typescript)
+Tests can be written in TypeScript, assuming `ts-node` is also installed.
 
 As for any `npm` package, the standard way to run the project tests is via
 `npm run test`:
@@ -201,8 +246,9 @@ and `/* c8 ignore start */` `/* c8 ignore stop */` for
 The module is {% if packageWebsiteConfig.has100coverage == "true" %}tested with 100% coverage and{% endif %}
 CI tested on every push via
 [GitHub Actions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions), on Ubuntu,
-Windows and macOS, using node 18 and 20.
+Windows and macOS, using node 18, 20 and 22.
 
+{% if isTypeScript == "true" %}
 ## Tricks & tips
 
 To trace TypeScript module resolution:
@@ -210,5 +256,6 @@ To trace TypeScript module resolution:
 ```json
     "compile": "tsc --traceResolution  -p ./",
 ```
+{% endif %}
 
 {% endif %}
