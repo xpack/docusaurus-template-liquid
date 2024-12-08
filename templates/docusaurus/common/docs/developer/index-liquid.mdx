@@ -32,6 +32,8 @@ import Prerequisites from './_common/_prerequisites.mdx';
 import GetProjectSources from './_common/_get-project-sources.mdx';
 
 import TestResults from './_test-results.mdx';
+import StyleExceptions from './_style-exceptions.mdx';
+import CoverageExceptions from './_coverage-exceptions.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
@@ -158,7 +160,7 @@ all files should limit the line length to 80.
 
 Known and accepted exceptions:
 
-- none
+<StyleExceptions />
 
 To manually fix compliance with the style guide (where possible):
 
@@ -238,7 +240,7 @@ Exclusions are marked with `/* istanbul ignore next */` for
 and `/* c8 ignore start */` `/* c8 ignore stop */` for
 [c8](https://github.com/bcoe/c8).
 
-- none
+<CoverageExceptions />
 {% endif %}
 
 ### Continuous Integration (CI)
