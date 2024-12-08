@@ -9,7 +9,7 @@
  * be obtained from https://opensource.org/licenses/MIT/.
  */
 
-import logger from '@docusaurus/logger';
+import util from 'node:util';
 
 export const redirects = {
   // fromExtensions: ['html', 'htm'], // /myPage.html -> /myPage
@@ -27,15 +27,15 @@ export const redirects = {
     //   },
   ],
   createRedirects(existingPath) {
-    logger.info(existingPath);
+    console.log(existingPath);
     //   if (existingPath.includes('/evenimente')) {
-    //     // logger.info(`to ${existingPath} from ${existingPath.replace('/evenimente', '/events')}`);
+    //     // console.log(`to ${existingPath} from ${existingPath.replace('/evenimente', '/events')}`);
     //     // Redirect from /events/X to /evenimente/X
     //     return [
     //       existingPath.replace('/evenimente', '/events')
     //     ];
     //   } else if (existingPath.includes('/amintiri')) {
-    //     // logger.info(`to ${existingPath} from ${existingPath.replace('/amintiri', '/blog')}`);
+    //     // console.log(`to ${existingPath} from ${existingPath.replace('/amintiri', '/blog')}`);
     //     // Redirect from /blog/Z to /amintiri/X
     //     return [
     //       existingPath.replace('/amintiri', '/blog')
