@@ -315,13 +315,20 @@ In https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/milest
 
 - close the current milestone.
 
+### Check npm package tags
+
+```sh
+npm dist-tag ls {{packageScopedName}}
+```
+
 ### Tag the npm package as `latest`
 
 When the release is considered stable, promote it as `latest`:
 
-- `npm dist-tag ls {{packageScopedName}}`
-- <code>npm dist-tag add {{packageScopedName}}@{customField('releaseVersion')} latest</code>
-- `npm dist-tag ls {{packageScopedName}}`
+<CodeBlock language="sh"> {
+`npm dist-tag add {{packageScopedName}}@${customField('releaseVersion')} latest
+npm dist-tag ls {{packageScopedName}}
+`} </CodeBlock>
 
 {% if packageWebsiteConfig.shareOnTwitter == "true" %}
 ## Share on X/Twitter
