@@ -38,7 +38,7 @@ function HomepageHeader() {
         <p className="hero__subtitle">{siteConfig.tagline}</p>
 {% if packageConfig.isOrganizationWeb != "true" %}
         <div className={styles.installWithCopy}>
-          <InstallWithCopy>npm install {% if packageWebsiteConfig.isInstallGlobally == "true" %}--location=global {% endif %}{{packageScopedName}}@latest --verbose</InstallWithCopy>
+          <InstallWithCopy>npm install {% if packageWebsiteConfig.isInstallGlobally == "true" %}--location=global {% endif %}{{packageScopedName}}@latest</InstallWithCopy>
         </div>
 {% endif %}
       </div>

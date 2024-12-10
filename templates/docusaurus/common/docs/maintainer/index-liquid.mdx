@@ -249,13 +249,13 @@ Test if the package can be installed in a project:
 ```bash
 rm -rf ~/tmp/{{packageName}}-test && mkdir ~/tmp/{{packageName}}-test && cd ~/tmp/{{packageName}}-test
 npm init --yes
-npm install {{packageScopedName}}@next --verbose
+npm install {{packageScopedName}}@next
 ```
 {% else %}
 Test if the package can be installed globally:
 
 ```bash
-npm install ----location=global {{packageScopedName}}@next --verbose
+npm install ----location=global {{packageScopedName}}@next
 ```
 {% endif %}
 
