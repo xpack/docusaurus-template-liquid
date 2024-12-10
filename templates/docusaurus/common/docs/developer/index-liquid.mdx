@@ -167,7 +167,7 @@ To manually fix compliance with the style guide (where possible):
 <CodeBlock language="console"> {
 `% npm run fix
 
-> {{packageScopedName}}@${customField('version')} fix
+> {{packageScopedName}}@${customField('releaseVersion')} fix
 > {% if isTypeScript == "true" %}ts-standard --fix src && {% endif %}standard --fix test
 ...
 `} </CodeBlock>
