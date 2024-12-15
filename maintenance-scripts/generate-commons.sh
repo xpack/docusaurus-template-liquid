@@ -116,6 +116,10 @@ function trap_handler()
   exit 255
 }
 
+# Runs in the source folder.
+# $1 = relative file path to source
+# $2 = absolute folder path to destination
+
 # echo $@
 # set -x
 
@@ -154,31 +158,45 @@ then
   exit 0
 fi
 
+# Destination relative file paths to skip.
+skip_pages_array=()
+
 if [ "${is_organization_web}" == "true" ]
 then
-  skip_pages_array=(\
+  skip_pages_array+=(\
     "docs/developer/_test-results.mdx" \
-    "docs/faq/index-liquid.mdx" "docs/user/index-liquid.mdx" \
+    "docs/faq/index-liquid.mdx" "docs/user/index.mdx" \
     "docs/getting-started/_common/_commonjs-compatibility.mdx" \
-    "docs/getting-started/_common/_github-and-npmjs-liquid.mdx" \
+    "docs/getting-started/_common/_github-and-npmjs.mdx" \
     "docs/getting-started/_compatibility.mdx" \
     "docs/getting-started/_overview.mdx" \
-    "docs/getting-started/_status-liquid.mdx" \
+    "docs/getting-started/_status.mdx" \
     "docs/install/index-liquid.mdx" \
     "docs/maintainer/_more.mdx" \
-    "docs/releases/index-liquid.mdx" \
+    "docs/releases/index.mdx" \
   )
+fi
 
-  if [[ ${skip_pages_array[@]} =~ "${from_path}" ]]
-  then
-    echo "${from_path} skipped for organisation web"
-    exit 0
-  fi
+if [ "${skip_install_command}" == "true" ]
+then
+  skip_pages_array+=(\
+    "docs/install/_common/_cli-liquid.mdx" \
+    "docs/install/_common/_no-administrative-rights.mdx" \
+    "docs/install/_common/_prerequisites.mdx" \
+    "docs/install/_troubleshooting-windows.mdx" \
+    "docs/install/index.mdx" \
+  )
+fi
+
+if [[ ${skip_pages_array[@]} =~ "${to_path}" ]]
+then
+  echo "${from_path} skipped for organisation web"
+  exit 0
 fi
 
 if [ -f "${to_path}" ]
 then
-    # Be sure destination is writable.
+    # Be sure destination is writeable.
     chmod -f +w "${to_path}"
 fi
 
@@ -215,7 +233,7 @@ then
     xargs -0 -I '{}' rm -rfv "${website_folder_path}"/'{}'
 
   echo
-  echo "Common files, overriden..."
+  echo "Common files, overridden..."
 
   # Main pass to copy/generate common
   find . -type f -print0 | sort -zn | \
@@ -237,7 +255,7 @@ echo "Regenerate website package.json..."
 # https://trentm.com/json
 if [ -f "${website_folder_path}/package.json" ]
 then
-  # Be sure destination is writable.
+  # Be sure destination is writeable.
   chmod -f +w "${website_folder_path}/package.json"
 
   # Pass the existing json first, then the template one.
