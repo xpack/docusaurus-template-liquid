@@ -3,11 +3,12 @@
 
 {/* ------------------------------------------------------------------------ */}
 
-:::info Separate User/Contributor/Maintainer pages
+:::info Separate User{% if packageWebsiteConfig.skipContributorGuide != "true" %}/Contributor{% endif %}/Maintainer pages
 
 To meet the specific needs of different
-audiences, this site features separate **[User's Guide](/docs/user/)**,
-**[Contributor's Guide](/docs/developer/)** and
+audiences, this site features separate
+**[User's Guide](/docs/user/)**{% if packageWebsiteConfig.skipContributorGuide != "true" %},
+**[Contributor's Guide](/docs/developer/)**{% endif %} and
 **[Maintainer's Guide](/docs/maintainer/)**
 pages. This way, each group can easily find the information and resources
 most relevant to them.

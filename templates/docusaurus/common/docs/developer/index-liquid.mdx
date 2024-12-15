@@ -39,8 +39,9 @@ import CoverageExceptions from './_coverage-exceptions.mdx';
 
 [![license](https://img.shields.io/github/license/{{githubProjectOrganization}}/{{githubProjectName}}.svg)](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/xpack/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/{{githubProjectOrganization}}/{{githubProjectName}}.svg)](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/issues)
-[![GitHub pulls](https://img.shields.io/github/issues-pr/{{githubProjectOrganization}}/{{githubProjectName}}.svg)](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/pulls/)
-[![TS-Standard - TypeScript Standard Style Guide](https://badgen.net/badge/code%20style/ts-standard/blue?icon=typescript)](https://github.com/standard/ts-standard/)
+[![GitHub pulls](https://img.shields.io/github/issues-pr/{{githubProjectOrganization}}/{{githubProjectName}}.svg)](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/pulls/){% if isTypeScript == "true" %}
+[![TS-Standard - TypeScript Standard Style Guide](https://badgen.net/badge/code%20style/ts-standard/blue?icon=typescript)](https://github.com/standard/ts-standard/){% endif %}{% if isJavaScript == "true" %}
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com){% endif %}
 
 # How to contribute to {% if packageWebsiteConfig.shortName %}{{packageWebsiteConfig.shortName}}{% else %} the {{packageWebsiteConfig.longName}}{% endif %}
 

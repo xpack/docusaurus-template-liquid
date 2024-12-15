@@ -28,17 +28,27 @@ const sidebars: SidebarsConfig = {
       id: 'getting-started/index',
       label: 'Getting Started'
     },
-    {
+    {% if packageWebsiteConfig.skipInstallCommand != "true" %}
       type: 'doc',
       id: 'install/index',
       label: 'Install Guide'
-    },{% if packageWebsiteConfig.hasCustomUserSidebar == "true" %}
+    },{% endif %}{% if packageWebsiteConfig.hasCustomUserSidebar == "true" %}
     userSidebarCategory,{% else %}
     {
       type: 'doc',
       id: 'user/index',
-      label: 'User Information'
+      label: 'User\'s Guide'
+    },{% endif %}{% if packageWebsiteConfig.skipContributorGuide != "true" %}
+    {
+      type: 'doc',
+      id: 'developer/index',
+      label: 'Contributor\'s Guide'
     },{% endif %}
+    {
+      type: 'doc',
+      id: 'maintainer/index',
+      label: 'Maintainer\'s Guide'
+    },
     {
       type: 'doc',
       id: 'faq/index',
@@ -80,17 +90,8 @@ const sidebars: SidebarsConfig = {
         },
       ]
     },
-    {
-      type: 'doc',
-      id: 'developer/index',
-      label: 'Developer Information'
-    },
-    {
-      type: 'doc',
-      id: 'maintainer/index',
-      label: 'Maintainer Information'
-    },
-  ],{% endif %}{% if packageWebsiteConfig.hasApi == "true" %}
+  ],{% endif %}
+  {% if packageWebsiteConfig.hasApi == "true" %}
   typedocSidebar: [
     {
       type: 'category',
@@ -102,7 +103,8 @@ const sidebars: SidebarsConfig = {
       collapsed: false,
       items: typedocSidebarItems,
     },
-  ],{% endif %}{% if packageWebsiteConfig.hasCli == "true" %}
+  ],{% endif %}
+  {% if packageWebsiteConfig.hasCli == "true" %}
   cliSidebar
   {% endif %}
 };

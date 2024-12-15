@@ -260,12 +260,12 @@ const config: Config = {
     ],
     navbar: {
       // Overriden by i18n/en/docusaurus-theme-classic.
-      title: 'The xPack Project',
+      title: {% if githubProjectOrganization == "xpack" %}'The xPack Project'{% elsif githubProjectOrganization == "xpack-dev-tools" %}'xPack Binary Development Tools'{% endif %},
 
       logo: {
         alt: 'xPack Logo',
         src: 'img/components-256.png',
-        href: 'https://xpack.github.io/',
+        href: 'https://{{githubProjectOrganization}}.github.io/',
       },
       items: [
         {
@@ -285,14 +285,22 @@ const config: Config = {
             {
               label: 'Getting Started',
               to: '/docs/getting-started'
-            },
+            },{% if packageWebsiteConfig.skipInstallCommand != "true" %}
             {
               label: 'Install Guide',
               to: '/docs/install'
-            },
+            },{% endif %}
             {
-              label: 'User Information',
+              label: 'User\'s Guide',
               to: '/docs/user'
+            },{% if packageWebsiteConfig.skipContributorGuide != "true" %}
+            {
+              label: 'Contributor\'s Guide',
+              to: '/docs/developer'
+            },{% endif %}
+            {
+              label: 'Maintainer\'s Guide',
+              to: '/docs/maintainer'
             },
             {
               label: 'Help Centre',
@@ -339,7 +347,7 @@ const config: Config = {
           position: 'right',
           className: 'header-github-link',
           'aria-label': 'GitHub repository',
-        },{% if packageConfig.isOrganizationWeb != "true" %}
+        },{% if releaseVersion != "0.0.0" %}
         {
           label: `v${customFields.releaseVersion}`,
           position: 'right',
@@ -370,11 +378,15 @@ const config: Config = {
             {
               label: 'About',
               to: '/docs/project/about',
-            },{% else %}
+            },{% else %}{% if packageWebsiteConfig.skipInstallCommand != "true" %}
             {
               label: 'Install',
               to: '/docs/install',
-            },
+            },{% else %}
+            {
+              label: 'Getting Started',
+              to: '/docs/getting-started',
+            },{% endif %}
             {
               label: 'Support',
               to: '/docs/support',

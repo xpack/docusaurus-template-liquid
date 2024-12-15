@@ -35,6 +35,7 @@ Add a `websiteConfig` object to `website/package.json`, after `engines`.
 - shortName: the lowercase short name, like xml; used in page titles;
 if missing, the long name is used
 - longName: the multi word name, without _the_; used in page titles
+- programName: application name for CLI projects, like "xpm", "xcdl"
 - title: home page title, also used for all docs title
 - tagline: home page tagline
 - metadataDescription: home page SEO
@@ -50,7 +51,6 @@ if missing, the long name is used
 
 For the xpm web
 
-- hasTopHomepageFeatures
 - hasCustomHomepageFeatures
 - hasCustomUserSidebar
 - hasCustomUserInformation
@@ -63,6 +63,11 @@ For the organisation web
 - hasCustomGettingStarted
 - hasCustomMaintainer
 - hasCustomAbout
+
+For XBB
+
+- skipInstallCommand
+
 
 ### Examples
 
@@ -91,7 +96,6 @@ For the organisation web
     "hasCli": "true",
     "isInstallGlobally": "true",
     "shareOnTwitter": "true",
-    "hasTopHomepageFeatures": "true",
     "hasCustomUserSidebar": "true",
     "hasCustomUserInformation": "true",
     "nodeVersion": "18.20.4"
