@@ -267,7 +267,7 @@ else
   cat "${templates_folder_path}/docusaurus/other/package.json" | json --deep-merge > "${website_folder_path}/package.json"
 fi
 
-if [ "${do_init}" != "true" ] && [ "${is_organization_web}" != "true" ]
+if [ "${do_init}" != "true" ]
 then
 
   echo
