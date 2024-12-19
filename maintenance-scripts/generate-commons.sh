@@ -133,9 +133,10 @@ fi
 
 # The source file path.
 from_path="$(echo "${1}" | sed -e 's|^\.\/||')"
+to_relative_path="$(echo "${from_path}" | sed -e 's|-liquid||')"
 
 # The destination file path.
-to_path="${2}/$(echo "${from_path}" | sed -e 's|-liquid||')"
+to_path="${2}/${to_relative_path}"
 
 # Used to enforce an exit code of 255, required by xargs.
 trap 'trap_handler ${from_path} $LINENO $?; return 255' ERR
@@ -188,9 +189,34 @@ then
   )
 fi
 
-if [[ ${skip_pages_array[@]} =~ "${to_path}" ]]
+if [ "${has_metadata_minimum}" != "true" ]
 then
-  echo "${from_path} skipped for organisation web"
+  skip_pages_array+=(\
+    "docs/metadata/_common/_minimum-required.mdx" \
+  )
+fi
+
+if [ "${has_cli}" != "true" ]
+then
+  skip_pages_array+=(\
+    "docs/install/_common/_cli.mdx" \
+    "docs/install/_common/_no-administrative-rights.mdx" \
+  )
+fi
+
+if [ "${has_policies}" != "true" ]
+then
+  skip_pages_array+=(\
+    "docs/user/policies/_common/_policies.mdx" \
+  )
+fi
+
+# echo "skip_pages_array=${skip_pages_array[@]}"
+# echo "to_relative_path=${to_relative_path}"
+
+if [[ ${skip_pages_array[@]} =~ "${to_relative_path}" ]]
+then
+  echo "${from_path} skipped"
   exit 0
 fi
 
@@ -279,7 +305,7 @@ then
   fi
   echo
   echo liquidjs "@README-TOP-liquid.md" '->' "${project_folder_path}/README.md"
-  liquidjs --context "${context}" --template "@${templates_folder_path}/docusaurus/other/README-TOP-liquid.md" --output "${project_folder_path}/README.md" --strict-variables --strict-filters
+  liquidjs --context "${context}" --template "@${templates_folder_path}/docusaurus/other/README-TOP-liquid.md" --output "${project_folder_path}/README.md" --strict-variables --strict-filters --lenient-if
 
 fi
 
