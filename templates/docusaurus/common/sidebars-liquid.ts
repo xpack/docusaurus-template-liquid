@@ -27,8 +27,8 @@ const sidebars: SidebarsConfig = {
       type: 'doc',
       id: 'getting-started/index',
       label: 'Getting Started'
-    },
-    {% if packageWebsiteConfig.skipInstallCommand != "true" %}
+    },{% if packageWebsiteConfig.skipInstallCommand != "true" %}
+    {
       type: 'doc',
       id: 'install/index',
       label: 'Install Guide'
