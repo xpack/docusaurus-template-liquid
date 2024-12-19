@@ -54,7 +54,9 @@ export default function Home(): JSX.Element {
       description={siteConfig.tagline} >
       <HomepageHeader />
       <main>
-        <HomepageFeatures />
+        <HomepageFeatures />{% if packageConfig.isOrganizationWeb == "true" %}
+        <hr className="hero__hr"/>
+        <HomepageTools />{% endif %}
       </main>
     </Layout>
   );
