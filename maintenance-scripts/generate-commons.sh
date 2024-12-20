@@ -211,6 +211,18 @@ then
   )
 fi
 
+if [ "${skip_contributor_guide}" == "true" ]
+then
+  skip_pages_array+=(\
+    "docs/developer/_common/_prerequisites.mdx" \
+    "docs/developer/_common/_get-project-sources.mdx" \
+    "docs/developer/_coverage-exceptions.mdx" \
+    "docs/developer/_style-exceptions.mdx" \
+    "docs/developer/_test-results.mdx" \
+    "docs/developer/index.mdx" \
+  )
+fi
+
 # echo "skip_pages_array=${skip_pages_array[@]}"
 # echo "to_relative_path=${to_relative_path}"
 
