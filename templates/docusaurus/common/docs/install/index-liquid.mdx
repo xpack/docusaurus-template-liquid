@@ -51,7 +51,7 @@ it can be added as a
 project with `npm install`:
 
 ```console
-npm install {{packageScopedName}}@latest --save-dev
+npm install {{packageScopedName}}@latest{% if packageWebsiteConfig.hasCli == "true" %} --save-dev{% endif %}
 ```
 
 {% if packageWebsiteConfig.hasCli != "true" %}
