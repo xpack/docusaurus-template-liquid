@@ -454,6 +454,10 @@ sed -i.bak -e 's|.Windows Build Tools..{{ site.baseurl }}/dev-tools/windows-buil
 # Fix WBT link.
 sed -i.bak -e 's|please read the .dedicated page..{{ site.baseurl }}/dev-tools/windows-build-tools/.|please read the [Getting Started page](/docs/getting-started/)|g' "${to_path}"
 
+# Fix npm link to xPacks
+sed -i.bak -e 's|\[xPacks\](https://xpack.github.io/intro/#but-what-are-xpacks) dependencies|[xpm packages](/docs/getting-started/#xpm-packages)|g' "${to_path}"
+sed -i.bak -e 's|\[xPacks\](https://xpack.github.io/intro/#but-what-are-xpacks)|[xpm packages](/docs/getting-started/#xpm-packages)|g' "${to_path}"
+
 # Fix platform names.
 sed -i.bak -e "s|Intel 64-bit|x64|" "${to_path}"
 sed -i.bak -e "s|Intel 32/64-bit|x64 and x86|" "${to_path}"
