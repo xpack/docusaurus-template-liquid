@@ -175,6 +175,8 @@ then
     "docs/install/index-liquid.mdx" \
     "docs/maintainer/_more.mdx" \
     "docs/releases/index.mdx" \
+    "blog/_common/_download-analytics.mdx" \
+    "blog/_common/_prerequisites.mdx"
   )
 fi
 
