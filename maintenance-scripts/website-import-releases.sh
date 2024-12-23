@@ -56,7 +56,9 @@ source "${current_folder_path}/node_modules/@xpack/npm-packages-helper/maintenan
 # -----------------------------------------------------------------------------
 
 export do_force="y"
-export xpack_www_releases="$(dirname $(dirname $(dirname "${project_folder_path}")))/xpack.github/www/web-jekyll-xpack.git/_posts/releases"
+# export xpack_www_releases="$(dirname $(dirname $(dirname "${project_folder_path}")))/xpack.github/www/web-jekyll-xpack.git/_posts/releases"
+
+export xpack_www_releases="${website_folder_path}/_xpack.github.io/_posts/releases"
 
 if [ ! -d "${xpack_www_releases}/${npm_package_name}" ]
 then
