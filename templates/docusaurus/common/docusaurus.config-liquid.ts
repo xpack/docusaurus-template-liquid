@@ -281,7 +281,7 @@ const config: Config = {
         {% else %}
         {
           type: 'dropdown',
-          label: 'Documentation',
+          label: 'Getting Started',
           to: 'docs/getting-started',
           position: 'left',
           items: [
