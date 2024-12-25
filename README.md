@@ -123,7 +123,7 @@ In the `website` folder:
 
 ```sh
 npm install
-npm run npm-link-helper
+npm run npm-link-helpers
 npm run generate-website-commons
 ```
 
