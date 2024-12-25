@@ -76,15 +76,15 @@ do
 
     git checkout "${development_branch}"
 
-    npm run generate-top-commons
     npm run npm-install
-    npm run npm-link-helper
+    npm run npm-link-helpers
+    npm run generate-top-commons
 
     cd website
 
     # npm run deep-clean
     npm run npm-install
-    npm run npm-link-helper
+    npm run npm-link-helpers
     npm run generate-website-commons
 
     npm run build
