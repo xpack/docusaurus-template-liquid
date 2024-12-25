@@ -76,7 +76,7 @@ do
 
     if git branch | grep website
     then
-      website_branch="development"
+      website_branch="website"
     else
       website_branch="master"
     fi
