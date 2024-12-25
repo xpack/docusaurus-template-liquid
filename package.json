@@ -1,11 +1,13 @@
 {
   "name": "@xpack/docusaurus-template-liquid",
   "version": "0.0.0",
-  "description": "The template used to generate the Docusaurus web sites for the xPack projects from files with liquid substitutions.",
+  "description": "The template used to generate the Docusaurus web sites for the xPack projects from files with liquid substitutions",
   "main": "",
   "scripts": {
-    "npm-link": "npm link"
-  },
+    "npm-link": "npm link",
+    "websites-generate-commons-and-build": "bash maintenance-scripts/websites-generate-commons-and-build.sh",
+    "websites-update-and-publish": "bash maintenance-scripts/websites-update-and-publish.sh"
+},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/xpack/docusaurus-template-liquid.git"
