@@ -76,9 +76,9 @@ do
 
     if git branch | grep website
     then
-      website_branch="website"
+      xpack_website_branch="website"
     else
-      website_branch="master"
+      xpack_website_branch="master"
     fi
 
     git checkout "${development_branch}"
@@ -91,9 +91,9 @@ do
 
     git push
 
-    if [ "${development_branch}" != "${website_branch}" ]
+    if [ "${development_branch}" != "${xpack_website_branch}" ]
     then
-      git checkout "${website_branch}"
+      git checkout "${xpack_website_branch}"
       git merge "${development_branch}"
       git push
 

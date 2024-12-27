@@ -60,13 +60,13 @@ export do_force="y"
 
 export xpack_www_releases="${website_folder_path}/_xpack.github.io/_posts/releases"
 
-if [ ! -d "${xpack_www_releases}/${npm_package_name}" ]
+if [ ! -d "${xpack_www_releases}/${xpack_npm_package_name}" ]
 then
-  echo "No ${xpack_www_releases}/${npm_package_name}, nothing to do..."
+  echo "No ${xpack_www_releases}/${xpack_npm_package_name}, nothing to do..."
   exit 0
 fi
 
-cd "${xpack_www_releases}/${npm_package_name}"
+cd "${xpack_www_releases}/${xpack_npm_package_name}"
 
 echo
 echo "Release posts..."

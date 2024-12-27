@@ -66,7 +66,7 @@ templates_folder_path="$(dirname "${script_folder_path}")/templates"
 
 source "${current_folder_path}/node_modules/@xpack/npm-packages-helper/maintenance-scripts/compute-context.sh"
 
-post_file_path="${website_folder_path}/blog/$(date -u '+%Y-%m-%d')-${npm_package_name}-v$(echo ${release_version} | tr '.' '-')-released.mdx"
+post_file_path="${website_folder_path}/blog/$(date -u '+%Y-%m-%d')-${xpack_npm_package_name}-v$(echo ${xpack_release_version} | tr '.' '-')-released.mdx"
 
 # -----------------------------------------------------------------------------
 
@@ -79,7 +79,7 @@ then
 fi
 
 echo "liquidjs -> ${post_file_path}"
-liquidjs --context "${context}" --template "@${website_folder_path}/blog/_templates/blog-post-release-liquid.mdx" > "${post_file_path}"
+liquidjs --context "${xpack_context}" --template "@${website_folder_path}/blog/_templates/blog-post-release-liquid.mdx" > "${post_file_path}"
 
 echo
 echo "${script_name} done"

@@ -104,7 +104,7 @@ then
   # s="s|[.]$| of **${post_app_name}**.|"
   # summary="$(echo ${summary} | sed -e "${s}")"
 else
-  s="s|[.]$| of ${website_config_long_name}.|"
+  s="s|[.]$| of ${xpack_website_config_long_name}.|"
   description="$(echo ${description} | sed -e "${s}")"
 fi
 
@@ -158,7 +158,7 @@ cat <<__EOF__ > "${tmp_awk_file}"
   print "description: ${description}"
   print "keywords:"
   print "  - xpack"
-  print "  - ${website_config_short_name}"
+  print "  - ${xpack_website_config_short_name}"
   print "  - release"
   print ""
   print "date: ${date}"
@@ -258,21 +258,21 @@ sed -i.bak -e '/^# --e-n-d-f--$/,/^---$/d' "${to_path}"
 # Process the post body.
 
 # Fix the badge to releases.
-s="  - this release <a href={\`https://github.com/xpack-dev-tools/${website_config_short_name}-xpack/releases/v\$\{frontMatter.version}/\`} ><Image img={\`https://img.shields.io/github/downloads/xpack-dev-tools/${website_config_short_name}-xpack/v\$\{frontMatter.version}/total.svg\`} alt='Github Release' /></a>"
+s="  - this release <a href={\`https://github.com/xpack-dev-tools/${xpack_website_config_short_name}-xpack/releases/v\$\{frontMatter.version}/\`} ><Image img={\`https://img.shields.io/github/downloads/xpack-dev-tools/${xpack_website_config_short_name}-xpack/v\$\{frontMatter.version}/total.svg\`} alt='Github Release' /></a>"
 sed -i.bak -e "s|  - this release ...Github All Releases.*|$s|" "${to_path}"
 
-if [ "${github_project_organization}" == "xpack-dev-tools" ]
+if [ "${xpack_github_project_organization}" == "xpack-dev-tools" ]
 then
   # Insert xpm install version
-  s="/^## Install$/ { print; print \"\"; print \"The easiest way to install this specific version, is by using **xpm**:\"; print \"\"; print \"<CodeBlock language=console> \{\"; print \"\`xpm install @xpack-dev-tools/${website_config_short_name}@\${frontMatter.version}.\${frontMatter.npm_subversion} -verbose\"; print \"\`\} </CodeBlock>\"; next }1"
+  s="/^## Install$/ { print; print \"\"; print \"The easiest way to install this specific version, is by using **xpm**:\"; print \"\"; print \"<CodeBlock language=console> \{\"; print \"\`xpm install @xpack-dev-tools/${xpack_website_config_short_name}@\${frontMatter.version}.\${frontMatter.npm_subversion} -verbose\"; print \"\`\} </CodeBlock>\"; next }1"
   awk "$s" "${to_path}" >"${to_path}.new" && mv -f "${to_path}.new" "${to_path}"
   sed -i.bak -e 's|CodeBlock language=console|CodeBlock language="console"|' "${to_path}"
 fi
 
-# s="/^The full details of installing the **xPack/ { print \"Comprehensive instructions for installing **${website_config_long_name}**\"; print \"on different platforms can be found in the\"; next }1"
+# s="/^The full details of installing the **xPack/ { print \"Comprehensive instructions for installing **${xpack_website_config_long_name}**\"; print \"on different platforms can be found in the\"; next }1"
 # awk "$s" "${to_path}" >"${to_path}.new" && mv -f "${to_path}.new" "${to_path}"
 
-s="s|The full details of installing the ..xPack .*.. on various platforms|Comprehensive instructions for installing **${website_config_long_name}** on different platforms|"
+s="s|The full details of installing the ..xPack .*.. on various platforms|Comprehensive instructions for installing **${xpack_website_config_long_name}** on different platforms|"
 sed -i.bak -e "${s}" "${to_path}"
 s="s|are presented in the separate .Install.* page|can be found in the [Install Guide](/docs/install/)|"
 sed -i.bak -e "${s}" "${to_path}"
@@ -380,7 +380,7 @@ s="[Maintainer Info](/docs/maintainer/)"
 sed -i.bak -e "s|.How to build..https://github.com/xpack-dev-tools/.*-xpack/blob/xpack/README-BUILD.md.|$s|" "${to_path}"
 
 # Convert parametrised link to html.
-sed -i.bak -e "s|.{{ page.upstream_commit }}..https://github.com/openocd-org/[a-z-]*/commit/{{ page.upstream_commit }}/)|<a href={\`https://github.com/openocd-org/${website_config_short_name}/commit/\$\{frontMatter.upstream_commit}/\`}>{frontMatter.upstream_commit}</a>|" "${to_path}"
+sed -i.bak -e "s|.{{ page.upstream_commit }}..https://github.com/openocd-org/[a-z-]*/commit/{{ page.upstream_commit }}/)|<a href={\`https://github.com/openocd-org/${xpack_website_config_short_name}/commit/\$\{frontMatter.upstream_commit}/\`}>{frontMatter.upstream_commit}</a>|" "${to_path}"
 
 # Fix openocd documentation autolink.
 sed -i.bak -e "s|- <https://openocd.org/doc/pdf/openocd.pdf>|- https://openocd.org/doc/pdf/openocd.pdf|" "${to_path}"
@@ -412,7 +412,7 @@ sed -i.bak -e "$s" "${to_path}"
 sed -i.bak -e 's|update the \`${openocd_path}\` variable|update the `$\\{openocd_path\\}` variable|' "${to_path}"
 
 # Fix links to tests.
-sed -i.bak -e "s|/dev-tools/${website_config_short_name}/tests/|/docs/tests/|" "${to_path}"
+sed -i.bak -e "s|/dev-tools/${xpack_website_config_short_name}/tests/|/docs/tests/|" "${to_path}"
 
 # Fix qemu docs link
 sed -i.bak -e 's|- <https://www.qemu.org/docs/master/>|- https://www.qemu.org/docs/master/|' "${to_path}"

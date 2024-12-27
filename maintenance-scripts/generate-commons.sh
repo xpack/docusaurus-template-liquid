@@ -162,7 +162,7 @@ fi
 # Destination relative file paths to skip.
 skip_pages_array=()
 
-if [ "${is_organization_web}" == "true" ]
+if [ "${xpack_is_organization_web}" == "true" ]
 then
   skip_pages_array+=(\
     "docs/developer/_test-results.mdx" \
@@ -180,7 +180,7 @@ then
   )
 fi
 
-if [ "${skip_install_command}" == "true" ]
+if [ "${xpack_skip_install_command}" == "true" ]
 then
   skip_pages_array+=(\
     "docs/install/_common/_cli-liquid.mdx" \
@@ -191,14 +191,14 @@ then
   )
 fi
 
-if [ "${has_metadata_minimum}" != "true" ]
+if [ "${xpack_has_metadata_minimum}" != "true" ]
 then
   skip_pages_array+=(\
     "docs/metadata/_common/_minimum-required.mdx" \
   )
 fi
 
-if [ "${has_cli}" != "true" ]
+if [ "${xpack_has_cli}" != "true" ]
 then
   skip_pages_array+=(\
     "docs/install/_common/_cli.mdx" \
@@ -206,14 +206,14 @@ then
   )
 fi
 
-if [ "${has_policies}" != "true" ]
+if [ "${xpack_has_policies}" != "true" ]
 then
   skip_pages_array+=(\
     "docs/user/policies/_common/_policies.mdx" \
   )
 fi
 
-if [ "${skip_contributor_guide}" == "true" ]
+if [ "${xpack_skip_contributor_guide}" == "true" ]
 then
   skip_pages_array+=(\
     "docs/developer/_common/_prerequisites.mdx" \
@@ -222,6 +222,13 @@ then
     "docs/developer/_style-exceptions.mdx" \
     "docs/developer/_test-results.mdx" \
     "docs/developer/index.mdx" \
+  )
+fi
+
+if [ "${xpack_has_custom_homepage_features}" == "true" ]
+then
+  skip_pages_array+=(\
+    "src/components/HomepageFeatures/FeatureList.tsx" \
   )
 fi
 
@@ -246,7 +253,7 @@ if [[ "$(basename "${from_path}")" =~ .*-liquid.* ]]
 then
   echo liquidjs "@${from_path}" '->' "${to_path}"
   # --strict-variables
-  liquidjs --context "${context}" --template "@${from_path}" --output "${to_path}" --strict-filters
+  liquidjs --context "${xpack_context}" --template "@${from_path}" --output "${to_path}" --strict-filters
 else
   cp -v "${from_path}" "${to_path}"
 fi
@@ -319,7 +326,7 @@ then
   fi
   echo
   echo liquidjs "@README-TOP-liquid.md" '->' "${project_folder_path}/README.md"
-  liquidjs --context "${context}" --template "@${templates_folder_path}/docusaurus/other/README-TOP-liquid.md" --output "${project_folder_path}/README.md" --strict-variables --strict-filters --lenient-if
+  liquidjs --context "${xpack_context}" --template "@${templates_folder_path}/docusaurus/other/README-TOP-liquid.md" --output "${project_folder_path}/README.md" --strict-variables --strict-filters --lenient-if
 
 fi
 
