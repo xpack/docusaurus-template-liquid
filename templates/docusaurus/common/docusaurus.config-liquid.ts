@@ -353,22 +353,32 @@ const config: Config = {
           position: 'right',
           className: 'header-github-link',
           'aria-label': 'GitHub repository',
+        },
+        {
+          type: 'dropdown',
+          href: 'https://github.com/{{ githubProjectOrganization }}/{{ githubProjectName }}/',
+          position: 'right',
+          label: 'GitHub',
+          items: [
+            {
+              label: `{{ githubProjectName }}`,
+              href: `https://github.com/{{ githubProjectOrganization }}/{{ githubProjectName }}/`,
+            },
+            {
+              label: 'xpack',
+              href: 'https://github.com/xpack/',
+            },
+            {
+              label: 'xpack-dev-tools',
+              href: 'https://github.com/xpack-dev-tools/',
+            },
+          ]
         },{% if releaseVersion != "0.0.0" %}
         {
-          label: `v${customFields.releaseVersion}`,
+          label: `${customFields.releaseVersion}`,
           position: 'right',
           href: `https://www.npmjs.com/package/{{ packageScopedName }}/v/${customFields.releaseVersion}`,
         },{% endif %}
-        {
-          href: 'https://github.com/xpack/',
-          label: 'xpack',
-          position: 'right',
-        },
-        {
-          href: 'https://github.com/xpack-dev-tools/',
-          label: 'xpack-dev-tools',
-          position: 'right',
-        },
       ],
     },
     footer: {
@@ -384,15 +394,11 @@ const config: Config = {
             {
               label: 'About',
               to: '/docs/project/about',
-            },{% else %}{% if packageWebsiteConfig.skipInstallCommand != "true" %}
-            {
-              label: 'Install',
-              to: '/docs/install',
             },{% else %}
             {
               label: 'Getting Started',
               to: '/docs/getting-started',
-            },{% endif %}
+            },
             {
               label: 'Support',
               to: '/docs/support',
