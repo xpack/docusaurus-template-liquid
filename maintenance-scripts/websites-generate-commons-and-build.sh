@@ -56,7 +56,7 @@ do
       continue
     fi
 
-    if ! grep websiteConfig website/package.json
+    if ! grep websiteConfig website/package.json >/dev/null
     then
       echo "${name} has no websiteConfig..."
       continue
@@ -67,7 +67,7 @@ do
 
     # set -x
 
-    if git branch | grep development
+    if git branch | grep development >/dev/null
     then
       development_branch="development"
     else
