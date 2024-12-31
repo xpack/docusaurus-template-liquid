@@ -25,6 +25,7 @@ import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import HomepageTools from '@site/src/components/HomepageTools';
 {%- endif %}
 import InstallWithCopy from '@site/src/components/InstallWithCopy';
+import customField from '@site/src/libs/customField';
 
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
@@ -38,7 +39,7 @@ function HomepageHeader() {
         <p className="hero__subtitle">{siteConfig.tagline}</p>
 {% if packageWebsiteConfig.skipInstallCommand != "true" %}
         <div className={styles.installWithCopy}>
-          <InstallWithCopy>npm install {% if packageWebsiteConfig.isInstallGlobally == "true" %}--location=global {% endif %}{{packageScopedName}}@latest</InstallWithCopy>
+          <InstallWithCopy>npm install {% if packageWebsiteConfig.isInstallGlobally == "true" %}--location=global {% endif %}{{packageScopedName}}@{customField('releaseVersion')}</InstallWithCopy>
         </div>
 {% endif %}
       </div>
