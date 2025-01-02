@@ -35,6 +35,25 @@ script_folder_name="$(basename "${script_folder_path}")"
 # =============================================================================
 
 # set -x
+skip_website="false"
+
+while [ $# -gt 0 ]
+do
+  case "$1" in
+    --skip-website )
+      skip_website="true"
+      shift
+      ;;
+
+    * )
+      echo "Unsupported option $1"
+      shift
+  esac
+done
+
+export skip_website
+
+# -----------------------------------------------------------------------------
 
 # Runs as
 # .../xpack.github/npm-packages/docusaurus-template-liquid.git/maintenance-scripts
@@ -80,14 +99,19 @@ do
     npm run npm-link-helpers
     npm run generate-top-commons
 
-    cd website
+    if [ "${skip_website}" == "true" ]
+    then
+      (
+        cd website
 
-    # npm run deep-clean
-    npm run npm-install
-    npm run npm-link-helpers
-    npm run generate-website-commons
+        # npm run deep-clean
+        npm run npm-install
+        npm run npm-link-helpers
+        npm run generate-website-commons
 
-    npm run build
+        npm run build
+      )
+    fi
   )
 done
 
