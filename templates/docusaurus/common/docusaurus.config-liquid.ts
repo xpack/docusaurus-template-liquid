@@ -365,11 +365,11 @@ const config: Config = {
               href: `https://github.com/{{ githubProjectOrganization }}/{{ githubProjectName }}/`,
             },
             {
-              label: 'xpack',
+              label: 'xpack org',
               href: 'https://github.com/xpack/',
             },
             {
-              label: 'xpack-dev-tools',
+              label: 'xpack-dev-tools org',
               href: 'https://github.com/xpack-dev-tools/',
             },
           ]
@@ -446,11 +446,11 @@ const config: Config = {
               href: 'https://github.com/{{ githubProjectOrganization }}/{{ githubProjectName }}/',
             },
             {
-              label: 'GitHub xpack',
+              label: 'GitHub xpack org',
               href: 'https://github.com/xpack/',
             },
             {
-              label: 'GitHub xpack-dev-tools',
+              label: 'GitHub xpack-dev-tools org',
               href: 'https://github.com/xpack-dev-tools/',
             },
           ],
