@@ -11,9 +11,9 @@ The project is hosted on GitHub:
 
 The project uses multiple branches:
 
-- `master`, with the latest stable version (default)
-- `development`, with the current development version
-- `website`, with the current content of the website; pushes to this branch automatically trigger publishes the main website{% if packageWebsiteConfig.hasWebpreview == "true" %}
+{% if hasBranchMaster == "true" %}- `master`, {% if packageConfig.hasEmptyMaster == "true" %}not actively used{% else %}with the latest stable version (default){% endif %}{% endif %}{% if hasBranchDevelopment == "true" %}
+- `development`, with the current development version{% endif %}{% if hasBranchWebsite == "true" %}
+- `website`, with the current content of the website; pushes to this branch automatically trigger publishes the main website{% endif %}{% if hasBranchWebpreview == "true" %}
 - `webpreview`, with the current content of the preview website; pushes to this branch automatically trigger publishes the preview website{% endif %}
 
 To clone the stable branch (`master`), run the following commands in a
