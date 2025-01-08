@@ -35,8 +35,6 @@ script_folder_name="$(basename "${script_folder_path}")"
 # =============================================================================
 
 # set -x
-skip_website="false"
-# skip_website="true"
 
 while [ $# -gt 0 ]
 do
@@ -47,12 +45,10 @@ do
   esac
 done
 
-export skip_website
-
 # -----------------------------------------------------------------------------
 
 # Runs as
-# .../xpack.github/packages/docusaurus-template-liquid.git/maintenance-scripts
+# .../xpack.github/packages/docusaurus-template-liquid.git/maintenance-scripts/websites-generate-commons-and-build.sh
 packages_folder_path="$(dirname $(dirname "${script_folder_path}"))"
 www_folder_path="$(dirname "${packages_folder_path}")/www"
 
@@ -68,14 +64,14 @@ do
 
     name="$(basename "$(pwd)")"
 
-    xconfig="$(json -f "package.json" -o json-0 xConfig)"
-    if [ -z "${xconfig}" ]
+    top_config="$(json -f "package.json" -o json-0 topConfig)"
+    if [ -z "${top_config}" ]
     then
-      echo "${name} has no xConfig..."
+      echo "${name} has no topConfig..."
       continue
     fi
 
-    has_empty_master="$(echo "${xconfig}" | json hasEmptyMaster)"
+    has_empty_master="$(echo "${top_config}" | json hasEmptyMaster)"
 
     if [ "${has_empty_master}" == "true" ]
     then
