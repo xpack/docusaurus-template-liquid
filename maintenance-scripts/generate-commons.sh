@@ -132,30 +132,30 @@ then
 fi
 
 # The source file path.
-from_path="$(echo "${1}" | sed -e 's|^\.\/||')"
-to_relative_path="$(echo "${from_path}" | sed -e 's|-liquid||')"
+from_file_path="$(echo "${1}" | sed -e 's|^\.\/||')"
+to_relative_file_path="$(echo "${from_file_path}" | sed -e 's|-liquid||')"
 
 # The destination file path.
-to_path="${2}/${to_relative_path}"
+to_file_path="${2}/${to_relative_file_path}"
 
 # Used to enforce an exit code of 255, required by xargs.
-trap 'trap_handler ${from_path} $LINENO $?; return 255' ERR
+trap 'trap_handler ${from_file_path} $LINENO $?; return 255' ERR
 
-if [ ! -f "${from_path}" ]
+if [ ! -f "${from_file_path}" ]
 then
-  echo "${to_path} not a file"
+  echo "${from_file_path} not a file"
   exit 1
 fi
 
-if [ "$(basename "${from_path}")" == ".DS_Store" ]
+if [ "$(basename "${from_file_path}")" == ".DS_Store" ]
 then
-  echo "${from_path} ignored" # Skip macOS specifics.
+  echo "${from_file_path} ignored" # Skip macOS specifics.
   exit 0
 fi
 
-if [ -f "${to_path}" ] && [ "${do_force}" == "n" ]
+if [ -f "${to_file_path}" ] && [ "${do_force}" == "n" ]
 then
-  echo "${to_path} already present"
+  echo "${to_file_path} already present"
   exit 0
 fi
 
@@ -233,34 +233,34 @@ then
 fi
 
 # echo "skip_pages_array=${skip_pages_array[@]}"
-# echo "to_relative_path=${to_relative_path}"
+# echo "to_relative_file_path=${to_relative_file_path}"
 
-if [[ ${skip_pages_array[@]} =~ "${to_relative_path}" ]]
+if [[ ${skip_pages_array[@]} =~ "${to_relative_file_path}" ]]
 then
-  echo "${from_path} skipped"
+  echo "${from_file_path} skipped"
   exit 0
 fi
 
-if [ -f "${to_path}" ]
+if [ -f "${to_file_path}" ]
 then
-    # Be sure destination is writeable.
-    chmod -f +w "${to_path}"
+  # Be sure destination is writeable.
+  chmod -f +w "${to_file_path}"
 fi
 
-mkdir -p "$(dirname ${to_path})"
+mkdir -p "$(dirname ${to_file_path})"
 
-if [[ "$(basename "${from_path}")" =~ .*-liquid.* ]]
+if [[ "$(basename "${from_file_path}")" =~ .*-liquid.* ]]
 then
-  echo liquidjs "@${from_path}" '->' "${to_path}"
+  echo liquidjs "@${from_file_path}" '->' "${to_file_path}"
   # --strict-variables
-  liquidjs --context "${xpack_context}" --template "@${from_path}" --output "${to_path}" --strict-filters
+  liquidjs --context "${xpack_context}" --template "@${from_file_path}" --output "${to_file_path}" --strict-filters
 else
-  cp -v "${from_path}" "${to_path}"
+  cp -v "${from_file_path}" "${to_file_path}"
 fi
 
 if [ "${do_force}" == "y" ]
 then
-  chmod -w "${to_path}"
+  chmod -w "${to_file_path}"
 fi
 
 __EOF__

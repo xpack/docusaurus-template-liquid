@@ -36,6 +36,7 @@ script_folder_name="$(basename "${script_folder_path}")"
 
 # set -x
 skip_website="false"
+# skip_website="true"
 
 while [ $# -gt 0 ]
 do
@@ -56,41 +57,46 @@ export skip_website
 # -----------------------------------------------------------------------------
 
 # Runs as
-# .../xpack.github/npm-packages/docusaurus-template-liquid.git/maintenance-scripts
-repos_folder="$(dirname $(dirname "${script_folder_path}"))"
+# .../xpack.github/packages/docusaurus-template-liquid.git/maintenance-scripts
+packages_folder_path="$(dirname $(dirname "${script_folder_path}"))"
+www_folder_path="$(dirname "${packages_folder_path}")/www"
 
-# npm-packages
-cd "${repos_folder}"
-
-for f in "${repos_folder}"/*/.git
+for f in "${packages_folder_path}"/*/.git "${www_folder_path}"/*/.git
 do
   (
     cd "${f}/.."
-
-    name="$(basename "$(pwd)")"
-
-    if [ ! -d "website" ]
-    then
-      echo "${name} has no website..."
-      continue
-    fi
-
-    if ! grep websiteConfig website/package.json >/dev/null
-    then
-      echo "${name} has no websiteConfig..."
-      continue
-    fi
 
     echo
     pwd
 
     # set -x
 
-    if git branch | grep development >/dev/null
+    name="$(basename "$(pwd)")"
+
+    xconfig="$(json -f "package.json" -o json-0 xConfig)"
+    if [ -z "${xconfig}" ]
     then
-      development_branch="development"
+      echo "${name} has no xConfig..."
+      continue
+    fi
+
+    has_empty_master="$(echo "${xconfig}" | json hasEmptyMaster)"
+
+    if [ "${has_empty_master}" == "true" ]
+    then
+      if git branch | grep webpreview >/dev/null
+      then
+        development_branch="webpreview"
+      else
+        development_branch="website"
+      fi
     else
-      development_branch="master"
+      if git branch | grep development >/dev/null
+      then
+        development_branch="development"
+      else
+        development_branch="master"
+      fi
     fi
 
     git checkout "${development_branch}"
@@ -99,22 +105,37 @@ do
     npm run npm-link-helpers
     npm run generate-top-commons
 
-    if [ "${skip_website}" == "true" ]
+    if [ "${skip_website}" != "true" ]
     then
-      (
-        cd website
+      if [ -d "website" ]
+      then
+        website_config="$(json -f "website/package.json" -o json-0 websiteConfig)"
 
-        # npm run deep-clean
-        npm run npm-install
-        npm run npm-link-helpers
-        npm run generate-website-commons
+        if [ ! -z "${website_config}" ]
+        then
+          (
+            cd website
 
-        npm run build
-      )
+            # npm run deep-clean
+            npm run npm-install
+            npm run npm-link-helpers
+            npm run generate-website-commons
+
+            npm run build
+          )
+        else
+          echo "${name} has no websiteConfig..."
+        fi
+
+      else
+        echo "${name} has no website..."
+      fi
     fi
   )
 done
 
+echo
 echo "${script_name} done"
+exit 0
 
 # -----------------------------------------------------------------------------

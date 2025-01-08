@@ -35,74 +35,124 @@ script_folder_name="$(basename "${script_folder_path}")"
 # =============================================================================
 
 # set -x
+skip_website="false"
+# skip_website="true"
+
+while [ $# -gt 0 ]
+do
+  case "$1" in
+    --skip-website )
+      skip_website="true"
+      shift
+      ;;
+
+    * )
+      echo "Unsupported option $1"
+      shift
+  esac
+done
+
+export skip_website
+
+# -----------------------------------------------------------------------------
 
 # Runs as
-# .../xpack.github/npm-packages/docusaurus-template-liquid.git/maintenance-scripts
-repos_folder="$(dirname $(dirname "${script_folder_path}"))"
+# .../xpack.github/packages/docusaurus-template-liquid.git/maintenance-scripts
+packages_folder_path="$(dirname $(dirname "${script_folder_path}"))"
+www_folder_path="$(dirname "${packages_folder_path}")/www"
 
-# npm-packages
-cd "${repos_folder}"
-
-for f in "${repos_folder}"/*/.git
+for f in "${packages_folder_path}"/*/.git "${www_folder_path}"/*/.git
 do
   (
     cd "${f}/.."
-
-    name="$(basename "$(pwd)")"
-
-    if [ ! -d "website" ]
-    then
-      echo "${name} has no website..."
-      continue
-    fi
-
-    if ! grep websiteConfig website/package.json
-    then
-      echo "${name} has no websiteConfig..."
-      continue
-    fi
 
     echo
     pwd
 
     # set -x
 
-    if git branch | grep development
+    name="$(basename "$(pwd)")"
+
+    xconfig="$(json -f "package.json" -o json-0 xConfig)"
+    if [ -z "${xconfig}" ]
     then
-      development_branch="development"
-    else
-      development_branch="master"
+      echo "${name} has no xConfig..."
+      continue
     fi
 
-    if git branch | grep website
+    has_empty_master="$(echo "${xconfig}" | json hasEmptyMaster)"
+
+    if [ "${has_empty_master}" == "true" ]
     then
-      xpack_website_branch="website"
+      if git branch | grep webpreview >/dev/null
+      then
+        development_branch="webpreview"
+      else
+        development_branch="website"
+      fi
+      website_branch="website"
     else
-      xpack_website_branch="master"
+      if git branch | grep development >/dev/null
+      then
+        development_branch="development"
+      else
+        development_branch="master"
+      fi
+      if git branch | grep website >/dev/null
+      then
+        website_branch="website"
+      else
+        website_branch="master"
+      fi
     fi
 
     git checkout "${development_branch}"
 
-    git add website
-    git commit -m "website: updates" || true
+    git add .github .gitignore README*.md package*.json
+    if [ -f .npmignore ]
+    then
+      git add .npmignore
+    fi
+    if [ -f tsconfig.json ]
+    then
+      git add tsconfig*.json
+    fi
 
-    git add package*.json .*ignore .github
     git commit -m "re-generate commons" || true
+
+    if [ "${skip_website}" != "true" ]
+    then
+      if [ -d "website" ]
+      then
+        website_config="$(json -f "website/package.json" -o json-0 websiteConfig)"
+
+        if [ ! -z "${website_config}" ]
+        then
+          git add website
+          git commit -m "website: re-generate commons" || true
+        else
+          echo "${name} has no websiteConfig..."
+        fi
+      else
+        echo "${name} has no website..."
+      fi
+    fi
 
     git push
 
-    if [ "${development_branch}" != "${xpack_website_branch}" ]
+    if [ "${development_branch}" != "${website_branch}" ]
     then
-      git checkout "${xpack_website_branch}"
+      git checkout "${website_branch}"
       git merge "${development_branch}"
       git push
 
       git checkout "${development_branch}"
     fi
-
   )
 done
 
+echo
 echo "${script_name} done"
+exit 0
 
 # -----------------------------------------------------------------------------
