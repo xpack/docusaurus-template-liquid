@@ -41,11 +41,6 @@ skip_website="false"
 while [ $# -gt 0 ]
 do
   case "$1" in
-    --skip-website )
-      skip_website="true"
-      shift
-      ;;
-
     * )
       echo "Unsupported option $1"
       shift
@@ -101,35 +96,28 @@ do
 
     git checkout "${development_branch}"
 
-    npm run npm-install
-    npm run npm-link-helpers
-    npm run generate-top-commons
-
-    if [ "${skip_website}" != "true" ]
+    if [ -d "website" ]
     then
-      if [ -d "website" ]
+      website_config="$(json -f "website/package.json" -o json-0 websiteConfig)"
+
+      if [ ! -z "${website_config}" ]
       then
-        website_config="$(json -f "website/package.json" -o json-0 websiteConfig)"
+        (
+          cd website
 
-        if [ ! -z "${website_config}" ]
-        then
-          (
-            cd website
+          # npm run deep-clean
+          npm run npm-install
+          npm run npm-link-helpers
+          npm run generate-website-commons
 
-            # npm run deep-clean
-            npm run npm-install
-            npm run npm-link-helpers
-            npm run generate-website-commons
-
-            npm run build
-          )
-        else
-          echo "${name} has no websiteConfig..."
-        fi
-
+          npm run build
+        )
       else
-        echo "${name} has no website..."
+        echo "${name} has no websiteConfig..."
       fi
+
+    else
+      echo "${name} has no website..."
     fi
   )
 done

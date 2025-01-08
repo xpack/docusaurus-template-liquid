@@ -41,11 +41,6 @@ skip_website="false"
 while [ $# -gt 0 ]
 do
   case "$1" in
-    --skip-website )
-      skip_website="true"
-      shift
-      ;;
-
     * )
       echo "Unsupported option $1"
       shift
@@ -108,34 +103,19 @@ do
 
     git checkout "${development_branch}"
 
-    git add .github .gitignore README*.md package*.json
-    if [ -f .npmignore ]
+    if [ -d "website" ]
     then
-      git add .npmignore
-    fi
-    if [ -f tsconfig.json ]
-    then
-      git add tsconfig*.json
-    fi
+      website_config="$(json -f "website/package.json" -o json-0 websiteConfig)"
 
-    git commit -m "re-generate commons" || true
-
-    if [ "${skip_website}" != "true" ]
-    then
-      if [ -d "website" ]
+      if [ ! -z "${website_config}" ]
       then
-        website_config="$(json -f "website/package.json" -o json-0 websiteConfig)"
-
-        if [ ! -z "${website_config}" ]
-        then
-          git add website
-          git commit -m "website: re-generate commons" || true
-        else
-          echo "${name} has no websiteConfig..."
-        fi
+        git add website
+        git commit -m "website: re-generate commons" || true
       else
-        echo "${name} has no website..."
+        echo "${name} has no websiteConfig..."
       fi
+    else
+      echo "${name} has no website..."
     fi
 
     git push
