@@ -50,28 +50,25 @@ export script_folder_name="$(basename "${script_folder_path}")"
 
 # set -x
 
-do_init="false"
-
-while [ $# -gt 0 ]
-do
-  case "$1" in
-    --init )
-      do_init="true"
-      shift
-      ;;
-
-    * )
-      echo "Unsupported option $1"
-      shift
-  esac
-done
-
-# -----------------------------------------------------------------------------
-
 # The script is invoked from the website via the following npm script:
 # "website-generate-commons": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-commons.sh",
 
 current_folder_path="$(dirname $(dirname $(dirname $(dirname "${script_folder_path}"))))"
+helper_folder_path="${current_folder_path}/node_modules/@xpack/npm-packages-helper"
+
+source "${helper_folder_path}/maintenance-scripts/scripts-helper-source.sh"
+
+parse_options "$@"
+
+# -----------------------------------------------------------------------------
+
+if [ "${do_dry_run}" == "true" ]
+then
+  echo
+  echo "Dry run!"
+  echo
+fi
+
 if [ "$(basename "${current_folder_path}")" == "website" ]
 then
   website_folder_path="${current_folder_path}"
@@ -95,7 +92,14 @@ fi
 
 templates_folder_path="$(dirname "${script_folder_path}")/templates"
 
-source "${current_folder_path}/node_modules/@xpack/npm-packages-helper/maintenance-scripts/compute-context.sh"
+export project_folder_path
+export templates_folder_path
+export website_folder_path
+
+# -----------------------------------------------------------------------------
+
+# Process package.json files and leave results in environment variables.
+compute_context
 
 # -----------------------------------------------------------------------------
 
@@ -109,14 +113,14 @@ then
 
   # Preliminary pass to remove _common folders.
   find . -type d -name '_common' -print0 | sort -zn | \
-    xargs -0 -I '{}' rm -rfv "${website_folder_path}"/'{}'
+    xargs -0 -I '{}' bash "${script_folder_path}/process-template-item.sh" --remove-folder '{}' "${website_folder_path}"
 
   echo
   echo "Common files, overridden..."
 
   # Main pass to copy/generate common
   find . -type f -print0 | sort -zn | \
-    xargs -0 -I '{}' bash "${script_folder_path}/process-template-file.sh" --force '{}' "${website_folder_path}"
+    xargs -0 -I '{}' bash "${script_folder_path}/process-template-item.sh" --force '{}' "${website_folder_path}"
 
   cd "${templates_folder_path}/docusaurus/first-time"
 
@@ -124,26 +128,8 @@ then
   echo "First time proposals..."
 
   find . -type f -print0 | sort -zn | \
-    xargs -0 -I '{}' bash "${script_folder_path}/process-template-file.sh" '{}' "${website_folder_path}"
+    xargs -0 -I '{}' bash "${script_folder_path}/process-template-item.sh" '{}' "${website_folder_path}"
 
-fi
-
-echo
-echo "Regenerate website package.json..."
-
-# https://trentm.com/json
-if [ -f "${website_folder_path}/package.json" ]
-then
-  # Be sure destination is writeable.
-  chmod -f +w "${website_folder_path}/package.json"
-
-  # Pass the existing json first, then the template one.
-  cat "${website_folder_path}/package.json" "${templates_folder_path}/docusaurus/other/package.json" | json --deep-merge > "${website_folder_path}/package-new.json"
-
-  rm "${website_folder_path}/package.json"
-  mv -v "${website_folder_path}/package-new.json" "${website_folder_path}/package.json"
-else
-  cat "${templates_folder_path}/docusaurus/other/package.json" | json --deep-merge > "${website_folder_path}/package.json"
 fi
 
 if [ "${do_init}" != "true" ]

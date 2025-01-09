@@ -48,62 +48,111 @@ export script_folder_name="$(basename "${script_folder_path}")"
 
 # =============================================================================
 
-# xargs stops only for exit code 255.
-function trap_handler()
-{
-  local from_file="$1"
-  shift
-  local line_number="$1"
-  shift
-  local exit_code="$1"
-  shift
+# set -x
 
-  echo "FAIL ${from_file} line: ${line_number} exit: ${exit_code}"
-  exit 255
-}
+# The script is invoked from node_modules/@xpack/docusaurus-template-liquid.js via
+# ${script_folder_path}/process-template-item.sh
+
+helper_folder_path="$(dirname $(dirname "${script_folder_path}"))/npm-packages-helper"
+
+source "${helper_folder_path}/maintenance-scripts/scripts-helper-source.sh"
+
+# -----------------------------------------------------------------------------
 
 # Runs in the source folder.
-# $1 = relative file path to source
+# $1 = relative file path to source, starts with `./`
 # $2 = absolute folder path to destination
 
 # echo $@
 # set -x
 
-do_force="n"
-if [ "${1}" == "--force" ]
+do_remove_folder="false"
+do_force="false"
+
+if [ "${1}" == "--remove-folder" ]
 then
   # Ask to override and write protect.
-  do_force="y"
+  do_remove_folder="true"
+  shift
+elif [ "${1}" == "--force" ]
+then
+  # Ask to override and write protect.
+  do_force="true"
   shift
 fi
 
-# The source file path.
-from_file_path="$(echo "${1}" | sed -e 's|^\.\/||')"
-to_relative_file_path="$(echo "${from_file_path}" | sed -e 's|-liquid||')"
+export do_remove_folder
+export do_force
 
-# The destination file path.
-to_file_path="${2}/${to_relative_file_path}"
+# -----------------------------------------------------------------------------
+
+# If one of the selector paths is present, but not the right one, exit.
+if check_if_should_ignore_path "$@"
+then
+  exit 0
+fi
+
+# -----------------------------------------------------------------------------
+
+if [ "${do_remove_folder}" == "true" ]
+then
+  from_relative_folder_path="$(echo "${1}" | sed -e 's|^\.\/||')"
+  # Superfluous, `find -type d` should not allow this.
+  if [ ! -d "${from_relative_folder_path}" ]
+  then
+    echo "${from_relative_folder_path} not a folder"
+    exit 1
+  fi
+
+  to_relative_folder_path="$(echo "${1}" | sed -e 's|/_xpack/|/|' -e 's|/_xpack-dev-tools/|/|' -e 's|^\.\/||')"
+  to_absolute_folder_path="${2}/${to_relative_folder_path}"
+
+  if [ -d "${to_absolute_folder_path}" ]
+  then
+    echo "rm ${to_relative_folder_path}"
+    if [ "${do_dry_run}" != "true" ]
+    then
+      rm -rf "${to_absolute_folder_path}"
+    fi
+  fi
+
+  exit 0
+fi
+
+# -----------------------------------------------------------------------------
+
+prepare_paths "$@"
+
+# -----------------------------------------------------------------------------
+
+tmp_file_path="$(mktemp -t top_commons.XXXXX)"
 
 # Used to enforce an exit code of 255, required by xargs.
-trap 'trap_handler ${from_file_path} $LINENO $?; return 255' ERR
+trap 'trap_handler ${from_relative_file_path} $LINENO $? ${tmp_file_path}; return 255' ERR
 
-if [ ! -f "${from_file_path}" ]
+# -----------------------------------------------------------------------------
+
+# Superfluous, `find -type f` should not allow this.
+if [ ! -f "${from_relative_file_path}" ]
 then
-  echo "${from_file_path} not a file"
+  echo "${from_relative_file_path} not a file"
   exit 1
 fi
 
-if [ "$(basename "${from_file_path}")" == ".DS_Store" ]
+if [ "$(basename "${from_relative_file_path}")" == ".DS_Store" ]
 then
-  echo "${from_file_path} ignored" # Skip macOS specifics.
+  echo "${from_relative_file_path} ignored" # Skip macOS specifics.
   exit 0
 fi
 
-if [ -f "${to_file_path}" ] && [ "${do_force}" == "n" ]
+if [ -f "${to_absolute_file_path}" ] && [ "${do_force}" != "true" ]
 then
-  echo "${to_file_path} already present"
+  echo "${to_absolute_file_path} already present"
   exit 0
 fi
+
+# -----------------------------------------------------------------------------
+# Compute exclusions.
 
 # Destination relative file paths to skip.
 skip_pages_array=()
@@ -178,36 +227,25 @@ then
   )
 fi
 
+set +o nounset # Do not exit if variable not set (empty skip_pages_array).
+
 # echo "skip_pages_array=${skip_pages_array[@]}"
 # echo "to_relative_file_path=${to_relative_file_path}"
 
 if [[ ${skip_pages_array[@]} =~ "${to_relative_file_path}" ]]
 then
-  echo "${from_file_path} skipped"
+  echo "skipped: ${from_relative_file_path}"
+  rm -f "${tmp_file_path}"
   exit 0
 fi
 
-if [ -f "${to_file_path}" ]
-then
-  # Be sure destination is writeable.
-  chmod -f +w "${to_file_path}"
-fi
+set -o nounset # Exit if variable not set.
 
-mkdir -p "$(dirname ${to_file_path})"
+# -----------------------------------------------------------------------------
 
-if [[ "$(basename "${from_file_path}")" =~ .*-liquid.* ]]
-then
-  echo liquidjs "@${from_file_path}" '->' "${to_file_path}"
-  # --strict-variables
-  liquidjs --context "${xpack_context}" --template "@${from_file_path}" --output "${to_file_path}" --strict-filters
-else
-  cp -v "${from_file_path}" "${to_file_path}"
-fi
+process_file
 
-if [ "${do_force}" == "y" ]
-then
-  chmod -w "${to_file_path}"
-fi
+rm -rf "${tmp_file_path}"
 
 # Completed successfully.
 exit 0

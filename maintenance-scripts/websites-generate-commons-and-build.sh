@@ -121,6 +121,8 @@ done
 
 echo
 echo "${script_name} done"
+
+# Completed successfully.
 exit 0
 
 # -----------------------------------------------------------------------------
