@@ -40,10 +40,11 @@ then
   script_path="$(pwd)/$0"
 fi
 
-script_name="$(basename "${script_path}")"
+export script_path
+export script_name="$(basename "${script_path}")"
 
-script_folder_path="$(dirname "${script_path}")"
-script_folder_name="$(basename "${script_folder_path}")"
+export script_folder_path="$(dirname "${script_path}")"
+export script_folder_name="$(basename "${script_folder_path}")"
 
 # =============================================================================
 
@@ -105,7 +106,7 @@ function generate_details()
   local dependencies="$(json -f "${project_folder_path}/package.json" ${key} | grep -v '{' | grep -v '}')"
 
   # echo "|${dependencies}|"
-  
+
   echo
   echo "\`${key}\`:"
   echo
