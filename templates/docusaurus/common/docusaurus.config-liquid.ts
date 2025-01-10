@@ -298,8 +298,8 @@ const config: Config = {
       },
       items: [
         {
-          to: '/',{% if packageConfig.isOrganizationWeb != "true" %}
-          label: {% if packageWebsiteConfig.shortName %}'{{packageWebsiteConfig.shortName}}'{% else %}'{{packageName}}'{% endif %},{% endif %}
+          to: '/',
+          label: {% if packageConfig.isOrganizationWeb == "true" %}'{{githubProjectOrganization}}'{% else %}{% if packageWebsiteConfig.shortName %}'{{packageWebsiteConfig.shortName}}'{% else %}'{{packageName}}'{% endif %}{% endif %},
           className: 'header-home-link',
           position: 'left'
         },{% if packageWebsiteConfig.hasCustomDocsNavbarItem == "true" %}
