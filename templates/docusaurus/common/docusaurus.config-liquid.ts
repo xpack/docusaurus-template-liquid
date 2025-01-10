@@ -298,8 +298,8 @@ const config: Config = {
       },
       items: [
         {
-          to: '/',
-          // label: 'Home',
+          to: '/',{% if packageConfig.isOrganizationWeb != "true" %}
+          label: {% if packageWebsiteConfig.shortName %}'{{packageWebsiteConfig.shortName}}'{% else %}'{{packageName}}'{% endif %},{% endif %}
           className: 'header-home-link',
           position: 'left'
         },{% if packageWebsiteConfig.hasCustomDocsNavbarItem == "true" %}
@@ -348,7 +348,7 @@ const config: Config = {
         cliNavbar,{% endif %}{% if packageWebsiteConfig.hasApi == "true" %}
         {
           to: '/docs/api',
-          label: 'API Reference',
+          label: 'API',
           position: 'left',
         },{% endif %}
         {
