@@ -10,15 +10,26 @@ To add the template to an existing project, start with the instructions in
 `npm-package-helper`, up to the point where the folder `website` is
 created
 
+### Top dependencies
+
+Install `del-cli`, `json` and `liquidjs`:
+
+```sh
+npm install -C website del-cli json liquidjs --save-dev
+```
+
+Link the local helper & template projects:
+
+```sh
+(cd website; npm link  @xpack/npm-packages-helper @xpack/docusaurus-template-liquid)
+```
+
 ## `websiteConfig`
 
 Add a `websiteConfig` object to `website/package.json`, after `engines`.
 
 ```json
 {
-  "engines": {
-    "node": ">=18.0"
-  },
   "websiteConfig": {
     "longName": "xPack Logger",
     "title": "logger - The xPack Logger",
@@ -26,15 +37,27 @@ Add a `websiteConfig` object to `website/package.json`, after `engines`.
     "metadataDescription": "A Node.js CommonJS/ES6 module with a generic console logger class",
     "metadataKeywords": "xpm, xpack, build, test, dependencies, npm, reproducibility",
     "nodeVersion": "18.20.4"
+  },
+  "engines": {
+    "node": ">=18.0"
   }
 }
+```
+
+### Run actions once
+
+In `website`:
+
+```sh
+npm install
+npm run npm-link-helpers
+npm run generate-website-commons
 ```
 
 ### Variables
 
 - shortName: the lowercase short name, like xml; used in page titles;
 if missing, the long name is used
-- longName: the multi word name, without _the_; used in page titles
 - programName: application name for CLI projects, like "xpm", "xcdl"
 - title: home page title, also used for all docs title
 - tagline: home page tagline
