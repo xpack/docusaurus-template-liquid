@@ -18,12 +18,12 @@ date: 2020-07-21 17:54:00 +0300
 
 {/* ------------------------------------------------------------------------ */}
 
-# How to get help for {% if packageWebsiteConfig.shortName %}{{packageWebsiteConfig.shortName}}{% else %}the {{packageWebsiteConfig.longName}}{% endif %}
+# How to get help for {% if packageWebsiteConfig.shortName %}{{packageWebsiteConfig.shortName}}{% else %}the {{packageConfig.longName}}{% endif %}
 
 {% if packageConfig.isOrganizationWeb == "true" %}
 ## Quick tips
 
-The **{{packageWebsiteConfig.longName}}** consists of multiple individual
+The **{{packageConfig.longName}}** consists of multiple individual
 projects, each hosted on its own GitHub repository. Therefore, the best
 way to get answers quickly is to use the
 GitHub Discussions
@@ -87,7 +87,7 @@ Enter a **New discussion**; use the **Q&A** category for questions,
 
 If you are convinced that you identified a bug
 or if want to contribute code to enhance the
-**{{packageWebsiteConfig.longName}}**
+**{{packageConfig.longName}}**
 project, register a **New Issue** in the
 [GitHub Issues](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/issues)
 tracker.

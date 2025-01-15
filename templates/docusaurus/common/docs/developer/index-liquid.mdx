@@ -45,11 +45,11 @@ import CoverageExceptions from './_coverage-exceptions.mdx';
 [![TS-Standard - TypeScript Standard Style Guide](https://badgen.net/badge/code%20style/ts-standard/blue?icon=typescript)](https://github.com/standard/ts-standard/){% endif %}{% if isJavaScript == "true" %}
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com){% endif %}
 
-# How to contribute to {% if packageWebsiteConfig.shortName %}{{packageWebsiteConfig.shortName}}{% else %} the {{packageWebsiteConfig.longName}}{% endif %}
+# How to contribute to {% if packageWebsiteConfig.shortName %}{{packageWebsiteConfig.shortName}}{% else %} the {{packageConfig.longName}}{% endif %}
 
 This page is designed for developers who plan to contribute new features
 or fix bugs in the
-**{{packageWebsiteConfig.longName}}**
+**{{packageConfig.longName}}**
 project and provides documentation on how to build and test the package.
 
 {% if isJavaScript == "true" %}

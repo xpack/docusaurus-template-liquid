@@ -34,7 +34,7 @@ import customField from '@site/src/libs/customField';
 [![NPM Downloads](https://img.shields.io/npm/dw/{% if packageScope != "" %}%40{{packageScope}}%2F{% endif %}{{packageName}})](https://www.npmjs.com/package/{{packageScopedName}}/)
 [![NPM Downloads](https://img.shields.io/npm/d18m/{% if packageScope != "" %}%40{{packageScope}}%2F{% endif %}{{packageName}})](https://www.npmjs.com/package/{{packageScopedName}}/)
 
-# How to install {% if packageWebsiteConfig.shortName %}{{packageWebsiteConfig.shortName}}{% else %}the {{packageWebsiteConfig.longName}}{% endif %}
+# How to install {% if packageWebsiteConfig.shortName %}{{packageWebsiteConfig.shortName}}{% else %}the {{packageConfig.longName}}{% endif %}
 
 {% if packageWebsiteConfig.hasCustomUserInformation == "true" %}
 <CustomInstall nodeVersion={frontMatter.node_version}/>
