@@ -76,8 +76,8 @@
       "last 5 safari version"
     ]
   },
-  "websiteConfig": {},
   "engines": {
     "node": ">=18.0"
-  }
+  },
+  "websiteConfig": {}
 }
