@@ -147,7 +147,7 @@ fi
 
 if [ -f "${to_absolute_file_path}" ] && [ "${do_force}" != "true" ]
 then
-  echo "${to_absolute_file_path} already present"
+  echo "${to_relative_file_path} already present"
   exit 0
 fi
 
@@ -155,86 +155,101 @@ fi
 # Compute exclusions.
 
 # Destination relative file paths to skip.
-skip_pages_array=()
+skip_pages_array=("BEGIN")
 
-if [ "${xpack_is_organization_web}" == "true" ]
+if [ "${is_xpack}" == "true" ]
 then
-  skip_pages_array+=(\
-    "docs/developer/_test-results.mdx" \
-    "docs/faq/index-liquid.mdx" "docs/user/index.mdx" \
-    "docs/getting-started/_common/_commonjs-compatibility.mdx" \
-    "docs/getting-started/_common/_github-and-npmjs.mdx" \
-    "docs/getting-started/_compatibility.mdx" \
-    "docs/getting-started/_overview.mdx" \
-    "docs/getting-started/_status.mdx" \
-    "docs/install/index-liquid.mdx" \
-    "docs/maintainer/_more.mdx" \
-    "docs/releases/index.mdx" \
-    "blog/_common/_download-analytics.mdx" \
-    "blog/_common/_prerequisites.mdx"
-  )
+
+  if [ "${xpack_is_organization_web}" == "true" ]
+  then
+    skip_pages_array+=(\
+      "docs/developer/_test-results.mdx" \
+      "docs/faq/index-liquid.mdx" "docs/user/index.mdx" \
+      "docs/getting-started/_common/_commonjs-compatibility.mdx" \
+      "docs/getting-started/_common/_github-and-npmjs.mdx" \
+      "docs/getting-started/_compatibility.mdx" \
+      "docs/getting-started/_overview.mdx" \
+      "docs/getting-started/_status.mdx" \
+      "docs/install/index-liquid.mdx" \
+      "docs/maintainer/_more.mdx" \
+      "docs/releases/index.mdx" \
+      "blog/_common/_download-analytics.mdx" \
+      "blog/_common/_prerequisites.mdx"
+    )
+  fi
+
+  if [ "${xpack_skip_install_command}" == "true" ]
+  then
+    skip_pages_array+=(\
+      "docs/install/_common/_cli-liquid.mdx" \
+      "docs/install/_common/_no-administrative-rights.mdx" \
+      "docs/install/_common/_prerequisites.mdx" \
+      "docs/install/_troubleshooting-windows.mdx" \
+      "docs/install/index.mdx" \
+    )
+  fi
+
+  if [ "${xpack_has_metadata_minimum}" != "true" ]
+  then
+    skip_pages_array+=(\
+      "docs/metadata/_common/_minimum-required.mdx" \
+    )
+  fi
+
+  if [ "${xpack_has_cli}" != "true" ]
+  then
+    skip_pages_array+=(\
+      "docs/install/_common/_cli.mdx" \
+      "docs/install/_common/_no-administrative-rights.mdx" \
+    )
+  fi
+
+  if [ "${xpack_has_policies}" != "true" ]
+  then
+    skip_pages_array+=(\
+      "docs/user/policies/_common/_policies.mdx" \
+    )
+  fi
+
+  if [ "${xpack_skip_contributor_guide}" == "true" ]
+  then
+    skip_pages_array+=(\
+      "docs/developer/_common/_prerequisites.mdx" \
+      "docs/developer/_common/_get-project-sources.mdx" \
+      "docs/developer/_coverage-exceptions.mdx" \
+      "docs/developer/_style-exceptions.mdx" \
+      "docs/developer/_test-results.mdx" \
+      "docs/developer/index.mdx" \
+    )
+  fi
+
+  if [ "${xpack_has_custom_homepage_features}" == "true" ]
+  then
+    skip_pages_array+=(\
+      "src/components/HomepageFeatures/FeatureList.tsx" \
+    )
+  fi
+
+elif [ "${is_xpack_dev_tools}" == "true" ]
+then
+  : # TODO
 fi
 
-if [ "${xpack_skip_install_command}" == "true" ]
-then
-  skip_pages_array+=(\
-    "docs/install/_common/_cli-liquid.mdx" \
-    "docs/install/_common/_no-administrative-rights.mdx" \
-    "docs/install/_common/_prerequisites.mdx" \
-    "docs/install/_troubleshooting-windows.mdx" \
-    "docs/install/index.mdx" \
-  )
-fi
+# -----------------------------------------------------------------------------
 
-if [ "${xpack_has_metadata_minimum}" != "true" ]
-then
-  skip_pages_array+=(\
-    "docs/metadata/_common/_minimum-required.mdx" \
-  )
-fi
+skip_pages_array+=("END")
 
-if [ "${xpack_has_cli}" != "true" ]
-then
-  skip_pages_array+=(\
-    "docs/install/_common/_cli.mdx" \
-    "docs/install/_common/_no-administrative-rights.mdx" \
-  )
-fi
-
-if [ "${xpack_has_policies}" != "true" ]
-then
-  skip_pages_array+=(\
-    "docs/user/policies/_common/_policies.mdx" \
-  )
-fi
-
-if [ "${xpack_skip_contributor_guide}" == "true" ]
-then
-  skip_pages_array+=(\
-    "docs/developer/_common/_prerequisites.mdx" \
-    "docs/developer/_common/_get-project-sources.mdx" \
-    "docs/developer/_coverage-exceptions.mdx" \
-    "docs/developer/_style-exceptions.mdx" \
-    "docs/developer/_test-results.mdx" \
-    "docs/developer/index.mdx" \
-  )
-fi
-
-if [ "${xpack_has_custom_homepage_features}" == "true" ]
-then
-  skip_pages_array+=(\
-    "src/components/HomepageFeatures/FeatureList.tsx" \
-  )
-fi
-
-set +o nounset # Do not exit if variable not set (empty skip_pages_array).
-
+# The array members are concatenated with spaces separators.
 # echo "skip_pages_array=${skip_pages_array[@]}"
 # echo "to_relative_file_path=${to_relative_file_path}"
 
-if [[ ${skip_pages_array[@]} =~ "${to_relative_file_path}" ]]
+set +o nounset # Do not exit if variable not set (empty skip_pages_array).
+
+# To ensure proper match, use explicit spaces.
+if [[ ${skip_pages_array[@]} =~ " ${to_relative_file_path} " ]]
 then
-  echo "skipped: ${from_relative_file_path}"
+  # echo "skipped: ${from_relative_file_path}"
+  echo "skipped: ${to_relative_file_path}"
   rm -f "${tmp_file_path}"
   exit 0
 fi

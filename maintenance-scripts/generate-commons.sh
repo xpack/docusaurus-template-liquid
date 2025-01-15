@@ -64,6 +64,13 @@ parse_options "$@"
 
 # -----------------------------------------------------------------------------
 
+if [ "${is_xpack}" != "true" ] &&
+   [ "${is_xpack_dev_tools}" != "true" ]
+then
+  echo "Unsupported configuration..."
+  exit 1
+fi
+
 current_folder_path="$(dirname $(dirname $(dirname $(dirname "${script_folder_path}"))))"
 
 if [ "$(basename "${current_folder_path}")" == "website" ]
@@ -109,8 +116,13 @@ fi
 
 # -----------------------------------------------------------------------------
 
-if [ "${do_init}" != "true" ]
+if [ "${do_init}" == "true" ]
 then
+  : # TODO
+else
+
+  echo
+  echo "Processing template from ${templates_folder_path}/docusaurus..."
 
   cd "${templates_folder_path}/docusaurus/common"
 
@@ -136,23 +148,23 @@ then
   find . -type f -print0 | sort -zn | \
     xargs -0 -I '{}' bash "${script_folder_path}/process-template-item.sh" '{}' "${website_folder_path}"
 
-fi
-
-if [ "${do_init}" != "true" ]
-then
-
-  echo
-  echo "Regenerate top README.md..."
-
-  if [ $(cat "${project_folder_path}/README.md" | wc -l | tr -d '[:blank:]') -ge 42 ]
+  if [ "${is_xpack}" == "true" ]
   then
-    mv -v "${project_folder_path}/README.md" "${project_folder_path}/README-long.md"
-  fi
-  echo
-  echo liquidjs "@README-TOP-liquid.md" '->' "${project_folder_path}/README.md"
-  liquidjs --context "${xpack_context}" --template "@${templates_folder_path}/docusaurus/other/README-TOP-liquid.md" --output "${project_folder_path}/README.md" --strict-variables --strict-filters --lenient-if
 
+    echo
+    echo "Regenerate top README.md..."
+
+    if [ $(cat "${project_folder_path}/README.md" | wc -l | tr -d '[:blank:]') -ge 42 ]
+    then
+      mv -v "${project_folder_path}/README.md" "${project_folder_path}/README-long.md"
+    fi
+    echo
+    substitute "${templates_folder_path}/docusaurus/other/README-TOP-liquid.md" "README.md" "${project_folder_path}"
+
+  fi
 fi
+
+# -----------------------------------------------------------------------------
 
 echo
 echo "${script_name} ${argv} done"
