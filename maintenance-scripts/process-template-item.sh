@@ -141,7 +141,7 @@ fi
 
 if [ "$(basename "${from_relative_file_path}")" == ".DS_Store" ]
 then
-  echo "${from_relative_file_path} ignored" # Skip macOS specifics.
+  # echo "${from_relative_file_path} ignored" # Skip macOS specifics.
   exit 0
 fi
 

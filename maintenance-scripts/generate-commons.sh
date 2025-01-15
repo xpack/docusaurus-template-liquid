@@ -50,24 +50,21 @@ export script_folder_name="$(basename "${script_folder_path}")"
 
 # set -x
 
-# The script is invoked from the website via the following npm script:
-# "website-generate-commons": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-commons.sh",
+argv="$@"
 
-current_folder_path="$(dirname $(dirname $(dirname $(dirname "${script_folder_path}"))))"
-helper_folder_path="${current_folder_path}/node_modules/@xpack/npm-packages-helper"
+# The script is invoked from the `website` via the following npm script:
+# "website-generate-commons": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-commons.sh",
+helper_folder_path="$(dirname $(dirname "${script_folder_path}"))/npm-packages-helper"
 
 source "${helper_folder_path}/maintenance-scripts/scripts-helper-source.sh"
 
+# Parse --init, --dry-run, --xpack, --xpack-dev-tools
+# and leave variables in the environment.
 parse_options "$@"
 
 # -----------------------------------------------------------------------------
 
-if [ "${do_dry_run}" == "true" ]
-then
-  echo
-  echo "Dry run!"
-  echo
-fi
+current_folder_path="$(dirname $(dirname $(dirname $(dirname "${script_folder_path}"))))"
 
 if [ "$(basename "${current_folder_path}")" == "website" ]
 then
@@ -100,6 +97,15 @@ export website_folder_path
 
 # Process package.json files and leave results in environment variables.
 compute_context
+
+# -----------------------------------------------------------------------------
+
+if [ "${do_dry_run}" == "true" ]
+then
+  echo
+  echo "Dry run!"
+  echo
+fi
 
 # -----------------------------------------------------------------------------
 
@@ -149,7 +155,7 @@ then
 fi
 
 echo
-echo "${script_name} done"
+echo "${script_name} ${argv} done"
 
 # Completed successfully.
 exit 0
