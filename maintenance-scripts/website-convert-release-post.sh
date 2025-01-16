@@ -65,7 +65,7 @@ trap 'trap_handler ${from_path} $LINENO $?; return 255' ERR
 
 if [ -f "${to_path}" ] && [ "${do_force}" == "n" ]
 then
-  echo "${to_path} already present"
+  echo "already present: ${to_path}"
   exit 0
 fi
 

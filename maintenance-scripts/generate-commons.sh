@@ -118,16 +118,18 @@ fi
 
 if [ "${do_init}" == "true" ]
 then
-  : # TODO
+  # TODO
+  echo "--init not implemented yet"
+  exit 1
 else
 
   echo
   echo "Processing template from ${templates_folder_path}/docusaurus..."
 
-  cd "${templates_folder_path}/docusaurus/common"
-
   echo
   echo "Common files, cleanups..."
+
+  cd "${templates_folder_path}/docusaurus/common"
 
   # Preliminary pass to remove _common folders.
   find . -type d -name '_common' -print0 | sort -zn | \
@@ -140,17 +142,16 @@ else
   find . -type f -print0 | sort -zn | \
     xargs -0 -I '{}' bash "${script_folder_path}/process-template-item.sh" --force '{}' "${website_folder_path}"
 
-  cd "${templates_folder_path}/docusaurus/first-time"
-
   echo
   echo "First time proposals..."
+
+  cd "${templates_folder_path}/docusaurus/first-time"
 
   find . -type f -print0 | sort -zn | \
     xargs -0 -I '{}' bash "${script_folder_path}/process-template-item.sh" '{}' "${website_folder_path}"
 
-  if [ "${is_xpack}" == "true" ]
+  if [ "${xpack_is_organization_web}" != "true" ]
   then
-
     echo
     echo "Regenerate top README.md..."
 
@@ -159,9 +160,9 @@ else
       mv -v "${project_folder_path}/README.md" "${project_folder_path}/README-long.md"
     fi
     echo
-    substitute "${templates_folder_path}/docusaurus/other/README-TOP-liquid.md" "README.md" "${project_folder_path}"
-
+    substitute "${templates_folder_path}/docusaurus/other/${accepted_path}/README-TOP-liquid.md" "README.md" "${project_folder_path}"
   fi
+
 fi
 
 # -----------------------------------------------------------------------------

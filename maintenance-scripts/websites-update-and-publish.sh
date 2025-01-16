@@ -37,26 +37,27 @@ export script_folder_name="$(basename "${script_folder_path}")"
 
 # set -x
 
-while [ $# -gt 0 ]
-do
-  case "$1" in
-    * )
-      echo "Unsupported option $1"
-      shift
-  esac
-done
-
-# -----------------------------------------------------------------------------
+argv="$@"
 
 # Runs as
 # .../xpack.github/packages/docusaurus-template-liquid.git/maintenance-scripts/websites-update-and-publish.sh
-packages_folder_path="$(dirname $(dirname "${script_folder_path}"))"
-www_folder_path="$(dirname "${packages_folder_path}")/www"
+helper_folder_path="$(dirname "${script_folder_path}")/node_modules/@xpack/npm-packages-helper"
 
-for f in "${packages_folder_path}"/*/.git "${www_folder_path}"/*/.git
-do
+source "${helper_folder_path}/maintenance-scripts/scripts-helper-source.sh"
+
+# Parse --init, --dry-run, --xpack, --xpack-dev-tools
+# and leave variables in the environment.
+parse_options "$@"
+
+# -----------------------------------------------------------------------------
+
+# $1 = *.git
+function update_and_publish()
+{
   (
-    cd "${f}/.."
+    local from_folder_path="$(dirname "${1}")"
+
+    cd "${from_folder_path}"
 
     echo
     pwd
@@ -84,7 +85,10 @@ do
       fi
       website_branch="website"
     else
-      if git branch | grep development >/dev/null
+      if git branch | grep xpack-development >/dev/null
+      then
+        development_branch="xpack-development"
+      elif git branch | grep development >/dev/null
       then
         development_branch="development"
       else
@@ -126,12 +130,44 @@ do
       git checkout "${development_branch}"
     fi
   )
-done
+}
+
+# -----------------------------------------------------------------------------
+
+# Runs as
+# .../xpack.github/packages/docusaurus-template-liquid.git/maintenance-scripts/websites-update-and-publish.sh
+
+my_projects_folder_path="$(dirname $(dirname $(dirname $(dirname "${script_folder_path}"))))"
+
+if [ "${is_xpack}" == "true" ]
+then
+  xpack_github_folder_path="${my_projects_folder_path}/xpack.github"
+  packages_folder_path="${xpack_github_folder_path}/packages"
+  www_folder_path="${xpack_github_folder_path}/www"
+
+  for file_path in "${packages_folder_path}"/*/.git "${www_folder_path}"/*/.git
+  do
+    update_and_publish "${file_path}"
+  done
+elif [ "${is_xpack_dev_tools}" == "true" ]
+then
+  xpack_dev_tools_github_folder_path="${my_projects_folder_path}/xpack-dev-tools.github"
+  xpacks_folder_path="${xpack_dev_tools_github_folder_path}/xPacks"
+  www_folder_path="${xpack_dev_tools_github_folder_path}/www"
+
+  # "${xpack_dev_tools_github_folder_path}/xpack-build-box.git/.git"
+  for file_path in "${xpacks_folder_path}"/*/.git "${www_folder_path}"/*/.git
+  do
+    update_and_publish "${file_path}"
+  done
+else
+  echo "Unsupported configuration..."
+  exit 1
+fi
 
 echo
-echo "${script_name} done"
+echo "${script_name} ${argv} done"
 
-# Completed successfully.
 exit 0
 
 # -----------------------------------------------------------------------------
