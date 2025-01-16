@@ -9,6 +9,7 @@
     "xpack-dev-tools-generate-websites-commons-and-build": "bash maintenance-scripts/websites-generate-commons-and-build.sh --xpack-dev-tools",
     "xpack-dev-tools-update-and-publish-websites": "bash maintenance-scripts/websites-update-and-publish.sh --xpack-dev-tools",
     "npm-install": "npm install",
+    "npm-link-helpers": "npm link @xpack/npm-packages-helper",
     "npm-link": "npm link"
   },
   "repository": {
@@ -31,9 +32,9 @@
     "url": "https://github.com/xpack/docusaurus-template-liquid/issues"
   },
   "homepage": "https://github.com/xpack/docusaurus-template-liquid#readme",
-  "dependencies": {},
   "devDependencies": {
-    "json": "^11.0.0"
+    "json": "^11.0.0",
+    "liquidjs": "^10.20.1"
   },
   "engines": {
     "node": " >=18.0.0"
