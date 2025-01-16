@@ -146,7 +146,6 @@ const config: Config = {
             'https://github.com/xpack-dev-tools/{{appLcName}}-xpack/edit/xpack/website/',
           showLastUpdateTime: true,
           blogSidebarCount: 8,
-          authorsMapPath: '../authors.yml',
         },
         theme: {
           customCss: './src/css/custom.css',
