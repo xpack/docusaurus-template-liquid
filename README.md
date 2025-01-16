@@ -15,13 +15,19 @@ created
 Install `del-cli`, `json` and `liquidjs`:
 
 ```sh
-npm install -C website del-cli json liquidjs --save-dev
+(chmod -R +w website; cd website; npm install del-cli json liquidjs --save-dev)
 ```
 
 Link the local helper & template projects:
 
 ```sh
-(cd website; npm link  @xpack/npm-packages-helper @xpack/docusaurus-template-liquid)
+(cd website; npm link @xpack/npm-packages-helper @xpack/docusaurus-template-liquid)
+```
+
+### Add npm script
+
+```json
+    "generate-website-commons": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-commons.sh --xpack-dev-tools --dry-run",
 ```
 
 ## `websiteConfig`
