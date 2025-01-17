@@ -7,7 +7,7 @@ title: User's Guide{% if customFields.usePluralGuides == "true" %}s{% endif %}
 description: User information, including the versioning scheme, usage of shared libraries, and RPATH configuration on GNU/Linux.
 keywords:
   - xpack
-  - {{appLcName}}
+  - {{packageConfig.shortName}}
   - user{% if customFields.hasCustomUser != "true" %}
   - versioning
   - shared
@@ -38,10 +38,10 @@ import UseInTesting from './_use-in-testing.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
-# How to use the xPack {{appName}}
+# How to use the xPack {{packageConfig.longName}}
 
 This page is intended for those who plan
-to use the **xPack {{appName}}** binaries in their workflows.
+to use the **xPack {{packageConfig.longName}}** binaries in their workflows.
 
 <More/>
 

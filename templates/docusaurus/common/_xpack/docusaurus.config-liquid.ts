@@ -299,7 +299,7 @@ const config: Config = {
       items: [
         {
           to: '/',
-          label: {% if packageConfig.isOrganizationWeb == "true" %}'{{githubProjectOrganization}}'{% else %}{% if packageWebsiteConfig.shortName %}'{{packageWebsiteConfig.shortName}}'{% else %}'{{packageName}}'{% endif %}{% endif %},
+          label: {% if packageConfig.isOrganizationWeb == "true" %}'{{githubProjectOrganization}}'{% else %}{% if packageConfig.shortName %}'{{packageConfig.shortName}}'{% else %}'{{packageName}}'{% endif %}{% endif %},
           className: 'header-home-link',
           position: 'left'
         },{% if packageWebsiteConfig.hasCustomDocsNavbarItem == "true" %}

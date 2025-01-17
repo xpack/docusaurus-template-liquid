@@ -13,7 +13,7 @@ import LinksVsForwarders from '@site/src/components/LinksVsForwarders'
 ## Versioning
 
 The version string used by the
-upstream {props.upstreamName ? props.upstreamName : '{{appName}}'} project
+upstream {props.upstreamName ? props.upstreamName : '{{packageConfig.longName}}'} project
 is a three number string
 like <code>{customField('xpackVersion')}</code>;
 to this string the xPack distribution adds a fourth number,
@@ -26,7 +26,7 @@ a fifth number,
 like <code>{customField('xpackVersion')}.{customField('npmSubversion')}</code>.
 
 Since adherence of third party packages to SemVer is not guaranteed,
-it is recommended to avoid referring to the xPack {{appName}} dependency via
+it is recommended to avoid referring to the xPack {{packageConfig.longName}} dependency via
 a SemVer expressions
 like <code>^{customField('xpackVersion')}</code> or <code>~{customField('xpackVersion')}</code>, and
 prefer exact matches,

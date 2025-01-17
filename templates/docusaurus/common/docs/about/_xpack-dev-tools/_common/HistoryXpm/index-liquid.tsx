@@ -16,6 +16,6 @@ import customField from '@site/src/libs/customField';
 
 export default function HistoryXpm({specifier}): JSX.Element {
     return (
-        <>The xPack metadata has been added, and the package can now be more conveniently installed via <b>xpm</b>. It is  available from <code>npmjs.com</code> as <code>{specifier ? specifier : '@xpack-dev-tools/{{appLcName}}'}</code></>
+        <>The xPack metadata has been added, and the package can now be more conveniently installed via <b>xpm</b>. It is  available from <code>npmjs.com</code> as <code>{specifier ? specifier : '@xpack-dev-tools/{{packageConfig.shortName}}'}</code></>
     );
 }

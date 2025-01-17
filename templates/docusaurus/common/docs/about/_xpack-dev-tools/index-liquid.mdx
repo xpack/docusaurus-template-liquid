@@ -7,7 +7,7 @@ title: About
 description: Details about the project, including its history, the history of the website, and details about the author.
 keywords:
   - xpack
-  - {{appLcName}}
+  - {{packageConfig.shortName}}
   - about
   - history
   - web
@@ -24,13 +24,13 @@ import Website from './_website.mdx'
 
 {/* ------------------------------------------------------------------------ */}
 
-# About the xPack {{appName}}
+# About the xPack {{packageConfig.longName}}
 
 {%- if customFields.isOrganizationWeb != "true" %}
 
 ## The project
 
-The **xPack {{appName}}** project is part of the
+The **xPack {{packageConfig.longName}}** project is part of the
 [xPack Reproducible Build Framework](https://xpack.github.io)
 and is hosted on GitHub as
 [`xpack-dev-tools/{{gitHubProjectName}}`](https://github.com/xpack-dev-tools/{{gitHubProjectName}}/),
@@ -63,5 +63,5 @@ and Internet technologies.
 He can be reached at [`<ilg@livius.net>`](mailto:ilg@livius.net).
 Please note, this email address is provided as a courtesy.
 For all correspondence related to {% if customFields.isOrganizationWeb == "true" %}the
-**xPack {{appName}}** projects, kindly use the support pages of each individual project{% else%}the **xPack {{appName}}**
+**xPack {{packageConfig.longName}}** projects, kindly use the support pages of each individual project{% else%}the **xPack {{packageConfig.longName}}**
 project, kindly use the project [support](/docs/support/) page{% endif %}).

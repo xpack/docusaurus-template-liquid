@@ -1,9 +1,9 @@
 [![GitHub package.json version](https://img.shields.io/github/package-json/v/xpack-dev-tools/{{gitHubProjectName}})](https://github.com/xpack-dev-tools/{{gitHubProjectName}}/blob/xpack/package.json)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/xpack-dev-tools/{{gitHubProjectName}})](https://github.com/xpack-dev-tools/{{gitHubProjectName}}/releases/)
-[![npm (scoped)](https://img.shields.io/npm/v/@xpack-dev-tools/{{appLcName}}.svg?color=blue)](https://www.npmjs.com/package/@xpack-dev-tools/{{appLcName}}/)
+[![npm (scoped)](https://img.shields.io/npm/v/@xpack-dev-tools/{{packageConfig.shortName}}.svg?color=blue)](https://www.npmjs.com/package/@xpack-dev-tools/{{packageConfig.shortName}}/)
 [![license](https://img.shields.io/github/license/xpack-dev-tools/{{gitHubProjectName}})](https://github.com/xpack-dev-tools/{{gitHubProjectName}}/blob/xpack/LICENSE)
 
-# The xPack {{appName}}
+# The xPack {{packageConfig.longName}}
 
 {% assign platforms_array = platforms | split: "," -%}
 
@@ -17,7 +17,7 @@
 
 {% assign names_array = names_array | uniq -%}
 
-A standalone{% if names_array.size > 1 %}, cross-platform ({{ names_array | join: ", " }}){% else %} {{ names_array | first }}{% endif %} binary distribution of {{appName}},
+A standalone{% if names_array.size > 1 %}, cross-platform ({{ names_array | join: ", " }}){% else %} {{ names_array | first }}{% endif %} binary distribution of {{packageConfig.longName}},
 intended for reproducible builds.
 
 ## Project documentation

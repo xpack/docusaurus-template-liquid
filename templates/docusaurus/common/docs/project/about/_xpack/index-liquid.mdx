@@ -21,7 +21,7 @@ import Website from './_website.mdx'
 
 {/* ------------------------------------------------------------------------ */}
 
-# About {% if packageWebsiteConfig.shortName %}{{packageWebsiteConfig.shortName}}{% else %}the {{packageConfig.longName}}{% endif %}
+# About {% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}the {{packageConfig.longName}}{% endif %}
 
 ## The project
 
@@ -36,7 +36,7 @@ and is hosted on GitHub as
 
 ## The project history
 
-The {% if packageWebsiteConfig.shortName %}**{{packageWebsiteConfig.shortName}}**{% else %}**{{packageConfig.longName}}**{% endif %} history is presented
+The {% if packageConfig.shortName %}**{{packageConfig.shortName}}**{% else %}**{{packageConfig.longName}}**{% endif %} history is presented
 in a separate [History](/docs/project/history/) page.
 
 ## The web site

@@ -20,29 +20,29 @@ import Link from '@docusaurus/Link';
 
 import tools from '@site/tools';
 
-function Tool({ appName, appLcName }) {
+function Tool({ longName, shortName }) {
   return (
     <>
       <div className="padding-vert--sm">
         <div>
-          <b><Link to={'https://xpack-dev-tools.github.io/' + appLcName + '-xpack/'}>{appLcName}</Link></b> - <b>xPack {appName}</b>
+          <b><Link to={'https://xpack-dev-tools.github.io/' + shortName + '-xpack/'}>{shortName}</Link></b> - <b>xPack {longName}</b>
         </div>
         <div className="padding-top--xs">
-          <Link to={'https://github.com/xpack-dev-tools/' + appLcName + '-xpack/releases/'}><img alt="GitHub Release" src={'https://img.shields.io/github/v/release/xpack-dev-tools/' + appLcName + '-xpack?color=blue'} /></Link>
-          &nbsp;<Link to={'https://github.com/xpack-dev-tools/' + appLcName + '-xpack/releases/'}><img alt="GitHub Release Date" src={'https://img.shields.io/github/release-date/xpack-dev-tools/' + appLcName + '-xpack?label=date&color=yellowgreen'} /></Link>
-          &nbsp;<Link to={'https://github.com/xpack-dev-tools/' + appLcName + '-xpack/releases/'}><img alt="GitHub Downloads (all assets, all releases)" src={'https://img.shields.io/github/downloads/xpack-dev-tools/' + appLcName + '-xpack/total.svg'} /></Link>
-          &nbsp;<Link to={'https://github.com/xpack-dev-tools/' + appLcName + '-xpack/'}><img alt="GitHub Repo stars" src={'https://img.shields.io/github/stars/xpack-dev-tools/' + appLcName + '-xpack'} /></Link>
+          <Link to={'https://github.com/xpack-dev-tools/' + shortName + '-xpack/releases/'}><img alt="GitHub Release" src={'https://img.shields.io/github/v/release/xpack-dev-tools/' + shortName + '-xpack?color=blue'} /></Link>
+          &nbsp;<Link to={'https://github.com/xpack-dev-tools/' + shortName + '-xpack/releases/'}><img alt="GitHub Release Date" src={'https://img.shields.io/github/release-date/xpack-dev-tools/' + shortName + '-xpack?label=date&color=yellowgreen'} /></Link>
+          &nbsp;<Link to={'https://github.com/xpack-dev-tools/' + shortName + '-xpack/releases/'}><img alt="GitHub Downloads (all assets, all releases)" src={'https://img.shields.io/github/downloads/xpack-dev-tools/' + shortName + '-xpack/total.svg'} /></Link>
+          &nbsp;<Link to={'https://github.com/xpack-dev-tools/' + shortName + '-xpack/'}><img alt="GitHub Repo stars" src={'https://img.shields.io/github/stars/xpack-dev-tools/' + shortName + '-xpack'} /></Link>
         </div>
       </div>
     </>
   )
 }
 
-function ToolWork({ appName, appLcName }) {
+function ToolWork({ longName, shortName }) {
   return (
     <>
       <div>
-        <b><Link to={'https://xpack-dev-tools.github.io/' + appLcName + '-xpack/'}>{appLcName}</Link></b> - <b>xPack {appName}</b>
+        <b><Link to={'https://xpack-dev-tools.github.io/' + shortName + '-xpack/'}>{shortName}</Link></b> - <b>xPack {longName}</b>
       </div>
     </>
   )

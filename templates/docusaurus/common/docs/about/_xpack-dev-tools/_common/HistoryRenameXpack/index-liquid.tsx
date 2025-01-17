@@ -14,6 +14,6 @@
 
 export default function HistoryRenameXpack(): JSX.Element {
     return (
-        <>The project was renamed <b>xPack {{appName}}</b></>
+        <>The project was renamed <b>xPack {{packageConfig.longName}}</b></>
     );
 }

@@ -25,7 +25,7 @@ import CustomGettingStarted from './_custom-getting-started.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
-# Getting started with {% if packageWebsiteConfig.shortName %}{{packageWebsiteConfig.shortName}}{% else %}the {{packageConfig.longName}}{% endif %}
+# Getting started with {% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}the {{packageConfig.longName}}{% endif %}
 
 <CustomGettingStarted />
 
@@ -42,7 +42,7 @@ import Status from './_status.mdx'
 [![license](https://img.shields.io/github/license/{{githubProjectOrganization}}/{{githubProjectName}}.svg)](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/xpack/LICENSE)
 ![GitHub Repo stars](https://img.shields.io/github/stars/{{githubProjectOrganization}}/{{githubProjectName}})
 
-# Getting Started with {% if packageWebsiteConfig.shortName %}{{packageWebsiteConfig.shortName}}{% else %}the {{packageConfig.longName}}{% endif %}
+# Getting Started with {% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}the {{packageConfig.longName}}{% endif %}
 
 <UserDeveloperMaintainer />
 
@@ -51,7 +51,7 @@ import Status from './_status.mdx'
 {% if packageWebsiteConfig.skipInstallCommand != "true" %}
 ## Install
 
-{% if packageWebsiteConfig.shortName %}[{{packageScopedName}}](https://www.npmjs.com/package/{{packageScopedName}}) is a npm package available{% else %}The {{packageConfig.longName}} is a npm package available as [{{packageScopedName}}](https://www.npmjs.com/package/{{packageScopedName}}){% endif %}
+{% if packageConfig.shortName %}[{{packageScopedName}}](https://www.npmjs.com/package/{{packageScopedName}}) is a npm package available{% else %}The {{packageConfig.longName}} is a npm package available as [{{packageScopedName}}](https://www.npmjs.com/package/{{packageScopedName}}){% endif %}
 from the npmjs.com public registry and can be installed via **npm**.
 
 :::tip

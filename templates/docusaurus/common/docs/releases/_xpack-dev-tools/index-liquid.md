@@ -7,7 +7,7 @@ title: Releases
 description: The full list of project releases.
 keywords:
   - xpack
-  - {{appLcName}}
+  - {{packageConfig.shortName}}
   - releases
 
 hide_table_of_contents: true
@@ -20,7 +20,7 @@ import {ReleasesList} from '@site/src/components/ReleasesList';
 
 {/* ------------------------------------------------------------------------ */}
 
-# The xPack {{appName}} releases
+# The xPack {{packageConfig.longName}} releases
 
 The releases, in reverse chronological order are:
 
