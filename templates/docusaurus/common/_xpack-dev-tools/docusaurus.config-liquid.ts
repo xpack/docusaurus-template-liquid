@@ -239,7 +239,7 @@ const config: Config = {
     // The project's social card, og:image, twitter:image, 1200x630
     image: 'img/sunrise-og-image.jpg',
 
-    metadata: [{% if customFields.isOrganizationWeb == "true" %}
+    metadata: [{% if packageWebsiteConfig.customFields.isOrganizationWeb == "true" %}
       {
         name: 'keywords',
         content: 'xpack, binary, development, tools, reproducibility'
@@ -261,10 +261,10 @@ const config: Config = {
       items: [
         {
           to: '/',
-          label: {% if customFields.isOrganizationWeb == "true" %}'xpack-dev-tools'{% else %}'{{packageConfig.shortName}}'{% endif %},
+          label: {% if packageWebsiteConfig.customFields.isOrganizationWeb == "true" %}'xpack-dev-tools'{% else %}'{{packageConfig.shortName}}'{% endif %},
           className: 'header-home-link',
           position: 'left'
-        },{% if customFields.isOrganizationWeb != "true" %}
+        },{% if packageWebsiteConfig.customFields.isOrganizationWeb != "true" %}
         {
           type: 'dropdown',
           label: 'Documentation',
@@ -370,7 +370,7 @@ const config: Config = {
               href: 'https://github.com/xpack/',
             },
           ]
-        },{% if customFields.isOrganizationWeb != "true" %}
+        },{% if packageWebsiteConfig.customFields.isOrganizationWeb != "true" %}
         {
           label: `${customFields.xpackVersion}`,
           position: 'right',
@@ -383,7 +383,7 @@ const config: Config = {
       links: [
         {
           title: 'Pages',
-          items: [{% if customFields.isOrganizationWeb == "true" %}
+          items: [{% if packageWebsiteConfig.customFields.isOrganizationWeb == "true" %}
             {
               label: 'Getting Started',
               to: '/docs/getting-started',
