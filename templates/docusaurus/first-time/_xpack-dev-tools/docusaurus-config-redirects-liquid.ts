@@ -25,7 +25,7 @@ export const redirects = {
     //     to: '/docs/newDoc2',
     //     from: ['/docs/oldDocFrom2019', '/docs/legacyDocFrom2016'],
     //   },
-    {% if packageWebsiteConfig.customFields.isOrganizationWeb != "true" %}
+    {% if packageConfig.isOrganizationWeb != "true" %}
     {
       from: '/docs/developer-info',
       to: '/docs/developer',
@@ -56,7 +56,7 @@ export const redirects = {
     //   }
     //   return undefined; // Return a falsy value: no redirect created
     //   },
-    {% if packageWebsiteConfig.customFields.isOrganizationWeb != "true" %}
+    {% if packageConfig.isOrganizationWeb != "true" %}
     if (existingPath.includes('/user-info')) {
       return [
         existingPath.replace('/user-info', '/user')

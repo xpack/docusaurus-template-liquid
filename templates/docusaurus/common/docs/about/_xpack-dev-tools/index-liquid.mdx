@@ -26,7 +26,7 @@ import Website from './_website.mdx'
 
 # About the xPack {{packageConfig.longName}}
 
-{%- if packageWebsiteConfig.customFields.isOrganizationWeb != "true" %}
+{%- if packageConfig.isOrganizationWeb != "true" %}
 
 ## The project
 
@@ -40,7 +40,7 @@ part of the [xPack Binary Development Tools](https://github.com/xpack-dev-tools/
 
 <MoreIntro/>
 
-{%- if packageWebsiteConfig.customFields.isOrganizationWeb != "true" %}
+{%- if packageConfig.isOrganizationWeb != "true" %}
 
 ## Project history
 
@@ -62,6 +62,6 @@ and Internet technologies.
 
 He can be reached at [`<ilg@livius.net>`](mailto:ilg@livius.net).
 Please note, this email address is provided as a courtesy.
-For all correspondence related to {% if packageWebsiteConfig.customFields.isOrganizationWeb == "true" %}the
+For all correspondence related to {% if packageConfig.isOrganizationWeb == "true" %}the
 **xPack {{packageConfig.longName}}** projects, kindly use the support pages of each individual project{% else%}the **xPack {{packageConfig.longName}}**
 project, kindly use the project [support](/docs/support/) page{% endif %}).
