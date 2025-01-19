@@ -5,9 +5,11 @@
   "main": "",
   "scripts": {
     "xpack-generate-websites-commons-and-build": "bash maintenance-scripts/websites-generate-commons-and-build.sh --xpack",
-    "xpack-update-and-publish-websites": "bash maintenance-scripts/websites-update-and-publish.sh --xpack",
+    "xpack-commit-websites": "bash maintenance-scripts/websites-commit-and-push.sh --xpack",
+    "xpack-commit-and-push-websites": "bash maintenance-scripts/websites-commit-and-push.sh --xpack --push",
     "xpack-dev-tools-generate-websites-commons-and-build": "bash maintenance-scripts/websites-generate-commons-and-build.sh --xpack-dev-tools",
-    "xpack-dev-tools-update-and-publish-websites": "bash maintenance-scripts/websites-update-and-publish.sh --xpack-dev-tools",
+    "xpack-dev-tools-commit-websites": "bash maintenance-scripts/websites-commit-and-push.sh --xpack-dev-tools",
+    "xpack-dev-tools-commit-and-push-websites": "bash maintenance-scripts/websites-commit-and-push.sh --xpack-dev-tools --push",
     "npm-install": "npm install",
     "npm-link-helpers": "npm link @xpack/npm-packages-helper",
     "npm-link": "npm link"
