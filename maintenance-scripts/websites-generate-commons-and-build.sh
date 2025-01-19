@@ -190,7 +190,7 @@ fi
 rm -rf "${tmp_file_path}"
 
 echo
-echo "${script_name} ${argv} done"
+echo "'${script_name} ${argv}' done"
 
 exit 0
 

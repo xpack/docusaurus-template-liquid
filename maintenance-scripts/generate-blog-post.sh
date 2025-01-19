@@ -83,7 +83,7 @@ echo "liquidjs -> ${post_file_path}"
 liquidjs --context "${xpack_context}" --template "@${website_folder_path}/blog/_templates/blog-post-release-liquid.mdx" > "${post_file_path}"
 
 echo
-echo "${script_name} done"
+echo "'${script_name}' done"
 
 # Completed successfully.
 exit 0

@@ -168,7 +168,7 @@ fi
 # -----------------------------------------------------------------------------
 
 echo
-echo "${script_name} ${argv} done"
+echo "'${script_name} ${argv}' done"
 
 # Completed successfully.
 exit 0

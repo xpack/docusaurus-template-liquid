@@ -90,6 +90,6 @@ echo "Showing descriptions..."
 egrep -h -e "(title:|description:)" "${website_folder_path}/blog"/*.md*
 
 echo
-echo "${script_name} done"
+echo "'${script_name}' done"
 
 # -----------------------------------------------------------------------------

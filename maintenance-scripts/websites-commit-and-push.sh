@@ -128,6 +128,11 @@ function update_and_publish()
     #   git commit -m "build-assets: move customFields to websiteConfig" || true
     # fi
 
+    # chmod +w website/src/libs/customField.js
+    # rm website/src/libs/customField.js
+    # git add website
+    # git commit -m "website: remove unused customField.js" || true
+
     # -------------------------------------------------------------------------
 
     if [ "${do_push}" == "true" ]
@@ -184,7 +189,7 @@ else
 fi
 
 echo
-echo "${script_name} ${argv} done"
+echo "'${script_name} ${argv}' done"
 
 exit 0
 
