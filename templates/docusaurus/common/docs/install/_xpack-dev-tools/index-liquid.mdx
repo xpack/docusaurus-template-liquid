@@ -3,14 +3,14 @@
 # DO NOT EDIT!
 # Automatically generated from docusaurus-template-liquid/templates/docusaurus.
 
-title: Install Guide{% if customFields.usePluralGuides == "true" %}s{% endif %}
+title: Install Guide{% if packageWebsiteConfig.customFields.usePluralGuides == "true" %}s{% endif %}
 description: Explain the prerequisites, how to perform an automated or manual installation, how to uninstall, and the folder hierarchies.
 keywords:
   - xpack
   - {{packageConfig.shortName}}
   - prerequisites
   - automated
-  - install{% if customFields.hasCustomInstall != "true" %}
+  - install{% if packageWebsiteConfig.customFields.hasCustomInstall != "true" %}
   - uninstall
   - files{% endif %}
 
@@ -20,13 +20,13 @@ date: 2020-08-21 11:09:00 +0300
 
 ---
 
-{% if customFields.hasCustomInstall == "true" %}
+{% if packageWebsiteConfig.customFields.hasCustomInstall == "true" %}
 
 import CustomInstall from './_custom-install.mdx'
 
 {/* ------------------------------------------------------------------------ */}
 
-# Install Guide{% if customFields.usePluralGuides == "true" %}s{% endif %}
+# Install Guide{% if packageWebsiteConfig.customFields.usePluralGuides == "true" %}s{% endif %}
 
 <CustomInstall />
 

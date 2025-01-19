@@ -20,7 +20,7 @@ import HeadTitle from '@site/src/components/HeadTitle';
 
 import styles from './index.module.css';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
-{% if customFields.isOrganizationWeb == "true" %}
+{% if packageWebsiteConfig.customFields.isOrganizationWeb == "true" %}
 import HomepageTools from '@site/src/components/HomepageTools';
 {% endif %}
 import InstallWithCopy from '@site/src/components/InstallWithCopy';
@@ -34,7 +34,7 @@ function HomepageHeader() {
       <div className="container">
         <h1 className="hero__title">{siteConfig.title}</h1>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
-{% if customFields.isOrganizationWeb != "true" %}
+{% if packageWebsiteConfig.customFields.isOrganizationWeb != "true" %}
         <div className={styles.installWithCopy}>
           <InstallWithCopy>xpm install @xpack-dev-tools/{{packageConfig.shortName}}@{customField('version')} --verbose</InstallWithCopy>
         </div>
@@ -47,14 +47,14 @@ function HomepageHeader() {
 export default function Home(): JSX.Element {
   const {siteConfig} = useDocusaurusContext();
   return (
-    <Layout {% if customFields.isOrganizationWeb == "true" %}
+    <Layout {% if packageWebsiteConfig.customFields.isOrganizationWeb == "true" %}
       title="Welcome!"
       description="A collection of binary packages with development tools">{% else %}
       title="Welcome!"
       description="A binary package with the {{packageConfig.shortName}} executables">{% endif %}
       <HomepageHeader />
       <main>
-        <HomepageFeatures />{% if customFields.isOrganizationWeb == "true" %}
+        <HomepageFeatures />{% if packageWebsiteConfig.customFields.isOrganizationWeb == "true" %}
         <hr className="hero__hr"/>
         <HomepageTools />{% endif %}
       </main>

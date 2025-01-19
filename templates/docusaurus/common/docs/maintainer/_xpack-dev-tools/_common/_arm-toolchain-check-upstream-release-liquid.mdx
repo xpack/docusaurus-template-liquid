@@ -28,11 +28,11 @@ as below.
 - the GDB version is in `binutils-gdb--gdb/gdb/version.in`
 - the newlib version is in `newlib-cygwin/newlib/configure`, search for `VERSION=`
 - download the latest **macOS (x86_64) hosted cross toolchains** archive (like
-<code>arm-gnu-toolchain-{versionMajor()}.{versionMinor()}.rel{customField('armSubRelease')}-darwin-x86_64-{{customFields.triplet}}.tar.xz</code>)
+<code>arm-gnu-toolchain-{versionMajor()}.{versionMinor()}.rel{customField('armSubRelease')}-darwin-x86_64-{{packageWebsiteConfig.customFields.triplet}}.tar.xz</code>)
 - unpack the archive
 - create a folder <code>build-assets/extras/{versionMajor()}.{versionMinor()}.rel{customField('armSubRelease')}</code>
 - copy the file with the configurations
-(<code>{versionMajor()}.{versionMinor()}.rel{customField('armSubRelease')}-darwin-x86_64-{{customFields.triplet}}-manifest.txt</code>) to the new folder in extras
+(<code>{versionMajor()}.{versionMinor()}.rel{customField('armSubRelease')}-darwin-x86_64-{{packageWebsiteConfig.customFields.triplet}}-manifest.txt</code>) to the new folder in extras
 - download the manifest.txt with the individual source URLs
 (<code>arm-gnu-toolchain-src-snapshot-{versionMajor()}.{versionMinor()}.rel{customField('armSubRelease')}-manifest.txt</code>)
 - copy to the new folder in extras
