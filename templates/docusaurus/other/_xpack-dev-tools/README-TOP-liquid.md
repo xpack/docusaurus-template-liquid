@@ -1,7 +1,7 @@
-[![GitHub package.json version](https://img.shields.io/github/package-json/v/xpack-dev-tools/{{gitHubProjectName}})](https://github.com/xpack-dev-tools/{{gitHubProjectName}}/blob/xpack/package.json)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/xpack-dev-tools/{{gitHubProjectName}})](https://github.com/xpack-dev-tools/{{gitHubProjectName}}/releases/)
-[![npm (scoped)](https://img.shields.io/npm/v/@xpack-dev-tools/{{packageConfig.shortName}}.svg?color=blue)](https://www.npmjs.com/package/@xpack-dev-tools/{{packageConfig.shortName}}/)
-[![license](https://img.shields.io/github/license/xpack-dev-tools/{{gitHubProjectName}})](https://github.com/xpack-dev-tools/{{gitHubProjectName}}/blob/xpack/LICENSE)
+[![GitHub package.json version](https://img.shields.io/github/package-json/v/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/xpack/package.json)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/releases)
+[![npm (scoped)](https://img.shields.io/npm/v/{{packageScopedName}}.svg?color=blue)](https://www.npmjs.com/package/{{packageScopedName}}/)
+[![license](https://img.shields.io/github/license/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/xpack/LICENSE)
 
 # The xPack {{packageConfig.longName}}
 
@@ -24,7 +24,7 @@ intended for reproducible builds.
 
 For information on how to install and use the tools provided by this project,
 please refer to the
-[project web site](https://xpack-dev-tools.github.io/{{gitHubProjectName}}/).
+[project web site]({{packageHomepage}}).
 
 ## License
 

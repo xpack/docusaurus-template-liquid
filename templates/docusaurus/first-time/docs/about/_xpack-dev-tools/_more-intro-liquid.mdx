@@ -1,5 +1,5 @@
 
-{% if packageWebsiteConfig.customFields.isSecondaryTool == 'true' -%}
+{% if packageWebsiteConfig.isSecondaryTool == 'true' -%}
 import IntroSecondary from './_common/_intro-secondary.mdx'
 {%- else -%}
 import IntroPrimary from './_common/_intro-primary.mdx'
@@ -7,7 +7,7 @@ import IntroPrimary from './_common/_intro-primary.mdx'
 
 {/* ------------------------------------------------------------------------ */}
 
-{% if packageWebsiteConfig.customFields.isSecondaryTool == 'true' -%}
+{% if packageWebsiteConfig.isSecondaryTool == 'true' -%}
 <IntroSecondary/>
 {%- else -%}
 <IntroPrimary/>

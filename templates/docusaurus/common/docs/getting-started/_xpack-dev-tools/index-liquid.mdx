@@ -33,8 +33,8 @@ import ReleaseSchedule from './_release-schedule.mdx'
 # Getting Started with the xPack {{packageConfig.longName}}
 
 {% if packageConfig.isOrganizationWeb != "true" -%}
-[![license](https://img.shields.io/github/license/xpack-dev-tools/{{gitHubProjectName}})](https://github.com/xpack-dev-tools/{{gitHubProjectName}}/blob/xpack/LICENSE)
-![GitHub Repo stars](https://img.shields.io/github/stars/xpack-dev-tools/{{gitHubProjectName}})
+[![license](https://img.shields.io/github/license/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/xpack/LICENSE)
+![GitHub Repo stars](https://img.shields.io/github/stars/{{githubProjectOrganization}}/{{githubProjectName}})
 {%- endif %}
 
 {% assign platforms_array = platforms | split: "," -%}
@@ -79,13 +79,13 @@ resulting behaviour must be functionally equivalent.
 {% if packageConfig.isOrganizationWeb != "true" -%}
 
 The open source **xPack {{packageConfig.longName}}** project is hosted on GitHub as
-[`xpack-dev-tools/{{gitHubProjectName}}`](https://github.com/xpack-dev-tools/{{gitHubProjectName}}/);
+[`{{githubProjectOrganization}}/{{githubProjectName}}`](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/);
 it provides the platform specific binaries as
-[release assets](https://github.com/xpack-dev-tools/{{gitHubProjectName}}/releases).
+[release assets](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/releases).
 
 In addition to the binary archives and the package metadata,
 this project also includes the
-[build scripts](https://github.com/xpack-dev-tools/{{gitHubProjectName}}/tree/xpack/build-assets/scripts).
+[build scripts](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/tree/xpack/build-assets/scripts).
 
 <UpgradeNotice/>
 
@@ -245,7 +245,7 @@ presented in the
 ## Support & feedback
 
 The quick advice for getting support and providing feedback is to use the
-[GitHub Discussions](https://github.com/xpack-dev-tools/{{gitHubProjectName}}/discussions/).
+[GitHub Discussions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/discussions).
 
 For additional information, please refer to the
 [Help Centre](/docs/support/) page.
@@ -253,7 +253,7 @@ For additional information, please refer to the
 ## Change log
 
 The release and change log is available in the repository
-[`CHANGELOG.md`](https://github.com/xpack-dev-tools/{{gitHubProjectName}}/blob/xpack/CHANGELOG.md) file.
+[`CHANGELOG.md`](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/xpack/CHANGELOG.md) file.
 
 ## Maintainer & Developer information
 
@@ -265,8 +265,8 @@ For information on how to build the binaries, please see the
 
 However, the ultimate source for details are the build scripts themselves,
 all available from the
-[`{{gitHubProjectName}}.git/build-assets/scripts`](https://github.com/xpack-dev-tools/{{gitHubProjectName}}/tree/xpack/build-assets/scripts/)
-folder. The scripts include common code from the [`@xpack-dev-tools/xbb-helper`](https://github.com/xpack-dev-tools/xbb-helper-xpack) package.
+[`{{githubProjectName}}.git/build-assets/scripts`](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/tree/xpack/build-assets/scripts/)
+folder. The scripts include common code from the [`@{{githubProjectOrganization}}/xbb-helper`](https://github.com/{{githubProjectOrganization}}/xbb-helper-xpack) package.
 
 {%- endif %}
 
@@ -316,5 +316,5 @@ If you enjoyed using this project, please let us know! Here are some ways you ca
 
 - **Donate**: Your contributions (small or
 generous) help us keep the xPack projects thriving. [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/donate/?hosted_button_id=5MFRG9ZRBETQ8)
-- **Star** {% if packageConfig.isOrganizationWeb == "true" %}each project on GitHub{% else %}the project on [GitHub](https://github.com/xpack-dev-tools/{{gitHubProjectName}}/){% endif %}: It helps others discover our work.
+- **Star** {% if packageConfig.isOrganizationWeb == "true" %}each project on GitHub{% else %}the project on [GitHub](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/){% endif %}: It helps others discover our work.
 - **Follow** us on [X/Twitter](https://twitter.com/xpack_project/): Stay updated with our latest releases and news.

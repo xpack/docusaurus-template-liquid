@@ -6,8 +6,8 @@ import customField from '@site/src/libs/customField';
 {/* ------------------------------------------------------------------------ */}
 
 <CodeBlock language="console"> {
-`$ tree -L 2 ~/.local/xPacks/\@xpack-dev-tools/{{packageConfig.shortName}}/${customField('version')}/.content/
-/home/ilg/.local/xPacks/\@xpack-dev-tools/{{packageConfig.shortName}}/${customField('version')}/.content/
+`$ tree -L 2 ~/.local/xPacks/\{{packageScopedName}}/${customField('version')}/.content/
+/home/ilg/.local/xPacks/\{{packageScopedName}}/${customField('version')}/.content/
 ├── README.md
 ├── bin
 TODO
