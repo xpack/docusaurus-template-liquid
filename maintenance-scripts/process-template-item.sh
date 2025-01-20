@@ -235,6 +235,7 @@ then
   if [ "${xpack_is_organization_web}" == "true" ]
   then
     skip_pages_array+=(\
+      "docs/about/_common/HistoryXpm/index.tsx" \
       "docs/developer/_common/_platform-docker-section.mdx" \
       "docs/developer/_common/_platform-native-section.mdx" \
       "docs/faq/_common/_flatpack-snap.mdx" \
@@ -276,6 +277,7 @@ then
       "docs/user/_more.mdx" \
       "docs/user/_use-in-testing.mdx" \
       "docs/user/_versioning.mdx" \
+      "blog/_common/_download-analytics.mdx" \
     )
   else
 

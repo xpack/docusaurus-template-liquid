@@ -134,10 +134,14 @@ function update_and_publish()
     # git commit -m "website: remove unused customField.js" || true
 
     # -------------------------------------------------------------------------
+    timestamp="$(date +%Y%m%d)"
+    tag="web-${timestamp}"
 
     if [ "${do_push}" == "true" ]
     then
+      git tag --force "${tag}"
       git push
+      git push --tags
     fi
 
     if [ "${development_branch}" != "${website_branch}" ]
