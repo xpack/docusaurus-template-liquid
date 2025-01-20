@@ -36,7 +36,7 @@ function HomepageHeader() {
         <p className="hero__subtitle">{siteConfig.tagline}</p>
 {% if packageConfig.isOrganizationWeb != "true" %}
         <div className={styles.installWithCopy}>
-          <InstallWithCopy>xpm install {{packageScopedName}}@{customField('version')} --verbose</InstallWithCopy>
+          <InstallWithCopy>xpm install {{packageScopedName}}@{customField('releaseVersion')} --verbose</InstallWithCopy>
         </div>
 {% endif %}
       </div>

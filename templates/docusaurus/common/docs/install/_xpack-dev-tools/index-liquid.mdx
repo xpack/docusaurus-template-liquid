@@ -256,7 +256,7 @@ The command to install the **latest** available version of **{{packageConfig.sho
 To install a **specific version**, specify it explicitly:
 
 <CodeBlock language="sh"> {
-`xpm install {{packageScopedName}}@${customField('version')} --verbose
+`xpm install {{packageScopedName}}@${customField('releaseVersion')} --verbose
 `} </CodeBlock>
 
 {% assign platforms_array = platforms | split: "," -%}
