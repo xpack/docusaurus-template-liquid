@@ -603,7 +603,9 @@ The Windows versions of **xPack {{packageConfig.longName}}**
 are packed as `.zip` files.
 Download the latest version named like:
 
-- <code>xpack-{{packageConfig.shortName}}-{customField('xpackVersion')}-win32-x64.zip</code>
+<ul>
+<li><code>xpack-{{packageConfig.shortName}}-{customField('xpackVersion')}-win32-x64.zip</code></li>
+</ul>
 
 :::note
 
@@ -645,9 +647,10 @@ Download the latest version named like:
 {% if platform == "darwin-arm64" %}{% assign isMacOsArm64 = true %}{% endif -%}
 {% endfor -%}
 
-{% if isMacOSX64 %}- <code>xpack-{{packageConfig.shortName}}-{customField('xpackVersion')}-darwin-x64.tar.gz</code>{% endif -%}
-{% if isMacOsArm64 %}- <code>xpack-{{packageConfig.shortName}}-{customField('xpackVersion')}-darwin-arm64.tar.gz</code>{% endif -%}
-{% comment %}{% endcomment %}
+<ul>
+{% if isMacOSX64 %}<li><code>xpack-{{packageConfig.shortName}}-{customField('xpackVersion')}-darwin-x64.tar.gz</code></li>{% endif %}
+{% if isMacOsArm64 %}<li><code>xpack-{{packageConfig.shortName}}-{customField('xpackVersion')}-darwin-arm64.tar.gz</code></li>{% endif %}
+</ul>
 
 :::note
 
@@ -691,10 +694,11 @@ Download the latest version named like:
 {% if platform == "linux-arm" %}{% assign isLinuxArm = true %}{% endif -%}
 {% endfor -%}
 
-{% if isLinuxX64 %}- <code>xpack-{{packageConfig.shortName}}-{customField('xpackVersion')}-linux-x64.tar.gz</code>{% endif -%}
-{% if isLinuxArm64 %}- <code>xpack-{{packageConfig.shortName}}-{customField('xpackVersion')}-linux-arm64.tar.gz</code>{% endif -%}
-{% if isLinuxArm %}- <code>xpack-{{packageConfig.shortName}}-{customField('xpackVersion')}-linux-arm.tar.gz</code>{% endif -%}
-{% comment %}{% endcomment %}
+<ul>
+{% if isLinuxX64 %}<li><code>xpack-{{packageConfig.shortName}}-{customField('xpackVersion')}-linux-x64.tar.gz</code></li>{% endif %}
+{% if isLinuxArm64 %}<li><code>xpack-{{packageConfig.shortName}}-{customField('xpackVersion')}-linux-arm64.tar.gz</code></li>{% endif %}
+{% if isLinuxArm %}<li><code>xpack-{{packageConfig.shortName}}-{customField('xpackVersion')}-linux-arm.tar.gz</code></li>{% endif %}
+</ul>
 
 :::note
 

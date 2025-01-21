@@ -67,7 +67,7 @@ templates_folder_path="$(dirname "${script_folder_path}")/templates"
 
 source "${current_folder_path}/node_modules/@xpack/npm-packages-helper/maintenance-scripts/compute-context.sh"
 
-post_file_path="${website_folder_path}/blog/$(date -u '+%Y-%m-%d')-${xpack_npm_package_name}-v$(echo ${xpack_release_version} | tr '.' '-')-released.mdx"
+post_file_path="${website_folder_path}/blog/$(date -u '+%Y-%m-%d')-${xpack_npm_package_name}-v$(echo ${xpack_release_semver} | tr '.' '-')-released.mdx"
 
 # -----------------------------------------------------------------------------
 

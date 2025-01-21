@@ -110,8 +110,8 @@ function update_and_publish()
 
       if [ ! -z "${website_config}" ]
       then
-        git add website
-        git commit -m "website: re-generate commons" || true
+        run_verbose git add website
+        run_verbose git commit -m "website: re-generate commons" || true
       else
         echo "${name} has no websiteConfig..."
       fi
@@ -139,19 +139,20 @@ function update_and_publish()
 
     if [ "${do_push}" == "true" ]
     then
-      git tag --force "${tag}"
-      git push
-      git push --tags
+      run_verbose git tag --force "${tag}"
+      run_verbose git push origin :"${tag}" || true
+      run_verbose git push
+      run_verbose git push --tags
     fi
 
     if [ "${development_branch}" != "${website_branch}" ]
     then
-      git checkout "${website_branch}"
-      git merge "${development_branch}"
+      run_verbose git checkout "${website_branch}"
+      run_verbose git merge "${development_branch}"
 
       if [ "${do_push}" == "true" ]
       then
-        git push
+        run_verbose git push
       fi
 
       git checkout "${development_branch}"

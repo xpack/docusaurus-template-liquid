@@ -295,7 +295,7 @@ const config: Config = {
           label: 'GitHub',
           items: [
             {
-              label: `{{githubProjectName}}`,
+              label: `{{githubProjectName}} project`,
               href: `https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/`,
             },
             {
@@ -376,7 +376,7 @@ const config: Config = {
               href: 'https://www.paypal.com/donate/?hosted_button_id=5MFRG9ZRBETQ8',
             },
             {
-              label: 'GitHub {{githubProjectName}}',
+              label: 'GitHub {{githubProjectName}} project',
               href: 'https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/',
             },
             {
