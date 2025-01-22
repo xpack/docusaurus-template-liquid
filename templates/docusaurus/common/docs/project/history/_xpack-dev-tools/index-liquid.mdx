@@ -11,8 +11,10 @@ date: 2024-10-24 23:58:00 +0300
 
 ---
 
+import History from './_history.mdx'
+
 {/* ------------------------------------------------------------------------ */}
 
-# The {% if packageConfig.shortName %}history of {{packageConfig.shortName}}{% else %}{{packageConfig.longName}} history{% endif %}
+# The {% if packageConfig.shortName and packageWebsiteConfig.preferShortName == "true" %}history of {{packageConfig.shortName}}{% else %}{{longXpackName}} history{% endif %}
 
-The project was created in **DATE**.
+<History />

@@ -7,7 +7,7 @@ title: Install Guide{% if packageWebsiteConfig.usePluralGuides == "true" %}s{% e
 description: Explain the prerequisites, how to perform an automated or manual installation, how to uninstall, and the folder hierarchies.
 keywords:
   - xpack
-  - {{packageConfig.shortName}}
+  - {% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}
   - prerequisites
   - automated
   - install{% if packageWebsiteConfig.hasCustomInstall != "true" %}
@@ -52,7 +52,7 @@ import Testing from './_testing.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
-# How to install the xPack {{packageConfig.longName}}
+# How to install the {{longXpackName}}
 
 [![GitHub package.json version](https://img.shields.io/github/package-json/v/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/xpack/package.json)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/releases)
@@ -61,13 +61,13 @@ import Testing from './_testing.mdx';
 ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/{{githubProjectOrganization}}/{{githubProjectName}}/total)
 [![npm](https://img.shields.io/npm/dm/%40xpack-dev-tools%2F{{packageName}}?label=xpm%20downloads)](https://www.npmjs.com/package/{{packageScopedName}}/)
 
-The **xPack {{packageConfig.longName}}** can be installed automatically, using the `xpm` command
+The **{{longXpackName}}** can be installed automatically, using the `xpm` command
 (the recommended method), or manually, by downloading and unpacking one of the
 platform specific archives.
 
 ## Automated install
 
-The easiest (and recommended) way to install {{packageConfig.longName}}
+The easiest (and recommended) way to install {{longXpackName}}
 is via **xpm** and the package available
 as <a href={`https://www.npmjs.com/package/{{packageScopedName}}`}><code>{{packageScopedName}}</code></a> from
 the [`npmjs.com`](https://www.npmjs.com) registry.
@@ -244,9 +244,9 @@ mandatory to identify the package as an **xpm package**.
 ### Install into the project
 
 The next step is to install the
-**{{packageConfig.shortName}}** package into the project.
+**{{packageName}}** package into the project.
 
-The command to install the **latest** available version of **{{packageConfig.shortName}}** is:
+The command to install the **latest** available version of **{{packageName}}** is:
 
 <CodeBlock language="sh"> {
 `xpm install {{packageScopedName}}@latest --verbose
@@ -256,7 +256,7 @@ The command to install the **latest** available version of **{{packageConfig.sho
 To install a **specific version**, specify it explicitly:
 
 <CodeBlock language="sh"> {
-`xpm install {{packageScopedName}}@${customField('releaseVersion')} --verbose
+`xpm install {{packageScopedName}}@{{releaseVersion}} --verbose
 `} </CodeBlock>
 
 {% assign platforms_array = platforms | split: "," -%}
@@ -379,7 +379,7 @@ The above `xpm install` command will do the following:
   <code>xpacks/{{packageScopedName}}/.content/bin</code>;
 * add <code>{{packageScopedName}}</code> to
   `package.json` as a
-  development dependency; this associates a specific version of {{packageConfig.longName}} with
+  development dependency; this associates a specific version of {{longXpackName}} with
   the current project (details below).
 
 :::tip
@@ -410,7 +410,7 @@ The result looks like this:
     "dependencies": {},
     "devDependencies": {
       "{{packageScopedName}}": {
-        "specifier": "${customField('xpackVersion')}.${customField('npmSubversion')}",
+        "specifier": "{{releaseVersion}}",
         "local": "link",
         "platforms": "all"
       }
@@ -423,7 +423,7 @@ The result looks like this:
 
 If the `package.json` is saved in the revision system, the above
 definition acts as a hard reference to the specific version of
-**xPack {{packageConfig.longName}}**.
+**{{longXpackName}}**.
 
 After cloning the project into a different location, the command `xpm install`
 can be used to install all development dependencies.
@@ -435,7 +435,7 @@ This is particularly useful for CI/CD environments.
 ### Install globally
 
 For older development environments,
-it is also possible to install {{packageConfig.longName}} only globally in
+it is also possible to install {{longXpackName}} only globally in
 the **user global xPacks store**, without any
 local links/forwarders; it
 is the developer's responsibility to configure the path to the tools.
@@ -457,7 +457,7 @@ install the packages globally will fail with _already installed_.
 <details>
 <summary>PATH setup</summary>
 
-In order to access the {{packageConfig.longName}} binaries installed in
+In order to access the {{longXpackName}} binaries installed in
 the user global xPacks store,
 the project build configurations need a PATH adjustment:
 
@@ -468,7 +468,7 @@ the project build configurations need a PATH adjustment:
 <TabItem value="windows" label="Windows" default>
 
 <CodeBlock language="sh"> {
-`export PATH=$HOME/AppData/Roaming/xPacks/\@pack-dev-tools/{{packageName}}/${customField('xpackVersion')}.${customField('npmSubversion')}/.content/bin:$PATH
+`export PATH=$HOME/AppData/Roaming/xPacks/\@pack-dev-tools/{{packageName}}/{{releaseVersion}}/.content/bin:$PATH
 `} </CodeBlock>
 
 :::tip
@@ -485,7 +485,7 @@ corresponding shell.
 <TabItem value="macos" label="macOS">
 
 <CodeBlock language="sh"> {
-`export PATH=$HOME/Library/xPacks/\@pack-dev-tools/{{packageName}}/${customField('xpackVersion')}.${customField('npmSubversion')}/.content/bin:$PATH
+`export PATH=$HOME/Library/xPacks/\@pack-dev-tools/{{packageName}}/{{releaseVersion}}/.content/bin:$PATH
 `} </CodeBlock>
 
 </TabItem>
@@ -495,7 +495,7 @@ corresponding shell.
 <TabItem value="linux" label="GNU/Linux">
 
 <CodeBlock language="sh"> {
-`export PATH=$HOME/.local/xPacks/{{packageScopedName}}/${customField('xpackVersion')}.${customField('npmSubversion')}/.content/bin:$PATH
+`export PATH=$HOME/.local/xPacks/{{packageScopedName}}/{{releaseVersion}}/.content/bin:$PATH
 `} </CodeBlock>
 
 </TabItem>
@@ -585,7 +585,7 @@ broken paths.
 
 ## Manual install
 
-For all platforms, the **xPack {{packageConfig.longName}}** binaries are released as portable
+For all platforms, the **{{longXpackName}}** binaries are released as portable
 archives that can be installed in any location.
 
 The archives can be downloaded from
@@ -599,12 +599,12 @@ the <a href={`https://github.com/{{githubProjectOrganization}}/{{githubProjectNa
 {% if name == "Windows" %}
 <TabItem value="windows" label="Windows" default>
 
-The Windows versions of **xPack {{packageConfig.longName}}**
+The Windows versions of **{{longXpackName}}**
 are packed as `.zip` files.
 Download the latest version named like:
 
 <ul>
-<li><code>xpack-{{packageConfig.shortName}}-{customField('xpackVersion')}-win32-x64.zip</code></li>
+<li><code>xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{xpackVersion}}-win32-x64.zip</code></li>
 </ul>
 
 :::note
@@ -615,12 +615,12 @@ The `win32` part is confusing, but we have to live with it.
 
 :::
 
-To manually install the <b>xPack {{packageConfig.longName}}</b>,
+To manually install the <b>{{longXpackName}}</b>,
 unpack the archive and move it to a location of your choice.
 
 The recommended location is
 the <code>%USERPROFILE%\\AppData\\Roaming\\xPacks\\{{packageName}}</code> folder, for
-example <code>C:\\Users\\ilg\\AppData\\Roaming\\xPacks\\{{packageName}}\\xpack-{{packageConfig.shortName}}-{customField('xpackVersion')}</code>.
+example <code>C:\\Users\\ilg\\AppData\\Roaming\\xPacks\\{{packageName}}\\xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{xpackVersion}}</code>.
 
 :::note
 
@@ -635,7 +635,7 @@ installing user specific packages.
 {% if name == "macOS" %}
 <TabItem value="macos" label="macOS">
 
-The macOS versions of **xPack {{packageConfig.longName}}**
+The macOS versions of **{{longXpackName}}**
 are packed as `.tar.gz` archives.
 Download the latest version named like:
 
@@ -648,8 +648,8 @@ Download the latest version named like:
 {% endfor -%}
 
 <ul>
-{% if isMacOSX64 %}<li><code>xpack-{{packageConfig.shortName}}-{customField('xpackVersion')}-darwin-x64.tar.gz</code></li>{% endif %}
-{% if isMacOsArm64 %}<li><code>xpack-{{packageConfig.shortName}}-{customField('xpackVersion')}-darwin-arm64.tar.gz</code></li>{% endif %}
+{% if isMacOSX64 %}<li><code>xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{xpackVersion}}-darwin-x64.tar.gz</code></li>{% endif %}
+{% if isMacOsArm64 %}<li><code>xpack-{{packageConfig.shortName}}-{{xpackVersion}}-darwin-arm64.tar.gz</code></li>{% endif %}
 </ul>
 
 :::note
@@ -659,19 +659,19 @@ from, it is exactly the Node.js `process.platform` and `process.arch`.
 
 :::
 
-To manually install the <b>xPack {{packageConfig.longName}}</b>,
+To manually install the <b>{{longXpackName}}</b>,
 unpack the archive and move it to a location of your choice.
 
 The recommended location is
 the <code>~/Library/xPacks/{{packageName}}</code> folder, for
-example <code>/Users/ilg/Library/xPacks/{{packageName}}/xpack-{{packageConfig.shortName}}-{customField('xpackVersion')}</code>:
+example <code>/Users/ilg/Library/xPacks/{{packageName}}/xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{xpackVersion}}</code>:
 
 <CodeBlock language="console"> {
 `mkdir -p ~/Library/xPacks/{{packageName}}
 cd ~/Library/xPacks/{{packageName}}
 
-tar xvf ~/Downloads/xpack-{{packageConfig.shortName}}-${customField('xpackVersion')}-darwin-x64.tar.gz
-chmod -R -w xpack-{{packageConfig.shortName}}-${customField('xpackVersion')}
+tar xvf ~/Downloads/xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{xpackVersion}}-darwin-x64.tar.gz
+chmod -R -w xpack-{{packageConfig.shortName}}-{{xpackVersion}}
 `} </CodeBlock>
 
 </TabItem>
@@ -680,7 +680,7 @@ chmod -R -w xpack-{{packageConfig.shortName}}-${customField('xpackVersion')}
 {% if name == "GNU/Linux" %}
 <TabItem value="linux" label="GNU/Linux">
 
-The GNU/Linux versions of **xPack {{packageConfig.longName}}**
+The GNU/Linux versions of **{{longXpackName}}**
 are packed as `.tar.gz` archives.
 Download the latest version named like:
 
@@ -695,9 +695,9 @@ Download the latest version named like:
 {% endfor -%}
 
 <ul>
-{% if isLinuxX64 %}<li><code>xpack-{{packageConfig.shortName}}-{customField('xpackVersion')}-linux-x64.tar.gz</code></li>{% endif %}
-{% if isLinuxArm64 %}<li><code>xpack-{{packageConfig.shortName}}-{customField('xpackVersion')}-linux-arm64.tar.gz</code></li>{% endif %}
-{% if isLinuxArm %}<li><code>xpack-{{packageConfig.shortName}}-{customField('xpackVersion')}-linux-arm.tar.gz</code></li>{% endif %}
+{% if isLinuxX64 %}<li><code>xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{xpackVersion}}-linux-x64.tar.gz</code></li>{% endif %}
+{% if isLinuxArm64 %}<li><code>xpack-{{packageConfig.shortName}}-{{xpackVersion}}-linux-arm64.tar.gz</code></li>{% endif %}
+{% if isLinuxArm %}<li><code>xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{xpackVersion}}-linux-arm.tar.gz</code></li>{% endif %}
 </ul>
 
 :::note
@@ -707,19 +707,19 @@ from, it is exactly the Node.js `process.platform` and `process.arch`.
 
 :::
 
-To manually install the <b>xPack {{packageConfig.longName}}</b>,
+To manually install the <b>{{longXpackName}}</b>,
 unpack the archive and move it to a location of your choice.
 
 The recommended location is
 the <code>~/.local/xPacks/{{packageName}}</code> folder, for
-example <code>/home/ilg/.local/xPacks/{{packageName}}/xpack-{{packageConfig.shortName}}-{customField('xpackVersion')}</code>:
+example <code>/home/ilg/.local/xPacks/{{packageName}}/xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{xpackVersion}}</code>:
 
 <CodeBlock language="console"> {
 `mkdir -p ~/.local/xPacks/{{packageName}}
 cd ~/.local/xPacks/{{packageName}}
 
-tar xvf ~/Downloads/xpack-{{packageConfig.shortName}}-${customField('xpackVersion')}-linux-x64.tar.gz
-chmod -R -w xpack-{{packageConfig.shortName}}-${customField('xpackVersion')}
+tar xvf ~/Downloads/xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{xpackVersion}}-linux-x64.tar.gz
+chmod -R -w xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{xpackVersion}}
 `} </CodeBlock>
 
 </TabItem>

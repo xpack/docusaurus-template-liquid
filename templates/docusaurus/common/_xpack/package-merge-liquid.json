@@ -47,7 +47,7 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },
-  "$dependenciesUrls": [
+  "$devDependenciesUrls": [
     "https://www.npmjs.com/package/docusaurus-plugin-typedoc",
     "https://www.npmjs.com/package/liquidjs",
     "https://www.npmjs.com/package/typedoc",
@@ -76,8 +76,8 @@
       "last 5 safari version"
     ]
   },
+  "websiteConfig": {},
   "engines": {
     "node": ">=18.0"
-  },
-  "websiteConfig": {}
+  }
 }

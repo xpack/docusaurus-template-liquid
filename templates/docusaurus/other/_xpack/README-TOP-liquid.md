@@ -2,11 +2,11 @@
 [![npm (scoped)](https://img.shields.io/npm/v/{{packageScopedName}}.svg?color=blue)](https://www.npmjs.com/package/{{packageScopedName}}/){% endif %}
 [![license](https://img.shields.io/github/license/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/master/LICENSE)
 {% if packageConfig.isOrganizationWeb == "true" %}
-# The {{packageConfig.longName}} web site source
+# The {{longXpackName}} web site source
 
-The Docusaurus source code for the {{packageConfig.longName}} web site.
+The Docusaurus source code for the {{longXpackName}} web site.
 {% else %}
-# The {{packageConfig.longName}}
+# The {{longXpackName}}
 
 {% if packageWebsiteConfig.tagline %}{{packageWebsiteConfig.tagline}}{% else %}{{ packageDescription }}{% endif %}
 

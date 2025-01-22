@@ -41,8 +41,8 @@ xpm run docker-build-development --config ${props.platform} -C ~/Work/{{githubPr
 archive and its SHA signature, created in
 the <code>build-assets/build/{props.platform}/deploy</code> folder:
 
-- <code>xpack-{{packageConfig.shortName}}-{customField('xpackVersion')}-{props.platform}.{props.platform === 'win32-x64' ? 'zip' : 'tar.gz'}</code>
-- <code>xpack-{{packageConfig.shortName}}-{customField('xpackVersion')}-{props.platform}.{props.platform === 'win32-x64' ? 'zip' : 'tar.gz'}.sha</code>
+- <code>xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{xpackVersion}}-{props.platform}.{props.platform === 'win32-x64' ? 'zip' : 'tar.gz'}</code>
+- <code>xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{xpackVersion}}-{props.platform}.{props.platform === 'win32-x64' ? 'zip' : 'tar.gz'}.sha</code>
 
 To update the build scripts and build the release binaries:
 

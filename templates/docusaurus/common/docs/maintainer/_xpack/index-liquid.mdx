@@ -51,10 +51,10 @@ import More from './_more.mdx';
 [![TS-Standard - TypeScript Standard Style Guide](https://badgen.net/badge/code%20style/ts-standard/blue?icon=typescript)](https://github.com/standard/ts-standard/){% endif %}{% if isJavaScript == "true" %}
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com){% endif %}
 
-# How to make new {% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageConfig.longName}}{% endif %} releases
+# How to make new {% if packageConfig.shortName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.shortName}}{% else %}{{longXpackName}}{% endif %} releases
 
 This page is designed for maintainers of the
-**{{packageConfig.longName}}**
+**{{longXpackName}}**
 project and provides documentation on how to create new releases.
 
 <Prerequisites nodeVersion="{{packageEnginesNodeVersion}}" nodeVersionMajor="{{packageEnginesNodeVersionMajor}}"/>
@@ -114,9 +114,9 @@ Keep:
 
 As required by npm modules, this one also uses [SemVer](https://semver.org).
 
-- determine the next version (like <code>{customField('releaseVersion')}</code>)
+- determine the next version (like <code>{{releaseVersion}}</code>)
 - update the version in the top `package.json` file
-- use the new version, suffixed by `-pre`, like <code>{customField('releaseVersion')}-pre</code>.
+- use the new version, suffixed by `-pre`, like <code>{{releaseVersion}}-pre</code>.
 
 ### Update the `websiteConfig` in top `package.json` (if necessary)
 
@@ -148,7 +148,7 @@ Check GitHub Issues and Pull Requests:
 - https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/pulls
 
 and fix them; assign them to a milestone
-(like <code>{customField('releaseVersion')}</code>).
+(like <code>{{releaseVersion}}</code>).
 
 ### Update `CHANGELOG.md`
 
@@ -187,8 +187,8 @@ to:
 *
 ```
 
-- add a new entry like _**\* v{customField('releaseVersion')} prepared**_
-- commit with a message like _**prepare v{customField('releaseVersion')}**_
+- add a new entry like _**\* v{{releaseVersion}} prepared**_
+- commit with a message like _**prepare v{{releaseVersion}}**_
 
 ### Prepare the release
 
@@ -205,7 +205,7 @@ to:
 ### Set the new version
 
 <CodeBlock language="sh"> {
-`npm version ${customField('releaseVersion')}
+`npm version {{releaseVersion}}
 `} </CodeBlock>
 
 ### CI tests
@@ -226,7 +226,7 @@ npm run generate-website-blog-post
 
 - edit the front matter properties
 - select the correct summary
-- commit with _**website: blog post release {customField('releaseVersion')} published**_
+- commit with _**website: blog post release {{releaseVersion}} published**_
 - push the `development` branch
 
 ## Publish the release to npmjs.com
@@ -329,7 +329,7 @@ npm dist-tag ls {{packageScopedName}}
 When the release is considered stable, promote it as `latest`:
 
 <CodeBlock language="sh"> {
-`npm dist-tag add {{packageScopedName}}@${customField('releaseVersion')} latest
+`npm dist-tag add {{packageScopedName}}@{{releaseVersion}} latest
 npm dist-tag ls {{packageScopedName}}
 `} </CodeBlock>
 

@@ -34,7 +34,7 @@ import customField from '@site/src/libs/customField';
 [![NPM Downloads](https://img.shields.io/npm/dw/{% if packageScope != "" %}%40{{packageScope}}%2F{% endif %}{{packageName}})](https://www.npmjs.com/package/{{packageScopedName}}/)
 [![NPM Downloads](https://img.shields.io/npm/d18m/{% if packageScope != "" %}%40{{packageScope}}%2F{% endif %}{{packageName}})](https://www.npmjs.com/package/{{packageScopedName}}/)
 
-# How to install {% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}the {{packageConfig.longName}}{% endif %}
+# How to install {% if packageConfig.shortName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.shortName}}{% else %}the {{longXpackName}}{% endif %}
 
 {% if packageWebsiteConfig.hasCustomUserInformation == "true" %}
 <CustomInstall nodeVersion={frontMatter.node_version}/>
@@ -64,7 +64,7 @@ npm install {{packageScopedName}}@latest{% if packageWebsiteConfig.hasCli == "tr
 To install a **specific version**, mention it explicitly:
 
 <CodeBlock language="sh"> {
-`npm install {{packageScopedName}}@${customField('releaseVersion')}{% if packageWebsiteConfig.hasCli == "true" %} --save-dev{% endif %}
+`npm install {{packageScopedName}}@{{releaseVersion}}{% if packageWebsiteConfig.hasCli == "true" %} --save-dev{% endif %}
 `} </CodeBlock>
 
 {% if packageWebsiteConfig.hasCli != "true" %}
@@ -83,7 +83,7 @@ npm install --location=global {{packageScopedName}}@latest
 To install a **specific version**, mention it explicitly:
 
 <CodeBlock language="sh"> {
-`npm install --location=global {{packageScopedName}}@${customField('releaseVersion')}
+`npm install --location=global {{packageScopedName}}@{{releaseVersion}}
 `} </CodeBlock>
 
 {% endif %}

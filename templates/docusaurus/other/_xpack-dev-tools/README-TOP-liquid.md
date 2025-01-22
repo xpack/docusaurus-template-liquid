@@ -3,7 +3,7 @@
 [![npm (scoped)](https://img.shields.io/npm/v/{{packageScopedName}}.svg?color=blue)](https://www.npmjs.com/package/{{packageScopedName}}/)
 [![license](https://img.shields.io/github/license/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/xpack/LICENSE)
 
-# The xPack {{packageConfig.longName}}
+# The {{longXpackName}}
 
 {% assign platforms_array = platforms | split: "," -%}
 

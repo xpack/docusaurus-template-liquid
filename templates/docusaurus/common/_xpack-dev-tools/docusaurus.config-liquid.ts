@@ -23,7 +23,7 @@ console.log('customFields: ' + util.inspect(customFields));
 // ----------------------------------------------------------------------------
 
 const config: Config = {
-  title: 'xPack {{packageConfig.longName}}' +
+  title: '{{longXpackName}}' +
     ((process.env.DOCUSAURUS_IS_PREVIEW === 'true') ? ' (preview)' : ''),
   tagline: '{% if packageWebsiteConfig.docusaurusTagline %}{{packageWebsiteConfig.docusaurusTagline}}{% else %}A binary distribution of {{packageConfig.longName}}{% endif %}',
   // Explicitly set in headTags.
@@ -183,25 +183,24 @@ const config: Config = {
       }{% else %}
       {
         name: 'keywords',
-        content: 'xpack, binary, development, tools, reproducibility, {{packageConfig.shortName}}'
+        content: 'xpack, binary, development, tools, reproducibility, {% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}'
       }{% endif %}
     ],
     navbar: {
-      title: 'The xPack Binary Tools',
+      title: {% if githubProjectOrganization == "xpack" %}'The xPack Project'{% elsif githubProjectOrganization == "xpack-dev-tools" %}'The xPack Binary Tools'{% else %}???{% endif %},
 
       logo: {
         alt: 'xPack Logo',
         src: 'img/components-256.png',
-        // href: 'https://xpack.github.io/',
         href: 'https://{{githubProjectOrganization}}.github.io/'
       },
       items: [
         {
           to: '/',
-          label: {% if packageConfig.isOrganizationWeb == "true" %}'{{githubProjectOrganization}}'{% else %}'{{packageConfig.shortName}}'{% endif %},
+          label: {% if packageConfig.isOrganizationWeb == "true" %}'{{githubProjectOrganization}}'{% else %}{% if packageConfig.shortName %}'{{packageConfig.shortName}}'{% else %}'{{packageName}}'{% endif %}{% endif %},
           className: 'header-home-link',
           position: 'left'
-        },{% if packageConfig.isOrganizationWeb != "true" %}
+        },
         {
           type: 'dropdown',
           label: 'Documentation',
@@ -211,56 +210,53 @@ const config: Config = {
             {
               label: 'Getting Started',
               to: '/docs/getting-started'
-            },
+            },{% if packageWebsiteConfig.skipInstallCommand != "true" %}
             {
               label: 'Install Guide',
               to: '/docs/install'
-            },
+            },{% endif %}
             {
               label: 'User\'s Guide',
               to: '/docs/user'
-            },
+            },{% if packageWebsiteConfig.skipContributorGuide != "true" %}
             {
               label: 'Contributor\'s Guide',
               to: '/docs/developer'
-            },
+            },{% endif %}
             {
               label: 'Maintainer\'s Guide',
               to: '/docs/maintainer'
-            },
+            },{% if packageConfig.isOrganizationWeb != "true" %}
             {
               label: 'FAQ',
               to: '/docs/faq'
-            },
+            },{% endif %}
             {
               label: 'Help Centre',
               to: '/docs/support'
-            },
+            },{% if packageConfig.isOrganizationWeb != "true" %}
             {
               label: 'Releases',
               to: '/docs/releases'
-            },
+            },{% endif %}
             {
               label: 'About',
-              to: '/docs/about'
-            }
+              to: '/docs/project/about'
+            },
           ]
-        },{% else %}
+        },{% if packageWebsiteConfig.hasCli == "true" %}
+        cliNavbar,{% endif %}{% if packageWebsiteConfig.hasApi == "true" %}
         {
-          label: 'Documentation',
-          to: 'docs/getting-started',
+          to: '/docs/api',
+          label: 'API',
           position: 'left',
-        },
+        },{% endif %}
+        {% if packageConfig.isOrganizationWeb == "true" %}
         {
           type: 'docSidebar',
           label: 'Tools',
           position: 'left',
           sidebarId: 'toolsSidebar'
-        },
-        {
-          label: 'About',
-          to: 'docs/about',
-          position: 'left',
         },{% endif %}
         {
           type: 'dropdown',
@@ -307,7 +303,7 @@ const config: Config = {
               href: 'https://github.com/xpack/',
             },
           ]
-        },{% if packageConfig.isOrganizationWeb != "true" %}
+        },{% if releaseSemver != "0.0.0" %}
         {
           label: `${customFields.xpackVersion}`,
           position: 'right',
@@ -327,7 +323,7 @@ const config: Config = {
             },
             {
               label: 'About',
-              to: '/docs/about',
+              to: '/docs/project/about',
             },{% else %}
             {
               label: 'Install',

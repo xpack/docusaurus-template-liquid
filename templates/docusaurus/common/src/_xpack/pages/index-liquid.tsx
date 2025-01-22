@@ -39,7 +39,7 @@ function HomepageHeader() {
         <p className="hero__subtitle">{siteConfig.tagline}</p>
 {% if packageWebsiteConfig.skipInstallCommand != "true" %}
         <div className={styles.installWithCopy}>
-          <InstallWithCopy>npm install {% if packageWebsiteConfig.isInstallGlobally == "true" %}--location=global {% endif %}{{packageScopedName}}@{customField('releaseVersion')}</InstallWithCopy>
+          <InstallWithCopy>npm install {% if packageWebsiteConfig.isInstallGlobally == "true" %}--location=global {% endif %}{{packageScopedName}}@{{releaseVersion}}</InstallWithCopy>
         </div>
 {% endif %}
       </div>

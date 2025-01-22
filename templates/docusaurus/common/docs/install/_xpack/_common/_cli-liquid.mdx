@@ -133,7 +133,7 @@ npm install --location=global {{packageScopedName}}@latest
 To install a **specific version**, specify it explicitly:
 
 <CodeBlock language="sh"> {
-`npm install --location=global {{packageScopedName}}@${customField('releaseVersion')}
+`npm install --location=global {{packageScopedName}}@{{releaseVersion}}
 `} </CodeBlock>
 
 <Tabs groupId="operating-systems">
@@ -167,7 +167,7 @@ already have this path configured and the program should start normally:
 
 <CodeBlock language="console"> {
 `C:\>{{packageWebsiteConfig.programName}} --version
-${customField('releaseVersion')}
+{{releaseVersion}}
 `} </CodeBlock>
 
 <TroubleshootingWindows />
@@ -189,7 +189,7 @@ To test if **{{packageWebsiteConfig.programName}}** starts:
 
 <CodeBlock language="console"> {
 `% {{packageWebsiteConfig.programName}} --version
-${customField('releaseVersion')}
+{{releaseVersion}}
 `} </CodeBlock>
 
 <Heading as="h3">Show macOS hidden files</Heading>
@@ -252,7 +252,7 @@ To test if {{packageWebsiteConfig.programName}} starts:
 `$ which {{packageWebsiteConfig.programName}}
 /home/ilg/.nvm/versions/node/${props.nodeVersion}/bin/{{packageWebsiteConfig.programName}}
 $ {{packageWebsiteConfig.programName}} --version
-${customField('releaseVersion')}
+{{releaseVersion}}
 `} </CodeBlock>
 
 </TabItem>
@@ -276,7 +276,7 @@ benefit from it by using the `npx` command, as a trampoline to start **{{package
 
 <CodeBlock language="console"> {
 `$ npx {{packageWebsiteConfig.programName}} --version
-${customField('releaseVersion')}
+{{releaseVersion}}
 `} </CodeBlock>
 
 However, for regular usage, this method is not efficient, since

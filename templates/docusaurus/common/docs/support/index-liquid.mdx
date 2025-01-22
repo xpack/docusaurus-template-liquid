@@ -7,7 +7,7 @@ title: Help Centre
 description: The project's support channel, where you can ask questions, start discussions, and report issues.
 keywords:
   - xpack
-  - {{packageName}}
+  - {% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}
   - support
   - discussions
   - issues
@@ -16,9 +16,11 @@ date: 2020-07-21 17:54:00 +0300
 
 ---
 
+import Documentation from '../getting-started/_documentation.mdx';
+
 {/* ------------------------------------------------------------------------ */}
 
-# How to get help for {% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}the {{packageConfig.longName}}{% endif %}
+# How to get help for {% if packageConfig.shortName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.shortName}}{% else %}the {{longXpackName}}{% endif %}
 
 {% if packageConfig.isOrganizationWeb == "true" %}
 ## Quick tips
@@ -52,6 +54,8 @@ pages.
 
 As usual, before asking anything, it is a good idea to check the project
 documentation.
+
+<Documentation/>
 
 ## Preliminary checks
 
@@ -87,7 +91,7 @@ Enter a **New discussion**; use the **Q&A** category for questions,
 
 If you are convinced that you identified a bug
 or if want to contribute code to enhance the
-**{{packageConfig.longName}}**
+**{{longXpackName}}**
 project, register a **New Issue** in the
 [GitHub Issues](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/issues)
 tracker.

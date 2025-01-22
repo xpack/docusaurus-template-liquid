@@ -20,7 +20,7 @@ import {ReleasesList} from '@site/src/components/ReleasesList';
 
 {/* ------------------------------------------------------------------------ */}
 
-# The {% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageConfig.longName}}{% endif %} releases
+# The {% if packageConfig.shortName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.shortName}}{% else %}{{longXpackName}}{% endif %} releases
 
 The releases, in reverse chronological order, are:
 

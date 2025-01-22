@@ -15,7 +15,7 @@ date: 2024-10-24 23:58:00 +0300
 
 ---
 
-# The {% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageConfig.longName}}{% endif %} Frequently Asked Questions
+# The {% if packageConfig.shortName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.shortName}}{% else %}{{longXpackName}}{% endif %} Frequently Asked Questions
 
 <details>
 <summary>Warum?</summary>

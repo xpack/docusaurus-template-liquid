@@ -253,8 +253,7 @@ const config: Config = {
       }
     ],
     navbar: {
-      // Overriden by i18n/en/docusaurus-theme-classic.
-      title: {% if githubProjectOrganization == "xpack" %}'The xPack Project'{% elsif githubProjectOrganization == "xpack-dev-tools" %}'xPack Binary Development Tools'{% endif %},
+      title: {% if githubProjectOrganization == "xpack" %}'The xPack Project'{% elsif githubProjectOrganization == "xpack-dev-tools" %}'xPack Binary Tools'{% else %}???{% endif %},
 
       logo: {
         alt: 'xPack Logo',

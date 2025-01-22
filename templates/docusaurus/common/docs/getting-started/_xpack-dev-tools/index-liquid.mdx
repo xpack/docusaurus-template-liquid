@@ -7,7 +7,7 @@ title: Getting Started
 description: The initial steps to explore the project, including what xpacks are, the project's features, benefits, compatibility, and available documentation.
 keywords:
   - xpack
-  - {{packageConfig.shortName}}
+  - {% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}
   - overview
   - xpacks
   - features
@@ -30,7 +30,7 @@ import ReleaseSchedule from './_release-schedule.mdx'
 
 {/* ------------------------------------------------------------------------ */}
 
-# Getting Started with the xPack {{packageConfig.longName}}
+# Getting Started with the {{longXpackName}}
 
 {% if packageConfig.isOrganizationWeb != "true" -%}
 [![license](https://img.shields.io/github/license/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/xpack/LICENSE)
@@ -57,7 +57,7 @@ import ReleaseSchedule from './_release-schedule.mdx'
 
 {% assign names_array = names_array | uniq -%}
 
-**xPack {{packageConfig.longName}}** is a
+**{{longXpackName}}** is a
 standalone{% if names_array.size > 1 %}, cross-platform ({{ names_array | join: ", " }}){% else %} {{ names_array | first }}{% endif %} binary
 distribution of {{packageConfig.longName}},
 aimed at reproducible builds.
@@ -78,7 +78,7 @@ resulting behaviour must be functionally equivalent.
 
 {% if packageConfig.isOrganizationWeb != "true" -%}
 
-The open source **xPack {{packageConfig.longName}}** project is hosted on GitHub as
+The open source **{{longXpackName}}** project is hosted on GitHub as
 [`{{githubProjectOrganization}}/{{githubProjectName}}`](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/);
 it provides the platform specific binaries as
 [release assets](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/releases).
@@ -188,7 +188,7 @@ location, including in user folders.
 
 ## Benefits
 
-The main advantages of using the **xPack {{packageConfig.longName}}** are:
+The main advantages of using the **{{longXpackName}}** are:
 
 {% assign names_array = "" | split: "" -%}
 
@@ -225,11 +225,11 @@ The executables and other related files can be installed automatically with
 **platform specific archives**.
 
 {% if packageConfig.isOrganizationWeb == "true" -%}
-The details of installing the various **xPack {{packageConfig.longName}}**
+The details of installing the various **{{longXpackName}}**
 on various platforms are presented in the
 **Install Guide** of each project web site.
 {% else -%}
-The details of installing the **xPack {{packageConfig.longName}}** on various platforms are
+The details of installing the **{{longXpackName}}** on various platforms are
 presented in the
 [Install Guide](/docs/install/).
 {%- endif %}

@@ -12,7 +12,7 @@ date: 2024-10-24 23:58:00 +0300
 
 ---
 
-# How to use {% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}the {{packageConfig.longName}}{% endif %}
+# How to use {% if packageConfig.shortName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.shortName}}{% else %}the {{longXpackName}}{% endif %}
 
 This section is intended for those who plan to use this
 {% if packageWebsiteConfig.hasCli == "true" %}package{% else %}module{% endif %} in their

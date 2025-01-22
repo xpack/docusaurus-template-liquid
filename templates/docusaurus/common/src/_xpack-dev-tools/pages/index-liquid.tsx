@@ -30,13 +30,13 @@ function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <HeadTitle title="Welcome to the xPack {{packageConfig.longName}}!" />
+      <HeadTitle title="Welcome to the {{longXpackName}}!" />
       <div className="container">
         <h1 className="hero__title">{siteConfig.title}</h1>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
 {% if packageConfig.isOrganizationWeb != "true" %}
         <div className={styles.installWithCopy}>
-          <InstallWithCopy>xpm install {{packageScopedName}}@{customField('releaseVersion')} --verbose</InstallWithCopy>
+          <InstallWithCopy>xpm install {{packageScopedName}}@{{releaseVersion}} --verbose</InstallWithCopy>
         </div>
 {% endif %}
       </div>
@@ -51,7 +51,7 @@ export default function Home(): JSX.Element {
       title="Welcome!"
       description="A collection of binary packages with development tools">{% else %}
       title="Welcome!"
-      description="A binary package with the {{packageConfig.shortName}} executables">{% endif %}
+      description="A binary package with the {% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %} executables">{% endif %}
       <HomepageHeader />
       <main>
         <HomepageFeatures />{% if packageConfig.isOrganizationWeb == "true" %}
