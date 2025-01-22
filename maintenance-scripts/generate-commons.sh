@@ -150,7 +150,7 @@ else
   find . -type f -print0 | sort -zn | \
     xargs -0 -I '{}' bash "${script_folder_path}/process-template-item.sh" '{}' "${website_folder_path}"
 
-  if [ "${xpack_is_organization_web}" != "true" ]
+  if true # [ "${xpack_is_organization_web}" != "true" ]
   then
     echo
     echo "Regenerate top README.md..."
@@ -160,7 +160,7 @@ else
       mv -v "${project_folder_path}/README.md" "${project_folder_path}/README-long.md"
     fi
     echo
-    substitute "${templates_folder_path}/docusaurus/other/${accepted_path}/README-TOP-liquid.md" "README.md" "${project_folder_path}"
+    substitute "${templates_folder_path}/docusaurus/other/README-TOP-liquid.md" "README.md" "${project_folder_path}"
   fi
 
 fi

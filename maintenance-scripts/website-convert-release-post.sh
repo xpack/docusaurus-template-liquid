@@ -259,7 +259,7 @@ sed -i.bak -e '/^# --e-n-d-f--$/,/^---$/d' "${to_path}"
 # Process the post body.
 
 # Fix the badge to releases.
-s="  - this release <a href={\`https://github.com/xpack-dev-tools/${xpack_website_config_short_name}-xpack/releases/v\$\{frontMatter.version}/\`} ><Image img={\`https://img.shields.io/github/downloads/xpack-dev-tools/${xpack_website_config_short_name}-xpack/v\$\{frontMatter.version}/total.svg\`} alt='Github Release' /></a>"
+s="  - this release <a href={\`https://github.com/xpack-dev-tools/${xpack_website_config_short_name}-xpack/releases/v\$\{frontMatter.version}/\`} ><Image img={\`https://img.shields.io/github/downloads/xpack-dev-tools/${xpack_website_config_short_name}-xpack/v\$\{frontMatter.version}/total\`} alt='Github Release' /></a>"
 sed -i.bak -e "s|  - this release ...Github All Releases.*|$s|" "${to_path}"
 
 if [ "${xpack_github_project_organization}" == "xpack-dev-tools" ]

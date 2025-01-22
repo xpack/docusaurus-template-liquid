@@ -30,7 +30,7 @@ function Tool({ longName, shortName }) {
         <div className="padding-top--xs">
           <Link to={'https://github.com/{{githubProjectOrganization}}/' + shortName + '-xpack/releases/'}><img alt="GitHub Release" src={'https://img.shields.io/github/v/release/{{githubProjectOrganization}}/' + shortName + '-xpack?color=blue'} /></Link>
           &nbsp;<Link to={'https://github.com/{{githubProjectOrganization}}/' + shortName + '-xpack/releases/'}><img alt="GitHub Release Date" src={'https://img.shields.io/github/release-date/{{githubProjectOrganization}}/' + shortName + '-xpack?label=date&color=yellowgreen'} /></Link>
-          &nbsp;<Link to={'https://github.com/{{githubProjectOrganization}}/' + shortName + '-xpack/releases/'}><img alt="GitHub Downloads (all assets, all releases)" src={'https://img.shields.io/github/downloads/{{githubProjectOrganization}}/' + shortName + '-xpack/total.svg'} /></Link>
+          &nbsp;<Link to={'https://github.com/{{githubProjectOrganization}}/' + shortName + '-xpack/releases/'}><img alt="GitHub Downloads (all assets, all releases)" src={'https://img.shields.io/github/downloads/{{githubProjectOrganization}}/' + shortName + '-xpack/total'} /></Link>
           &nbsp;<Link to={'https://github.com/{{githubProjectOrganization}}/' + shortName + '-xpack/'}><img alt="GitHub Repo stars" src={'https://img.shields.io/github/stars/{{githubProjectOrganization}}/' + shortName + '-xpack'} /></Link>
         </div>
       </div>

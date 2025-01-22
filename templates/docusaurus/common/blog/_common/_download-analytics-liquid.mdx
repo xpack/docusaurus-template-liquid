@@ -8,11 +8,11 @@ import Image from '@theme/IdealImage';
 ## Analytics
 {% if isXpackBinary == "true" %}
 - GitHub [{{githubProjectOrganization}}/{{githubProjectName}}](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/)
-  - this release <a href={`https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/releases/v${props.version}/`} ><Image img={`https://img.shields.io/github/downloads/{{githubProjectOrganization}}/{{githubProjectName}}/v${props.version}/total.svg`} alt='Github Release' /></a>
-  - all xPack releases [![Github All Releases](https://img.shields.io/github/downloads/{{githubProjectOrganization}}/{{githubProjectName}}/total.svg)](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/releases){% if packageWebsiteConfig.showDeprecatedGnuMcuAnalytics == 'true' %}
-  - all GNU MCU Eclipse releases [![Github All Releases](https://img.shields.io/github/downloads/gnu-mcu-eclipse/arm-none-eabi-gcc/total.svg)](https://github.com/gnu-mcu-eclipse/arm-none-eabi-gcc/releases){% endif %}{% if packageWebsiteConfig.showDeprecatedRiscvGccAnalytics == 'true' %}
-  - deprecated xPack releases [![Github All Releases](https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-embed-gcc-xpack/total.svg)](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases)
-  - all GNU MCU Eclipse releases [![Github All Releases](https://img.shields.io/github/downloads/gnu-mcu-eclipse/riscv-none-gcc/total.svg)](https://github.com/gnu-mcu-eclipse/riscv-none-gcc/releases){% endif %}
+  - this release <a href={`https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/releases/v${props.version}/`} ><Image img={`https://img.shields.io/github/downloads/{{githubProjectOrganization}}/{{githubProjectName}}/v${props.version}/total`} alt='Github Release' /></a>
+  - all xPack releases [![Github All Releases](https://img.shields.io/github/downloads/{{githubProjectOrganization}}/{{githubProjectName}}/total)](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/releases){% if packageWebsiteConfig.showDeprecatedGnuMcuAnalytics == 'true' %}
+  - all GNU MCU Eclipse releases [![Github All Releases](https://img.shields.io/github/downloads/gnu-mcu-eclipse/arm-none-eabi-gcc/total)](https://github.com/gnu-mcu-eclipse/arm-none-eabi-gcc/releases){% endif %}{% if packageWebsiteConfig.showDeprecatedRiscvGccAnalytics == 'true' %}
+  - deprecated xPack releases [![Github All Releases](https://img.shields.io/github/downloads/xpack-dev-tools/riscv-none-embed-gcc-xpack/total)](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/releases)
+  - all GNU MCU Eclipse releases [![Github All Releases](https://img.shields.io/github/downloads/gnu-mcu-eclipse/riscv-none-gcc/total)](https://github.com/gnu-mcu-eclipse/riscv-none-gcc/releases){% endif %}
   - [individual file counters](https://somsubhra.github.io/github-release-stats/?username={{githubProjectOrganization}}&repository={{githubProjectName}}) (grouped by release){% endif %}
 - npmjs.com [{{packageScopedName}}](https://www.npmjs.com/package/{{packageScopedName}})
   - last week downloads [![NPM Downloads](https://img.shields.io/npm/dw/{% if packageScope != "" %}%40{{packageScope}}%2F{% endif %}{{packageName}})](https://www.npmjs.com/package/{{packageScopedName}}/)
