@@ -37,7 +37,6 @@ Add a `websiteConfig` object to `website/package.json`, after `engines`.
 ```json
 {
   "websiteConfig": {
-    "longName": "xPack Logger",
     "title": "logger - The xPack Logger",
     "tagline": "Tools to manage, configure and build complex, package based, multi-target projects, in a reproducible way.",
     "metadataDescription": "A Node.js CommonJS/ES6 module with a generic console logger class",
@@ -103,7 +102,6 @@ For XBB
 ```json
 {
   "websiteConfig": {
-    "longName": "xPack Project",
     "title": "The xPack Reproducible Build Framework",
     "tagline": "Tools to manage, configure and build complex, package based, multi-target projects, in a reproducible way.",
     "metadataDescription": "The xPack Reproducible Build Framework",
@@ -116,8 +114,6 @@ For XBB
 ```json
 {
   "websiteConfig": {
-    "shortName": "xpm",
-    "longName": "xPack Project Manager",
     "title": "xpm - The xPack Project Manager",
     "tagline": "A tool to automate builds, tests and manage C/C++ dependencies, inspired by npm",
     "metadataDescription": "The xPack Project Manager command line tool",
@@ -135,7 +131,6 @@ For XBB
 ```json
 {
   "websiteConfig": {
-    "longName": "xPack Logger",
     "title": "logger - The xPack Logger",
     "metadataDescription": "A Node.js CommonJS/ES6 module with a generic console logger class",
     "metadataKeywords": "xpm, xpack, build, test, dependencies, npm, reproducibility",
