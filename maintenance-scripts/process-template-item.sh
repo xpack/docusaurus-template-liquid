@@ -235,29 +235,19 @@ then
   if [ "${xpack_is_organization_web}" == "true" ]
   then
     skip_pages_array+=(\
+      "blog/_common/_download-analytics.mdx" \
       "docs/about/_common/HistoryXpm/index.tsx" \
       "docs/developer/_common/_platform-docker-section.mdx" \
       "docs/developer/_common/_platform-native-section.mdx" \
-      "docs/faq/_common/_flatpack-snap.mdx" \
-      "docs/faq/_common/_nixos.mdx" \
-      "docs/faq/index.mdx" \
-      "docs/install/_common/_automatic-install-quick-test.mdx" \
-      "docs/install/_common/_manual-install-quick-test.mdx" \
-      "docs/maintainer/_common/_gcc-check-upstream-release.mdx" \
-      "docs/maintainer/_common/_arm-toolchain-check-upstream-release.mdx" \
-      "docs/maintainer/_common/_arm-toolchain-update-version-specific.mdx" \
-      "docs/maintainer/_common/_platform-docker-build.mdx" \
-      "docs/maintainer/_common/_platform-native-build.mdx" \
-      "docs/releases/index.md" \
-      "docs/support/index.mdx" \
-      "docs/test/index.mdx" \
-      "docs/user/_common/_arm-toolchain-versioning.mdx" \
-      "docs/user/_common/_libraries-and-rpath.mdx" \
-      "docs/user/_common/_versioning.mdx" \
       "docs/developer/_more.mdx" \
       "docs/developer/_other-repositories.mdx" \
+      "docs/faq/_common/_flatpack-snap.mdx" \
+      "docs/faq/_common/_nixos.mdx" \
       "docs/faq/_more.mdx" \
+      "docs/faq/index.mdx" \
       "docs/install/_automatic-install-quick-test.mdx" \
+      "docs/install/_common/_automatic-install-quick-test.mdx" \
+      "docs/install/_common/_manual-install-quick-test.mdx" \
       "docs/install/_folders-hierarchies-linux.mdx" \
       "docs/install/_folders-hierarchies-macos.mdx" \
       "docs/install/_folders-hierarchies-windows.mdx" \
@@ -265,6 +255,11 @@ then
       "docs/install/_miscellaneous.mdx" \
       "docs/install/_testing.mdx" \
       "docs/maintainer/_check-upstream-release.mdx" \
+      "docs/maintainer/_common/_gcc-check-upstream-release.mdx" \
+      "docs/maintainer/_common/_arm-toolchain-check-upstream-release.mdx" \
+      "docs/maintainer/_common/_arm-toolchain-update-version-specific.mdx" \
+      "docs/maintainer/_common/_platform-docker-build.mdx" \
+      "docs/maintainer/_common/_platform-native-build.mdx" \
       "docs/maintainer/_development-durations.mdx" \
       "docs/maintainer/_first-development-run.mdx" \
       "docs/maintainer/_first-production-run.mdx" \
@@ -274,10 +269,13 @@ then
       "docs/maintainer/_patches.mdx" \
       "docs/maintainer/_share-custom.mdx" \
       "docs/maintainer/_update-version-specific.mdx" \
+      "docs/releases/index.md" \
+      "docs/user/_common/_arm-toolchain-versioning.mdx" \
+      "docs/user/_common/_libraries-and-rpath.mdx" \
+      "docs/user/_common/_versioning.mdx" \
       "docs/user/_more.mdx" \
       "docs/user/_use-in-testing.mdx" \
       "docs/user/_versioning.mdx" \
-      "blog/_common/_download-analytics.mdx" \
     )
   else
 
@@ -286,6 +284,7 @@ then
       skip_pages_array+=(\
         "docs/maintainer/_common/_arm-toolchain-check-upstream-release.mdx" \
         "docs/maintainer/_common/_arm-toolchain-update-version-specific.mdx" \
+        "docs/user/_common/_arm-toolchain-versioning.mdx" \
       )
     fi
 

@@ -126,7 +126,7 @@ function generate_top_commons()
       fi
     fi
 
-    git checkout "${development_branch}"
+    run_verbose git checkout "${development_branch}"
 
     if [ -d "website" ]
     then
@@ -137,12 +137,34 @@ function generate_top_commons()
         (
           cd website
 
-          # npm run deep-clean
-          npm run npm-install
-          npm run npm-link-helpers
-          npm run generate-website-commons
+          # -------------------------------------------------------------------
+          # Custom actions.
 
-          npm run build
+          # if [ ! -d "docs/project" ]
+          # then
+          #   run_verbose mkdir -pv docs/project/about docs/project/history
+          #   run_verbose cp docs/about/_more-intro.mdx docs/project/about
+          #   run_verbose cp docs/about/_website.mdx docs/project/about
+          #   run_verbose cp docs/about/_history.mdx docs/project/history
+          # fi
+
+          # if [ ! -f "docs/project/history/_history.mdx" ]
+          # then
+          #   run_verbose cp docs/about/_history.mdx docs/project/history
+          # fi
+
+          # run_verbose rm -rf docs/about
+
+          # -------------------------------------------------------------------
+
+          # npm run deep-clean
+          run_verbose npm run npm-install
+          run_verbose npm run npm-link-helpers
+
+          run_verbose npm run generate-website-commons
+
+          run_verbose npm run clear
+          run_verbose npm run build
         )
       else
         echo "${name} has no websiteConfig..."

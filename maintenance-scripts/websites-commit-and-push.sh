@@ -102,10 +102,11 @@ function update_and_publish()
       fi
     fi
 
-    git checkout "${development_branch}"
+    run_verbose git checkout "${development_branch}"
 
     if [ -d "website" ]
     then
+
       website_config="$(json -f "website/package.json" -o json-0 websiteConfig)"
 
       if [ ! -z "${website_config}" ]
@@ -125,7 +126,7 @@ function update_and_publish()
     # if [ -d "build-assets" ]
     # then
     #   git add build-assets
-    #   git commit -m "build-assets: move customFields to websiteConfig" || true
+    #   git commit -m "build-assets: cleanup actions" || true
     # fi
 
     # chmod +w website/src/libs/customField.js
