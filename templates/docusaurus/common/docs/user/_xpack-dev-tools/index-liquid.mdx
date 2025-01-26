@@ -4,7 +4,13 @@
 # Automatically generated from docusaurus-template-liquid/templates/docusaurus.
 
 title: User's Guide{% if packageWebsiteConfig.usePluralGuides == "true" %}s{% endif %}
-description: {% if packageWebsiteConfig.userGuideDescription %}{{packageWebsiteConfig.userGuideDescription}}{% else %}{% if githubProjectOrganization == "xpack" %}User information, including how to include it in a project, how to instantiate objects, how to call various functions{% elsif githubProjectOrganization == "xpack-dev-tools" %}User information, including the versioning scheme, usage of shared libraries, and RPATH configuration on GNU/Linux.{% else %}TODO{% endif %}{% endif %}.
+{% if githubProjectOrganization == "xpack" -%}
+description: {% if packageWebsiteConfig.userGuideDescription %}{{packageWebsiteConfig.userGuideDescription}}{% else %}User information, including how to integrate it in a project, how to instantiate objects, how to call various functions.{% endif %}
+{% elsif githubProjectOrganization == "xpack-dev-tools" -%}
+description: {% if packageWebsiteConfig.userGuideDescription %}{{packageWebsiteConfig.userGuideDescription}}{% else %}User information, including the versioning scheme, usage of shared libraries, and RPATH configuration on GNU/Linux.{% endif %}
+{% else -%}
+description: TODO
+{% endif -%}
 keywords:
   - xpack
   - {% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}
@@ -34,22 +40,30 @@ import ProjectContent from './_project/_content.mdx';
 
 import customField from '@site/src/libs/customField';
 
-import Versioning from './_versioning.mdx';
+import Versioning from './_project/_versioning.mdx';
 import LibrariesAndRpath from './_common/_libraries-and-rpath.mdx';
-import UseInTesting from './_use-in-testing.mdx';
+import UseInTesting from './_project/_use-in-testing.mdx';
 
 {% endif -%}
 
-import More from './_more.mdx';
+import More from './_project/_more.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
 # How to use {% if packageConfig.shortName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.shortName}}{% else %}the {{longXpackName}}{% endif %}
 
-This section is intended for those who plan to {% if packageWebsiteConfig.hasCli == "true" %}integrate
-**{% if packageConfig.shortName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.shortName}}{% else %}the {{longXpackName}}{% endif %}** into their workflows{% else %}use this
-{% if packageWebsiteConfig.hasCli == "true" %}package{% else %}module{% endif %} in their
-own projects{% endif %}.
+{% if isXpackBinary == "true" or packageWebsiteConfig.hasCli == "true" -%}
+
+This section is intended for those who plan to integrate
+{% if packageConfig.shortName and packageWebsiteConfig.preferShortName == "true" %}**{{packageConfig.shortName}}**{% else %}the **{{longXpackName}}**{% endif %} into their workflows.
+
+{% else -%}
+
+This section is intended for those who plan to use this
+module in their
+own projects.
+
+{% endif -%}
 
 <More />
 

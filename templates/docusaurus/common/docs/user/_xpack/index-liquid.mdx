@@ -5,7 +5,7 @@
 
 title: User's Guide{% if packageWebsiteConfig.usePluralGuides == "true" %}s{% endif %}
 {% if githubProjectOrganization == "xpack" -%}
-description: {% if packageWebsiteConfig.userGuideDescription %}{{packageWebsiteConfig.userGuideDescription}}{% else %}User information, including how to include it in a project, how to instantiate objects, how to call various functions.{% endif %}
+description: {% if packageWebsiteConfig.userGuideDescription %}{{packageWebsiteConfig.userGuideDescription}}{% else %}User information, including how to integrate it in a project, how to instantiate objects, how to call various functions.{% endif %}
 {% elsif githubProjectOrganization == "xpack-dev-tools" -%}
 description: {% if packageWebsiteConfig.userGuideDescription %}{{packageWebsiteConfig.userGuideDescription}}{% else %}User information, including the versioning scheme, usage of shared libraries, and RPATH configuration on GNU/Linux.{% endif %}
 {% else -%}
