@@ -362,10 +362,10 @@ then
   )
 fi
 
-if [ "${xpack_npm_package_is_xpack_binary}" != "true" ]
+if [ "${xpack_website_config_is_gcc_toolchain}" != "true" ]
 then
   skip_pages_array+=(\
-    "docs/getting-started/_common/_gcc-release-schedule.mdx" \
+    "docs/_common/_gcc-release-schedule.mdx" \
   )
 fi
 
@@ -391,6 +391,16 @@ else
     "docs/maintainer/_common/_content.mdx" \
     "docs/maintainer/_project/_dependencies-detail.mdx" \
     "docs/maintainer/_project/_more.mdx" \
+  )
+fi
+
+if [ "${xpack_has_custom_about}" != "true" ]
+then
+  skip_pages_array+=(\
+    "docs/project/about/_project/_content.mdx" \
+  )
+else
+  skip_pages_array+=(\
   )
 fi
 
