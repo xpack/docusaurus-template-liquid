@@ -116,6 +116,32 @@ fi
 
 # -----------------------------------------------------------------------------
 
+# $1 = from_file_path
+# $2 = to_file_path, optional
+function relocate()
+{
+  local from_file_path="${1}"
+  local to_file_path="${2:-"$(dirname "${from_file_path}")/_project/$(basename "${from_file_path}")"}"
+
+  if [ -f "${from_file_path}" ]
+  then
+    run_verbose mkdir -pv "$(dirname "${to_file_path}")"
+    if [ -f "${to_file_path}" ]
+    then
+      echo "${to_file_path} already present"
+      exit 1
+    fi
+    run_verbose mv -fv "${from_file_path}" "${to_file_path}"
+
+    if grep "'./_common/" "${to_file_path}" >/dev/null
+    then
+      run_verbose sed -i.bak -e "s|'\./_common|'../_common|" "${to_file_path}"
+    fi
+  fi
+}
+
+# -----------------------------------------------------------------------------
+
 if [ "${do_init}" == "true" ]
 then
   # TODO
@@ -123,77 +149,86 @@ then
   exit 1
 else
 
-  (
-    cd "${website_folder_path}"
+  if true
+  then
+    (
+      echo
+      echo "Relocating files..."
 
-    chmod -R +w *
+      cd "${website_folder_path}"
 
-    if [ -f "docs/getting-started/_documentation.mdx" ]
-    then
-      run_verbose mkdir -p "docs/_shared"
-      run_verbose mv "docs/getting-started/_documentation.mdx" "docs/_shared/"
-    fi
+      chmod -R +w *
 
-    if [ -f "docs/developer/_coverage-exceptions.mdx" ]
-    then
-      run_verbose mkdir -p "docs/developer/_project"
-      run_verbose mv "docs/developer/_coverage-exceptions.mdx" "docs/developer/_style-exceptions.mdx" "docs/developer/_test-results.mdx" "docs/developer/_project"
-    fi
+      relocate "docs/getting-started/_documentation.mdx" "docs/_shared/_documentation.mdx"
 
-    if [ -f "docs/getting-started/_compatibility.mdx" ]
-    then
-      run_verbose mkdir -p "docs/getting-started/_project"
-      run_verbose mv "docs/getting-started/_compatibility.mdx" "docs/getting-started/_more-credits.mdx" "docs/getting-started/_overview.mdx" "docs/getting-started/_status.mdx" "docs/getting-started/_project"
-    fi
+      relocate "docs/developer/_coverage-exceptions.mdx"
+      relocate "docs/developer/_style-exceptions.mdx"
+      relocate "docs/developer/_test-results.mdx"
 
-    if [ -f "docs/getting-started/_project/_overview.mdx" ]
-    then
-      run_verbose sed -i.bak -e "s|'\./_common|'../_common|" -e "s|'\.\./_shared|'../../_shared|" "docs/getting-started/_project/_overview.mdx"
-    fi
+      relocate "docs/developer/_more.mdx"
+      relocate "docs/developer/_other-repositories.mdx"
 
-    if [ -f "docs/install/_troubleshooting-windows.mdx" ]
-    then
-      run_verbose mkdir -p "docs/install/_project"
-      run_verbose mv "docs/install/_troubleshooting-windows.mdx" "docs/install/_project"
-    fi
+      relocate "docs/faq/_more.mdx" "docs/faq/_project/_content.mdx"
 
-    if [ -f "docs/install/_custom-install.mdx" ]
-    then
-      run_verbose mkdir -p "docs/install/_project"
-      run_verbose mv "docs/install/_custom-install.mdx" "docs/install/_project"
-    fi
+      relocate "docs/getting-started/_compatibility.mdx"
+      relocate "docs/getting-started/_more-credits.mdx"
+      relocate "docs/getting-started/_overview.mdx"
+      relocate "docs/getting-started/_status.mdx"
 
-    if [ -f "docs/install/_project/_custom-install.mdx" ]
-    then
-      run_verbose sed -i.bak -e "s|'\./_common|'../_common|" "docs/install/_project/_custom-install.mdx"
-    fi
+      relocate "docs/getting-started/_more.mdx"
+      relocate "docs/getting-started/_other-benefits.mdx"
 
-    if [ -f "docs/maintainer/_more.mdx" ]
-    then
-      run_verbose mkdir -p "docs/maintainer/_project"
-      run_verbose mv "docs/maintainer/_more.mdx" "docs/maintainer/_dependencies-details.mdx" "docs/maintainer/_project"
-    fi
+      relocate "docs/getting-started/_overview.mdx"
+      if [ -f "docs/getting-started/_project/_overview.mdx" ] && grep "'../_shared/" "docs/getting-started/_project/_overview.mdx" >/dev/null
+      then
+        run_verbose sed -i.bak -e "s|'\.\./_shared|'../../_shared|" "docs/getting-started/_project/_overview.mdx"
+      fi
 
-    if [ -f "docs/project/about/_website.mdx" ]
-    then
-      run_verbose mkdir -p "docs/project/about/_project"
-      run_verbose mv "docs/project/about/_website.mdx" "docs/project/about/_project"
-    fi
+      relocate "docs/getting-started/_release-schedule.mdx" "docs/_shared/_release-schedule.mdx"
+      relocate "docs/getting-started/_upgrade-notice.mdx"
 
-    if [ -f "docs/project/about/_more-intro.mdx" ]
-    then
-      run_verbose mkdir -p "docs/project/about/_project"
-      run_verbose mv "docs/project/about/_more-intro.mdx" "docs/project/about/_project"
-    fi
+      relocate "docs/install/_troubleshooting-windows.mdx"
+      relocate "docs/install/_custom-install.mdx"
 
-    if [ -f "docs/project/about/_project/_website.mdx" ]
-    then
-      run_verbose sed -i.bak -e "s|'\./_common|'../_common|" "docs/project/about/_project/_website.mdx"
-    fi
+      relocate "docs/install/_automatic-install-quick-test.mdx"
+      relocate "docs/install/_folders-hierarchies-linux.mdx"
+      relocate "docs/install/_folders-hierarchies-macos.mdx"
+      relocate "docs/install/_folders-hierarchies-windows.mdx"
+      relocate "docs/install/_manual-install-quick-test.mdx"
 
-    find . -name '*.bak' -exec rm -v '{}' ';'
+      relocate "docs/install/_miscellaneous.mdx"
+      relocate "docs/install/_testing.mdx"
 
-  )
+      relocate "docs/maintainer/_more.mdx"
+      relocate "docs/maintainer/_dependencies-details.mdx"
+
+      relocate "docs/maintainer/_check-upstream-release.mdx"
+      relocate "docs/maintainer/_development-durations.mdx" "docs/_shared/_development-durations.mdx"
+      relocate "docs/maintainer/_first-development-run.mdx"
+      relocate "docs/maintainer/_first-production-run.mdx"
+      relocate "docs/maintainer/_github-actions-durations.mdx" "docs/_shared/_github-actions-durations.mdx"
+      relocate "docs/maintainer/_more-repos.mdx"
+      relocate "docs/maintainer/_more-tests.mdx"
+      relocate "docs/maintainer/_patches.mdx"
+      relocate "docs/maintainer/_share-custom.mdx"
+      relocate "docs/maintainer/_update-version-specific.mdx"
+
+      relocate "docs/project/about/_more-intro.mdx"
+      relocate "docs/project/about/_website.mdx"
+      relocate "docs/project/history/_history.mdx" "docs/project/history/_project/_content.mdx"
+
+      relocate "docs/releases/index.md" "docs/releases/index.mdx"
+
+      relocate "docs/project/history/history.mdx" "docs/project/history/_project/_content.mdx"
+
+      relocate "docs/user/_more.mdx"
+      relocate "docs/user/_use-in-testing.mdx"
+      relocate "docs/user/_versioning.mdx"
+
+      find . -name '*.bak' -exec rm -v '{}' ';'
+    )
+  fi
+
   echo
   echo "Processing template from ${templates_folder_path}/docusaurus..."
 
