@@ -23,13 +23,11 @@ export function getCustomFields() {
   // Remove the pre-release.
   const releaseSemver = releaseVersion.replace(/[-].*$/, '');
 
-  let upstreamVersion = releaseSemver;
-{%- if packageWebsiteConfig.hasTwoNumbersVersion == "true" %}
+  let upstreamVersion = releaseSemver;{% if packageWebsiteConfig.hasTwoNumbersVersion == "true" %}
   if (releaseSemver.endsWith('.0')) {
     // Remove the patch number if zero (wine uses both 2 and 3 numbers).
     upstreamVersion = releaseSemver.replace(/[.]0*$/, '');
-  }
-{%- endif %}
+  }{% endif %}
 
   let versionFields = {
     packageVersion,

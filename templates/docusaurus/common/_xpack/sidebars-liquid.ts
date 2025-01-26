@@ -27,7 +27,7 @@ const sidebars: SidebarsConfig = {
       type: 'doc',
       id: 'getting-started/index',
       label: 'Getting Started'
-    },{% if packageWebsiteConfig.skipInstallCommand != "true" %}
+    },{% if packageWebsiteConfig.skipInstallGuide != "true" %}
     {
       type: 'doc',
       id: 'install/index',
@@ -43,27 +43,27 @@ const sidebars: SidebarsConfig = {
       type: 'doc',
       id: 'developer/index',
       label: 'Contributor\'s Guide'
-    },{% endif %}
+    },{% endif %}{% if packageWebsiteConfig.skipMaintainerGuide != "true" %}
     {
       type: 'doc',
       id: 'maintainer/index',
       label: 'Maintainer\'s Guide'
-    },
+    },{% endif %}{% if packageWebsiteConfig.skipFaq != "true" %}
     {
       type: 'doc',
       id: 'faq/index',
       label: 'FAQ'
-    },
+    },{% endif %}
     {
       type: 'doc',
       id: 'support/index',
       label: 'Help Centre'
-    },
+    },{% if packageWebsiteConfig.skipReleases != "true" %}
     {
       type: 'doc',
       id: 'releases/index',
       label: 'Releases'
-    },
+    },{% endif %}
     {
       type: 'category',
       label: 'Project',

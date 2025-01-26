@@ -164,7 +164,7 @@ then
   then
     skip_pages_array+=(\
       "docs/developer/_test-results.mdx" \
-      "docs/faq/index-liquid.mdx" "docs/user/index.mdx" \
+      "docs/faq/index-liquid.mdx" \
       "docs/getting-started/_common/_commonjs-compatibility.mdx" \
       "docs/getting-started/_common/_github-and-npmjs.mdx" \
       "docs/getting-started/_compatibility.mdx" \
@@ -199,8 +199,16 @@ then
   if [ "${xpack_has_cli}" != "true" ]
   then
     skip_pages_array+=(\
-      "docs/install/_common/_cli.mdx" \
+      "docs/install/_common/_prerequisites-cli.mdx" \
+      "docs/install/_common/_install-cli.mdx" \
       "docs/install/_common/_no-administrative-rights.mdx" \
+      "docs/install/_project/_more-install.mdx" \
+      "docs/install/_project/_troubleshooting-windows.mdx" \
+    )
+  else
+    skip_pages_array+=(\
+      "docs/install/_common/_prerequisites-module.mdx" \
+      "docs/install/_common/_install-module.mdx" \
     )
   fi
 
@@ -293,6 +301,103 @@ then
       "src/components/HomepageTools/styles.module.css" \
     )
   fi
+fi
+
+if [ "${xpack_has_custom_developer}" != "true" ]
+then
+  skip_pages_array+=(\
+    "docs/developer/_project/_content.mdx" \
+  )
+else
+  skip_pages_array+=(\
+    "docs/developer/_common/_content.mdx" \
+    "docs/developer/_project/_coverage-exceptions.mdx" \
+    "docs/developer/_project/_style-exceptions.mdx" \
+    "docs/developer/_project/_test-results.mdx" \
+  )
+fi
+
+if [ "${xpack_has_custom_getting_started}" != "true" ]
+then
+  skip_pages_array+=(\
+    "docs/getting-started/_project/_content.mdx" \
+  )
+else
+  skip_pages_array+=(\
+    "docs/getting-started/_common/_content.mdx" \
+    "docs/getting-started/_project/_compatibility.mdx" \
+    "docs/getting-started/_project/_more-credits.mdx" \
+    "docs/getting-started/_project/_overview.mdx" \
+    "docs/getting-started/_project/_status.mdx" \
+  )
+fi
+
+if [ "${xpack_skip_install_guide}" == "true" ]
+then
+  skip_pages_array+=(\
+    "docs/install/index.mdx" \
+    "docs/install/_common/_content.mdx" \
+    "docs/install/_common/_prerequisites-module.mdx" \
+    "docs/install/_common/_install-module.mdx" \
+    "docs/install/_project/_content.mdx" \
+    "docs/install/_project/_troubleshooting-windows.mdx" \
+  )
+fi
+
+if [ "${xpack_has_custom_install}" != "true" ]
+then
+  skip_pages_array+=(\
+    "docs/install/_project/_content.mdx" \
+  )
+else
+  skip_pages_array+=(\
+    "docs/install/_common/_content.mdx" \
+    "docs/install/_project/_troubleshooting-windows.mdx" \
+  )
+fi
+
+if [ "${xpack_has_custom_maintainer}" != "true" ]
+then
+  skip_pages_array+=(\
+    "docs/maintainer/_project/_content.mdx" \
+  )
+else
+  skip_pages_array+=(\
+    "docs/maintainer/_common/_content.mdx" \
+    "docs/maintainer/_project/_dependencies-detail.mdx" \
+    "docs/maintainer/_project/_more.mdx" \
+  )
+fi
+
+if [ "${xpack_has_custom_user}" != "true" ]
+then
+  skip_pages_array+=(\
+    "docs/user/_project/_content.mdx" \
+  )
+else
+  skip_pages_array+=(\
+    "docs/user/_project/_content.mdx" \
+    "docs/user/_project/_use-in-testing.mdx" \
+    "docs/user/_project/_versioning.mdx" \
+    "docs/user/_common/_arm-toolchain-versioning.mdx" \
+    "docs/user/_common/_libraries-and-rpath.mdx" \
+    "docs/user/_common/_versioning.mdx" \
+  )
+fi
+
+if [ "${xpack_skip_releases}" == "true" ]
+then
+  skip_pages_array+=(\
+    "docs/releases/index.mdx" \
+  )
+fi
+
+if [ "${xpack_skip_faq}" == "true" ]
+then
+  skip_pages_array+=(\
+    "docs/faq/index.mdx" \
+    "docs/faq/_project/_content.mdx" \
+  )
 fi
 
 # -----------------------------------------------------------------------------

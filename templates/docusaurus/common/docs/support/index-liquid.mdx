@@ -16,13 +16,14 @@ date: 2020-07-21 17:54:00 +0300
 
 ---
 
-import Documentation from '../getting-started/_documentation.mdx';
+import Documentation from '../_shared/_documentation.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
 # How to get help for {% if packageConfig.shortName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.shortName}}{% else %}the {{longXpackName}}{% endif %}
 
-{% if packageConfig.isOrganizationWeb == "true" %}
+{% if packageConfig.isOrganizationWeb == "true" -%}
+
 ## Quick tips
 
 The **{{packageConfig.longName}}** consists of multiple individual
@@ -30,25 +31,31 @@ projects, each hosted on its own GitHub repository. Therefore, the best
 way to get answers quickly is to use the
 GitHub Discussions
 pages for the specific project you're interested in.
-{% else %}
+
+{% else -%}
+
 ## Quick links
 
 The quick answer is to use the
 [GitHub Discussions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/discussions)
 pages.
-{% endif %}
+
+{% endif -%}
 
 ## Web pages issues
 
 If you find any issues in the content of these pages (such as typos or
 incorrect phrasing) or have suggestions for improving the documentation,
-please share them through the{% if packageConfig.isOrganizationWeb == "true" %}
+please share them through the
+{% if packageConfig.isOrganizationWeb == "true" -%}
 GitHub Discussions pages. Use the top-level
 [GitHub Discussions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/discussions)
-page for issues related to the main xPack Project site, or the individual project’s GitHub Discussions pages for specific projects.{% else %}
+page for issues related to the main xPack Project site, or the individual project's GitHub Discussions pages for specific projects.
+{% else -%}
 [GitHub Discussions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/discussions)
 pages.
-{% endif %}
+
+{% endif -%}
 
 ## Check documentation
 
@@ -62,11 +69,11 @@ documentation.
 Before posting any questions or providing feedback,
 check if the subject was not already addressed.
 
-- check the {% if packageConfig.isOrganizationWeb == "true" %}FAQ{% else %}[FAQ](/docs/faq/){% endif %}
+- Check the {% if packageConfig.isOrganizationWeb == "true" %}FAQ{% else %}[FAQ](/docs/faq/){% endif %}
 for similar problems
-- check the {% if packageConfig.isOrganizationWeb == "true" %}GitHub Discussions{% else %}[GitHub Discussions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/discussions){% endif %} for
+- Check the {% if packageConfig.isOrganizationWeb == "true" %}GitHub Discussions{% else %}[GitHub Discussions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/discussions){% endif %} for
 similar topics
-- check the
+- Check the
 {% if packageConfig.isOrganizationWeb == "true" %}GitHub Issues{% else %}[GitHub Issues](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/issues){% endif %}
 tracker and the
 {% if packageConfig.isOrganizationWeb == "true" %}GitHub Pull Requests{% else %}[GitHub Pull Requests](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/pulls){% endif %}
@@ -86,7 +93,7 @@ pages.{% endif %}
 Enter a **New discussion**; use the **Q&A** category for questions,
 **Ideas** for suggestions and **General** for everything else.
 
-{% if packageConfig.isOrganizationWeb != "true" %}
+{% if packageConfig.isOrganizationWeb != "true" -%}
 ## Register a new support ticket only if necessary
 
 If you are convinced that you identified a bug
@@ -103,8 +110,8 @@ for questions and support, **use the
 [GitHub Discussions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/discussions)** pages.
 
 :::
-{% endif %}
 
+{% endif -%}
 ## Stack Overflow
 
 For community help, you can also use
@@ -156,4 +163,3 @@ a short message including a link to this page.
 The reason for this rude behaviour is simply an attempt to use
 the time more efficiently; since discussions are archived, other people
 having similar problems might benefit from the answers.
-

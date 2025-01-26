@@ -112,7 +112,8 @@ function update_and_publish()
       if [ ! -z "${website_config}" ]
       then
         run_verbose git add website README.md
-        run_verbose git commit -m "website: re-generate commons" || true
+        # run_verbose git commit -m "website: re-generate commons" || true
+        run_verbose git commit -m "website: rework with _project" || true
       else
         echo "${name} has no websiteConfig..."
       fi

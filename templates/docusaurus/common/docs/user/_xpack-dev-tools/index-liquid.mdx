@@ -4,11 +4,12 @@
 # Automatically generated from docusaurus-template-liquid/templates/docusaurus.
 
 title: User's Guide{% if packageWebsiteConfig.usePluralGuides == "true" %}s{% endif %}
-description: User information, including the versioning scheme, usage of shared libraries, and RPATH configuration on GNU/Linux.
+description: {% if packageWebsiteConfig.userGuideDescription %}{{packageWebsiteConfig.userGuideDescription}}{% else %}{% if githubProjectOrganization == "xpack" }User information, including how to include it in a project, how to instantiate objects, how to call various functions{% elsif githubProjectOrganization == "xpack-dev-tools" %}User information, including the versioning scheme, usage of shared libraries, and RPATH configuration on GNU/Linux.{% else %}TODO{% endif %}{% endif %}.
 keywords:
   - xpack
   - {% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}
-  - user{% if packageWebsiteConfig.hasCustomUser != "true" %}
+  - user
+  - guide{% if isXpackBinary == "true" %}
   - versioning
   - shared
   - rpath{% endif %}
@@ -17,9 +18,9 @@ date: 2024-07-21 18:56:00 +0300
 
 ---
 
-{% if packageWebsiteConfig.hasCustomUser == "true" %}
+{% if packageWebsiteConfig.hasCustomUser == "true" -%}
 
-import CustomUser from './_custom-user.mdx'
+import CustomUser from './_custom-user.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
@@ -27,23 +28,32 @@ import CustomUser from './_custom-user.mdx'
 
 <CustomUser />
 
-{% else %}
+{% else -%}
+
+{% if isXpackBinary == "true" -%}
 
 import customField from '@site/src/libs/customField';
 
 import Versioning from './_versioning.mdx';
 import LibrariesAndRpath from './_common/_libraries-and-rpath.mdx';
-import More from './_more.mdx';
 import UseInTesting from './_use-in-testing.mdx';
+
+{% endif -%}
+
+import More from './_more.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
-# How to use the {{longXpackName}}
+# How to use {% if packageConfig.shortName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.shortName}}{% else %}the {{longXpackName}}{% endif %}
 
-This page is intended for those who plan
-to use the **{{longXpackName}}** binaries in their workflows.
+This section is intended for those who plan to {% if packageWebsiteConfig.hasCli == "true" %}integrate
+**{% if packageConfig.shortName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.shortName}}{% else %}the {{longXpackName}}{% endif %}** into their workflows{% else %}use this
+{% if packageWebsiteConfig.hasCli == "true" %}package{% else %}module{% endif %} in their
+own projects{% endif %}.
 
-<More/>
+<More />
+
+{% if isXpackBinary == "true" -%}
 
 <Versioning/>
 
@@ -51,4 +61,18 @@ to use the **{{longXpackName}}** binaries in their workflows.
 
 <UseInTesting/>
 
-{% endif %}
+{% endif -%}
+
+{% endif -%}
+
+{% if packageWebsiteConfig.hasApi == "true" -%}
+
+### Reference
+
+For more details on the available class definitions, including all methods,
+accessors, properties, etc,
+please see the TypeDoc
+[API](/docs/api/) pages.
+
+{% endif -%}
+{% endif -%}

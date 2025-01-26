@@ -14,15 +14,13 @@ keywords:
   - uninstall
   - files{% endif %}
 
-hide_table_of_contents: false
-
 date: 2020-08-21 11:09:00 +0300
 
 ---
 
-{% if packageWebsiteConfig.hasCustomInstall == "true" %}
+{% if packageWebsiteConfig.hasCustomInstall == "true" -%}
 
-import CustomInstall from './_custom-install.mdx'
+import CustomInstall from './_custom-install.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
@@ -30,7 +28,7 @@ import CustomInstall from './_custom-install.mdx'
 
 <CustomInstall />
 
-{% else %}
+{% else -%}
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -38,16 +36,16 @@ import CodeBlock from '@theme/CodeBlock';
 import Admonition from '@theme/Admonition';
 
 import customField from '@site/src/libs/customField';
-import LinksVsForwarders from '@site/src/components/LinksVsForwarders'
+import LinksVsForwarders from '@site/src/components/LinksVsForwarders';
 
-import AutomaticInstallQuickTest from './_automatic-install-quick-test.mdx'
-import ManualInstallQuickTest from './_manual-install-quick-test.mdx'
+import AutomaticInstallQuickTest from './_automatic-install-quick-test.mdx';
+import ManualInstallQuickTest from './_manual-install-quick-test.mdx';
 
-import FoldersHierarchiesLinux from './_folders-hierarchies-linux.mdx'
-import FoldersHierarchiesWindows from './_folders-hierarchies-windows.mdx'
-import FoldersHierarchiesMacOS from './_folders-hierarchies-macos.mdx'
+import FoldersHierarchiesLinux from './_folders-hierarchies-linux.mdx';
+import FoldersHierarchiesWindows from './_folders-hierarchies-windows.mdx';
+import FoldersHierarchiesMacOS from './_folders-hierarchies-macos.mdx';
 
-import Miscellaneous from './_miscellaneous.mdx'
+import Miscellaneous from './_miscellaneous.mdx';
 import Testing from './_testing.mdx';
 
 {/* ------------------------------------------------------------------------ */}
@@ -274,7 +272,8 @@ To install a **specific version**, specify it explicitly:
 <Tabs groupId="operating-systems">
 {% for name in names_array -%}
 
-{% if name == "Windows" %}
+{% if name == "Windows" -%}
+
 <TabItem value="windows" label="Windows" default>
 
 The main result is a set
@@ -305,9 +304,11 @@ adjust the syntax for the corresponding Windows specific shell.
 </details>
 
 </TabItem>
+
 {% endif -%}
 
-{% if name == "macOS" %}
+{% if name == "macOS" -%}
+
 <TabItem value="macos" label="macOS">
 
 The main result is a set
@@ -330,9 +331,11 @@ export PATH=<...project-path...>/xpacks/.bin:$PATH
 </details>
 
 </TabItem>
+
 {% endif -%}
 
-{% if name == "GNU/Linux" %}
+{% if name == "GNU/Linux" -%}
+
 <TabItem value="linux" label="GNU/Linux">
 
 The main result is a set
@@ -355,9 +358,11 @@ export PATH=<...project-path...>/xpacks/.bin:$PATH
 </details>
 
 </TabItem>
+
 {% endif -%}
 
-{% endfor %}
+{% endfor -%}
+
 </Tabs>
 
 <details>
@@ -464,7 +469,8 @@ the project build configurations need a PATH adjustment:
 <Tabs groupId="operating-systems">
 {% for name in names_array -%}
 
-{% if name == "Windows" %}
+{% if name == "Windows" -%}
+
 <TabItem value="windows" label="Windows" default>
 
 <CodeBlock language="sh"> {
@@ -479,9 +485,11 @@ corresponding shell.
 :::
 
 </TabItem>
+
 {% endif -%}
 
-{% if name == "macOS" %}
+{% if name == "macOS" -%}
+
 <TabItem value="macos" label="macOS">
 
 <CodeBlock language="sh"> {
@@ -489,9 +497,11 @@ corresponding shell.
 `} </CodeBlock>
 
 </TabItem>
+
 {% endif -%}
 
-{% if name == "GNU/Linux" %}
+{% if name == "GNU/Linux" -%}
+
 <TabItem value="linux" label="GNU/Linux">
 
 <CodeBlock language="sh"> {
@@ -499,9 +509,11 @@ corresponding shell.
 `} </CodeBlock>
 
 </TabItem>
+
 {% endif -%}
 
-{% endfor %}
+{% endfor -%}
+
 </Tabs>
 
 </details>
@@ -543,34 +555,41 @@ For a thorough clean-up, please note that **xpm** uses only two folders:
 <Tabs groupId="operating-systems">
 {% for name in names_array -%}
 
-{% if name == "Windows" %}
+{% if name == "Windows" -%}
+
 <TabItem value="windows" label="Windows" default>
 
 - `%APPDATA%\Roaming\xPacks`
 - `%APPDATA%\Local\Caches\xPacks`
 
 </TabItem>
+
 {% endif -%}
 
-{% if name == "macOS" %}
+{% if name == "macOS" -%}
+
 <TabItem value="macos" label="macOS">
 
 - `${HOME}/Library/xPacks`
 - `${HOME}/Library/Caches/xPacks`
 
 </TabItem>
+
 {% endif -%}
 
-{% if name == "GNU/Linux" %}
+{% if name == "GNU/Linux" -%}
+
 <TabItem value="linux" label="GNU/Linux">
 
 - `${HOME}/.local/xPacks`
 - `${HOME}/.cache/xPacks`
 
 </TabItem>
+
 {% endif -%}
 
-{% endfor %}
+{% endfor -%}
+
 </Tabs>
 
 They can be removed at any time and space reclaimed;
@@ -596,7 +615,8 @@ the <a href={`https://github.com/{{githubProjectOrganization}}/{{githubProjectNa
 <Tabs groupId="operating-systems">
 {% for name in names_array -%}
 
-{% if name == "Windows" %}
+{% if name == "Windows" -%}
+
 <TabItem value="windows" label="Windows" default>
 
 The Windows versions of **{{longXpackName}}**
@@ -630,9 +650,11 @@ installing user specific packages.
 :::
 
 </TabItem>
+
 {% endif -%}
 
-{% if name == "macOS" %}
+{% if name == "macOS" -%}
+
 <TabItem value="macos" label="macOS">
 
 The macOS versions of **{{longXpackName}}**
@@ -675,9 +697,11 @@ chmod -R -w xpack-{{packageConfig.shortName}}-{{xpackVersion}}
 `} </CodeBlock>
 
 </TabItem>
+
 {% endif -%}
 
-{% if name == "GNU/Linux" %}
+{% if name == "GNU/Linux" -%}
+
 <TabItem value="linux" label="GNU/Linux">
 
 The GNU/Linux versions of **{{longXpackName}}**
@@ -723,9 +747,11 @@ chmod -R -w xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% 
 `} </CodeBlock>
 
 </TabItem>
+
 {% endif -%}
 
-{% endfor %}
+{% endfor -%}
+
 </Tabs>
 
 :::info
@@ -759,35 +785,42 @@ After install, the package creates a hierarchy of folders like the following
 <Tabs groupId="operating-systems">
 {% for name in names_array -%}
 
-{% if name == "Windows" %}
+{% if name == "Windows" -%}
+
 <TabItem value="windows" label="Windows" default>
 
 <FoldersHierarchiesWindows />
 
 </TabItem>
+
 {% endif -%}
 
-{% if name == "macOS" %}
+{% if name == "macOS" -%}
+
 <TabItem value="macos" label="macOS">
 
 <FoldersHierarchiesMacOS />
 
 </TabItem>
+
 {% endif -%}
 
-{% if name == "GNU/Linux" %}
+{% if name == "GNU/Linux" -%}
+
 <TabItem value="linux" label="GNU/Linux">
 
 <FoldersHierarchiesLinux />
 
 </TabItem>
+
 {% endif -%}
 
-{% endfor %}
+{% endfor -%}
+
 </Tabs>
 
 <Miscellaneous/>
 
 <Testing/>
 
-{% endif %}
+{% endif -%}

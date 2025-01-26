@@ -155,6 +155,33 @@ function generate_top_commons()
 
           # run_verbose rm -rf docs/about
 
+          # if [ -f "docs/faq/_project-content.mdx" ]
+          # then
+          #   run_verbose chmod +w "docs/faq/_project-content.mdx"
+          #   run_verbose mkdir "docs/faq/_project"
+          #   run_verbose mv "docs/faq/_project-content.mdx" "docs/faq/_project/_content.mdx"
+          # fi
+
+          # if [ -f "docs/project/history/_project-content.mdx" ]
+          # then
+          #   run_verbose chmod +w "docs/project/history/_project-content.mdx"
+          #   run_verbose mkdir "docs/project/history/_project"
+          #   run_verbose mv "docs/project/history/_project-content.mdx" "docs/project/history/_project/_content.mdx"
+          # fi
+
+          # if [ -f "docs/user/_project-content.mdx" ]
+          # then
+          #   run_verbose chmod +w "docs/user/_project-content.mdx"
+          #   run_verbose mkdir "docs/user/_project"
+          #   run_verbose mv "docs/user/_project-content.mdx" "docs/user/_project/_content.mdx"
+          # fi
+
+          # if [ -f "docs/maintainer/_content.mdx" ]
+          # then
+          #   run_verbose chmod +w docs/maintainer/_content.mdx
+          #   run_verbose rm docs/maintainer/_content.mdx
+          # fi
+
           # -------------------------------------------------------------------
 
           # npm run deep-clean

@@ -7,13 +7,13 @@ import type * as Preset from '@docusaurus/preset-classic';
 // import logger from '@docusaurus/logger';
 import util from 'node:util';
 {% if packageWebsiteConfig.hasCli == "true" %}
-import cliNavbar from './docusaurus-config-navbar-cli'
+import cliNavbar from './docusaurus-config-navbar-cli';
 {% endif%}{% if packageWebsiteConfig.hasCustomDocsNavbarItem == "true" %}
-import {customDocsNavbarItem} from './navbar-docs-items'
+import {customDocsNavbarItem} from './navbar-docs-items';
 {% endif %}
 
-import {redirects} from './docusaurus-config-redirects'
-import {getCustomFields} from './customFields'
+import {redirects} from './docusaurus-config-redirects';
+import {getCustomFields} from './customFields';
 
 // The node.js modules cannot be used in modules imported in browser code:
 // webpack < 5 used to include polyfills for node.js core modules by default.
@@ -278,31 +278,31 @@ const config: Config = {
             {
               label: 'Getting Started',
               to: '/docs/getting-started'
-            },{% if packageWebsiteConfig.skipInstallCommand != "true" %}
+            },{% if packageWebsiteConfig.skipInstallGuide != "true" %}
             {
-              label: 'Install Guide',
+              label: 'Install Guide{% if packageWebsiteConfig.usePluralGuides == "true" %}s{% endif %}',
               to: '/docs/install'
             },{% endif %}
             {
-              label: 'User\'s Guide',
+              label: 'User\'s Guide{% if packageWebsiteConfig.usePluralGuides == "true" %}s{% endif %}',
               to: '/docs/user'
             },{% if packageWebsiteConfig.skipContributorGuide != "true" %}
             {
-              label: 'Contributor\'s Guide',
+              label: 'Contributor\'s Guide{% if packageWebsiteConfig.usePluralGuides == "true" %}s{% endif %}',
               to: '/docs/developer'
-            },{% endif %}
+            },{% endif %}{% if packageWebsiteConfig.skipMaintainerGuide != "true" %}
             {
-              label: 'Maintainer\'s Guide',
+              label: 'Maintainer\'s Guide{% if packageWebsiteConfig.usePluralGuides == "true" %}s{% endif %}',
               to: '/docs/maintainer'
-            },
+            },{% endif %}
             {
               label: 'Help Centre',
               to: '/docs/support'
-            },
+            },{% if packageWebsiteConfig.skipReleases != "true" %}
             {
               label: 'Releases',
               to: '/docs/releases'
-            },
+            },{% endif %}
             {
               label: 'About',
               to: '/docs/project/about'

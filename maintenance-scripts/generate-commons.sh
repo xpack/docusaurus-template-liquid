@@ -123,6 +123,77 @@ then
   exit 1
 else
 
+  (
+    cd "${website_folder_path}"
+
+    chmod -R +w *
+
+    if [ -f "docs/getting-started/_documentation.mdx" ]
+    then
+      run_verbose mkdir -p "docs/_shared"
+      run_verbose mv "docs/getting-started/_documentation.mdx" "docs/_shared/"
+    fi
+
+    if [ -f "docs/developer/_coverage-exceptions.mdx" ]
+    then
+      run_verbose mkdir -p "docs/developer/_project"
+      run_verbose mv "docs/developer/_coverage-exceptions.mdx" "docs/developer/_style-exceptions.mdx" "docs/developer/_test-results.mdx" "docs/developer/_project"
+    fi
+
+    if [ -f "docs/getting-started/_compatibility.mdx" ]
+    then
+      run_verbose mkdir -p "docs/getting-started/_project"
+      run_verbose mv "docs/getting-started/_compatibility.mdx" "docs/getting-started/_more-credits.mdx" "docs/getting-started/_overview.mdx" "docs/getting-started/_status.mdx" "docs/getting-started/_project"
+    fi
+
+    if [ -f "docs/getting-started/_project/_overview.mdx" ]
+    then
+      run_verbose sed -i.bak -e "s|'\./_common|'../_common|" -e "s|'\.\./_shared|'../../_shared|" "docs/getting-started/_project/_overview.mdx"
+    fi
+
+    if [ -f "docs/install/_troubleshooting-windows.mdx" ]
+    then
+      run_verbose mkdir -p "docs/install/_project"
+      run_verbose mv "docs/install/_troubleshooting-windows.mdx" "docs/install/_project"
+    fi
+
+    if [ -f "docs/install/_custom-install.mdx" ]
+    then
+      run_verbose mkdir -p "docs/install/_project"
+      run_verbose mv "docs/install/_custom-install.mdx" "docs/install/_project"
+    fi
+
+    if [ -f "docs/install/_project/_custom-install.mdx" ]
+    then
+      run_verbose sed -i.bak -e "s|'\./_common|'../_common|" "docs/install/_project/_custom-install.mdx"
+    fi
+
+    if [ -f "docs/maintainer/_more.mdx" ]
+    then
+      run_verbose mkdir -p "docs/maintainer/_project"
+      run_verbose mv "docs/maintainer/_more.mdx" "docs/maintainer/_dependencies-details.mdx" "docs/maintainer/_project"
+    fi
+
+    if [ -f "docs/project/about/_website.mdx" ]
+    then
+      run_verbose mkdir -p "docs/project/about/_project"
+      run_verbose mv "docs/project/about/_website.mdx" "docs/project/about/_project"
+    fi
+
+    if [ -f "docs/project/about/_more-intro.mdx" ]
+    then
+      run_verbose mkdir -p "docs/project/about/_project"
+      run_verbose mv "docs/project/about/_more-intro.mdx" "docs/project/about/_project"
+    fi
+
+    if [ -f "docs/project/about/_project/_website.mdx" ]
+    then
+      run_verbose sed -i.bak -e "s|'\./_common|'../_common|" "docs/project/about/_project/_website.mdx"
+    fi
+
+    find . -name '*.bak' -exec rm -v '{}' ';'
+
+  )
   echo
   echo "Processing template from ${templates_folder_path}/docusaurus..."
 

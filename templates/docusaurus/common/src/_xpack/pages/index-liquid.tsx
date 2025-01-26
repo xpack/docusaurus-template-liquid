@@ -21,9 +21,9 @@ import HeadTitle from '@site/src/components/HeadTitle';
 
 import styles from './index.module.css';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
-{%- if packageConfig.isOrganizationWeb == "true" %}
+{% if packageConfig.isOrganizationWeb == "true" -%}
 import HomepageTools from '@site/src/components/HomepageTools';
-{%- endif %}
+{% endif -%}
 import InstallWithCopy from '@site/src/components/InstallWithCopy';
 import customField from '@site/src/libs/customField';
 
