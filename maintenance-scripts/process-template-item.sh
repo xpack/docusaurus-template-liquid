@@ -253,15 +253,6 @@ then
       "docs/faq/_common/_nixos.mdx" \
       "docs/faq/_more.mdx" \
       "docs/faq/index.mdx" \
-      "docs/install/_automatic-install-quick-test.mdx" \
-      "docs/install/_common/_automatic-install-quick-test.mdx" \
-      "docs/install/_common/_manual-install-quick-test.mdx" \
-      "docs/install/_folders-hierarchies-linux.mdx" \
-      "docs/install/_folders-hierarchies-macos.mdx" \
-      "docs/install/_folders-hierarchies-windows.mdx" \
-      "docs/install/_manual-install-quick-test.mdx" \
-      "docs/install/_miscellaneous.mdx" \
-      "docs/install/_testing.mdx" \
       "docs/maintainer/_check-upstream-release.mdx" \
       "docs/maintainer/_common/_gcc-check-upstream-release.mdx" \
       "docs/maintainer/_common/_arm-toolchain-check-upstream-release.mdx" \
@@ -314,6 +305,8 @@ else
     "docs/developer/_project/_coverage-exceptions.mdx" \
     "docs/developer/_project/_style-exceptions.mdx" \
     "docs/developer/_project/_test-results.mdx" \
+    "docs/developer/_project/_more.mdx" \
+    "docs/developer/_project/_other-repositories.mdx" \
   )
 fi
 
@@ -341,6 +334,38 @@ then
     "docs/install/_common/_install-module.mdx" \
     "docs/install/_project/_content.mdx" \
     "docs/install/_project/_troubleshooting-windows.mdx" \
+    "docs/install/_common/_automatic-install-quick-test.mdx" \
+    "docs/install/_common/_manual-install-quick-test.mdx" \
+    "docs/install/_project/_automatic-install-quick-test.mdx" \
+    "docs/install/_project/_folders-hierarchies-linux.mdx" \
+    "docs/install/_project/_folders-hierarchies-macos.mdx" \
+    "docs/install/_project/_folders-hierarchies-windows.mdx" \
+    "docs/install/_project/_manual-install-quick-test.mdx" \
+    "docs/install/_project/_miscellaneous.mdx" \
+    "docs/install/_project/_testing.mdx" \
+  )
+fi
+
+if [ "${xpack_skip_install_command}" == "true" ]
+then
+  skip_pages_array+=(\
+    "docs/install/_common/_automatic-install-quick-test.mdx" \
+    "docs/install/_common/_manual-install-quick-test.mdx" \
+    "docs/install/_project/_automatic-install-quick-test.mdx" \
+    "docs/install/_project/_manual-install-quick-test.mdx" \
+    "docs/install/_project/_folders-hierarchies-linux.mdx" \
+    "docs/install/_project/_folders-hierarchies-macos.mdx" \
+    "docs/install/_project/_folders-hierarchies-windows.mdx" \
+    "docs/install/_project/_miscellaneous.mdx" \
+    "docs/install/_project/_testing.mdx" \
+    "docs/getting-started"
+  )
+fi
+
+if [ "${xpack_npm_package_is_xpack_binary}" != "true" ]
+then
+  skip_pages_array+=(\
+    "docs/getting-started/_common/_gcc-release-schedule.mdx" \
   )
 fi
 

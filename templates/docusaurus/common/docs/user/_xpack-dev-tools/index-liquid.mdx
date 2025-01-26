@@ -4,7 +4,7 @@
 # Automatically generated from docusaurus-template-liquid/templates/docusaurus.
 
 title: User's Guide{% if packageWebsiteConfig.usePluralGuides == "true" %}s{% endif %}
-description: {% if packageWebsiteConfig.userGuideDescription %}{{packageWebsiteConfig.userGuideDescription}}{% else %}{% if githubProjectOrganization == "xpack" }User information, including how to include it in a project, how to instantiate objects, how to call various functions{% elsif githubProjectOrganization == "xpack-dev-tools" %}User information, including the versioning scheme, usage of shared libraries, and RPATH configuration on GNU/Linux.{% else %}TODO{% endif %}{% endif %}.
+description: {% if packageWebsiteConfig.userGuideDescription %}{{packageWebsiteConfig.userGuideDescription}}{% else %}{% if githubProjectOrganization == "xpack" %}User information, including how to include it in a project, how to instantiate objects, how to call various functions{% elsif githubProjectOrganization == "xpack-dev-tools" %}User information, including the versioning scheme, usage of shared libraries, and RPATH configuration on GNU/Linux.{% else %}TODO{% endif %}{% endif %}.
 keywords:
   - xpack
   - {% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}
@@ -20,13 +20,13 @@ date: 2024-07-21 18:56:00 +0300
 
 {% if packageWebsiteConfig.hasCustomUser == "true" -%}
 
-import CustomUser from './_custom-user.mdx';
+import ProjectContent from './_project/_content.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
 # User's Guide{% if packageWebsiteConfig.usePluralGuides == "true" %}s{% endif %}
 
-<CustomUser />
+<ProjectContent />
 
 {% else -%}
 
@@ -74,5 +74,4 @@ accessors, properties, etc,
 please see the TypeDoc
 [API](/docs/api/) pages.
 
-{% endif -%}
 {% endif -%}

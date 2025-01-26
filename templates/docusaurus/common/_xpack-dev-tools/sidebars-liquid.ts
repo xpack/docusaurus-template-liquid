@@ -67,12 +67,12 @@ const sidebars: SidebarsConfig = {
       id: 'support/index',
       label: 'Help Centre'
     },
-    {% else %}
+    {% else %}{% if packageWebsiteConfig.skipInstallGuide != "true" %}
     {
       type: 'doc',
       id: 'install/index',
       label: 'Install Guide'
-    },{% if packageWebsiteConfig.hasCustomUserSidebar == "true" %}
+    },{% endif %}{% if packageWebsiteConfig.hasCustomUserSidebar == "true" %}
     userSidebarCategory,{% else %}
     {
       type: 'doc',
@@ -93,12 +93,12 @@ const sidebars: SidebarsConfig = {
       type: 'doc',
       id: 'tests/index',
       label: 'Tests results'
-    },{% endif %}{% endif %}
+    },{% endif %}{% endif %}{% if packageWebsiteConfig.skipFaq != "true" %}
     {
       type: 'doc',
       id: 'faq/index',
       label: 'FAQ'
-    },
+    },{% endif %}
     {
       type: 'doc',
       id: 'support/index',
