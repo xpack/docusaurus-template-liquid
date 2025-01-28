@@ -185,8 +185,7 @@ then
   xpacks_folder_path="${xpack_dev_tools_github_folder_path}/xPacks"
   www_folder_path="${xpack_dev_tools_github_folder_path}/www"
 
-  # "${xpack_dev_tools_github_folder_path}/xpack-build-box.git/.git"
-  for file_path in "${xpacks_folder_path}"/*/.git "${www_folder_path}"/*/.git
+  for file_path in "${xpacks_folder_path}"/*/.git "${www_folder_path}"/*/.git "${xpack_dev_tools_github_folder_path}/xpack-build-box.git/.git"
   do
     update_and_publish "${file_path}"
   done
