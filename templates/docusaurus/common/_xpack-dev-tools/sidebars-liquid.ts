@@ -78,12 +78,12 @@ const sidebars: SidebarsConfig = {
       type: 'doc',
       id: 'user/index',
       label: 'User\'s Guide'
-    },{% endif %}{% if packageConfig.isOrganizationWeb != "true" %}
+    },{% endif %}{% if packageWebsiteConfig.skipContributorGuide != "true" %}
     {
       type: 'doc',
       id: 'developer/index',
       label: 'Contributor\'s Guide'
-    },
+    },{% endif %}
     {
       type: 'doc',
       id: 'maintainer/index',
@@ -93,7 +93,7 @@ const sidebars: SidebarsConfig = {
       type: 'doc',
       id: 'tests/index',
       label: 'Tests results'
-    },{% endif %}{% endif %}{% if packageWebsiteConfig.skipFaq != "true" %}
+    },{% endif %}{% if packageWebsiteConfig.skipFaq != "true" %}
     {
       type: 'doc',
       id: 'faq/index',

@@ -7,7 +7,7 @@ title: History
 description: The most important moments since the project was created.
 keywords:
   - xpack
-  - {{packageName}}
+  - {% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}
   - history
 
 date: 2024-10-24 23:58:00 +0300

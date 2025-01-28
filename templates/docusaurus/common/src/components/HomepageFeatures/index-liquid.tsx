@@ -25,7 +25,7 @@ import { FeatureList } from './CustomFeatureList';
 import { FeatureList } from './FeatureList';
 {% endif %}
 
-function Feature({ title, Svg, description }: FeatureItem) {
+function Feature({title, Svg, description}: FeatureItem) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">

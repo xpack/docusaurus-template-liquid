@@ -1,12 +1,18 @@
-{% if releaseSemver != "0.0.0" %}[![GitHub package.json version](https://img.shields.io/github/package-json/v/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/package.json)
+{% if isNpmPublished == "true" -%}
+[![GitHub package.json version](https://img.shields.io/github/package-json/v/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/package.json)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/releases)
-[![npm (scoped)](https://img.shields.io/npm/v/{{packageScopedName}}?color=blue)](https://www.npmjs.com/package/{{packageScopedName}}/){% endif %}
+[![npm (scoped)](https://img.shields.io/npm/v/{{packageScopedName}}?color=blue)](https://www.npmjs.com/package/{{packageScopedName}}/)
+{% endif -%}
 [![license](https://img.shields.io/github/license/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/LICENSE)
-{% if packageConfig.isOrganizationWeb == "true" %}
+
+{% if packageConfig.isOrganizationWeb == "true" -%}
+
 # The {{longXpackName}} web site source
 
 The Docusaurus source code for the {{longXpackName}} web site.
-{% else %}
+
+{% else -%}
+
 # The {{longXpackName}}
 
 {% if isXpackBinary == "true" -%}
@@ -25,22 +31,34 @@ The Docusaurus source code for the {{longXpackName}} web site.
 A standalone{% if names_array.size > 1 %}, cross-platform ({{ names_array | join: ", " }}){% else %} {{ names_array | first }}{% endif %} binary
 distribution of {{packageConfig.longName}},
 intended for reproducible builds.
+
 {% else -%}
+
 {% if packageWebsiteConfig.tagline %}{{packageWebsiteConfig.tagline}}{% else %}{{ packageDescription }}{% endif %}.
-{% endif %}
+
+{% endif -%}
+
 ## Project documentation
 
 For information on how to {% if packageWebsiteConfig.skipInstallCommand != "true" %}install and {% endif %}use this project, please refer to the
 [project web site]({{packageHomepage}}).
-{% endif %}
+
+{% endif -%}
+
 ## Project source
-{% if releaseSemver != "0.0.0" %}
+
+{% if isNpmPublished == "true" -%}
+
 The source code of the current release is available on
 [GitHub tag v{{releaseVersion}} tree](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/tree/v{{releaseVersion}}).
-{% else %}
+
+{% else -%}
+
 The source code is available on
 [GitHub](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/).
-{% endif %}
+
+{% endif -%}
+
 ## License
 
 Unless otherwise stated, the original content is released under the terms of the

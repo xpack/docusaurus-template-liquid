@@ -69,8 +69,8 @@ documentation.
 Before posting any questions or providing feedback,
 check if the subject was not already addressed.
 
-- Check the {% if packageConfig.isOrganizationWeb == "true" %}FAQ{% else %}[FAQ](/docs/faq/){% endif %}
-for similar problems
+{% if packageWebsiteConfig.skipFaq != "true" %}- Check the {% if packageConfig.isOrganizationWeb == "true" %}FAQ{% else %}[FAQ](/docs/faq/){% endif %}
+for similar problems{% endif %}
 - Check the {% if packageConfig.isOrganizationWeb == "true" %}GitHub Discussions{% else %}[GitHub Discussions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/discussions){% endif %} for
 similar topics
 - Check the

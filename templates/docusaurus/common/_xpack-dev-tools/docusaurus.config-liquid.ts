@@ -7,6 +7,14 @@ import type * as Preset from '@docusaurus/preset-classic';
 // import logger from '@docusaurus/logger';
 import util from 'node:util';
 
+{% if packageWebsiteConfig.hasCli == "true" -%}
+import cliNavbar from './docusaurus-config-navbar-cli';
+{% endif -%}
+{% if packageWebsiteConfig.hasCustomDocsNavbarItem == "true" -%}
+import {customDocsNavbarItem} from './navbar-docs-items';
+
+{% endif -%}
+
 import {redirects} from './docusaurus-config-redirects';
 import {getCustomFields} from './customFields';
 
@@ -20,21 +28,23 @@ import {getCustomFields} from './customFields';
 const customFields = getCustomFields();
 console.log('customFields: ' + util.inspect(customFields));
 
+const actualBaseUrl = process.env.DOCUSAURUS_BASEURL ??
+    '{% if packageWebsiteConfig.isWebPreview == "true" %}{{baseUrlPreview}}{% else %}{{baseUrl}}{% endif %}';
+
 // ----------------------------------------------------------------------------
 
 const config: Config = {
-  title: '{{longXpackName}}' +
+  title: '{% if packageWebsiteConfig.title %}{{packageWebsiteConfig.title}}{% else %}{{longXpackName}}{% endif %}' +
     ((process.env.DOCUSAURUS_IS_PREVIEW === 'true') ? ' (preview)' : ''),
-  tagline: '{% if packageWebsiteConfig.docusaurusTagline %}{{packageWebsiteConfig.docusaurusTagline}}{% else %}A binary distribution of {{packageConfig.longName}}{% endif %}',
+  tagline: '{% if packageWebsiteConfig.tagline %}{{packageWebsiteConfig.tagline}}{% elsif isXpackBinary == "true" and packageConfig.longName %}A binary distribution of {{packageConfig.longName}}{% else %}{{packageDescription}}{% endif %}',
   // Explicitly set in headTags.
   // favicon: '/img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://{{githubProjectOrganization}}.github.io',
+  url: 'https://{{githubProjectOrganization}}.github.io/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: process.env.DOCUSAURUS_BASEURL ??
-    '{% if packageWebsiteConfig.docusaurusBaseUrl %}{{packageWebsiteConfig.docusaurusBaseUrl}}{% else %}/{{githubProjectName}}/{% endif %}',
+  baseUrl: actualBaseUrl,
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -132,7 +142,7 @@ const config: Config = {
       attributes: {
         rel: 'icon',
         type: 'image/png',
-        href: '{{baseUrl}}favicons/favicon-48x48.png',
+        href: actualBaseUrl + 'favicons/favicon-48x48.png',
         sizes: '48x48'
       }
     },
@@ -141,14 +151,14 @@ const config: Config = {
       attributes: {
         rel: 'icon',
         type: 'image/svg+xml',
-        href: '{{baseUrl}}favicons/favicon.svg'
+        href: actualBaseUrl + 'favicons/favicon.svg'
       }
     },
     {
       tagName: 'link',
       attributes: {
         rel: 'shortcut icon',
-        href: '{{baseUrl}}favicons/favicon.ico'
+        href: actualBaseUrl + 'favicons/favicon.ico'
       }
     },
     {
@@ -163,7 +173,7 @@ const config: Config = {
       tagName: 'link',
       attributes: {
         rel: 'manifest',
-        href: '{{baseUrl}}favicons/site.webmanifest'
+        href: actualBaseUrl + 'favicons/site.webmanifest'
       }
     }
   ],
@@ -303,7 +313,7 @@ const config: Config = {
               href: 'https://github.com/xpack/',
             },
           ]
-        },{% if releaseSemver != "0.0.0" %}
+        },{% if isNpmPublished == "true" %}
         {
           label: `${customFields.xpackVersion}`,
           position: 'right',

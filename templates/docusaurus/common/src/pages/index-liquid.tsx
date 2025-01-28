@@ -21,27 +21,27 @@ import HeadTitle from '@site/src/components/HeadTitle';
 
 import styles from './index.module.css';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
-{% if packageConfig.isOrganizationWeb == "true" -%}
+{% if packageWebsiteConfig.hasHomepageTools == "true" -%}
 import HomepageTools from '@site/src/components/HomepageTools';
 {% endif -%}
+{% if packageWebsiteConfig.skipInstallCommand != "true" -%}
 import InstallWithCopy from '@site/src/components/InstallWithCopy';
-import customField from '@site/src/libs/customField';
+
+{% endif -%}
 
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <HeadTitle title="Welcome to {{packageWebsiteConfig.title}}!" />
+      <HeadTitle title="Welcome to {% if packageWebsiteConfig.title %}{{packageWebsiteConfig.title}}{% else %}the {{longXpackName}}{% endif %}!" />
       <div className="container">
-        <Heading as="h1" className="hero__title">
-          {siteConfig.title}
-        </Heading>
+        <Heading as="h1" className="hero__title">{siteConfig.title}</Heading>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
-{% if packageWebsiteConfig.skipInstallCommand != "true" %}
+{%- if packageWebsiteConfig.skipInstallCommand != "true" %}
         <div className={styles.installWithCopy}>
-          <InstallWithCopy>npm install {% if packageWebsiteConfig.isInstallGlobally == "true" %}--location=global {% endif %}{{packageScopedName}}@{{releaseVersion}}</InstallWithCopy>
+          <InstallWithCopy>{% if isXpackBinary == "true" %}xpm{% else %}npm{% endif %} install {% if packageWebsiteConfig.isInstallGlobally == "true" %}--location=global {% endif %}{{packageScopedName}}@{{releaseVersion}}{% if isXpackBinary == "true" %} --verbose{% endif %}</InstallWithCopy>
         </div>
-{% endif %}
+{%- endif %}
       </div>
     </header>
   );

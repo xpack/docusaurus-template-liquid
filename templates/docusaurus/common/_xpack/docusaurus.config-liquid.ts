@@ -6,11 +6,14 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 // import logger from '@docusaurus/logger';
 import util from 'node:util';
-{% if packageWebsiteConfig.hasCli == "true" %}
+
+{% if packageWebsiteConfig.hasCli == "true" -%}
 import cliNavbar from './docusaurus-config-navbar-cli';
-{% endif%}{% if packageWebsiteConfig.hasCustomDocsNavbarItem == "true" %}
+{% endif -%}
+{% if packageWebsiteConfig.hasCustomDocsNavbarItem == "true" -%}
 import {customDocsNavbarItem} from './navbar-docs-items';
-{% endif %}
+
+{% endif -%}
 
 import {redirects} from './docusaurus-config-redirects';
 import {getCustomFields} from './customFields';
@@ -28,22 +31,23 @@ console.log('customFields: ' + util.inspect(customFields));
 // ----------------------------------------------------------------------------
 
 const config: Config = {
-  title: '{{ packageWebsiteConfig.title }}' +
+  title: '{% if packageWebsiteConfig.title %}{{packageWebsiteConfig.title}}{% else %}{{longXpackName}}{% endif %}' +
     ((process.env.DOCUSAURUS_IS_PREVIEW === 'true') ? ' (preview)' : ''),
-  tagline: '{% if packageWebsiteConfig.tagline %}{{packageWebsiteConfig.tagline}}{% else %}{{ packageDescription }}{% endif %}',
-  favicon: 'img/favicon.ico',
+  tagline: '{% if packageWebsiteConfig.tagline %}{{packageWebsiteConfig.tagline}}{% elsif isXpackBinary == "true" and packageConfig.longName %}A binary distribution of {{packageConfig.longName}}{% else %}{{packageDescription}}{% endif %}',
+  // Explicitly set in headTags.
+  // favicon: '/img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://{{ githubProjectOrganization }}.github.io/',
+  url: 'https://{{githubProjectOrganization}}.github.io/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: process.env.DOCUSAURUS_BASEURL ??
-    '{% if packageWebsiteConfig.isWebPreview == "true" %}{{ baseUrlPreview }}{% else %}{{ baseUrl }}{% endif %}',
+    '{% if packageWebsiteConfig.isWebPreview == "true" %}{{baseUrlPreview}}{% else %}{{baseUrl}}{% endif %}',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: '{{ githubProjectOrganization }}', // Usually your GitHub org/user name.
-  projectName: '{{ githubProjectName }}', // Usually your repo name.
+  organizationName: '{{githubProjectOrganization}}', // Usually your GitHub org/user name.
+  projectName: '{{githubProjectName}}', // Usually your repo name.
 
   onBrokenAnchors: 'throw',
   onBrokenLinks: 'throw',
@@ -86,7 +90,7 @@ const config: Config = {
         },
         // Please change this to your repo.
         // Remove this to remove the "edit this page" links.
-        editUrl: 'https://github.com/{{ githubProjectOrganization }}/{{ githubProjectName }}/edit/master/website/',
+        editUrl: 'https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/edit/master/website/',
         // Useful options to enforce blogging best practices
         onInlineTags: 'warn',
         onInlineAuthors: 'warn',
@@ -249,7 +253,7 @@ const config: Config = {
     metadata: [
       {
         name: 'keywords',
-        content: '{{ packageWebsiteConfig.metadataKeywords }}'
+        content: '{{packageWebsiteConfig.metadataKeywords}}'
       }
     ],
     navbar: {
@@ -336,20 +340,20 @@ const config: Config = {
           ]
         },
         {
-          href: 'https://github.com/{{ githubProjectOrganization }}/{{ githubProjectName }}/',
+          href: 'https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/',
           position: 'right',
           className: 'header-github-link',
           'aria-label': 'GitHub repository',
         },
         {
           type: 'dropdown',
-          href: 'https://github.com/{{ githubProjectOrganization }}/{{ githubProjectName }}/',
+          href: 'https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/',
           position: 'right',
           label: 'GitHub',
           items: [
             {
-              label: `{{ githubProjectName }} project`,
-              href: `https://github.com/{{ githubProjectOrganization }}/{{ githubProjectName }}/`,
+              label: `{{githubProjectName}} project`,
+              href: `https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/`,
             },
             {
               label: 'xpack org',
@@ -360,11 +364,11 @@ const config: Config = {
               href: 'https://github.com/xpack-dev-tools/',
             },
           ]
-        },{% if releaseSemver != "0.0.0" %}
+        },{% if isNpmPublished == "true" %}
         {
           label: `${customFields.releaseVersion}`,
           position: 'right',
-          href: `https://www.npmjs.com/package/{{ packageScopedName }}/v/${customFields.releaseVersion}`,
+          href: `https://www.npmjs.com/package/{{packageScopedName}}/v/${customFields.releaseVersion}`,
         },{% endif %}
       ],
     },
@@ -405,7 +409,7 @@ const config: Config = {
           items: [
             {
               label: 'GitHub Discussions',
-              href: 'https://github.com/{{ githubProjectOrganization }}/{{ githubProjectName }}/discussions',
+              href: 'https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/discussions',
             },
             {
               label: 'Stack Overflow',
@@ -429,8 +433,8 @@ const config: Config = {
               href: 'https://www.paypal.com/donate/?hosted_button_id=5MFRG9ZRBETQ8',
             },
             {
-              label: 'GitHub {{ githubProjectName }} project',
-              href: 'https://github.com/{{ githubProjectOrganization }}/{{ githubProjectName }}/',
+              label: 'GitHub {{githubProjectName}} project',
+              href: 'https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/',
             },
             {
               label: 'GitHub xpack org',
