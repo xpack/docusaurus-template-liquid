@@ -102,6 +102,11 @@ export website_folder_path
 
 # -----------------------------------------------------------------------------
 
+# Used to enforce an exit code of 255, required by xargs.
+trap 'trap_handler "${script_name}" $LINENO $?; return 255' ERR
+
+# -----------------------------------------------------------------------------
+
 # Process package.json files and leave results in environment variables.
 compute_context
 
@@ -201,6 +206,7 @@ else
 
       relocate "docs/maintainer/_more.mdx"
       relocate "docs/maintainer/_dependencies-details.mdx"
+      relocate "docs/maintainer/_custom-maintainer.mdx" "docs/maintainer/_project/_content.mdx"
 
       relocate "docs/maintainer/_check-upstream-release.mdx"
       relocate "docs/maintainer/_development-durations.mdx" "docs/_shared/_development-durations.mdx"
