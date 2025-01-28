@@ -173,19 +173,6 @@ then
       "docs/install/index-liquid.mdx" \
       "docs/maintainer/_more.mdx" \
       "docs/releases/index.mdx" \
-      "blog/_common/_download-analytics.mdx" \
-      "blog/_common/_prerequisites.mdx"
-    )
-  fi
-
-  if [ "${xpack_skip_install_command}" == "true" ]
-  then
-    skip_pages_array+=(\
-      "docs/install/_common/_cli-liquid.mdx" \
-      "docs/install/_common/_no-administrative-rights.mdx" \
-      "docs/install/_common/_prerequisites.mdx" \
-      "docs/install/_troubleshooting-windows.mdx" \
-      "docs/install/index.mdx" \
     )
   fi
 
@@ -228,13 +215,6 @@ then
       "docs/developer/_style-exceptions.mdx" \
       "docs/developer/_test-results.mdx" \
       "docs/developer/index.mdx" \
-    )
-  fi
-
-  if [ "${xpack_has_custom_homepage_features}" == "true" ]
-  then
-    skip_pages_array+=(\
-      "src/components/HomepageFeatures/FeatureList.tsx" \
     )
   fi
 
@@ -310,6 +290,18 @@ else
   )
 fi
 
+if [ "${xpack_skip_contributor_guide}" == "true" ]
+then
+  skip_pages_array+=(\
+    "docs/developer/index.mdx" \
+    "docs/developer/_common/_content.mdx" \
+    "docs/developer/_common/_platform-docker-section.mdx" \
+    "docs/developer/_common/_platform-native-section.mdx" \
+    "docs/developer/_project/_more.mdx" \
+    "docs/developer/_project/_other-repositories.mdx" \
+  )
+fi
+
 if [ "${xpack_has_custom_getting_started}" != "true" ]
 then
   skip_pages_array+=(\
@@ -332,10 +324,10 @@ then
     "docs/install/_common/_content.mdx" \
     "docs/install/_common/_prerequisites-module.mdx" \
     "docs/install/_common/_install-module.mdx" \
-    "docs/install/_project/_content.mdx" \
-    "docs/install/_project/_troubleshooting-windows.mdx" \
     "docs/install/_common/_automatic-install-quick-test.mdx" \
     "docs/install/_common/_manual-install-quick-test.mdx" \
+    "docs/install/_project/_content.mdx" \
+    "docs/install/_project/_troubleshooting-windows.mdx" \
     "docs/install/_project/_automatic-install-quick-test.mdx" \
     "docs/install/_project/_folders-hierarchies-linux.mdx" \
     "docs/install/_project/_folders-hierarchies-macos.mdx" \
@@ -351,6 +343,9 @@ then
   skip_pages_array+=(\
     "docs/install/_common/_automatic-install-quick-test.mdx" \
     "docs/install/_common/_manual-install-quick-test.mdx" \
+    "docs/install/_common/_cli-liquid.mdx" \
+    "docs/install/_common/_no-administrative-rights.mdx" \
+    "docs/install/_common/_prerequisites.mdx" \
     "docs/install/_project/_automatic-install-quick-test.mdx" \
     "docs/install/_project/_manual-install-quick-test.mdx" \
     "docs/install/_project/_folders-hierarchies-linux.mdx" \
@@ -358,14 +353,8 @@ then
     "docs/install/_project/_folders-hierarchies-windows.mdx" \
     "docs/install/_project/_miscellaneous.mdx" \
     "docs/install/_project/_testing.mdx" \
-    "docs/getting-started"
-  )
-fi
-
-if [ "${xpack_website_config_is_gcc_toolchain}" != "true" ]
-then
-  skip_pages_array+=(\
-    "docs/_common/_gcc-release-schedule.mdx" \
+    "docs/install/_project/_troubleshooting-windows.mdx" \
+    "docs/getting-started" \
   )
 fi
 
@@ -389,8 +378,20 @@ then
 else
   skip_pages_array+=(\
     "docs/maintainer/_common/_content.mdx" \
+    "docs/maintainer/_common/_gcc-check-upstream-release.mdx" \
+    "docs/maintainer/_common/_platform-docker-build.mdx" \
+    "docs/maintainer/_common/_platform-native-build.mdx" \
+    "docs/maintainer/_project/_check-upstream-release.mdx" \
+    "docs/maintainer/_project/_custom.mdx" \
     "docs/maintainer/_project/_dependencies-detail.mdx" \
+    "docs/maintainer/_project/_first-development-run.mdx" \
+    "docs/maintainer/_project/_first-production-run.mdx" \
     "docs/maintainer/_project/_more.mdx" \
+    "docs/maintainer/_project/_more-repos.mdx" \
+    "docs/maintainer/_project/_more-tests.mdx" \
+    "docs/maintainer/_project/_patches.mdx" \
+    "docs/maintainer/_project/_share-custom.mdx" \
+    "docs/maintainer/_project/_update-version-specific.mdx" \
   )
 fi
 
@@ -412,11 +413,11 @@ then
 else
   skip_pages_array+=(\
     "docs/user/_project/_content.mdx" \
+    "docs/user/_project/_more.mdx" \
     "docs/user/_project/_use-in-testing.mdx" \
     "docs/user/_project/_versioning.mdx" \
     "docs/user/_common/_arm-toolchain-versioning.mdx" \
     "docs/user/_common/_libraries-and-rpath.mdx" \
-    "docs/user/_common/_versioning.mdx" \
   )
 fi
 
@@ -424,6 +425,8 @@ if [ "${xpack_skip_releases}" == "true" ]
 then
   skip_pages_array+=(\
     "docs/releases/index.mdx" \
+    "blog/_common/_download-analytics.mdx" \
+    "blog/_common/_prerequisites.mdx" \
   )
 fi
 
@@ -432,8 +435,53 @@ then
   skip_pages_array+=(\
     "docs/faq/index.mdx" \
     "docs/faq/_project/_content.mdx" \
+    "docs/faq/_common/_flatpack-snap.mdx" \
+    "docs/faq/_common/_nixos.mdx" \
   )
 fi
+
+if [ "${xpack_website_config_is_gcc_toolchain}" != "true" ]
+then
+  skip_pages_array+=(\
+    "docs/_common/_gcc-release-schedule.mdx" \
+  )
+fi
+
+if [ "${xpack_npm_package_is_xpack_binary}" != "true" ]
+then
+  skip_pages_array+=(\
+    "blog/_common/_deprecation-notices-glib-2.27.mdx" \
+    "blog/_common/_prerequisites-glib-2.27.mdx" \
+    "docs/_shared/_development-durations.mdx" \
+    "docs/_shared/_github-actions-durations.mdx" \
+    "docs/_shared/_release-schedule.mdx" \
+    "docs/faq/_common/_flatpack-snap.mdx" \
+    "docs/faq/_common/_nixos.mdx" \
+    "docs/user/_common/_versioning.mdx" \
+  )
+fi
+
+if [ "${xpack_has_custom_homepage_features}" == "true" ]
+then
+  skip_pages_array+=(\
+    "src/components/HomepageFeatures/FeatureList.tsx" \
+  )
+fi
+
+if [ "${xpack_has_homepage_tools}" != "true" ]
+then
+  skip_pages_array+=(\
+    "src/components/HomepageTools/styles.module.css" \
+  )
+fi
+
+if [ "${xpack_is_npm_published}" != "true" ]
+then
+  skip_pages_array+=(\
+    "blog/_common/_download-analytics.mdx" \
+  )
+fi
+
 
 # -----------------------------------------------------------------------------
 
