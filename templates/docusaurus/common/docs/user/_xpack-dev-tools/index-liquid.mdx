@@ -4,13 +4,13 @@
 # Automatically generated from docusaurus-template-liquid/templates/docusaurus.
 
 title: User's Guide{% if packageWebsiteConfig.usePluralGuides == "true" %}s{% endif %}
-{% if githubProjectOrganization == "xpack" -%}
+{%- if githubProjectOrganization == "xpack" %}
 description: {% if packageWebsiteConfig.userGuideDescription %}{{packageWebsiteConfig.userGuideDescription}}{% else %}User information, including how to integrate it in a project, how to instantiate objects, how to call various functions.{% endif %}
-{% elsif githubProjectOrganization == "xpack-dev-tools" -%}
+{%- elsif githubProjectOrganization == "xpack-dev-tools" %}
 description: {% if packageWebsiteConfig.userGuideDescription %}{{packageWebsiteConfig.userGuideDescription}}{% else %}User information, including the versioning scheme, usage of shared libraries, and RPATH configuration on GNU/Linux.{% endif %}
-{% else -%}
+{%- else %}
 description: TODO
-{% endif -%}
+{%- endif %}
 keywords:
   - xpack
   - {% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}
@@ -24,7 +24,7 @@ date: 2024-07-21 18:56:00 +0300
 
 ---
 
-{% if packageWebsiteConfig.hasCustomUser == "true" -%}
+{%- if packageWebsiteConfig.hasCustomUser == "true" %}
 
 import ProjectContent from './_project/_content.mdx';
 
@@ -34,15 +34,15 @@ import ProjectContent from './_project/_content.mdx';
 
 <ProjectContent />
 
-{% else -%}
+{%- else %}
 
-{% if isXpackBinary == "true" -%}
+{%- if isXpackBinary == "true" %}
 
 import Versioning from './_project/_versioning.mdx';
 import LibrariesAndRpath from './_common/_libraries-and-rpath.mdx';
 import UseInTesting from './_project/_use-in-testing.mdx';
 
-{% endif -%}
+{%- endif %}
 
 import More from './_project/_more.mdx';
 
@@ -50,22 +50,22 @@ import More from './_project/_more.mdx';
 
 # How to use {% if packageConfig.shortName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.shortName}}{% else %}the {{longXpackName}}{% endif %}
 
-{% if isXpackBinary == "true" or packageWebsiteConfig.hasCli == "true" -%}
+{%- if isXpackBinary == "true" or packageWebsiteConfig.hasCli == "true" %}
 
 This section is intended for those who plan to integrate
 {% if packageConfig.shortName and packageWebsiteConfig.preferShortName == "true" %}**{{packageConfig.shortName}}**{% else %}the **{{longXpackName}}**{% endif %} into their workflows.
 
-{% else -%}
+{%- else %}
 
 This section is intended for those who plan to use this
 module in their
 own projects.
 
-{% endif -%}
+{%- endif %}
 
 <More />
 
-{% if isXpackBinary == "true" -%}
+{%- if isXpackBinary == "true" %}
 
 <Versioning/>
 
@@ -73,11 +73,11 @@ own projects.
 
 <UseInTesting/>
 
-{% endif -%}
+{%- endif %}
 
-{% endif -%}
+{%- endif %}
 
-{% if packageWebsiteConfig.hasApi == "true" -%}
+{%- if packageWebsiteConfig.hasApi == "true" %}
 
 ### Reference
 
@@ -86,4 +86,4 @@ accessors, properties, etc,
 please see the TypeDoc
 [API](/docs/api/) pages.
 
-{% endif -%}
+{%- endif %}

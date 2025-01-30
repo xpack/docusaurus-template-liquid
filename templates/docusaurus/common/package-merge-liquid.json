@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "generate-website-commons": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-commons.sh --xpack-dev-tools",
+    "generate-website-commons": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-commons.sh --{{githubProjectOrganization}}",
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
     "build": "docusaurus build",
@@ -20,7 +20,10 @@
     "npm-install": "npm install",
     "npm-link-helpers": "npm link @xpack/docusaurus-template-liquid @xpack/npm-packages-helper",
     "npm-ci": "npm ci",
-    "deep-clean": "del-cli .docusaurus build node_modules package-lock.json"
+    "deep-clean": "del-cli .docusaurus build node_modules package-lock.json",
+    "import-website-releases": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/website-import-releases.sh",
+    "generate-website-blog-post": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-blog-post.sh",
+    "generate-dependencies-details": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-dependencies-details.sh"
   },
   "dependencies": {
     "@docusaurus/core": "3.6.3",
@@ -35,14 +38,26 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },
+  "$devDependenciesUrls": [
+    "https://www.npmjs.com/package/docusaurus-plugin-typedoc",
+    "https://www.npmjs.com/package/liquidjs",
+    "https://www.npmjs.com/package/typedoc",
+    "https://www.npmjs.com/package/typescript"
+  ],
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.6.3",
     "@docusaurus/tsconfig": "3.6.3",
     "@docusaurus/types": "3.6.3",
     "del-cli": "^6.0.0",
+{%- if isTypeScript == "true" %}
+    "docusaurus-plugin-typedoc": "^1.2.1",
+{%- endif %}
     "json": "^11.0.0",
     "liquidjs": "^10.20.1",
-    "typescript": "~5.2.2"
+{%- if isTypeScript == "true" %}
+    "typedoc": "^0.27.6",
+{%- endif %}
+    "typescript": "~5.6.3"
   },
   "$devDependenciesUrls": [
     "https://www.npmjs.com/package/del-cli",

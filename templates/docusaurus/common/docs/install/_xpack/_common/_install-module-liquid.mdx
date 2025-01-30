@@ -28,12 +28,12 @@ To install a **specific version**, mention it explicitly:
 `npm install {{packageScopedName}}@{{releaseVersion}}{% if packageWebsiteConfig.hasCli == "true" %} --save-dev{% endif %}
 `} </CodeBlock>
 
-{% if packageWebsiteConfig.hasCli != "true" -%}
+{%- if packageWebsiteConfig.hasCli != "true" %}
 
 The package does not provide any executables, and generally there are **no
 reasons to install it globally**.
 
-{% else -%}
+{%- else %}
 
 The package does provides executables, and can also
 be installed globally.
@@ -51,7 +51,7 @@ To install a **specific version**, mention it explicitly:
 `npm install --location=global {{packageScopedName}}@{{releaseVersion}}
 `} </CodeBlock>
 
-{% endif -%}
+{%- endif %}
 
 ## Uninstall
 
@@ -62,7 +62,7 @@ from the project and the dependency removed from `package.json` with:
 npm uninstall {{packageScopedName}}
 ```
 
-{% if packageWebsiteConfig.hasCli == "true" -%}
+{%- if packageWebsiteConfig.hasCli == "true" %}
 
 If installed globally, it can be uninstalled with:
 
@@ -70,4 +70,4 @@ If installed globally, it can be uninstalled with:
 npm uninstall --location=global {{packageScopedName}}
 ```
 
-{% endif -%}
+{%- endif %}

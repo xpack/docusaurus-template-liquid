@@ -15,21 +15,21 @@ date: 2024-10-24 18:58:00 +0300
 
 ---
 
-{% if packageWebsiteConfig.hasCustomGettingStarted == "true" -%}
+{%- if packageWebsiteConfig.hasCustomGettingStarted == "true" %}
 
 import ProjectContent from './_project/_content.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
-{% if packageWebsiteConfig.customGettingStartedTitle -%}
+{%- if packageWebsiteConfig.customGettingStartedTitle %}
 
 # {{packageWebsiteConfig.customGettingStartedTitle}}
 
-{% endif -%}
+{%- endif %}
 
 <ProjectContent />
 
-{% else -%}
+{%- else %}
 
 import Link from '@docusaurus/Link';
 
@@ -57,4 +57,4 @@ import Content from './_common/_content.mdx';
 
 <EnjoyedUsing />
 
-{% endif -%}
+{%- endif %}

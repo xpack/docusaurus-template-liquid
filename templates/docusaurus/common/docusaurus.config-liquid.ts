@@ -7,13 +7,13 @@ import type * as Preset from '@docusaurus/preset-classic';
 // import logger from '@docusaurus/logger';
 import util from 'node:util';
 
-{% if packageWebsiteConfig.hasCli == "true" -%}
-import cliNavbar from './docusaurus-config-navbar-cli';
-{% endif -%}
-{% if packageWebsiteConfig.hasCustomDocsNavbarItem == "true" -%}
-import {customDocsNavbarItem} from './navbar-docs-items';
+{%- if packageWebsiteConfig.hasCli == "true" %}
 
-{% endif -%}
+import cliNavbar from './docusaurus-config-navbar-cli';
+{%- endif %}
+{%- if packageWebsiteConfig.hasCustomDocsNavbarItem == "true" %}
+import {customDocsNavbarItem} from './navbar-docs-items';
+{%- endif %}
 
 import {redirects} from './docusaurus-config-redirects';
 import {getCustomFields} from './customFields';
@@ -28,12 +28,16 @@ import {getCustomFields} from './customFields';
 const customFields = getCustomFields();
 console.log('customFields: ' + util.inspect(customFields));
 
+const actualBaseUrl = process.env.DOCUSAURUS_BASEURL ??
+    '{% if packageConfig.isWebPreview == "true" %}{{baseUrlPreview}}{% else %}{{baseUrl}}{% endif %}';
+
 // ----------------------------------------------------------------------------
 
 const config: Config = {
   title: '{% if packageWebsiteConfig.title %}{{packageWebsiteConfig.title}}{% else %}{{longXpackName}}{% endif %}' +
     ((process.env.DOCUSAURUS_IS_PREVIEW === 'true') ? ' (preview)' : ''),
   tagline: '{% if packageWebsiteConfig.tagline %}{{packageWebsiteConfig.tagline}}{% elsif isXpackBinary == "true" and packageConfig.longName %}A binary distribution of {{packageConfig.longName}}{% else %}{{packageDescription}}{% endif %}',
+
   // Explicitly set in headTags.
   // favicon: '/img/favicon.ico',
 
@@ -41,8 +45,7 @@ const config: Config = {
   url: 'https://{{githubProjectOrganization}}.github.io/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: process.env.DOCUSAURUS_BASEURL ??
-    '{% if packageWebsiteConfig.isWebPreview == "true" %}{{baseUrlPreview}}{% else %}{{baseUrl}}{% endif %}',
+  baseUrl: actualBaseUrl,
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -74,7 +77,7 @@ const config: Config = {
         sidebarPath: './sidebars.ts',
         // Please change this to your repo.
         // Remove this to remove the "edit this page" links.
-        editUrl: 'https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/edit/master/website/',
+        editUrl: 'https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/edit/{{branchWebsite}}/website/',
         // showLastUpdateAuthor: true,
         showLastUpdateTime: true,
       },
@@ -84,13 +87,14 @@ const config: Config = {
       '@docusaurus/plugin-content-blog',
       {
         showReadingTime: true,
+        blogSidebarCount: 8,
         feedOptions: {
           type: ['rss', 'atom'],
           xslt: true,
         },
         // Please change this to your repo.
         // Remove this to remove the "edit this page" links.
-        editUrl: 'https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/edit/master/website/',
+        editUrl: 'https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/edit/{{branchWebsite}}/website/',
         // Useful options to enforce blogging best practices
         onInlineTags: 'warn',
         onInlineAuthors: 'warn',
@@ -115,7 +119,7 @@ const config: Config = {
       // https://tagassistant.google.com
       '@docusaurus/plugin-google-gtag',
       {
-        trackingID: 'G-8WX9T80JEK',
+        trackingID: '{% if githubProjectOrganization == "xpack" %}G-8WX9T80JEK{% elsif githubProjectOrganization == "xpack-dev-tools" %}G-7QE5W7V05S{% endif %}',
         anonymizeIP: false,
       }
     ],
@@ -123,10 +127,14 @@ const config: Config = {
       // https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-sitemap
       '@docusaurus/plugin-sitemap',
       {
-        // https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-sitemap
+        lastmod: 'date',
         changefreq: 'weekly',
         priority: 0.5,
-        // ignorePatterns: ['/tags/**'],
+        ignorePatterns: [
+          actualBaseUrl + 'blog/archive/**',
+          actualBaseUrl + 'blog/authors/**',
+          actualBaseUrl + 'blog/tags/**'
+        ],
         filename: 'sitemap.xml',
       }
     ],
@@ -139,7 +147,8 @@ const config: Config = {
         steps: 2, // the max number of images generated between min and max (inclusive)
         disableInDev: false,
       },
-    ],{% if packageWebsiteConfig.hasApi == "true" %}
+    ],
+{%- if packageWebsiteConfig.hasApi == "true" %}
     [
       'docusaurus-plugin-typedoc',
       {
@@ -179,7 +188,8 @@ const config: Config = {
         typeDeclarationFormat: "table",
         useCodeBlocks: false, // Nice, but it might be mistaken for examples.
       }
-    ],{% endif %}
+    ],
+{%- endif %}
 
     // Local plugins.
     './src/plugins/SelectReleasesPlugin',
@@ -193,6 +203,7 @@ const config: Config = {
       }
     ],
     [
+      // Explicitly required when not using `preset-classic`.
       // https://docusaurus.io/docs/search#using-algolia-docsearch
       '@docusaurus/theme-search-algolia',
       {
@@ -207,7 +218,7 @@ const config: Config = {
       attributes: {
         rel: 'icon',
         type: 'image/png',
-        href: '{{baseUrl}}favicons/favicon-48x48.png',
+        href: actualBaseUrl + 'favicons/favicon-48x48.png',
         sizes: '48x48'
       }
     },
@@ -216,14 +227,14 @@ const config: Config = {
       attributes: {
         rel: 'icon',
         type: 'image/svg+xml',
-        href: '{{baseUrl}}favicons/favicon.svg'
+        href: actualBaseUrl + 'favicons/favicon.svg'
       }
     },
     {
       tagName: 'link',
       attributes: {
         rel: 'shortcut icon',
-        href: '{{baseUrl}}favicons/favicon.ico'
+        href: actualBaseUrl + 'favicons/favicon.ico'
       }
     },
     {
@@ -238,14 +249,12 @@ const config: Config = {
       tagName: 'link',
       attributes: {
         rel: 'manifest',
-        href: '{{baseUrl}}favicons/site.webmanifest'
+        href: actualBaseUrl + 'favicons/site.webmanifest'
       }
     }
   ],
 
-  // No longer needed.
-  // themes: [ '@docusaurus/theme-search-algolia' ],
-
+  // https://docusaurus.io/docs/seo
   themeConfig: {
     // The project's social card, og:image, twitter:image, 1200x630
     image: 'img/sunrise-og-image.jpg',
@@ -253,16 +262,22 @@ const config: Config = {
     metadata: [
       {
         name: 'keywords',
+{%- if packageWebsiteConfig.metadataKeywords %}
         content: '{{packageWebsiteConfig.metadataKeywords}}'
+{%- elsif githubProjectOrganization == "xpack-dev-tools" %}
+        content: 'xpack, binary, development, tools, reproducibility, {% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}'
+{%- else %}
+        content: 'xpack, {% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}'
+{%- endif %}
       }
     ],
     navbar: {
-      title: {% if githubProjectOrganization == "xpack" %}'The xPack Project'{% elsif githubProjectOrganization == "xpack-dev-tools" %}'xPack Binary Tools'{% else %}???{% endif %},
+      title: {% if githubProjectOrganization == "xpack" %}'The xPack Project'{% elsif githubProjectOrganization == "xpack-dev-tools" %}'The xPack Binary Tools'{% else %}???{% endif %},
 
       logo: {
         alt: 'xPack Logo',
         src: 'img/components-256.png',
-        href: 'https://{{githubProjectOrganization}}.github.io/',
+        href: 'https://{{githubProjectOrganization}}.github.io/'
       },
       items: [
         {
@@ -270,9 +285,10 @@ const config: Config = {
           label: {% if packageConfig.isOrganizationWeb == "true" %}'{{githubProjectOrganization}}'{% else %}{% if packageConfig.shortName %}'{{packageConfig.shortName}}'{% else %}'{{packageName}}'{% endif %}{% endif %},
           className: 'header-home-link',
           position: 'left'
-        },{% if packageWebsiteConfig.hasCustomDocsNavbarItem == "true" %}
+        },
+{%- if packageWebsiteConfig.hasCustomDocsNavbarItem == "true" %}
         customDocsNavbarItem,
-        {% else %}
+{%- else %}
         {
           type: 'dropdown',
           label: 'Documentation',
@@ -282,43 +298,70 @@ const config: Config = {
             {
               label: 'Getting Started',
               to: '/docs/getting-started'
-            },{% if packageWebsiteConfig.skipInstallGuide != "true" %}
+            },
+{%- if packageWebsiteConfig.skipInstallGuide != "true" %}
             {
               label: 'Install Guide{% if packageWebsiteConfig.usePluralGuides == "true" %}s{% endif %}',
               to: '/docs/install'
-            },{% endif %}
+            },
+{%- endif %}
             {
               label: 'User\'s Guide{% if packageWebsiteConfig.usePluralGuides == "true" %}s{% endif %}',
               to: '/docs/user'
-            },{% if packageWebsiteConfig.skipContributorGuide != "true" %}
+            },
+{%- if packageWebsiteConfig.skipContributorGuide != "true" %}
             {
               label: 'Contributor\'s Guide{% if packageWebsiteConfig.usePluralGuides == "true" %}s{% endif %}',
               to: '/docs/developer'
-            },{% endif %}{% if packageWebsiteConfig.skipMaintainerGuide != "true" %}
+            },
+{%- endif %}
+{%- if packageWebsiteConfig.skipMaintainerGuide != "true" %}
             {
               label: 'Maintainer\'s Guide{% if packageWebsiteConfig.usePluralGuides == "true" %}s{% endif %}',
               to: '/docs/maintainer'
-            },{% endif %}
+            },
+{%- endif %}
+{%- if packageWebsiteConfig.skipFaq != "true" %}
+            {
+              label: 'FAQ',
+              to: '/docs/faq'
+            },
+{%- endif %}
             {
               label: 'Help Centre',
               to: '/docs/support'
-            },{% if packageWebsiteConfig.skipReleases != "true" %}
+            },
+{%- if packageWebsiteConfig.skipReleases != "true" %}
             {
               label: 'Releases',
               to: '/docs/releases'
-            },{% endif %}
+            },
+{%- endif %}
             {
               label: 'About',
               to: '/docs/project/about'
-            }
+            },
           ],
-        },{% endif %}{% if packageWebsiteConfig.hasCli == "true" %}
-        cliNavbar,{% endif %}{% if packageWebsiteConfig.hasApi == "true" %}
+        },
+{%- endif %}
+{%- if packageWebsiteConfig.hasCli == "true" %}
+        cliNavbar,
+{%- endif %}
+{%- if packageWebsiteConfig.hasApi == "true" %}
         {
           to: '/docs/api',
           label: 'API',
           position: 'left',
-        },{% endif %}
+        },
+{%- endif %}
+{%- if packageWebsiteConfig.hasToolsSidebar == "true" %}
+        {
+          type: 'docSidebar',
+          label: 'Tools',
+          position: 'left',
+          sidebarId: 'toolsSidebar'
+        },
+{%- endif %}
         {
           type: 'dropdown',
           to: '/blog',
@@ -364,12 +407,20 @@ const config: Config = {
               href: 'https://github.com/xpack-dev-tools/',
             },
           ]
-        },{% if isNpmPublished == "true" %}
+        },
+{%- if isXpackBinary == "true" %}
+        {
+          label: `${customFields.xpackVersion}`,
+          position: 'right',
+          href: `https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/releases/tag/v${customFields.xpackVersion}`,
+        },
+{%- elsif isNpmPublished == "true" %}
         {
           label: `${customFields.releaseVersion}`,
           position: 'right',
           href: `https://www.npmjs.com/package/{{packageScopedName}}/v/${customFields.releaseVersion}`,
-        },{% endif %}
+        },
+{%- endif %}
       ],
     },
     footer: {
@@ -377,27 +428,26 @@ const config: Config = {
       links: [
         {
           title: 'Pages',
-          items: [{% if packageConfig.isOrganizationWeb == "true" %}
+          items: [
             {
               label: 'Getting Started',
               to: '/docs/getting-started',
             },
+{%- if packageWebsiteConfig.skipReleases != "true" %}
             {
-              label: 'About',
-              to: '/docs/project/about',
-            },{% else %}
-            {
-              label: 'Getting Started',
-              to: '/docs/getting-started',
+              label: 'Releases',
+              to: '/docs/releases',
             },
+{%- else %}
             {
               label: 'Support',
               to: '/docs/support',
             },
+{%- endif %}
             {
-              label: 'Releases',
-              to: '/docs/releases',
-            },{% endif %}
+              label: 'About',
+              to: '/docs/project/about',
+            },
             {
               label: 'Blog',
               to: '/blog',

@@ -18,12 +18,11 @@ import Link from '@docusaurus/Link';
 import styles from './styles.module.css';
 
 import type { FeatureItem } from './FeatureItem';
-
 {% if packageWebsiteConfig.hasCustomHomepageFeatures == "true" %}
 import { FeatureList } from './CustomFeatureList';
-{% else %}
+{%- else %}
 import { FeatureList } from './FeatureList';
-{% endif %}
+{%- endif %}
 
 function Feature({title, Svg, description}: FeatureItem) {
   return (

@@ -17,21 +17,21 @@ date: 2024-10-24 23:57:00 +0300
 
 ---
 
-{% if packageWebsiteConfig.hasCustomInstall == "true" -%}
+{%- if packageWebsiteConfig.hasCustomInstall == "true" %}
 
 import ProjectContent from './_project/_content.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
-{% if packageWebsiteConfig.customInstallTitle -%}
+{%- if packageWebsiteConfig.customInstallTitle %}
 
 # {{packageWebsiteConfig.customInstallTitle}}
 
-{% endif -%}
+{%- endif %}
 
 <ProjectContent />
 
-{% else -%}
+{%- else %}
 
 import Content from './_common/_content.mdx';
 
@@ -46,4 +46,4 @@ import Content from './_common/_content.mdx';
 
 <Content />
 
-{% endif -%}
+{%- endif %}

@@ -21,13 +21,14 @@ import HeadTitle from '@site/src/components/HeadTitle';
 
 import styles from './index.module.css';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
-{% if packageWebsiteConfig.hasHomepageTools == "true" -%}
-import HomepageTools from '@site/src/components/HomepageTools';
-{% endif -%}
-{% if packageWebsiteConfig.skipInstallCommand != "true" -%}
-import InstallWithCopy from '@site/src/components/InstallWithCopy';
 
-{% endif -%}
+{%- if packageWebsiteConfig.hasHomepageTools == "true" %}
+
+import HomepageTools from '@site/src/components/HomepageTools';
+{%- endif %}
+{%- if packageWebsiteConfig.skipInstallCommand != "true" %}
+import InstallWithCopy from '@site/src/components/InstallWithCopy';
+{%- endif %}
 
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
@@ -55,9 +56,11 @@ export default function Home(): JSX.Element {
       description={siteConfig.tagline} >
       <HomepageHeader />
       <main>
-        <HomepageFeatures />{% if packageConfig.isOrganizationWeb == "true" %}
+        <HomepageFeatures />
+{%- if packageConfig.isOrganizationWeb == "true" %}
         <hr className="hero__hr"/>
-        <HomepageTools />{% endif %}
+        <HomepageTools />
+{%- endif %}
       </main>
     </Layout>
   );

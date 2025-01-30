@@ -16,17 +16,18 @@ import Link from '@docusaurus/Link';
 
 import type { FeatureItem } from './FeatureItem';
 
-{% assign platforms_array = platforms | split: "," -%}
+{%- assign platforms_array = platforms | split: "," %}
 
-{% assign names_array = "" | split: "" -%}
+{%- assign names_array = "" | split: "" %}
 
-{% for platform in platforms_array -%}
-{% if platform == "win32-x64" %}{% assign names_array = names_array | concat: "Windows" %}{% endif -%}
-{% if platform == "darwin-x64" or platform == "darwin-arm64" %}{% assign names_array = names_array | concat: "macOS" %}{% endif -%}
-{% if platform == "linux-x64" or platform == "linux-arm64" or platform == "linux-arm" %}{% assign names_array = names_array | concat: "GNU/Linux" %}{% endif -%}
-{% endfor -%}
+{%- for platform in platforms_array %}
+{%- if platform == "win32-x64" %}{% assign names_array = names_array | concat: "Windows" %}{% endif %}
+{%- if platform == "darwin-x64" or platform == "darwin-arm64" %}{% assign names_array = names_array | concat: "macOS" %}{% endif %}
+{%- if platform == "linux-x64" or platform == "linux-arm64" or platform == "linux-arm" %}{% assign names_array = names_array | concat: "GNU/Linux" %}{% endif %}
+{%- endfor %}
 
-{% assign names_array = names_array | uniq -%}
+{%- assign names_array = names_array | uniq %}
+
 export const FeatureList: FeatureItem[] = [
   {
     title: 'Multi-version{% if names_array.size > 1 %}, cross-platform{% endif %}',

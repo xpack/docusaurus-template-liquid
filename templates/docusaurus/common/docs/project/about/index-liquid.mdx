@@ -17,21 +17,21 @@ date: 2024-10-24 23:58:00 +0300
 
 ---
 
-{% if packageWebsiteConfig.hasCustomAbout == "true" -%}
+{%- if packageWebsiteConfig.hasCustomAbout == "true" %}
 
 import ProjectContent from './_project/_content.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
-{% if packageWebsiteConfig.customAboutTitle -%}
+{%- if packageWebsiteConfig.customAboutTitle %}
 
 # {{packageWebsiteConfig.customAboutTitle}}
 
-{% endif -%}
+{%- endif %}
 
 <ProjectContent />
 
-{% else -%}
+{%- else %}
 
 import TheProject from './_common/_the-project.mdx';
 import TheProjectHistory from './_common/_the-project-history.mdx';
@@ -55,4 +55,4 @@ import TheAuthor from './_common/_the-author.mdx';
 
 <TheAuthor />
 
-{% endif -%}
+{%- endif %}

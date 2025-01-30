@@ -22,7 +22,7 @@ import Documentation from '../_shared/_documentation.mdx';
 
 # How to get help for {% if packageConfig.shortName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.shortName}}{% else %}the {{longXpackName}}{% endif %}
 
-{% if packageConfig.isOrganizationWeb == "true" -%}
+{%- if packageConfig.isOrganizationWeb == "true" %}
 
 ## Quick tips
 
@@ -32,7 +32,7 @@ way to get answers quickly is to use the
 GitHub Discussions
 pages for the specific project you're interested in.
 
-{% else -%}
+{%- else %}
 
 ## Quick links
 
@@ -40,22 +40,21 @@ The quick answer is to use the
 [GitHub Discussions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/discussions)
 pages.
 
-{% endif -%}
+{%- endif %}
 
 ## Web pages issues
 
 If you find any issues in the content of these pages (such as typos or
 incorrect phrasing) or have suggestions for improving the documentation,
 please share them through the
-{% if packageConfig.isOrganizationWeb == "true" -%}
+{%- if packageConfig.isOrganizationWeb == "true" %}
 GitHub Discussions pages. Use the top-level
 [GitHub Discussions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/discussions)
 page for issues related to the main xPack Project site, or the individual project's GitHub Discussions pages for specific projects.
-{% else -%}
+{%- else %}
 [GitHub Discussions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/discussions)
 pages.
-
-{% endif -%}
+{%- endif %}
 
 ## Check documentation
 
@@ -69,12 +68,14 @@ documentation.
 Before posting any questions or providing feedback,
 check if the subject was not already addressed.
 
-{% if packageWebsiteConfig.skipFaq != "true" %}- Check the {% if packageConfig.isOrganizationWeb == "true" %}FAQ{% else %}[FAQ](/docs/faq/){% endif %}
-for similar problems{% endif %}
+{% if packageWebsiteConfig.skipFaq != "true" -%}
+- Check the {% if packageConfig.isOrganizationWeb == "true" %}FAQ{% else %}[FAQ](/docs/faq/){% endif %}
+for similar problems
+{%- endif %}
 - Check the {% if packageConfig.isOrganizationWeb == "true" %}GitHub Discussions{% else %}[GitHub Discussions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/discussions){% endif %} for
 similar topics
-- Check the
-{% if packageConfig.isOrganizationWeb == "true" %}GitHub Issues{% else %}[GitHub Issues](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/issues){% endif %}
+- Check the {% if packageConfig.isOrganizationWeb == "true" %}
+GitHub Issues{% else %}[GitHub Issues](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/issues){% endif %}
 tracker and the
 {% if packageConfig.isOrganizationWeb == "true" %}GitHub Pull Requests{% else %}[GitHub Pull Requests](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/pulls){% endif %}
 for similar problems.
@@ -93,7 +94,8 @@ pages.{% endif %}
 Enter a **New discussion**; use the **Q&A** category for questions,
 **Ideas** for suggestions and **General** for everything else.
 
-{% if packageConfig.isOrganizationWeb != "true" -%}
+{%- if packageConfig.isOrganizationWeb != "true" %}
+
 ## Register a new support ticket only if necessary
 
 If you are convinced that you identified a bug
@@ -111,7 +113,8 @@ for questions and support, **use the
 
 :::
 
-{% endif -%}
+{%- endif %}
+
 ## Stack Overflow
 
 For community help, you can also use

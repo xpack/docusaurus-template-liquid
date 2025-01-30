@@ -56,14 +56,14 @@ kept as a legacy CommonJS dependency.
   up to date
 - commit the changes
 
-{% if isTypeScript == "true" -%}
+{%- if isTypeScript == "true" %}
 
 Keep:
 
 - [`@types/node`](https://www.npmjs.com/package/@types/node?activeTab=versions)
   locked to latest that still matches the oldest supported node ({{packageEnginesNodeVersionMajor}}).
 
-{% endif -%}
+{%- endif %}
 
 <DependenciesDetails />
 
@@ -203,7 +203,7 @@ After a few moments the version will be visible at
 
 ### Manual install test
 
-{% if packageWebsiteConfig.hasCli != "true" -%}
+{%- if packageWebsiteConfig.hasCli != "true" %}
 
 Test if the package can be installed in a project:
 
@@ -213,7 +213,7 @@ npm init --yes
 npm install {{packageScopedName}}@next
 ```
 
-{% else -%}
+{%- else %}
 
 Test if the package can be installed globally:
 
@@ -221,7 +221,7 @@ Test if the package can be installed globally:
 npm install ----location=global {{packageScopedName}}@next
 ```
 
-{% endif -%}
+{%- endif %}
 
 Validate the web site content in a local build via the npm `build` script:
 
@@ -294,7 +294,7 @@ When the release is considered stable, promote it as `latest`:
 npm dist-tag ls {{packageScopedName}}
 `} </CodeBlock>
 
-{% if packageWebsiteConfig.shareOnTwitter == "true" -%}
+{%- if packageWebsiteConfig.shareOnTwitter == "true" %}
 
 ## Share on X/Twitter
 
@@ -305,7 +305,7 @@ npm dist-tag ls {{packageScopedName}}
   [release](/docs/releases/)
 - click the **Tweet** button
 
-{% endif -%}
+{%- endif %}
 
 ## Analytics
 

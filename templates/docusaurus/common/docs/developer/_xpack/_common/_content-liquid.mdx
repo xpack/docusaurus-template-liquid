@@ -14,12 +14,12 @@ import CoverageExceptions from '../_project/_coverage-exceptions.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
-{% if isJavaScript == "true" -%}
+{%- if isJavaScript == "true" %}
 
 This project is currently written in JavaScript, but a rewrite in
 TypeScript is planned.
 
-{% endif -%}
+{%- endif %}
 
 <Prerequisites nodeVersion="{{packageEnginesNodeVersion}}" nodeVersionMajor="{{packageEnginesNodeVersionMajor}}"/>
 
@@ -65,7 +65,7 @@ npm run compile-watch
 ```
 ## Language standard compliance
 
-{% if isTypeScript == "true" -%}
+{%- if isTypeScript == "true" %}
 
 The current version is compiled with TypeScript {{packageDependenciesTypescriptVersion}}:
 
@@ -80,19 +80,19 @@ For more details on how to configure `tsconfig.json`, please see:
 
 - [TSConfig](https://www.typescriptlang.org/tsconfig/)
 
-{% elsif isJavaScript == "true" -%}
+{%- elsif isJavaScript == "true" %}
 
 The module uses ECMAScript 6 class definitions and modules.
 
-{% else -%}
+{%- else %}
 
 TBD
 
-{% endif -%}
+{%- endif %}
 
 ## Standard style
 
-{% if isTypeScript == "true" -%}
+{%- if isTypeScript == "true" %}
 
 As style, the project uses `ts-standard`, the TypeScript variant of
 [Standard Style](https://standardjs.com/#typescript),
@@ -108,7 +108,7 @@ The known rules are documented in the
 [typescript-eslint](https://github.com/typescript-eslint/typescript-eslint/tree/main/packages/eslint-plugin/docs/rules)
 project.
 
-{% elsif isJavaScript == "true" -%}
+{%- elsif isJavaScript == "true" %}
 
 As style, the project uses the
 [JavaScript Standard Style](https://standardjs.com/),
@@ -124,11 +124,11 @@ The known rules are documented in the
 [eslint](https://eslint.org/docs/latest/rules/)
 project.
 
-{% else -%}
+{%- else %}
 
 TBD
 
-{% endif -%}
+{%- endif %}
 
 Generally, to fit two editor windows side by side in a screen,
 all files should limit the line length to 80.
@@ -153,7 +153,7 @@ To manually fix compliance with the style guide (where possible):
 
 ## Documentation metadata
 
-{% if isTypeScript == "true" -%}
+{%- if isTypeScript == "true" %}
 
 The documentation metadata uses the
 [TypeDoc](https://typedoc.org/guides/doccomments/) tags, without
@@ -170,7 +170,7 @@ of the `@category` or `@group` tags.
 
 :::
 
-{% elsif isJavaScript == "true" -%}
+{%- elsif isJavaScript == "true" %}
 
 The documentation metadata follows the [JSdoc](http://usejsdoc.org) tags.
 
@@ -186,11 +186,11 @@ the `use strict`:
 Note: be sure C style comments are used, C++ styles are not parsed by
 [ESLint](http://eslint.org).
 
-{% else -%}
+{%- else %}
 
 TBD
 
-{% endif -%}
+{%- endif %}
 
 ## Tests
 
@@ -209,7 +209,7 @@ npm run test
 
 <TestResults />
 
-{% if packageWebsiteConfig.has100coverage == "true" -%}
+{%- if packageWebsiteConfig.has100coverage == "true" %}
 
 ### Coverage tests
 
@@ -228,7 +228,7 @@ and `/* c8 ignore start */` `/* c8 ignore stop */` for
 
 <CoverageExceptions />
 
-{% endif -%}
+{%- endif %}
 
 ### Continuous Integration (CI)
 
@@ -237,7 +237,7 @@ CI tested on every push via
 [GitHub Actions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions), on Ubuntu,
 Windows and macOS, using node 18, 20 and 22.
 
-{% if isTypeScript == "true" -%}
+{%- if isTypeScript == "true" %}
 
 ## Tricks & tips
 
@@ -247,4 +247,4 @@ To trace TypeScript module resolution:
     "compile": "tsc --traceResolution  -p ./",
 ```
 
-{% endif -%}
+{%- endif %}

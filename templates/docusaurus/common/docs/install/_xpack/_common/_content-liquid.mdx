@@ -6,7 +6,8 @@ import CodeBlock from '@theme/CodeBlock';
 
 {/* ------------------------------------------------------------------------ */}
 
-{% if packageWebsiteConfig.hasCli == "true" -%}
+{%- if packageWebsiteConfig.hasCli == "true" %}
+
 import PrerequisitesCli from './_prerequisites-cli.mdx';
 import InstallCli from './_install-cli.mdx';
 
@@ -20,7 +21,8 @@ import MoreInstall from '../_project/_more-install.mdx';
 
 <MoreInstall />
 
-{% else -%}
+{%- else %}
+
 import PrerequisitesModules from './_prerequisites-module.mdx';
 import InstallModule from './_install-module.mdx';
 
@@ -29,4 +31,5 @@ import InstallModule from './_install-module.mdx';
 <PrerequisitesModules />
 
 <InstallModule />
-{% endif -%}
+
+{%- endif %}
