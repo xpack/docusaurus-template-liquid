@@ -154,7 +154,7 @@ then
   exit 1
 else
 
-  if true
+  if false
   then
     (
       echo
