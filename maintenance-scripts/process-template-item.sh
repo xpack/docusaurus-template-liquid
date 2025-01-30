@@ -308,12 +308,22 @@ then
     "docs/getting-started/_project/_content.mdx" \
   )
 else
+  # Keep _common/_license, _common/_credits, _common/_enjoyed-using,
+  # _common/_xpm-xcdl-features.
   skip_pages_array+=(\
     "docs/getting-started/_common/_content.mdx" \
+    "docs/getting-started/_common/_change-log.mdx" \
+    "docs/getting-started/_common/_commonjs-compatibility.mdx" \
+    "docs/getting-started/_common/_github-and-npmjs.mdx" \
+    "docs/getting-started/_common/_releases.mdx" \
+    "docs/getting-started/_common/_support-and-feedback.mdx" \
     "docs/getting-started/_project/_compatibility.mdx" \
+    "docs/getting-started/_project/_compatibility-notices.mdx" \
     "docs/getting-started/_project/_more-credits.mdx" \
     "docs/getting-started/_project/_overview.mdx" \
     "docs/getting-started/_project/_status.mdx" \
+    "docs/getting-started/_project/_more.mdx" \
+    "docs/getting-started/_project/_upgrade-notice.mdx" \
   )
 fi
 
@@ -454,7 +464,6 @@ then
     "blog/_common/_prerequisites-glib-2.27.mdx" \
     "docs/_shared/_development-durations.mdx" \
     "docs/_shared/_github-actions-durations.mdx" \
-    "docs/_shared/_release-schedule.mdx" \
     "docs/faq/_common/_flatpack-snap.mdx" \
     "docs/faq/_common/_nixos.mdx" \
     "docs/user/_common/_versioning.mdx" \

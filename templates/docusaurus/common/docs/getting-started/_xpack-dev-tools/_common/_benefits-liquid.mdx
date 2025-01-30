@@ -1,0 +1,33 @@
+{/* DO NOT EDIT! */}
+{/* Automatically generated from docusaurus-template-liquid/templates/docusaurus. */}
+
+{/* ------------------------------------------------------------------------ */}
+
+## Benefits
+
+The main advantages of using the **{{longXpackName}}** are:
+
+{%- assign platforms_array = platforms | split: "," %}
+{%- assign names_array = "" | split: "" %}
+
+{%- for platform in platforms_array %}
+{%- if platform == "win32-x64" %}{% assign names_array = names_array | concat: "x64 Windows" %}{% endif %}
+{%- if platform == "darwin-x64" %}{% assign names_array = names_array | concat: "x64 macOS" %}{% endif %}
+{%- if platform == "darwin-arm64" %}{% assign names_array = names_array | concat: "arm64 macOS" %}{% endif %}
+{%- if platform == "linux-x64" %}{% assign names_array = names_array | concat: "x64 GNU/Linux" %}{% endif %}
+{%- if platform == "linux-arm64" %}{% assign names_array = names_array | concat: "arm64 GNU/Linux" %}{% endif %}
+{%- if platform == "linux-arm" %}{% assign names_array = names_array | concat: "arm GNU/Linux" %}{% endif %}
+{%- endfor %}
+
+- A convenient, uniform and portable install/uninstall/upgrade
+  {% if names_array.size > 1 %}procedure; the same procedure is used for all major
+  platforms (**{{ names_array | join: "**, **" }}**){% else %}procedure on **{{ names_array | join: "" }}**{% endif %}.
+- Multiple versions of the same package can be installed at the same time on
+  the same system.
+- No need to worry about dependent libraries, they are all included.
+- Not affected by system updates that
+  might change the versions of the dependent libraries.
+- Significantly lighter and easier to use than Docker images that provide
+  similar functionality and are GNU/Linux centric.
+- Projects can be tied to specific tools versions; this provides a good
+  reproducibility, especially useful in **CI/CD** environments.
