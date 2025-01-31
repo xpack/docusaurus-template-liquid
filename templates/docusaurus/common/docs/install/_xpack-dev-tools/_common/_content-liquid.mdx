@@ -1,34 +1,5 @@
----
-
-# DO NOT EDIT!
-# Automatically generated from docusaurus-template-liquid/templates/docusaurus.
-
-title: Install Guide{% if packageWebsiteConfig.usePluralGuides == "true" %}s{% endif %}
-description: Explain the prerequisites, how to perform an automated or manual installation, how to uninstall, and the folder hierarchies.
-keywords:
-  - xpack
-  - {% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}
-  - prerequisites
-  - automated
-  - install{% if packageWebsiteConfig.hasCustomInstall != "true" %}
-  - uninstall
-  - files{% endif %}
-
-date: 2020-08-21 11:09:00 +0300
-
----
-
-{%- if packageWebsiteConfig.hasCustomInstall == "true" %}
-
-import ProjectContent from './_project/_content.mdx';
-
-{/* ------------------------------------------------------------------------ */}
-
-# Install Guide{% if packageWebsiteConfig.usePluralGuides == "true" %}s{% endif %}
-
-<ProjectContent />
-
-{%- else %}
+{/* DO NOT EDIT! */}
+{/* Automatically generated from docusaurus-template-liquid/templates/docusaurus. */}
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -37,26 +8,17 @@ import Admonition from '@theme/Admonition';
 
 import LinksVsForwarders from '@site/src/components/LinksVsForwarders';
 
-import AutomaticInstallQuickTest from './_common/_automatic-install-quick-test.mdx';
-import ManualInstallQuickTest from './_common/_manual-install-quick-test.mdx';
+import AutomaticInstallQuickTest from '../_common/_automatic-install-quick-test.mdx';
+import ManualInstallQuickTest from '../_common/_manual-install-quick-test.mdx';
 
-import FoldersHierarchiesLinux from './_project/_folders-hierarchies-linux.mdx';
-import FoldersHierarchiesWindows from './_project/_folders-hierarchies-windows.mdx';
-import FoldersHierarchiesMacOS from './_project/_folders-hierarchies-macos.mdx';
+import FoldersHierarchiesLinux from '../_project/_folders-hierarchies-linux.mdx';
+import FoldersHierarchiesWindows from '../_project/_folders-hierarchies-windows.mdx';
+import FoldersHierarchiesMacOS from '../_project/_folders-hierarchies-macos.mdx';
 
-import Miscellaneous from './_project/_miscellaneous.mdx';
-import Testing from './_project/_testing.mdx';
+import Miscellaneous from '../_project/_miscellaneous.mdx';
+import Testing from '../_project/_testing.mdx';
 
 {/* ------------------------------------------------------------------------ */}
-
-# How to install the {{longXpackName}}
-
-[![GitHub package.json version](https://img.shields.io/github/package-json/v/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/package.json)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/releases)
-[![GitHub Release Date](https://img.shields.io/github/release-date/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/releases)
-[![npm (scoped)](https://img.shields.io/npm/v/%40xpack-dev-tools%2F{{packageName}}?label=xpm&color=blue)](https://www.npmjs.com/package/{{packageScopedName}}/)
-![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/{{githubProjectOrganization}}/{{githubProjectName}}/total)
-[![npm](https://img.shields.io/npm/dm/%40xpack-dev-tools%2F{{packageName}}?label=xpm%20downloads)](https://www.npmjs.com/package/{{packageScopedName}}/)
 
 The **{{longXpackName}}** can be installed automatically, using the `xpm` command
 (the recommended method), or manually, by downloading and unpacking one of the
@@ -836,5 +798,3 @@ After install, the package creates a hierarchy of folders like the following
 <Miscellaneous/>
 
 <Testing/>
-
-{%- endif %}

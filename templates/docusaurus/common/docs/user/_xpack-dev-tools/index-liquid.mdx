@@ -30,7 +30,11 @@ import ProjectContent from './_project/_content.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
-# User's Guide{% if packageWebsiteConfig.usePluralGuides == "true" %}s{% endif %}
+{%- if packageWebsiteConfig.customUserTitle %}
+
+# {{packageWebsiteConfig.customUserTitle}}
+
+{%- endif %}
 
 <ProjectContent />
 
@@ -38,13 +42,13 @@ import ProjectContent from './_project/_content.mdx';
 
 {%- if isXpackBinary == "true" %}
 
-import Versioning from './_project/_versioning.mdx';
-import LibrariesAndRpath from './_common/_libraries-and-rpath.mdx';
-import UseInTesting from './_project/_use-in-testing.mdx';
+import Content from './_common/_content.mdx';
+
+{%- else %}
+
+import Content from './_project/_content.mdx';
 
 {%- endif %}
-
-import More from './_project/_more.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
@@ -63,17 +67,7 @@ own projects.
 
 {%- endif %}
 
-<More />
-
-{%- if isXpackBinary == "true" %}
-
-<Versioning/>
-
-<LibrariesAndRpath/>
-
-<UseInTesting/>
-
-{%- endif %}
+<Content />
 
 {%- endif %}
 

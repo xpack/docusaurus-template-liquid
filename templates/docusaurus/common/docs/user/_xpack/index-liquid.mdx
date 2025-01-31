@@ -42,32 +42,32 @@ import ProjectContent from './_project/_content.mdx';
 
 {%- if isXpackBinary == "true" %}
 
-import Versioning from './_versioning.mdx';
-import LibrariesAndRpath from './_common/_libraries-and-rpath.mdx';
-import UseInTesting from './_use-in-testing.mdx';
+import Content from './_common/_content.mdx';
+
+{%- else %}
+
+import Content from './_project/_content.mdx';
 
 {%- endif %}
-
-import ProjectContent from './_project/_content.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
 # How to use {% if packageConfig.shortName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.shortName}}{% else %}the {{longXpackName}}{% endif %}
 
-This section is intended for those who plan to {% if packageWebsiteConfig.hasCli == "true" %}integrate
-**{% if packageConfig.shortName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.shortName}}{% else %}the {{longXpackName}}{% endif %}** into their workflows{% else %}use this
-{% if packageWebsiteConfig.hasCli == "true" %}package{% else %}module{% endif %} in their
-own projects{% endif %}.
+{%- if isXpackBinary == "true" or packageWebsiteConfig.hasCli == "true" %}
 
-<ProjectContent />
+This section is intended for those who plan to integrate
+{% if packageConfig.shortName and packageWebsiteConfig.preferShortName == "true" %}**{{packageConfig.shortName}}**{% else %}the **{{longXpackName}}**{% endif %} into their workflows.
 
-{%- if isXpackBinary == "true" %}
+{%- else %}
 
-<Versioning/>
+This section is intended for those who plan to use this
+module in their
+own projects.
 
-<LibrariesAndRpath/>
+{%- endif %}
 
-<UseInTesting/>
+<Content />
 
 {%- endif %}
 
@@ -79,7 +79,5 @@ For more details on the available class definitions, including all methods,
 accessors, properties, etc,
 please see the TypeDoc
 [API](/docs/api/) pages.
-
-{%- endif %}
 
 {%- endif %}

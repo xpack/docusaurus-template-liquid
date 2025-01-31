@@ -55,10 +55,10 @@ import Content from './_common/_content.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
+# Getting Started with {% if packageConfig.shortName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.shortName}}{% else %}the {{longXpackName}}{% endif %}
+
 [![license](https://img.shields.io/github/license/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/LICENSE)
 ![GitHub Repo stars](https://img.shields.io/github/stars/{{githubProjectOrganization}}/{{githubProjectName}})
-
-# Getting Started with {% if packageConfig.shortName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.shortName}}{% else %}the {{longXpackName}}{% endif %}
 
 <UserDeveloperMaintainer />
 
@@ -72,15 +72,15 @@ import Content from './_common/_content.mdx';
 
 <ReleaseSchedule/>
 
-<SupportAndFeedback />
-
-<ChangeLog />
-
 {%- if packageWebsiteConfig.skipReleases != "true" %}
 
 <Releases />
 
 {%- endif %}
+
+<ChangeLog />
+
+<SupportAndFeedback />
 
 {%- if githubProjectOrganization == "xpack" %}
 

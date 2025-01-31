@@ -42,6 +42,8 @@ import Content from './_common/_content.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
+# How to contribute to {% if packageConfig.shortName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.shortName}}{% else %}the {{longXpackName}}{% endif %}
+
 [![license](https://img.shields.io/github/license/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/issues)
 [![GitHub pulls](https://img.shields.io/github/issues-pr/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/pulls/)
@@ -51,8 +53,6 @@ import Content from './_common/_content.mdx';
 {%- if isJavaScript == "true" %}
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen)](https://standardjs.com)
 {%- endif %}
-
-# How to contribute to {% if packageConfig.shortName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.shortName}}{% else %} the {{longXpackName}}{% endif %}
 
 This page is designed for developers who plan to contribute new features
 or fix bugs in the
