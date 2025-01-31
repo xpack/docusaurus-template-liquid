@@ -44,7 +44,7 @@ import Content from './_common/_content.mdx';
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/{{githubProjectOrganization}}/{{githubProjectName}}?color=blue)](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/releases)
 [![GitHub Release Date](https://img.shields.io/github/release-date/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/releases)
 {%- endif %}
-[![NPM Version](https://img.shields.io/npm/v/{% if packageScope != "" %}%40{{packageScope}}%2F{% endif %}{{packageName}}?{% if isXpackBinary == "true" %}label=xpm&{% endif %}color=green)](https://www.npmjs.com/package/{{packageScopedName}}/)
+[![NPM Version](https://img.shields.io/npm/v/{% if packageScope != "" %}%40{{packageScope}}%2F{% endif %}{{packageName}}?color=green{% if isXpackBinary == "true" %}&label=xpm{% endif %})](https://www.npmjs.com/package/{{packageScopedName}}/)
 {%- if isXpackBinary == "true" %}
 [![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/{{githubProjectOrganization}}/{{githubProjectName}}/total)](https://somsubhra.github.io/github-release-stats/?username={{githubProjectOrganization}}&repository={{githubProjectName}})
 [![NPM Downloads](https://img.shields.io/npm/d18m/{% if packageScope != "" %}%40{{packageScope}}%2F{% endif %}{{packageName}}?label=xpm%20downloads)](https://www.npmjs.com/package/{{packageScopedName}}/)
