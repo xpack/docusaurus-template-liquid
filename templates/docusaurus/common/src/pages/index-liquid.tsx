@@ -30,6 +30,21 @@ import HomepageTools from '@site/src/components/HomepageTools';
 import InstallWithCopy from '@site/src/components/InstallWithCopy';
 {%- endif %}
 
+{%- if isNpmBinary == "true" %}
+{%- assign platforms = "win32-x64,darwin-x64,linux-x64" %}
+{%- endif %}
+{%- assign platforms_array = platforms | split: "," %}
+
+{%- assign isMacOS = false %}
+{%- assign isLinux = false %}
+{%- assign isWindows = false %}
+
+{%- for platform in platforms_array %}
+{%- if platform == "darwin-x64" or platform == "darwin-arm64" %}{% assign isMacOS = true %}{% endif %}
+{%- if platform == "linux-x64" or platform == "linux-arm64" or platform == "linux-arm" %}{% assign isLinux = true %}{% endif %}
+{%- if platform == "win32-x64" %}{% assign isWindows = true %}{% endif %}
+{%- endfor %}
+
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
   return (
@@ -37,7 +52,21 @@ function HomepageHeader() {
       <HeadTitle title="Welcome to {% if packageWebsiteConfig.title %}{{packageWebsiteConfig.title}}{% else %}the {{longXpackName}}{% endif %}!" />
       <div className="container">
         <Heading as="h1" className="hero__title">{siteConfig.title}</Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
+        <p className="hero__subtitle">{siteConfig.tagline}
+{%- if platforms != "" or isNpmBinary == "true" %}
+        <span className="margin-left-platforms">
+{%- if isWindows %}
+          <span className="tagline-platform-windows"></span>
+{%- endif %}
+{%- if isMacOS %}
+          <span className="tagline-platform-apple"></span>
+{%- endif %}
+{%- if isLinux %}
+          <span className="tagline-platform-linux"></span>
+{%- endif %}
+        </span>
+{%- endif %}
+        </p>
 {%- if packageWebsiteConfig.skipInstallCommand != "true" %}
         <div className={styles.installWithCopy}>
           <InstallWithCopy>{% if isXpackBinary == "true" %}xpm{% else %}npm{% endif %} install {% if packageWebsiteConfig.isInstallGlobally == "true" %}--location=global {% endif %}{{packageScopedName}}@{{releaseVersion}}{% if isXpackBinary == "true" %} --verbose{% endif %}</InstallWithCopy>
