@@ -143,7 +143,7 @@ echo
 echo "Release posts..."
 
 find . -type f -print0 | \
-   xargs -0 -I '{}' bash "${script_folder_path}/website-convert-release-post.sh" '{}' "${website_folder_path}/blog"
+   xargs -0 -I '{}' bash "${script_folder_path}/convert-release-post.sh" '{}' "${website_folder_path}/blog"
 
 echo
 echo "Validating liquidjs..."

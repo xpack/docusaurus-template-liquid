@@ -50,8 +50,19 @@ export script_folder_name="$(basename "${script_folder_path}")"
 
 # set -x
 
-# The script is invoked from the website via the following npm script:
-# "website-generate-commons-and-build": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-commons-and-build.sh"
+argv="$@"
+
+# Rus as
+# .../node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-blog-post.sh",
+helper_folder_path="$(dirname $(dirname "${script_folder_path}"))/npm-packages-helper"
+
+source "${helper_folder_path}/maintenance-scripts/scripts-helper-source.sh"
+
+# Parse options
+# and leave variables in the environment.
+parse_options "$@"
+
+# -----------------------------------------------------------------------------
 
 current_folder_path="$(dirname $(dirname $(dirname $(dirname "${script_folder_path}"))))"
 if [ "$(basename "${current_folder_path}")" == "website" ]
@@ -65,22 +76,54 @@ fi
 
 templates_folder_path="$(dirname "${script_folder_path}")/templates"
 
-source "${current_folder_path}/node_modules/@xpack/npm-packages-helper/maintenance-scripts/compute-context.sh"
+# -----------------------------------------------------------------------------
 
-post_file_path="${website_folder_path}/blog/$(date -u '+%Y-%m-%d')-${xpack_npm_package_name}-v$(echo ${xpack_release_semver} | tr '.' '-')-released.mdx"
+# Process package.json files and leave results in environment variables.
+compute_context
 
 # -----------------------------------------------------------------------------
 
 echo
 
-if [ -f "${post_file_path}" ]
-then
-    echo "${post_file_path} already there! Remove it to force regenerate."
-    exit 1
-fi
+post_relative_file_path="blog/$(date -u '+%Y-%m-%d')-${xpack_npm_package_name}-v$(echo ${xpack_release_semver} | tr '.' '-')-released.mdx"
 
-echo "liquidjs -> ${post_file_path}"
-liquidjs --context "${xpack_context}" --template "@${website_folder_path}/blog/_templates/blog-post-release-liquid.mdx" > "${post_file_path}"
+post_file_path="${website_folder_path}/${post_relative_file_path}"
+
+# if [ -f "${post_file_path}" ]
+# then
+#   echo "${post_file_path} already there! Remove it to force regenerate."
+#   exit 1
+# fi
+
+xpack_binaries_folder_path="${HOME}/Downloads/xpack-binaries/${xpack_short_name}"
+
+download_binaries "${xpack_binaries_folder_path}"
+
+echo
+ls -lL "${xpack_binaries_folder_path}"
+
+echo
+cat "${xpack_binaries_folder_path}"/*.sha
+
+# -----------------------------------------------------------------------------
+
+rm -rf "${post_file_path}"
+touch "${post_file_path}"
+
+echo "liquidjs -> ${post_relative_file_path}"
+liquidjs --context "${xpack_context}" --template "@${website_folder_path}/blog/_templates/blog-post-release-part-1-liquid.mdx" > "${post_file_path}"
+
+echo >> "${post_file_path}"
+echo '```txt'  >> "${post_file_path}"
+cat "${xpack_binaries_folder_path}"/*.sha \
+  | sed -e 's|$|\n|' \
+  | sed -e 's|  |\n|' \
+  >> "${post_file_path}"
+echo '```'  >> "${post_file_path}"
+
+liquidjs --context "${xpack_context}" --template "@${website_folder_path}/blog/_templates/blog-post-release-part-2-liquid.mdx" >> "${post_file_path}"
+
+echo "Don't forget to manually solve the TODO action point!"
 
 echo
 echo "'${script_name}' done"
