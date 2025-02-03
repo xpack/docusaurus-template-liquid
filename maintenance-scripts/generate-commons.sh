@@ -52,8 +52,8 @@ export script_folder_name="$(basename "${script_folder_path}")"
 
 argv="$@"
 
-# The script is invoked from the `website` via the following npm script:
-# "website-generate-commons": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-commons.sh",
+# Runs as
+# .../node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-commons.sh
 helper_folder_path="$(dirname $(dirname "${script_folder_path}"))/npm-packages-helper"
 
 source "${helper_folder_path}/maintenance-scripts/scripts-helper-source.sh"
