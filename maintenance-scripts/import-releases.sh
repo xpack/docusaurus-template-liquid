@@ -40,7 +40,7 @@ export script_folder_name="$(basename "${script_folder_path}")"
 argv="$@"
 
 # Runs as
-# .../xpack.github/packages/docusaurus-template-liquid.git/maintenance-scripts/website-import-releases.sh
+# .../xpack.github/packages/docusaurus-template-liquid.git/maintenance-scripts/import-releases.sh
 helper_folder_path="$(dirname $(dirname "${script_folder_path}"))/npm-packages-helper"
 
 source "${helper_folder_path}/maintenance-scripts/scripts-helper-source.sh"
