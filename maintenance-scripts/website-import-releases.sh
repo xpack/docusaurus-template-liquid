@@ -35,61 +35,39 @@ export script_folder_name="$(basename "${script_folder_path}")"
 
 # =============================================================================
 
-# The script is invoked from the website via the following npm script:
-# "website-generate-commons": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-commons.sh",
-
 # set -x
 
-current_folder_path="$(dirname $(dirname $(dirname $(dirname "${script_folder_path}"))))"
-if [ "$(basename "${current_folder_path}")" == "website" ]
-then
-  website_folder_path="${current_folder_path}"
-  project_folder_path="$(dirname "${current_folder_path}")"
-else
-  echo "Not called from the website folder"
-  exit 1
-fi
+argv="$@"
 
-templates_folder_path="$(dirname "${script_folder_path}")/templates"
+# Runs as
+# .../xpack.github/packages/docusaurus-template-liquid.git/maintenance-scripts/website-import-releases.sh
+helper_folder_path="$(dirname $(dirname "${script_folder_path}"))/npm-packages-helper"
 
-source "${current_folder_path}/node_modules/@xpack/npm-packages-helper/maintenance-scripts/compute-context.sh"
+source "${helper_folder_path}/maintenance-scripts/scripts-helper-source.sh"
+
+# Parse --init
+# and leave variables in the environment.
+parse_options "$@"
 
 # -----------------------------------------------------------------------------
 
-export do_force="y"
-# export xpack_www_releases="$(dirname $(dirname $(dirname "${project_folder_path}")))/xpack.github/www/web-jekyll-xpack.git/_posts/releases"
+# Runs as
+# .../xpack.github/packages/npm-packages-helper.git/maintenance-scripts/projects-generate-top-commons.sh
 
-export xpack_www_releases="${website_folder_path}/_xpack.github.io/_posts/releases"
+my_projects_folder_path="$(dirname $(dirname $(dirname $(dirname $(dirname $(dirname $(dirname $(dirname "${script_folder_path}"))))))))"
+stamps_folder_name="$(echo "${script_name}" | sed -e 's|\.sh$||')"
 
-if [ ! -d "${xpack_www_releases}/${xpack_npm_package_name}" ]
-then
-  echo "No ${xpack_www_releases}/${xpack_npm_package_name}, nothing to do..."
-  exit 0
-fi
+xpack_dev_tools_github_folder_path="${my_projects_folder_path}/xpack-dev-tools.github"
+export stamps_folder_path="${xpack_dev_tools_github_folder_path}/stamps/${stamps_folder_name}"
+# export xpacks_folder_path="${xpack_dev_tools_github_folder_path}/xPacks"
 
-cd "${xpack_www_releases}/${xpack_npm_package_name}"
+project_folder_path="$(dirname $(dirname $(dirname $(dirname $(dirname "${script_folder_path}")))))"
 
-echo
-echo "Release posts..."
-
-find . -type f -print0 | \
-   xargs -0 -I '{}' bash "${script_folder_path}/website-convert-release-post.sh" '{}' "${website_folder_path}/blog"
+import_releases "${project_folder_path}"
 
 echo
-echo "Validating liquidjs..."
+echo "'${script_name} ${argv}' done"
 
-if grep -r -e '{{' "${website_folder_path}/blog"/*.md* | grep -v '/website/blog/_' || \
-   grep -r -e '{%' "${website_folder_path}/blog"/*.md* | grep -v '/website/blog/_'
-then
-  exit 1
-fi
-
-echo
-echo "Showing descriptions..."
-
-egrep -h -e "(title:|description:)" "${website_folder_path}/blog"/*.md*
-
-echo
-echo "'${script_name}' done"
+exit 0
 
 # -----------------------------------------------------------------------------

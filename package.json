@@ -10,6 +10,7 @@
     "xpack-dev-tools-generate-websites-commons-and-build": "bash maintenance-scripts/websites-generate-commons-and-build.sh --xpack-dev-tools",
     "xpack-dev-tools-commit-websites": "bash maintenance-scripts/websites-commit-and-push.sh --xpack-dev-tools",
     "xpack-dev-tools-commit-and-push-websites": "bash maintenance-scripts/websites-commit-and-push.sh --xpack-dev-tools --push",
+    "xpack-dev-tools-import-websites-releases": "bash maintenance-scripts/websites-import-releases.sh --xpack-dev-tools",
     "npm-install": "npm install",
     "npm-link-helpers": "npm link @xpack/npm-packages-helper",
     "npm-link": "npm link"

@@ -216,7 +216,7 @@ function generate_website_commons()
 # -----------------------------------------------------------------------------
 
 # Runs as
-# .../xpack.github/packages/npm-packages-helper.git/maintenance-scripts/projects-generate-top-commons.sh
+# .../xpack.github/packages/docusaurus-template-liquid.git/maintenance-scripts/projects-generate-top-commons.sh
 
 my_projects_folder_path="$(dirname $(dirname $(dirname $(dirname "${script_folder_path}"))))"
 stamps_folder_name="$(echo "${script_name}" | sed -e 's|\.sh$||')"
