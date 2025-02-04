@@ -182,7 +182,7 @@ or run the following in a terminal:
 ```
 
 Navigate to the **Maintainer Info** page,
-the **Increase the version and update VERSION** section.
+the **Update the version specific code** section.
 
 <UpdateVersionSpecific/>
 
@@ -249,6 +249,7 @@ will build again the previous release!
 
 ## Run the development builds
 
+{%- assign platforms_array = platforms | split: "," %}
 {%- assign names_array = "" | split: "" %}
 
 {%- for platform in platforms_array %}
@@ -295,7 +296,6 @@ on the `xpack-development` branch and the latest
 commits are pushed to GitHub.
 
 {%- assign platforms_array = platforms | split: "," %}
-
 {%- assign names_array = "" | split: "" %}
 
 {%- for platform in platforms_array %}{% if platform == "darwin-x64" %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
@@ -436,7 +436,7 @@ caffeinate ssh xbbla32
 
 ### Update the durations of the development builds
 
-In `website/docs/maintainer/_shared/_development-durations.mdx`, update
+In `website/docs/_shared/_development-durations.mdx`, update
 the durations of the builds.
 
 Commit with the message _**website: update development durations**_.
@@ -489,6 +489,7 @@ Commit with the message _**website: update folder hierarchies**_.
 
 ### Update the list of links in top package.json
 
+{%- assign platforms_array = platforms | split: "," %}
 {%- assign names_array = "" | split: "" %}
 
 {%- for platform in platforms_array %}
@@ -535,17 +536,22 @@ The automation is provided by GitHub Actions and three self-hosted runners.
 ### Start the self-hosted runners
 
 If the runners expired (more than 2 weeks since last use), run the
-`github-runner-configure.sh` script to reconfigure them
+`github-runner-configure.sh` script to reconfigure them. This scripts
+is available in the `xbb-helper` and
+requires `GITHUB_API_XPACK_DEV_TOOLS_RUNNERS_TOKEN` to be present.
+
+{%- assign platforms_array = platforms | split: "," %}
 
 {%- assign dual_runner = false %}
 {%- assign dual_runners_array = "" | split: ""  %}
 {%- assign single_runner = false %}
+{%- assign isMacOS = false %}
 
 {%- assign names_array = "" | split: "" %}
 
 {%- for platform in platforms_array %}
-{%- if platform == "darwin-x64" %}{% assign names_array = names_array | concat: "xbbmi" %}{% assign single_runner = true %}{% endif %}
-{%- if platform == "darwin-arm64" %}{% assign names_array = names_array | concat: "xbbma" %}{% assign single_runner = true %}{% endif %}
+{%- if platform == "darwin-x64" %}{% assign names_array = names_array | concat: "xbbmi" %}{% assign single_runner = true %}{% assign isMacOS = true %}{% endif %}
+{%- if platform == "darwin-arm64" %}{% assign names_array = names_array | concat: "xbbma" %}{% assign single_runner = true %}{% assign isMacOS = true %}{% endif %}
 {%- if platform == "linux-x64" or platform == "win32-x64" %}{% assign names_array = names_array | concat: "xbbli" %}{% assign dual_runner = true %}{% assign dual_runners_array = dual_runners_array | concat: "xbbli" %}{% endif %}
 {%- if platform == "linux-arm64" %}{% assign names_array = names_array | concat: "xbbla" %}{% assign dual_runner = true %}{% assign dual_runners_array = dual_runners_array | concat: "xbbla" %}{% endif %}
 {%- if platform == "linux-arm" %}{% assign names_array = names_array | concat: "xbbla32" %}{% assign single_runner = true %}{% endif %}
@@ -585,7 +591,25 @@ For {% if dual_runners_array.size > 1 %}`{{dual_runners_array | join: "` & `"}}`
 
 {%- if single_runner %}
 
-On all other machines start a single runner:
+{%- if isMacOS %}
+
+For the macOS x64 runners, be sure the deployment target is defined:
+
+```sh
+unset WORK_FOLDER_PATH
+export XBB_ENVIRONMENT_MACOSX_DEPLOYMENT_TARGET="10.13"
+~/actions-runners/{{githubProjectOrganization}}/run.sh &
+```
+
+```sh
+unset WORK_FOLDER_PATH
+export XBB_ENVIRONMENT_MACOSX_DEPLOYMENT_TARGET="11.0"
+~/actions-runners/{{githubProjectOrganization}}/run.sh &
+```
+
+{%- endif %}
+
+On all other machines start the runner with:
 
 ```sh
 ~/actions-runners/{{githubProjectOrganization}}/run.sh &
@@ -613,14 +637,23 @@ The status of all self-hosted runners is available at the [GitHub Runners](https
 
 Publish a new release of the helper on **npmjs**.
 
-### In `npm-packages-helper.git`, update the dependency to the new helper
+### In the npm packages helper, update the dependency to the new helper
 
 In `templates/_xpack-dev-tools/build-assets/package-merge-liquid.json`, update the reference
-to `"@@xpack-dev-tools/xbb-helper":`.
+to `"@xpack-dev-tools/xbb-helper":`.
 
-### Commit the changes to `build-assets/package.json`
+### Generate the top commons
 
-Commit with the message _**template: build-assets/package-merge-liquid.json: bump deps**_.
+Run the top **generate-top-commons** npm script to update the
+`build-assets/package.json` and the GitHub workflow files.
+
+```sh
+npm run generate-top-commons -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git
+```
+
+### Commit the changes
+
+Commit with the message _**re-generate top commons**_.
 
 ### Check for disk space
 
@@ -632,6 +665,8 @@ xpm run check-space -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}
 ```
 
 This is equivalent to running a `df` command.
+
+{%- assign platforms_array = platforms | split: "," %}
 
 {%- assign isMacOS = false %}
 {%- assign isLinux = false %}
@@ -681,15 +716,6 @@ This is equivalent to running a wide `rm` to remove the `build` folders:
 rm -rf ~/Work/{{githubProjectOrganization}}/*/build-assets/build
 ```
 
-### Generate the GitHub workflows
-
-Run the top **generate-top-commons** npm script to update the
-GitHub workflow files.
-
-```sh
-npm run generate-workflows -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git
-```
-
 ### Commit and push
 
 - commit with the message **re-generate workflows**
@@ -701,6 +727,7 @@ npm run generate-workflows -C ~/Work/{{githubProjectOrganization}}/{{githubProje
 
 To trigger the GitHub Actions builds, use the xpm actions:
 
+{%- assign platforms_array = platforms | split: "," %}
 {%- assign names_array = "" | split: "" %}
 
 {%- for platform in platforms_array %}{% if platform == "darwin-x64" %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
@@ -750,6 +777,8 @@ The resulting binaries are available for testing from
 ### Automated tests
 
 The automation is provided by GitHub Actions.
+
+{%- assign platforms_array = platforms | split: "," %}
 
 {%- assign isMacOSX64 = false %}
 {%- assign isLinuxX64 = false %}
@@ -839,6 +868,8 @@ For even more tests, on each platform,
 download the archive from
 [pre-releases/test](https://github.com/xpack-dev-tools/pre-releases/releases/tag/test/)
 and check the binaries.
+
+{%- assign platforms_array = platforms | split: "," %}
 
 {%- assign isMacOS = false %}
 
@@ -1035,6 +1066,7 @@ npm run build -C website
 
 ### Publish the website
 
+- open {{packageHomepage}}docs/maintainer/#publish-the-website in a separate window
 - stop the local web server
 - select the `website` branch
 - merge `xpack-development` into `website`
@@ -1042,6 +1074,7 @@ npm run build -C website
   :::info
   At this moment an automated GitHub Action will generate and publish the website.
   :::
+- add a new tag like `web-YYYYMMDD`
 - the new release blog post is
 in {{packageHomepage}}blog/
 - remember the post URL, since it must be used to update the release page
