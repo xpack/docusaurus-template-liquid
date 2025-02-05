@@ -85,7 +85,7 @@ compute_context
 
 echo
 
-post_relative_file_path="blog/$(date -u '+%Y-%m-%d')-${xpack_npm_package_name}-v$(echo ${xpack_release_semver} | tr '.' '-')-released.mdx"
+post_relative_file_path="blog/$(date -u '+%Y-%m-%d')-${xpack_npm_package_name}-v$(echo ${xpack_xpack_version} | tr '.' '-')-released.mdx"
 
 post_file_path="${website_folder_path}/${post_relative_file_path}"
 
