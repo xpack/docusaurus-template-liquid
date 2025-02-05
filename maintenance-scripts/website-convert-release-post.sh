@@ -265,7 +265,7 @@ sed -i.bak -e "s|  - this release ...Github All Releases.*|$s|" "${to_path}"
 if [ "${xpack_github_project_organization}" == "xpack-dev-tools" ]
 then
   # Insert xpm install version
-  s="/^## Install$/ { print; print \"\"; print \"The easiest way to install this specific version, is by using **xpm**:\"; print \"\"; print \"<CodeBlock language=console> \{\"; print \"\`xpm install @xpack-dev-tools/${xpack_website_config_short_name}@\${frontMatter.version}.\${frontMatter.npm_subversion} -verbose\"; print \"\`\} </CodeBlock>\"; next }1"
+  s="/^## Install$/ { print; print \"\"; print \"The easiest way to install this specific version, is by using **xpm**:\"; print \"\"; print \"<CodeBlock language=console> \{\"; print \"\`xpm install @xpack-dev-tools/${xpack_website_config_short_name}@\${frontMatter.version}.\${frontMatter.npm_subversion} --verbose\"; print \"\`\} </CodeBlock>\"; next }1"
   awk "$s" "${to_path}" >"${to_path}.new" && mv -f "${to_path}.new" "${to_path}"
   sed -i.bak -e 's|CodeBlock language=console|CodeBlock language="console"|' "${to_path}"
 fi
