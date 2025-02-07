@@ -131,8 +131,8 @@ In the `{{githubProjectOrganization}}/{{githubProjectName}}` Git repo:
 
 - switch to the `xpack-development` branch
 - pull new changes
-- if necessary, merge the `xpack` branch
-- if necessary, merge the `website` branch
+- if necessary, **merge** the `xpack` branch
+- if necessary, **merge** the `website` branch
 
 :::caution
 
@@ -178,7 +178,8 @@ Run the **generate-website-commons** npm script from `website/package.json`.
 
 ### Commit the website changes
 
-Commit with the message _**website: re-generate commons**_.
+- **stage** `website` and top `README.md`
+- **commit** with the message _**website: re-generate commons**_
 
 ### Start the local web server
 
@@ -232,7 +233,7 @@ and fix them; assign them to a milestone (like <code>{{xpackVersion}}</code>).
   *
   ```
 - add a new entry like _**\* v{{xpackVersion}} prepared**_
-- commit with the message _**prepare v{{xpackVersion}}**_
+- **commit** with the message _**prepare v{{xpackVersion}}**_
 
 
 ### Push the changes to the `xpack-development` branch
@@ -349,7 +350,7 @@ xpm run build-development-debug --config darwin-x64 -C ~/Work/{{githubProjectOrg
 
 The build takes {developmentDurations["work"]} to complete.
 
-When functional, push the `xpack-development` branch to GitHub.
+When functional, **push** the `xpack-development` branch to GitHub.
 
 Run the native build on the production machine
 (`xbbmi`, an older macOS);
@@ -714,7 +715,7 @@ rm -rf ~/Work/{{githubProjectOrganization}}/*/build-assets/build
 
 ### Commit and push
 
-- push the `xpack-development` branch to GitHub
+- **push** the `xpack-development` branch to GitHub
 
 ### Check if the helper is pushed and published
 
@@ -894,9 +895,9 @@ xattr -cr ${HOME}/Downloads/xpack-*
 
 - in `CHANGELOG.md`, add the release date and a message
   like _**\* v{{xpackVersion}} released**_
-- commit with the message _**CHANGELOG update**_
+- **commit** with the message _**CHANGELOG update**_
 - check and possibly update the `build-assets/templates/body-github-release-liquid.mdx`
-- push the `xpack-development` branch to GitHub
+- **push** the `xpack-development` branch to GitHub
 - run the **trigger-workflow-publish-release** xpm action:
 
 ```sh
@@ -935,16 +936,17 @@ this will add a file in the `website/blog` folder:
 xpm run generate-website-blog-post -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
 ```
 
-- edit the front matter properties
-- select the correct summary
-- commit with the message _**website: blog post release {{xpackVersion}} published**_
+- edit the `description` property in the post front matter
+- select the correct summary (maintenance vs. new release)
+- copy/paste the folders hierarchy from the install guide
+- **commit** with the message _**website: blog post release {{xpackVersion}} published**_
 
 ### Update the web install page
 
 - check and possibly update the output of the `--version` runs in
   - `website/docs/install/_project/_automatic-install-quick-test.mdx`
   - `website/docs/install/_project/_manual-install-quick-test.mdx`
-- commit with the message _**website: update quick tests**_
+- **commit** with the message _**website: update quick tests**_
 
 ### Check the list of links in top package.json
 
@@ -972,7 +974,7 @@ xpm run update-package-binaries -C ~/Work/{{githubProjectOrganization}}/{{github
 - from the release, check the SHA & file names
 - compare the SHA sums with those shown by `cat *.sha`
 - check the executable names
-- commit all changes with the message
+- **commit** all changes with the message
   _**package.json: update urls for {{releaseVersion}} release**_
 
 ### Publish on the npmjs.com server
@@ -980,7 +982,7 @@ xpm run update-package-binaries -C ~/Work/{{githubProjectOrganization}}/{{github
 - select the `xpack-development` branch
 - check the latest commits `xpm run git-log`
 - update `CHANGELOG.md`, add a line like _**\* v{{releaseVersion}} published on npmjs.com**_
-- commit with the message _**CHANGELOG: publish npm v{{releaseVersion}}**_
+- **commit** with the message _**CHANGELOG: publish npm v{{releaseVersion}}**_
 - `npm pack` and check the content of the archive, which should list
   only the `package.json`, the `README.md`, `LICENSE` and `CHANGELOG.md`;
   possibly adjust `.npmignore`
@@ -1025,11 +1027,15 @@ The tests results are available from the
 
 ### Copy the test results
 
-For the toolchain projects, download the `test-report.zip` file, unzip it
+For the toolchain projects, use the **Artifact download UR**
+from the **Generate tests report** GitHub Action to
+download the `test-report.zip` file, unzip it
 and copy the markdown file to `website/docs/tests`.
 
 Edit the `website/docs/tests/index.md` file to add the
 new page.
+
+Check the **Known problems** link in the blog post.
 
 Commit with the message _**website: add tests results**_.
 
@@ -1060,7 +1066,7 @@ In case the release proves problematic and needs to be unpublished:
 Validate the web site content in a local build via the npm `build` script:
 
 ```sh
-npm run build -C website
+(cd website; npm run build)
 ```
 
 ### Publish the website
@@ -1068,12 +1074,16 @@ npm run build -C website
 - open {{packageHomepage}}docs/maintainer/#publish-the-website in a separate window
 - stop the local web server
 - select the `website` branch
-- merge `xpack-development` into `website`
-- push the `website` branch to GitHub
+- **merge** `xpack-development` into `website`
+- **push** the `website` branch to GitHub
   :::info
   At this moment an automated GitHub Action will generate and publish the website.
   :::
-- add a new tag like <code>web-{dateYYYYMMDD()}</code>
+- if already there from a previous run, delete the <code>web-{dateYYYYMMDD()}</code> tag, including from remote
+- add a new tag like <code>web-{dateYYYYMMDD()}</code> and push it to remote
+- checkout the `xpack-development` branch
+- wait for the publish to complete
+- refresh the web page
 - the new release blog post is
 in {{packageHomepage}}blog/
 - remember the post URL, since it must be used to update the release page
@@ -1087,8 +1097,9 @@ version in the top `package.json` is not changed.
 In this Git repo:
 
 - select the `xpack` branch
-- merge `xpack-development` into `xpack`
-- push the `xpack` branch to GitHub
+- **merge** `xpack-development` into `xpack`
+- **push** the `xpack` branch to GitHub
+- checkout the `xpack-development` branch
 
 :::note
 
