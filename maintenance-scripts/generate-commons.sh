@@ -231,6 +231,10 @@ else
       relocate "docs/user/_use-in-testing.mdx"
       relocate "docs/user/_versioning.mdx"
 
+      relocate "docs/install/_project/_folders-hierarchies-linux.mdx" "docs/_shared/_folders-hierarchies-linux.mdx"
+      relocate "docs/install/_project/_folders-hierarchies-macos.mdx" "docs/_shared/_folders-hierarchies-macos.mdx"
+      relocate "docs/install/_project/_folders-hierarchies-windows.mdx" "docs/_shared/_folders-hierarchies-windows.mdx"
+
       find . -name '*.bak' -exec rm -v '{}' ';'
     )
   fi

@@ -330,6 +330,9 @@ fi
 if [ "${xpack_skip_install_guide}" == "true" ]
 then
   skip_pages_array+=(\
+    "docs/_shared/_folders-hierarchies-linux.mdx" \
+    "docs/_shared/_folders-hierarchies-macos.mdx" \
+    "docs/_shared/_folders-hierarchies-windows.mdx" \
     "docs/install/index.mdx" \
     "docs/install/_common/_content.mdx" \
     "docs/install/_common/_prerequisites-module.mdx" \
@@ -339,9 +342,6 @@ then
     "docs/install/_project/_content.mdx" \
     "docs/install/_project/_troubleshooting-windows.mdx" \
     "docs/install/_project/_automatic-install-quick-test.mdx" \
-    "docs/install/_project/_folders-hierarchies-linux.mdx" \
-    "docs/install/_project/_folders-hierarchies-macos.mdx" \
-    "docs/install/_project/_folders-hierarchies-windows.mdx" \
     "docs/install/_project/_manual-install-quick-test.mdx" \
     "docs/install/_project/_miscellaneous.mdx" \
     "docs/install/_project/_testing.mdx" \
@@ -351,6 +351,9 @@ fi
 if [ "${xpack_skip_install_command}" == "true" ]
 then
   skip_pages_array+=(\
+    "docs/_shared/_folders-hierarchies-linux.mdx" \
+    "docs/_shared/_folders-hierarchies-macos.mdx" \
+    "docs/_shared/_folders-hierarchies-windows.mdx" \
     "docs/install/_common/_automatic-install-quick-test.mdx" \
     "docs/install/_common/_manual-install-quick-test.mdx" \
     "docs/install/_common/_cli-liquid.mdx" \
@@ -358,9 +361,6 @@ then
     "docs/install/_common/_prerequisites.mdx" \
     "docs/install/_project/_automatic-install-quick-test.mdx" \
     "docs/install/_project/_manual-install-quick-test.mdx" \
-    "docs/install/_project/_folders-hierarchies-linux.mdx" \
-    "docs/install/_project/_folders-hierarchies-macos.mdx" \
-    "docs/install/_project/_folders-hierarchies-windows.mdx" \
     "docs/install/_project/_miscellaneous.mdx" \
     "docs/install/_project/_testing.mdx" \
     "docs/install/_project/_troubleshooting-windows.mdx" \

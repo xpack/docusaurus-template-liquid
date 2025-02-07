@@ -467,13 +467,13 @@ Copy the trees displayed at the end of the test builds and paste to
 **Folder hierarchy** section in the web file:
 
 {% if isLinux -%}
-- `website/docs/install/_project/_folders-hierarchies-linux.mdx`
+- `website/docs/_shared/_folders-hierarchies-linux.mdx`
 {%- endif %}
 {% if isMacOS -%}
-- `website/docs/install/_project/_folders-hierarchies-macos.mdx`
+- `website/docs/_shared/_folders-hierarchies-macos.mdx`
 {%- endif %}
 {% if isWindows -%}
-- `website/docs/install/_project/_folders-hierarchies-windows.mdx`
+- `website/docs/_shared/_folders-hierarchies-windows.mdx`
 {%- endif %}
 
 If present, replace the actual version
@@ -899,10 +899,9 @@ xattr -cr ${HOME}/Downloads/xpack-*
 - check and possibly update the `build-assets/templates/body-github-release-liquid.mdx`
 - **push** the `xpack-development` branch to GitHub
 - run the **trigger-workflow-publish-release** xpm action:
-
-```sh
-xpm run trigger-workflow-publish-release -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
-```
+  ```sh
+  xpm run trigger-workflow-publish-release -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
+  ```
 
 The workflow result and logs are available from the
 [GitHub Actions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions) page.
@@ -915,6 +914,10 @@ with all binaries attached.
 
 - edit the draft and be sure it is attached to the `xpack-development` branch (important!)
 - perform the final edits (maintenance vs. new release) and check if everything is fine
+- add entries in the **Bug fixes**; use the following syntax
+  ```
+  - [[#N](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/issues/N)]:
+  ```
 - **keep the pre-release button enabled**
 - do **not** enable Discussions yet
 - click the **Publish release** button
@@ -931,14 +934,12 @@ watching the {{githubProjectName}} project.
 - check and possibly update the `website/blog/_templates/blog-post-release-part-[12]-liquid.md`
 - run the **generate-website-blog-post** xpm action;
 this will add a file in the `website/blog` folder:
-
-```sh
-xpm run generate-website-blog-post -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
-```
-
+  ```sh
+  xpm run generate-website-blog-post -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
+  ```
 - edit the `description` property in the post front matter
 - select the correct summary (maintenance vs. new release)
-- copy/paste the folders hierarchy from the install guide
+- copy/paste the folders hierarchies from the install guide
 - **commit** with the message _**website: blog post release {{xpackVersion}} published**_
 
 ### Update the web install page
@@ -963,11 +964,9 @@ xpm run generate-website-blog-post -C ~/Work/{{githubProjectOrganization}}/{{git
 - select the `xpack-development` branch
 - be sure that the binaries were attached to the pre-release
 - run the **update-package-binaries** xpm action:
-
-```sh
-xpm run update-package-binaries -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
-```
-
+  ```sh
+  xpm run update-package-binaries -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
+  ```
 - open the top `package.json` file
 - check the `baseUrl:` it should match the file URLs (including the tag/version);
   no terminating `/` is required
@@ -988,24 +987,19 @@ xpm run update-package-binaries -C ~/Work/{{githubProjectOrganization}}/{{github
   possibly adjust `.npmignore`
 - configure the version; the first 4 numbers are the same as the
   GitHub release; the fifth number is the npm specific version:
-
-<CodeBlock language="sh"> {
-`npm version {{releaseVersion}}
-`} </CodeBlock>
-
+  ```sh
+  npm version {{releaseVersion}}
+  ```
 - the commits and the tag should have been pushed by the `postversion` script;
   if not, push them with `git push origin --tags` to GitHub
 - publish and add the `test` tag:
-
-```sh
-npm publish --tag test
-```
-
+  ```sh
+  npm publish --tag test
+  ```
 - when publishing for the first time, use:
-
-```sh
-npm publish --access public
-```
+  ```sh
+  npm publish --access public
+  ```
 
 After a few moments the version will be visible at
 <a href="https://www.npmjs.com/package/{{packageScopedName}}?activeTab=versions">npmjs.com</a>.
@@ -1130,7 +1124,7 @@ Avoid further updates to the `xpack` branch until the next release.
 
 ### Clean the work area
 
-Run the **trigger-workflow-deep-clean** xpm action
+Run the **trigger-workflow-deep-clean** xpm action:
 
 ```sh
 xpm run trigger-workflow-deep-clean -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
