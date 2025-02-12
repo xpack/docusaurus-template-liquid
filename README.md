@@ -10,6 +10,18 @@ To add the template to an existing project, start with the instructions in
 `npm-package-helper`, up to the point where the folder `website` is
 created
 
+### Clone
+
+```sh
+rm -rf ~/Work/xpack/docusaurus-template-liquid.git && \
+mkdir -p ~/Work/xpack && \
+git clone \
+https://github.com/xpack/docusaurus-template-liquid.git \
+~/Work/xpack/docusaurus-template-liquid.git
+
+(cd ~/Work/xpack/docusaurus-template-liquid.git; npm link)
+```
+
 ### Top dependencies
 
 Install `del-cli`, `json` and `liquidjs`:
