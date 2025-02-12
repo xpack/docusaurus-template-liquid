@@ -819,12 +819,22 @@ These actions use the `xpack-development` branch of this repo and the
 [pre-releases/test](https://github.com/xpack-dev-tools/pre-releases/releases/tag/test/)
 binaries.
 
+{%- assign platforms_array = platforms | split: "," %}
+
+{%- assign isLinuxArm32 = false %}
+
+{%- for platform in platforms_array %}
+{%- if platform == "linux-arm" %}{% assign isLinuxArm32 = true %}{% endif %}
+{%- endfor %}
+
+{%- if isLinuxArm32 %}
 :::caution
 
 Some of the `docker-linux-arm` tests have an issue on Debian and the
 **Clean working area** step fails.
 
 :::
+{%- endif %}
 
 The tests results are available from the
 [GitHub Actions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions) page.
@@ -914,10 +924,6 @@ with all binaries attached.
 
 - edit the draft and be sure it is attached to the `xpack-development` branch (important!)
 - perform the final edits (maintenance vs. new release) and check if everything is fine
-- add entries in the **Bug fixes**; use the following syntax
-  ```
-  - [[#N](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/issues/N)]:
-  ```
 - **keep the pre-release button enabled**
 - do **not** enable Discussions yet
 - click the **Publish release** button
@@ -939,6 +945,10 @@ this will add a file in the `website/blog` folder:
   ```
 - edit the `description` property in the post front matter
 - select the correct summary (maintenance vs. new release)
+- add entries in the **Bug fixes**; use the following syntax
+  ```
+  - [[#N](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/issues/N)]:
+  ```
 - copy/paste the folders hierarchies from the install guide
 - **commit** with the message _**website: blog post release {{xpackVersion}} published**_
 
