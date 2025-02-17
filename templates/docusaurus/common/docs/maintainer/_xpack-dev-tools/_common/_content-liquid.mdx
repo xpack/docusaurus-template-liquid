@@ -298,7 +298,7 @@ commits are pushed to GitHub.
 
 :::caution
 
-This is particularly crucial for extensive projects; otherwise,
+This is particularly crucial for large projects; otherwise,
 the build may proceed with the previous version.
 
 :::
@@ -605,7 +605,7 @@ For the macOS x64 runners, be sure the deployment target is defined:
 
 ```sh
 unset WORK_FOLDER_PATH
-export XBB_ENVIRONMENT_MACOSX_DEPLOYMENT_TARGET="10.13"
+export XBB_ENVIRONMENT_MACOSX_DEPLOYMENT_TARGET="11.0"
 ~/actions-runners/{{githubProjectOrganization}}/run.sh &
 ```
 
@@ -716,6 +716,13 @@ rm -rf ~/Work/{{githubProjectOrganization}}/*/build-assets/build
 ### Commit and push
 
 - **push** the `xpack-development` branch to GitHub
+
+:::caution
+
+This is particularly crucial for large projects; otherwise,
+the build may proceed with the previous version.
+
+:::
 
 ### Check if the helper is pushed and published
 
@@ -1031,7 +1038,7 @@ The tests results are available from the
 
 ### Copy the test results
 
-For the toolchain projects, use the **Artifact download UR**
+For the toolchain projects, use the **Artifact download URL**
 from the **Generate tests report** GitHub Action to
 download the `test-report.zip` file, unzip it
 and copy the markdown file to `website/docs/tests`.
