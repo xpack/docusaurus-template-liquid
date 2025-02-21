@@ -85,7 +85,15 @@ compute_context
 
 echo
 
-post_relative_file_path="blog/$(date -u '+%Y-%m-%d')-${xpack_npm_package_name}-v$(echo ${xpack_xpack_version} | tr '.' '-')-released.mdx"
+# "" if empty or unset.
+if [ -z ${xpack_xpack_version:+x} ]
+then
+  version="${xpack_release_version}"
+else
+  version="${xpack_xpack_version}"
+fi
+
+post_relative_file_path="blog/$(date -u '+%Y-%m-%d')-${xpack_short_name:-${xpack_npm_package_name}}-v$(echo ${version} | tr '.' '-')-released.mdx"
 
 post_file_path="${website_folder_path}/${post_relative_file_path}"
 
@@ -97,31 +105,44 @@ post_file_path="${website_folder_path}/${post_relative_file_path}"
 
 xpack_binaries_folder_path="${HOME}/Downloads/xpack-binaries/${xpack_short_name}"
 
-download_binaries "${xpack_binaries_folder_path}"
+if [ "${xpack_npm_package_is_binary}" == "true" ]
+then
+  download_binaries "${xpack_binaries_folder_path}"
 
-echo
-ls -lL "${xpack_binaries_folder_path}"
+  echo
+  ls -lL "${xpack_binaries_folder_path}"
 
-echo
-cat "${xpack_binaries_folder_path}"/*.sha
+  echo
+  cat "${xpack_binaries_folder_path}"/*.sha
+fi
 
 # -----------------------------------------------------------------------------
 
 rm -rf "${post_file_path}"
 touch "${post_file_path}"
 
-echo "liquidjs -> ${post_relative_file_path}"
-liquidjs --context "${xpack_context}" --template "@${website_folder_path}/blog/_templates/blog-post-release-part-1-liquid.mdx" > "${post_file_path}"
+if [ -f "${website_folder_path}/blog/_templates/blog-post-release-part-1-liquid.mdx" ]
+then
+  echo "liquidjs -> ${post_relative_file_path}"
+  liquidjs --context "${xpack_context}" --template "@${website_folder_path}/blog/_templates/blog-post-release-part-1-liquid.mdx" > "${post_file_path}"
 
-echo >> "${post_file_path}"
-echo '```txt'  >> "${post_file_path}"
-cat "${xpack_binaries_folder_path}"/*.sha \
-  | sed -e 's|$|\n|' \
-  | sed -e 's|  |\n|' \
-  >> "${post_file_path}"
-echo '```'  >> "${post_file_path}"
+  echo >> "${post_file_path}"
+  echo '```txt'  >> "${post_file_path}"
+  cat "${xpack_binaries_folder_path}"/*.sha \
+    | sed -e 's|$|\n|' \
+    | sed -e 's|  |\n|' \
+    >> "${post_file_path}"
+  echo '```'  >> "${post_file_path}"
 
-liquidjs --context "${xpack_context}" --template "@${website_folder_path}/blog/_templates/blog-post-release-part-2-liquid.mdx" >> "${post_file_path}"
+  liquidjs --context "${xpack_context}" --template "@${website_folder_path}/blog/_templates/blog-post-release-part-2-liquid.mdx" >> "${post_file_path}"
+elif [ -f "${website_folder_path}/blog/_templates/blog-post-release-liquid.mdx" ]
+then
+  echo "liquidjs -> ${post_relative_file_path}"
+  liquidjs --context "${xpack_context}" --template "@${website_folder_path}/blog/_templates/blog-post-release-liquid.mdx" > "${post_file_path}"
+else
+  echo "No template found"
+  exit 1
+fi
 
 echo "Don't forget to manually solve the TODO action point!"
 
