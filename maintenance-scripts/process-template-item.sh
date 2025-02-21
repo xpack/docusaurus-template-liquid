@@ -461,7 +461,9 @@ if [ "${xpack_npm_package_is_xpack_binary}" != "true" ]
 then
   skip_pages_array+=(\
     "blog/_common/_deprecation-notices-glib-2.27.mdx" \
+    "blog/_common/_deprecation-notices-glib-2.28.mdx" \
     "blog/_common/_prerequisites-glib-2.27.mdx" \
+    "blog/_common/_prerequisites-glib-2.28.mdx" \
     "docs/_shared/_development-durations.mdx" \
     "docs/_shared/_github-actions-durations.mdx" \
     "docs/faq/_common/_flatpack-snap.mdx" \
