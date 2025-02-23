@@ -28,11 +28,11 @@ be added only as pre-release strings, separated by a dash,
 like <code>{{releaseSemver}}-<b>{{releaseSubversion}}</b></code>. When
 published as a npm package, the version gets
 a sixth number,
-like <code>{{xpackVersion}}.<b>{{releaseNpmSubversion}}</b></code>.
+like <code>{{releaseSemver}}-{{releaseSubversion}}.<b>{{releaseNpmSubversion}}</b></code>.
 
 Since adherence of third party packages to SemVer is not guaranteed,
 it is recommended to avoid referring to the xPack GNU AArch64 Embedded GCC dependency via
 a SemVer expressions
-like <code>^{{xpackVersion}}</code> or <code>~{{xpackVersion}}</code>, and
+like <code>^{{releaseSemver}}-{{releaseSubversion}}</code> or <code>~{{releaseSemver}}-{{releaseSubversion}}</code>, and
 prefer exact matches,
 like <code>{{releaseVersion}}</code>.

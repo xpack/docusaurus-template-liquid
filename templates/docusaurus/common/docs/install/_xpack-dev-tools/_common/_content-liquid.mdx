@@ -589,7 +589,7 @@ are packed as `.zip` files.
 Download the latest version named like:
 
 <ul>
-<li><code>xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{xpackVersion}}-win32-x64.zip</code></li>
+<li><code>xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{releaseSemver}}-{{releaseSubversion}}-win32-x64.zip</code></li>
 </ul>
 
 :::note
@@ -605,7 +605,7 @@ unpack the archive and move it to a location of your choice.
 
 The recommended location is
 the <code>%USERPROFILE%\\AppData\\Roaming\\xPacks\\{{packageName}}</code> folder, for
-example <code>C:\\Users\\ilg\\AppData\\Roaming\\xPacks\\{{packageName}}\\xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{xpackVersion}}</code>.
+example <code>C:\\Users\\ilg\\AppData\\Roaming\\xPacks\\{{packageName}}\\xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{releaseSemver}}-{{releaseSubversion}}</code>.
 
 :::note
 
@@ -636,10 +636,10 @@ Download the latest version named like:
 
 <ul>
 {%- if isMacOSX64 %}
-<li><code>xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{xpackVersion}}-darwin-x64.tar.gz</code></li>
+<li><code>xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{releaseSemver}}-{{releaseSubversion}}-darwin-x64.tar.gz</code></li>
 {%- endif %}
 {%- if isMacOsArm64 %}
-<li><code>xpack-{{packageConfig.shortName}}-{{xpackVersion}}-darwin-arm64.tar.gz</code></li>
+<li><code>xpack-{{packageConfig.shortName}}-{{releaseSemver}}-{{releaseSubversion}}-darwin-arm64.tar.gz</code></li>
 {%- endif %}
 </ul>
 
@@ -655,14 +655,14 @@ unpack the archive and move it to a location of your choice.
 
 The recommended location is
 the <code>~/Library/xPacks/{{packageName}}</code> folder, for
-example <code>/Users/ilg/Library/xPacks/{{packageName}}/xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{xpackVersion}}</code>:
+example <code>/Users/ilg/Library/xPacks/{{packageName}}/xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{releaseSemver}}-{{releaseSubversion}}</code>:
 
 <CodeBlock language="console"> {
 `mkdir -p ~/Library/xPacks/{{packageName}}
 cd ~/Library/xPacks/{{packageName}}
 
-tar xvf ~/Downloads/xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{xpackVersion}}-darwin-x64.tar.gz
-chmod -R -w xpack-{{packageConfig.shortName}}-{{xpackVersion}}
+tar xvf ~/Downloads/xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{releaseSemver}}-{{releaseSubversion}}-darwin-x64.tar.gz
+chmod -R -w xpack-{{packageConfig.shortName}}-{{releaseSemver}}-{{releaseSubversion}}
 `} </CodeBlock>
 
 </TabItem>
@@ -689,13 +689,13 @@ Download the latest version named like:
 
 <ul>
 {%- if isLinuxX64 %}
-<li><code>xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{xpackVersion}}-linux-x64.tar.gz</code></li>
+<li><code>xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{releaseSemver}}-{{releaseSubversion}}-linux-x64.tar.gz</code></li>
 {%- endif %}
 {%- if isLinuxArm64 %}
-<li><code>xpack-{{packageConfig.shortName}}-{{xpackVersion}}-linux-arm64.tar.gz</code></li>
+<li><code>xpack-{{packageConfig.shortName}}-{{releaseSemver}}-{{releaseSubversion}}-linux-arm64.tar.gz</code></li>
 {%- endif %}
 {%- if isLinuxArm %}
-<li><code>xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{xpackVersion}}-linux-arm.tar.gz</code></li>
+<li><code>xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{releaseSemver}}-{{releaseSubversion}}-linux-arm.tar.gz</code></li>
 {%- endif %}
 </ul>
 
@@ -711,14 +711,14 @@ unpack the archive and move it to a location of your choice.
 
 The recommended location is
 the <code>~/.local/xPacks/{{packageName}}</code> folder, for
-example <code>/home/ilg/.local/xPacks/{{packageName}}/xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{xpackVersion}}</code>:
+example <code>/home/ilg/.local/xPacks/{{packageName}}/xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{releaseSemver}}-{{releaseSubversion}}</code>:
 
 <CodeBlock language="console"> {
 `mkdir -p ~/.local/xPacks/{{packageName}}
 cd ~/.local/xPacks/{{packageName}}
 
-tar xvf ~/Downloads/xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{xpackVersion}}-linux-x64.tar.gz
-chmod -R -w xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{xpackVersion}}
+tar xvf ~/Downloads/xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{releaseSemver}}-{{releaseSubversion}}-linux-x64.tar.gz
+chmod -R -w xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{releaseSemver}}-{{releaseSubversion}}
 `} </CodeBlock>
 
 </TabItem>
