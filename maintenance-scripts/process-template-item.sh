@@ -464,6 +464,7 @@ then
     "blog/_common/_deprecation-notices-glib-2.28.mdx" \
     "blog/_common/_prerequisites-glib-2.27.mdx" \
     "blog/_common/_prerequisites-glib-2.28.mdx" \
+    "blog/2025-02-13-xbb.mdx" \
     "docs/_shared/_development-durations.mdx" \
     "docs/_shared/_github-actions-durations.mdx" \
     "docs/faq/_common/_flatpack-snap.mdx" \
