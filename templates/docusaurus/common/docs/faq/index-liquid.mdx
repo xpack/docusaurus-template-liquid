@@ -7,7 +7,7 @@ title: FAQ
 description: Answers to previously asked questions, so you can find solutions without having to ask again.
 keywords:
   - xpack
-  - {% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}
+  - {% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}
   - frequently
   - asked
   - questions
@@ -29,7 +29,7 @@ import FlatpackSnap from './_common/_flatpack-snap.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
-# The {% if packageConfig.shortName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.shortName}}{% else %}{{longXpackName}}{% endif %} Frequently Asked Questions
+# The {% if packageConfig.permalinkName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.permalinkName}}{% else %}{{longXpackName}}{% endif %} Frequently Asked Questions
 
 <ProjectContent />
 

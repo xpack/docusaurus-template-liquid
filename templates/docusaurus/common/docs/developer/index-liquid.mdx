@@ -13,7 +13,7 @@ description: Guidance for developers aiming to contribute new features or bug fi
 {%- endif %}
 keywords:
   - xpack
-  - {% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}
+  - {% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}
   - prerequisites{% if packageWebsiteConfig.hasCustomDeveloper != "true" %}
   - repositories{% endif %}
   - build
@@ -42,7 +42,7 @@ import Content from './_common/_content.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
-# How to contribute to {% if packageConfig.shortName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.shortName}}{% else %}the {{longXpackName}}{% endif %}
+# How to contribute to {% if packageConfig.permalinkName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.permalinkName}}{% else %}the {{longXpackName}}{% endif %}
 
 [![license](https://img.shields.io/github/license/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/issues)

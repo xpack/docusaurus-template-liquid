@@ -333,7 +333,7 @@ export PATH=<...project-path...>/xpacks/.bin:$PATH
 The above `xpm install` command will do the following:
 
 * identify the platform specific archive for the latest available version
-  of {{packageConfig.longName}}, download it into a cache and unpack
+  of {{packageConfig.descriptiveName}}, download it into a cache and unpack
   it into a versioned folder
   in the **user global xPacks store** (if not already there);
   check the output of the `xpm install` command for the actual
@@ -589,7 +589,7 @@ are packed as `.zip` files.
 Download the latest version named like:
 
 <ul>
-<li><code>xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{releaseSemver}}-{{releaseSubversion}}-win32-x64.zip</code></li>
+<li><code>xpack-{% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}-{{releaseSemver}}-{{releaseSubversion}}-win32-x64.zip</code></li>
 </ul>
 
 :::note
@@ -605,7 +605,7 @@ unpack the archive and move it to a location of your choice.
 
 The recommended location is
 the <code>%USERPROFILE%\\AppData\\Roaming\\xPacks\\{{packageName}}</code> folder, for
-example <code>C:\\Users\\ilg\\AppData\\Roaming\\xPacks\\{{packageName}}\\xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{releaseSemver}}-{{releaseSubversion}}</code>.
+example <code>C:\\Users\\ilg\\AppData\\Roaming\\xPacks\\{{packageName}}\\xpack-{% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}-{{releaseSemver}}-{{releaseSubversion}}</code>.
 
 :::note
 
@@ -636,10 +636,10 @@ Download the latest version named like:
 
 <ul>
 {%- if isMacOSX64 %}
-<li><code>xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{releaseSemver}}-{{releaseSubversion}}-darwin-x64.tar.gz</code></li>
+<li><code>xpack-{% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}-{{releaseSemver}}-{{releaseSubversion}}-darwin-x64.tar.gz</code></li>
 {%- endif %}
 {%- if isMacOsArm64 %}
-<li><code>xpack-{{packageConfig.shortName}}-{{releaseSemver}}-{{releaseSubversion}}-darwin-arm64.tar.gz</code></li>
+<li><code>xpack-{{packageConfig.permalinkName}}-{{releaseSemver}}-{{releaseSubversion}}-darwin-arm64.tar.gz</code></li>
 {%- endif %}
 </ul>
 
@@ -655,14 +655,14 @@ unpack the archive and move it to a location of your choice.
 
 The recommended location is
 the <code>~/Library/xPacks/{{packageName}}</code> folder, for
-example <code>/Users/ilg/Library/xPacks/{{packageName}}/xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{releaseSemver}}-{{releaseSubversion}}</code>:
+example <code>/Users/ilg/Library/xPacks/{{packageName}}/xpack-{% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}-{{releaseSemver}}-{{releaseSubversion}}</code>:
 
 <CodeBlock language="console"> {
 `mkdir -p ~/Library/xPacks/{{packageName}}
 cd ~/Library/xPacks/{{packageName}}
 
-tar xvf ~/Downloads/xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{releaseSemver}}-{{releaseSubversion}}-darwin-x64.tar.gz
-chmod -R -w xpack-{{packageConfig.shortName}}-{{releaseSemver}}-{{releaseSubversion}}
+tar xvf ~/Downloads/xpack-{% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}-{{releaseSemver}}-{{releaseSubversion}}-darwin-x64.tar.gz
+chmod -R -w xpack-{{packageConfig.permalinkName}}-{{releaseSemver}}-{{releaseSubversion}}
 `} </CodeBlock>
 
 </TabItem>
@@ -689,13 +689,13 @@ Download the latest version named like:
 
 <ul>
 {%- if isLinuxX64 %}
-<li><code>xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{releaseSemver}}-{{releaseSubversion}}-linux-x64.tar.gz</code></li>
+<li><code>xpack-{% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}-{{releaseSemver}}-{{releaseSubversion}}-linux-x64.tar.gz</code></li>
 {%- endif %}
 {%- if isLinuxArm64 %}
-<li><code>xpack-{{packageConfig.shortName}}-{{releaseSemver}}-{{releaseSubversion}}-linux-arm64.tar.gz</code></li>
+<li><code>xpack-{{packageConfig.permalinkName}}-{{releaseSemver}}-{{releaseSubversion}}-linux-arm64.tar.gz</code></li>
 {%- endif %}
 {%- if isLinuxArm %}
-<li><code>xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{releaseSemver}}-{{releaseSubversion}}-linux-arm.tar.gz</code></li>
+<li><code>xpack-{% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}-{{releaseSemver}}-{{releaseSubversion}}-linux-arm.tar.gz</code></li>
 {%- endif %}
 </ul>
 
@@ -711,14 +711,14 @@ unpack the archive and move it to a location of your choice.
 
 The recommended location is
 the <code>~/.local/xPacks/{{packageName}}</code> folder, for
-example <code>/home/ilg/.local/xPacks/{{packageName}}/xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{releaseSemver}}-{{releaseSubversion}}</code>:
+example <code>/home/ilg/.local/xPacks/{{packageName}}/xpack-{% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}-{{releaseSemver}}-{{releaseSubversion}}</code>:
 
 <CodeBlock language="console"> {
 `mkdir -p ~/.local/xPacks/{{packageName}}
 cd ~/.local/xPacks/{{packageName}}
 
-tar xvf ~/Downloads/xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{releaseSemver}}-{{releaseSubversion}}-linux-x64.tar.gz
-chmod -R -w xpack-{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}-{{releaseSemver}}-{{releaseSubversion}}
+tar xvf ~/Downloads/xpack-{% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}-{{releaseSemver}}-{{releaseSubversion}}-linux-x64.tar.gz
+chmod -R -w xpack-{% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}-{{releaseSemver}}-{{releaseSubversion}}
 `} </CodeBlock>
 
 </TabItem>

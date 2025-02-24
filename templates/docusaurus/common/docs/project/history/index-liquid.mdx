@@ -7,7 +7,7 @@ title: History
 description: The most important moments since the project was created.
 keywords:
   - xpack
-  - {% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}
+  - {% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}
   - history
 
 date: 2024-10-24 23:58:00 +0300
@@ -18,6 +18,6 @@ import ProjectContent from './_project/_content.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
-# The {% if packageConfig.shortName and packageWebsiteConfig.preferShortName == "true" %}history of {{packageConfig.shortName}}{% else %}{{longXpackName}} history{% endif %}
+# The {% if packageConfig.permalinkName and packageWebsiteConfig.preferShortName == "true" %}history of {{packageConfig.permalinkName}}{% else %}{{longXpackName}} history{% endif %}
 
 <ProjectContent />

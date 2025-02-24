@@ -7,7 +7,7 @@ title: Maintainer's Guide{% if packageWebsiteConfig.usePluralGuides == "true" %}
 description: Assistance for project maintainers, including the release schedule, versioning scheme, and instructions on how to build, test, and publish.
 keywords:
   - xpack
-  - {% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}
+  - {% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}
   - build{% if packageWebsiteConfig.hasCustomMaintainer != "true" %}
   - releases
   - publish
@@ -37,7 +37,7 @@ import Content from './_common/_content.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
-# How to make new {% if packageConfig.shortName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.shortName}}{% else %}{{longXpackName}}{% endif %} releases
+# How to make new {% if packageConfig.permalinkName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.permalinkName}}{% else %}{{longXpackName}}{% endif %} releases
 
 {% if isNpmPublished == "true" -%}
 [![GitHub package.json version](https://img.shields.io/github/package-json/v/{{githubProjectOrganization}}/{{githubProjectName}}?color=blue)](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/package.json)

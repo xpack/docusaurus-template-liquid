@@ -73,7 +73,7 @@ npm run generate-website-commons
 
 ### Variables
 
-- shortName: the lowercase short name, like xml; used in page titles;
+- permalinkName: the lowercase short name, like xml; used in page titles;
 if missing, the long name is used
 - programName: application name for CLI projects, like "xpm", "xcdl"
 - title: home page title, also used for all docs title

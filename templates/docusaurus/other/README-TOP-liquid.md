@@ -29,7 +29,7 @@ The Docusaurus source code for the {{longXpackName}} web site.
 {%- assign names_array = names_array | uniq  %}
 
 A standalone{% if names_array.size > 1 %}, cross-platform ({{ names_array | join: ", " }}){% else %} {{ names_array | first }}{% endif %} binary
-distribution of {{packageConfig.longName}},
+distribution of {{packageConfig.descriptiveName}},
 intended for reproducible builds.
 
 {%- else  %}

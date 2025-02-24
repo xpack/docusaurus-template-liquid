@@ -36,7 +36,7 @@ const actualBaseUrl = process.env.DOCUSAURUS_BASEURL ??
 const config: Config = {
   title: '{% if packageWebsiteConfig.title %}{{packageWebsiteConfig.title}}{% else %}{{longXpackName}}{% endif %}' +
     ((process.env.DOCUSAURUS_IS_PREVIEW === 'true') ? ' (preview)' : ''),
-  tagline: '{% if packageWebsiteConfig.tagline %}{{packageWebsiteConfig.tagline}}{% elsif isXpackBinary == "true" and packageConfig.longName %}A binary distribution of {{packageConfig.longName}}{% else %}{{packageDescription}}{% endif %}',
+  tagline: '{% if packageWebsiteConfig.tagline %}{{packageWebsiteConfig.tagline}}{% elsif isXpackBinary == "true" and packageConfig.descriptiveName %}A binary distribution of {{packageConfig.descriptiveName}}{% else %}{{packageDescription}}{% endif %}',
 
   // Explicitly set in headTags.
   // favicon: '/img/favicon.ico',
@@ -265,9 +265,9 @@ const config: Config = {
 {%- if packageWebsiteConfig.metadataKeywords %}
         content: '{{packageWebsiteConfig.metadataKeywords}}'
 {%- elsif githubProjectOrganization == "xpack-dev-tools" %}
-        content: 'xpack, binary, development, tools, reproducibility, {% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}'
+        content: 'xpack, binary, development, tools, reproducibility, {% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}'
 {%- else %}
-        content: 'xpack, {% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}'
+        content: 'xpack, {% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}'
 {%- endif %}
       }
     ],
@@ -282,7 +282,7 @@ const config: Config = {
       items: [
         {
           to: '/',
-          label: {% if packageConfig.isOrganizationWeb == "true" %}'{{githubProjectOrganization}}'{% else %}{% if packageConfig.shortName %}'{{packageConfig.shortName}}'{% else %}'{{packageName}}'{% endif %}{% endif %},
+          label: {% if packageConfig.isOrganizationWeb == "true" %}'{{githubProjectOrganization}}'{% else %}{% if packageConfig.permalinkName %}'{{packageConfig.permalinkName}}'{% else %}'{{packageName}}'{% endif %}{% endif %},
           className: 'header-home-link',
           position: 'left'
         },

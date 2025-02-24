@@ -7,7 +7,7 @@ title: About
 description: Details about the project, including its history, the history of the website, and details about the author.
 keywords:
   - xpack
-  - {% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}
+  - {% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}
   - about
   - history
   - web
@@ -43,7 +43,7 @@ import TheAuthor from './_common/_the-author.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
-# About {% if packageConfig.shortName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.shortName}}{% else %}the {{longXpackName}}{% endif %}
+# About {% if packageConfig.permalinkName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.permalinkName}}{% else %}the {{longXpackName}}{% endif %}
 
 <TheProject />
 

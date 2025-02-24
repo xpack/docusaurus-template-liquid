@@ -7,7 +7,7 @@ title: Install Guide{% if packageWebsiteConfig.usePluralGuides == "true" %}s{% e
 description: Explain the prerequisites, how to perform an automated {% if isXpackBinary == "true" %}or manual {% endif %}installation, how to uninstall{% if isXpackBinary == "true" %}, and the folder hierarchies{% endif %}.
 keywords:
   - xpack
-  - {% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}
+  - {% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}
   - prerequisites
   - automated
   - install
@@ -37,7 +37,7 @@ import Content from './_common/_content.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
-# How to install {% if packageConfig.shortName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.shortName}}{% else %}the {{longXpackName}}{% endif %}
+# How to install {% if packageConfig.permalinkName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.permalinkName}}{% else %}the {{longXpackName}}{% endif %}
 
 [![GitHub package.json version](https://img.shields.io/github/package-json/v/{{githubProjectOrganization}}/{{githubProjectName}}?color=blue)](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/package.json)
 {%- if isXpackBinary == "true" %}

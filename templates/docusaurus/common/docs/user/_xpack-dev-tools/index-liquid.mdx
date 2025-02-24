@@ -13,7 +13,7 @@ description: TODO
 {%- endif %}
 keywords:
   - xpack
-  - {% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}
+  - {% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}
   - user
   - guide{% if isXpackBinary == "true" %}
   - versioning
@@ -52,12 +52,12 @@ import Content from './_project/_content.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
-# How to use {% if packageConfig.shortName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.shortName}}{% else %}the {{longXpackName}}{% endif %}
+# How to use {% if packageConfig.permalinkName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.permalinkName}}{% else %}the {{longXpackName}}{% endif %}
 
 {%- if isXpackBinary == "true" or packageWebsiteConfig.hasCli == "true" %}
 
 This section is intended for those who plan to integrate
-{% if packageConfig.shortName and packageWebsiteConfig.preferShortName == "true" %}**{{packageConfig.shortName}}**{% else %}the **{{longXpackName}}**{% endif %} into their workflows.
+{% if packageConfig.permalinkName and packageWebsiteConfig.preferShortName == "true" %}**{{packageConfig.permalinkName}}**{% else %}the **{{longXpackName}}**{% endif %} into their workflows.
 
 {%- else %}
 

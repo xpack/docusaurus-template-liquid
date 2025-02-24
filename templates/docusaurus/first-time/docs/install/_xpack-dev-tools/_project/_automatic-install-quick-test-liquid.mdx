@@ -4,8 +4,8 @@ import AutomaticInstallQuickTest from './_common/_automatic-install-quick-test.m
 {/* ------------------------------------------------------------------------ */}
 
 <AutomaticInstallQuickTest
-  longName="{{longXpackName}}"
-  shortName="{% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}"
+  descriptiveName="{{longXpackName}}"
+  permalinkName="{% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}"
   programName="{{packageWebsiteConfig.programName}}"
   branding="{{packageWebsiteConfig.branding}}"
 />

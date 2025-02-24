@@ -7,7 +7,7 @@ title: Help Centre
 description: The project's support channel, where you can ask questions, start discussions, and report issues.
 keywords:
   - xpack
-  - {% if packageConfig.shortName %}{{packageConfig.shortName}}{% else %}{{packageName}}{% endif %}
+  - {% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}
   - support
   - discussions
   - issues
@@ -20,13 +20,13 @@ import Documentation from '../_shared/_documentation.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
-# How to get help for {% if packageConfig.shortName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.shortName}}{% else %}the {{longXpackName}}{% endif %}
+# How to get help for {% if packageConfig.permalinkName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.permalinkName}}{% else %}the {{longXpackName}}{% endif %}
 
 {%- if packageConfig.isOrganizationWeb == "true" %}
 
 ## Quick tips
 
-The **{{packageConfig.longName}}** consists of multiple individual
+The **{{packageConfig.descriptiveName}}** consists of multiple individual
 projects, each hosted on its own GitHub repository. Therefore, the best
 way to get answers quickly is to use the
 GitHub Discussions
