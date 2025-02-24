@@ -114,6 +114,7 @@ function update_and_publish()
         run_verbose git add website README.md
         run_verbose git commit -m "website: re-generate commons" || true
         # run_verbose git commit -m "website: rework with _project" || true
+        # run_verbose git commit -m "website: re-generate descriptive & permalink names" || true
       else
         echo "${name} has no websiteConfig..."
       fi
