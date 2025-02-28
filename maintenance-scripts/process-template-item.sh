@@ -50,7 +50,7 @@ export script_folder_name="$(basename "${script_folder_path}")"
 
 # set -x
 
-# The script is invoked from node_modules/@xpack/docusaurus-template-liquid.js via
+# The script is invoked from node_modules/@xpack/docusaurus-template-liquid.git via
 # ${script_folder_path}/process-template-item.sh
 
 helper_folder_path="$(dirname $(dirname "${script_folder_path}"))/npm-packages-helper"
