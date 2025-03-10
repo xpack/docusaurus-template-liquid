@@ -11,8 +11,11 @@ import typedocSidebarItems from "./docs/api/typedoc-sidebar.cjs";
 {%- if packageWebsiteConfig.hasToolsSidebar == "true" %}
 import toolsSidebar from './sidebars-tools.js';
 {%- endif %}
+{%- if packageWebsiteConfig.hasCustomGettingStartedSidebar == "true" %}
+import {customDocsGettingStartedSidebarCategory} from "./sidebar-docs-getting-started-custom";
+{%- endif %}
 {%- if packageWebsiteConfig.hasCustomUserSidebar == "true" %}
-import {userSidebarCategory} from "./sidebar-user";
+import {customDocsUserSidebarCategory} from "./sidebar-docs-user-custom";
 {%- endif %}
 {%- if packageWebsiteConfig.hasCustomSidebar == "true" %}
 import {customDocsSidebar} from "./sidebar-docs-custom";
@@ -33,16 +36,20 @@ const sidebars: SidebarsConfig = {
   docsSidebar: customDocsSidebar,
 {%- else %}
   docsSidebar: [
+{%- if packageWebsiteConfig.hasCustomGettingStartedSidebar == "true" %}
+    customDocsGettingStartedSidebarCategory,
+{%- else %}
     {
       type: 'doc',
       id: 'getting-started/index',
       label: 'Getting Started'
     },
+{%- endif %}
 {%- if packageConfig.isOrganizationWeb == "true" %}
     {
       type: 'doc',
       id: 'install/index',
-      label: 'Install Guides'
+      label: '{% if packageWebsiteConfig.customInstallLabel %}{{packageWebsiteConfig.customInstallLabel}}{% else %}Install Guides{% endif %}'
     },
     {
       type: 'doc',
@@ -79,11 +86,11 @@ const sidebars: SidebarsConfig = {
     {
       type: 'doc',
       id: 'install/index',
-      label: 'Install Guide'
+      label: '{% if packageWebsiteConfig.customInstallLabel %}{{packageWebsiteConfig.customInstallLabel}}{% else %}Install Guide{% endif %}'
     },
 {%- endif %}
 {%- if packageWebsiteConfig.hasCustomUserSidebar == "true" %}
-    userSidebarCategory,
+    customDocsUserSidebarCategory,
 {%- else %}
     {
       type: 'doc',

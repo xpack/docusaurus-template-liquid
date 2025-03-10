@@ -1,0 +1,29 @@
+{/* DO NOT EDIT! */}
+{/* Automatically generated from docusaurus-template-liquid/templates/docusaurus. */}
+
+import CodeBlock from '@theme/CodeBlock';
+
+{/* ------------------------------------------------------------------------ */}
+
+## Get the writable helper sources
+
+The project has a dependency to a common helper, that is normally installed
+as a read-only dependency; for development purposes, to be able to make
+changes to the scripts located inside the helper, clone the
+xpack-development branch and link it to the user global xPacks store:
+
+<CodeBlock language="sh"> {
+`rm -rf ~/Work/{{githubProjectOrganization}}/${props.helperProjectName}.git && \\
+mkdir -p ~/Work/{{githubProjectOrganization}} && \\
+git clone \\
+  --branch xpack-development \\
+  https://github.com/{{githubProjectOrganization}}/${props.helperProjectName}.git \\
+  ~/Work/{{githubProjectOrganization}}/${props.helperProjectName}.git \
+`} </CodeBlock>
+
+Or, if the repo was already cloned:
+
+<CodeBlock language="sh"> {
+`git -C ~/Work/{{githubProjectOrganization}}/${props.helperProjectName}.git pull
+xpm link -C ~/Work/{{githubProjectOrganization}}/${props.helperProjectName}.git
+`} </CodeBlock>

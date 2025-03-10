@@ -1,0 +1,86 @@
+---
+
+# DO NOT EDIT!
+# Automatically generated from docusaurus-template-liquid/templates/docusaurus.
+
+title: User's Guide{% if packageWebsiteConfig.usePluralGuides == "true" %}s{% endif %}
+{%- if githubProjectOrganization == "xpack" %}
+description: {% if packageWebsiteConfig.userGuideDescription %}{{packageWebsiteConfig.userGuideDescription}}{% else %}User information, including how to integrate it in a project, how to instantiate objects, how to call various functions.{% endif %}
+{%- elsif githubProjectOrganization == "xpack-dev-tools" %}
+description: {% if packageWebsiteConfig.userGuideDescription %}{{packageWebsiteConfig.userGuideDescription}}{% else %}User information, including the versioning scheme, usage of shared libraries, and RPATH configuration on GNU/Linux.{% endif %}
+{%- else %}
+description: TODO
+{%- endif %}
+keywords:
+{%- if githubProjectOrganization == "micro-os-plus" %}
+  - micro-os-plus
+{%- endif %}
+  - xpack
+  - {% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}
+  - user
+  - guide{% if isXpackBinary == "true" %}
+  - versioning
+  - shared
+  - rpath{% endif %}
+
+date: 2024-10-24 23:58:00 +0300
+
+---
+
+{%- if packageWebsiteConfig.hasCustomUser == "true" %}
+
+import ProjectContent from './_project/_content.mdx';
+
+{/* ------------------------------------------------------------------------ */}
+
+{%- if packageWebsiteConfig.customUserTitle %}
+
+# {{packageWebsiteConfig.customUserTitle}}
+
+{%- endif %}
+
+<ProjectContent />
+
+{%- else %}
+
+{%- if isXpackBinary == "true" %}
+
+import Content from './_common/_content.mdx';
+
+{%- else %}
+
+import Content from './_project/_content.mdx';
+
+{%- endif %}
+
+{/* ------------------------------------------------------------------------ */}
+
+# How to use {% if packageConfig.permalinkName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.permalinkName}}{% else %}the {{longXpackName}}{% endif %}
+
+{%- if isXpackBinary == "true" or packageWebsiteConfig.hasCli == "true" %}
+
+This section is intended for those who plan to integrate
+{% if packageConfig.permalinkName and packageWebsiteConfig.preferShortName == "true" %}**{{packageConfig.permalinkName}}**{% else %}the **{{longXpackName}}**{% endif %} into their workflows.
+
+{%- else %}
+
+This section is intended for those who plan to use this
+module in their
+own projects.
+
+{%- endif %}
+
+<Content />
+
+{%- endif %}
+
+{%- if packageWebsiteConfig.hasApi == "true" %}
+
+### Reference
+
+For more details on the available class definitions, including all methods,
+accessors, properties, etc,
+please see the TypeDoc
+[API](/docs/api/) pages.
+
+{%- endif %}

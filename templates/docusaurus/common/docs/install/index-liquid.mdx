@@ -6,6 +6,9 @@
 title: Install Guide{% if packageWebsiteConfig.usePluralGuides == "true" %}s{% endif %}
 description: Explain the prerequisites, how to perform an automated {% if isXpackBinary == "true" %}or manual {% endif %}installation, how to uninstall{% if isXpackBinary == "true" %}, and the folder hierarchies{% endif %}.
 keywords:
+{%- if githubProjectOrganization == "micro-os-plus" %}
+  - micro-os-plus
+{%- endif %}
   - xpack
   - {% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}
   - prerequisites
@@ -33,11 +36,23 @@ import ProjectContent from './_project/_content.mdx';
 
 {%- else %}
 
-import Content from './_common/_content.mdx';
+import CommonContent from './_common/_content.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
+{%- if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}
+
 # How to install {% if packageConfig.permalinkName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.permalinkName}}{% else %}the {{longXpackName}}{% endif %}
+
+{%- elsif githubProjectOrganization == "micro-os-plus" %}
+
+# How to install the {% if packageConfig.descriptiveLongName %}{{packageConfig.descriptiveLongName}}{% else %}{{packageConfig.descriptiveName}}{% endif %}
+
+{%- else %}
+
+# How to install on unsupported organization.
+
+{%- endif %}
 
 [![GitHub package.json version](https://img.shields.io/github/package-json/v/{{githubProjectOrganization}}/{{githubProjectName}}?color=blue)](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/package.json)
 {%- if isXpackBinary == "true" %}
@@ -53,7 +68,8 @@ import Content from './_common/_content.mdx';
 [![NPM Downloads](https://img.shields.io/npm/d18m/{% if packageScope != "" %}%40{{packageScope}}%2F{% endif %}{{packageName}})](https://www.npmjs.com/package/{{packageScopedName}}/)
 [![NPM Downloads](https://img.shields.io/npm/dw/{% if packageScope != "" %}%40{{packageScope}}%2F{% endif %}{{packageName}})](https://www.npmjs.com/package/{{packageScopedName}}/)
 {%- endif %}
+[![license](https://img.shields.io/github/license/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/LICENSE)
 
-<Content />
+<CommonContent />
 
 {%- endif %}

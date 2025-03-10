@@ -312,11 +312,8 @@ else
   # _common/_xpm-xcdl-features.
   skip_pages_array+=(\
     "docs/getting-started/_common/_content.mdx" \
-    "docs/getting-started/_common/_change-log.mdx" \
     "docs/getting-started/_common/_commonjs-compatibility.mdx" \
     "docs/getting-started/_common/_github-and-npmjs.mdx" \
-    "docs/getting-started/_common/_releases.mdx" \
-    "docs/getting-started/_common/_support-and-feedback.mdx" \
     "docs/getting-started/_project/_compatibility.mdx" \
     "docs/getting-started/_project/_compatibility-notices.mdx" \
     "docs/getting-started/_project/_more-credits.mdx" \
@@ -412,13 +409,15 @@ then
   )
 else
   skip_pages_array+=(\
+    "docs/project/about/_common/_the-author.mdx" \
+    "docs/project/about/_common/_the-project-history.mdx" \
+    "docs/project/about/_common/_the-project.mdx" \
   )
 fi
 
 if [ "${xpack_has_custom_user}" != "true" ]
 then
   skip_pages_array+=(\
-    "docs/user/_project/_content.mdx" \
   )
 else
   skip_pages_array+=(\

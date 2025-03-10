@@ -5,5 +5,14 @@
 
 ## The project history
 
+{%- if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}
+
 The {% if packageConfig.permalinkName and packageWebsiteConfig.preferShortName == "true" %}**{{packageConfig.permalinkName}}**{% else %}**{{longXpackName}}**{% endif %} history is presented
 in a separate [History](/docs/project/history/) page.
+
+{%- elsif githubProjectOrganization == "micro-os-plus" %}
+
+The {{packageConfig.descriptiveName}} history is presented
+in a separate [History](/docs/project/history/) page.
+
+{%- endif %}

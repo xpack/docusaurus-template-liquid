@@ -6,6 +6,9 @@
 title: FAQ
 description: Answers to previously asked questions, so you can find solutions without having to ask again.
 keywords:
+{%- if githubProjectOrganization == "micro-os-plus" %}
+  - micro-os-plus
+{%- endif %}
   - xpack
   - {% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}
   - frequently
@@ -22,21 +25,33 @@ import ProjectContent from './_project/_content.mdx';
 
 {%- if isXpackBinary == "true" %}
 
-import NixOs from './_common/_nixos.mdx';
-import FlatpackSnap from './_common/_flatpack-snap.mdx';
+import CommonNixOs from './_common/_nixos.mdx';
+import CommonFlatpackSnap from './_common/_flatpack-snap.mdx';
 
 {%- endif %}
 
 {/* ------------------------------------------------------------------------ */}
 
+{%- if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}
+
 # The {% if packageConfig.permalinkName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.permalinkName}}{% else %}{{longXpackName}}{% endif %} Frequently Asked Questions
+
+{%- elsif githubProjectOrganization == "micro-os-plus" %}
+
+# The {% if packageConfig.descriptiveLongName %}{{packageConfig.descriptiveLongName}}{% else %}{{packageConfig.descriptiveName}}{% endif %} Frequently Asked Questions
+
+{%- else %}
+
+# The unsupported organization FAQ
+
+{%- endif %}
 
 <ProjectContent />
 
 {%- if isXpackBinary == "true" %}
 
-<NixOs />
+<CommonNixOs />
 
-<FlatpackSnap />
+<CommonFlatpackSnap />
 
 {%- endif %}

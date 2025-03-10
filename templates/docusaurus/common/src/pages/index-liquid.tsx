@@ -69,7 +69,13 @@ function HomepageHeader() {
         </p>
 {%- if packageWebsiteConfig.skipInstallCommand != "true" %}
         <div className={styles.installWithCopy}>
-          <InstallWithCopy>{% if isXpackBinary == "true" %}xpm{% else %}npm{% endif %} install {% if packageWebsiteConfig.isInstallGlobally == "true" %}--location=global {% endif %}{{packageScopedName}}@{{releaseVersion}}{% if isXpackBinary == "true" %} --verbose{% endif %}</InstallWithCopy>
+{%- if isXpackBinary == "true" or packageWebsiteConfig.isXpmDependency == "true" %}
+          <InstallWithCopy>xpm install {% if packageWebsiteConfig.isInstallGlobally == "true" %}--location=global {% endif %}{{packageScopedName}}@{{releaseVersion}} --verbose
+          </InstallWithCopy>
+{%- else %}
+          <InstallWithCopy>npm install {% if packageWebsiteConfig.isInstallGlobally == "true" %}--global {% endif %}{{packageScopedName}}@{{releaseVersion}}
+{%- endif %}
+
         </div>
 {%- endif %}
       </div>

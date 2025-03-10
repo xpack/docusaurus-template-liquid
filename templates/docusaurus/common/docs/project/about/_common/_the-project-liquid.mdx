@@ -5,8 +5,19 @@
 
 ## The project
 
+{%- if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}
+
 The **{{longXpackName}}** project is part of the
 [xPack Reproducible Build Framework](https://xpack.github.io)
 and is hosted on GitHub as
 [`{{githubProjectOrganization}}/{{githubProjectName}}`](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/){% if githubProjectOrganization == "xpack-dev-tools" %},
 part of the [xPack Binary Development Tools](https://github.com/xpack-dev-tools/){% endif %}.
+
+{%- elsif githubProjectOrganization == "micro-os-plus" %}
+
+The **{% if packageConfig.descriptiveLongName %}{{packageConfig.descriptiveLongName}}{% else %}{{packageConfig.descriptiveName}}{% endif %}** project is part of the
+[µOS++ Framework](https://micro-os-plus.github.io)
+and is hosted on GitHub as
+[`{{githubProjectOrganization}}/{{githubProjectName}}`](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/).
+
+{%- endif %}

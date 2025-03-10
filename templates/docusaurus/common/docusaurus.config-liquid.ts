@@ -119,7 +119,7 @@ const config: Config = {
       // https://tagassistant.google.com
       '@docusaurus/plugin-google-gtag',
       {
-        trackingID: '{% if githubProjectOrganization == "xpack" %}G-8WX9T80JEK{% elsif githubProjectOrganization == "xpack-dev-tools" %}G-7QE5W7V05S{% endif %}',
+        trackingID: '{% if githubProjectOrganization == "xpack" %}G-8WX9T80JEK{% elsif githubProjectOrganization == "xpack-dev-tools" %}G-7QE5W7V05S{% elsif githubProjectOrganization == "micro-os-plus" %}G-E9T84WD3CK{% else %}???{% endif %}',
         anonymizeIP: false,
       }
     ],
@@ -202,6 +202,7 @@ const config: Config = {
         customCss: './src/css/custom.css',
       }
     ],
+{%- if packageWebsiteConfig.skipAlgolia != "true" %}
     [
       // Explicitly required when not using `preset-classic`.
       // https://docusaurus.io/docs/search#using-algolia-docsearch
@@ -209,10 +210,20 @@ const config: Config = {
       {
       }
     ],
+{%- endif %}
   ],
 
   // https://docusaurus.io/docs/api/docusaurus-config#headTags
   headTags: [
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'icon',
+        type: 'image/png',
+        href: actualBaseUrl + 'favicons/favicon-96x96.png',
+        sizes: '96x96'
+      }
+    },
     {
       tagName: 'link',
       attributes: {
@@ -272,11 +283,11 @@ const config: Config = {
       }
     ],
     navbar: {
-      title: {% if githubProjectOrganization == "xpack" %}'The xPack Project'{% elsif githubProjectOrganization == "xpack-dev-tools" %}'The xPack Binary Tools'{% else %}???{% endif %},
+      title: {% if githubProjectOrganization == "xpack" %}'The xPack Project'{% elsif githubProjectOrganization == "xpack-dev-tools" %}'The xPack Binary Tools'{% elsif githubProjectOrganization == "micro-os-plus" %}'The µOS++ Project'{% else %}???{% endif %},
 
       logo: {
-        alt: 'xPack Logo',
-        src: 'img/components-256.png',
+        alt: '{% if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}xPack{% elsif githubProjectOrganization == "micro-os-plus" %}µOS++{% else %}???{% endif %} Logo',
+        src: 'img/logo-256.png',
         href: 'https://{{githubProjectOrganization}}.github.io/'
       },
       items: [
@@ -301,7 +312,7 @@ const config: Config = {
             },
 {%- if packageWebsiteConfig.skipInstallGuide != "true" %}
             {
-              label: 'Install Guide{% if packageWebsiteConfig.usePluralGuides == "true" %}s{% endif %}',
+              label: '{% if packageWebsiteConfig.customInstallLabel %}{{packageWebsiteConfig.customInstallLabel}}{% else %}Install Guide{% if packageWebsiteConfig.usePluralGuides == "true" %}s{% endif %}{% endif %}',
               to: '/docs/install'
             },
 {%- endif %}
@@ -353,6 +364,12 @@ const config: Config = {
           label: 'API',
           position: 'left',
         },
+{%- elsif packageWebsiteConfig.hasDoxygenReference == "true" %}
+        {
+          to: 'pathname:///reference/topics.html',
+          label: 'API',
+          position: 'left',
+        },
 {%- endif %}
 {%- if packageWebsiteConfig.hasToolsSidebar == "true" %}
         {
@@ -398,6 +415,7 @@ const config: Config = {
               label: `{{githubProjectName}} project`,
               href: `https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/`,
             },
+{%- if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}
             {
               label: 'xpack org',
               href: 'https://github.com/xpack/',
@@ -406,6 +424,16 @@ const config: Config = {
               label: 'xpack-dev-tools org',
               href: 'https://github.com/xpack-dev-tools/',
             },
+{%- elsif githubProjectOrganization == "micro-os-plus" %}
+            {
+              label: 'micro-os-plus org',
+              href: 'https://github.com/micro-os-plus/',
+            },
+            {
+              label: 'xpack org',
+              href: 'https://github.com/xpack/',
+            },
+{%- endif %}
           ]
         },
 {%- if isXpackBinary == "true" %}
@@ -461,6 +489,7 @@ const config: Config = {
               label: 'GitHub Discussions',
               href: 'https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/discussions',
             },
+{%- if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}
             {
               label: 'Stack Overflow',
               href: 'https://stackoverflow.com/questions/tagged/xpack',
@@ -473,6 +502,20 @@ const config: Config = {
               label: 'X/Twitter',
               href: 'https://twitter.com/xpack_project',
             },
+{%- elsif githubProjectOrganization == "micro-os-plus" %}
+            {
+              label: 'Stack Overflow',
+              href: 'https://stackoverflow.com/questions/tagged/micro-os-plus',
+            },
+            {
+              label: 'Discord',
+              href: 'https://discord.com/invite/Xu82xjZZ',
+            },
+            {
+              label: 'X/Twitter',
+              href: 'https://twitter.com/micro_os_plus',
+            },
+{%- endif %}
           ],
         },
         {
@@ -486,6 +529,7 @@ const config: Config = {
               label: 'GitHub {{githubProjectName}} project',
               href: 'https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/',
             },
+{%- if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}
             {
               label: 'GitHub xpack org',
               href: 'https://github.com/xpack/',
@@ -494,6 +538,16 @@ const config: Config = {
               label: 'GitHub xpack-dev-tools org',
               href: 'https://github.com/xpack-dev-tools/',
             },
+{%- elsif githubProjectOrganization == "micro-os-plus" %}
+            {
+              label: 'GitHub micro-os-plus org',
+              href: 'https://github.com/micro-os-plus/',
+            },
+            {
+              label: 'GitHub xpack org',
+              href: 'https://github.com/xpack/',
+            },
+{%- endif %}
           ],
         },
       ],
@@ -503,6 +557,7 @@ const config: Config = {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
     },
+{%- if packageWebsiteConfig.skipAlgolia != "true" %}
     // https://docusaurus.io/docs/search#using-algolia-docsearch
     // https://docsearch.algolia.com/docs/docsearch-v3/
     algolia: {
@@ -543,6 +598,7 @@ const config: Config = {
       // Optional: whether the insights feature is enabled or not on Docsearch (`false` by default)
       insights: false,
     },
+{%- endif %}
   } satisfies Preset.ThemeConfig,
 
   customFields: customFields,

@@ -1,0 +1,69 @@
+{/* DO NOT EDIT! */}
+{/* Automatically generated from docusaurus-template-liquid/templates/docusaurus. */}
+
+{/* ------------------------------------------------------------------------ */}
+
+## Get project sources
+
+The project is hosted on GitHub:
+
+- https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}.git
+
+The project uses multiple branches:
+
+{% if branchMain == "xpack" -%}
+- `master`, not actively used
+- `xpack`, with the latest stable version (default)
+- `xpack-development`, with the current development version
+{%- else %}
+- `master`, {% if packageConfig.hasEmptyMaster == "true" %}not actively used{% else %}with the latest stable version (default){% endif %}
+{%- if hasBranchDevelopment == "true" %}
+- `development`, with the current development version
+{%- endif %}
+{%- endif %}
+{%- if hasBranchWebsite == "true" %}
+- `website`, with the current content of the website; pushes to this branch automatically trigger publishes the main website
+{%- endif %}
+{%- if hasBranchWebpreview == "true" %}
+- `webpreview`, with the current content of the preview website; pushes to this branch automatically trigger publishes the preview website
+{%- endif %}
+
+To clone the stable branch (`{{branchMain}}`), run the following commands in a
+terminal (on Windows use the Git Bash console):
+
+```sh
+rm -f ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git && \
+mkdir ~/Work/{{githubProjectOrganization}} && \
+git clone \
+  --branch {{branchMain}} \
+  https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}.git \
+  ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git
+```
+
+For **development** purposes, clone the `{{branchDevelopment}}` branch:
+
+```sh
+rm -f ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git && \
+mkdir ~/Work/{{githubProjectOrganization}} && \
+git clone \
+  --branch {{branchDevelopment}} \
+  https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}.git \
+  ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git
+```
+
+Or, if the repo was already cloned:
+
+```sh
+git -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git pull
+```
+
+{%- if isXpack == "true" %}
+
+To link it to the user global xPack store:
+
+```sh
+xpm link -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git
+```
+
+{%- endif %}
+

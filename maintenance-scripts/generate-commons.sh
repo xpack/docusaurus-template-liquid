@@ -267,7 +267,8 @@ else
   find . -type f -print0 | sort -zn | \
     xargs -0 -I '{}' bash "${script_folder_path}/process-template-item.sh" '{}' "${website_folder_path}"
 
-  if true # [ "${xpack_is_organization_web}" != "true" ]
+  if [ "${xpack_github_project_organization}" == "xpack" ] ||
+     [ "${xpack_github_project_organization}" == "xpack-dev-tools" ]
   then
     echo
     echo "Regenerate top README.md..."
@@ -278,6 +279,10 @@ else
     fi
     echo
     substitute "${templates_folder_path}/docusaurus/other/README-TOP-liquid.md" "README.md" "${project_folder_path}"
+  elif [ "${xpack_github_project_organization}" == "micro-os-plus" ]
+  then
+    substitute "${templates_folder_path}/docusaurus/other/README-TOP-MICRO-OS-liquid.md" "README.md" "${project_folder_path}"
+
   fi
 
 fi

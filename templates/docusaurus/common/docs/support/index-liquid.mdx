@@ -6,6 +6,9 @@
 title: Help Centre
 description: The project's support channel, where you can ask questions, start discussions, and report issues.
 keywords:
+{%- if githubProjectOrganization == "micro-os-plus" %}
+  - micro-os-plus
+{%- endif %}
   - xpack
   - {% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}
   - support
@@ -16,11 +19,23 @@ date: 2020-07-21 17:54:00 +0300
 
 ---
 
-import Documentation from '../_shared/_documentation.mdx';
+import SharedDocumentation from '../_shared/_documentation.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
+{%- if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}
+
 # How to get help for {% if packageConfig.permalinkName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.permalinkName}}{% else %}the {{longXpackName}}{% endif %}
+
+{%- elsif githubProjectOrganization == "micro-os-plus" %}
+
+# How to get help for the {% if packageConfig.descriptiveLongName %}{{packageConfig.descriptiveLongName}}{% else %}{{packageConfig.descriptiveName}}{% endif %}
+
+{%- else %}
+
+# How to get help for an unsupported organization
+
+{%- endif %}
 
 {%- if packageConfig.isOrganizationWeb == "true" %}
 
@@ -63,7 +78,7 @@ part with the problematic section, and suggest improvements.
 As usual, before asking anything, it is a good idea to check the project
 documentation.
 
-<Documentation/>
+<SharedDocumentation/>
 
 ## Preliminary checks
 
@@ -117,6 +132,8 @@ for questions and support; instead, **use the
 
 {%- endif %}
 
+{%- if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}
+
 ## Stack Overflow
 
 For community help, you can also use
@@ -130,17 +147,33 @@ project, and some of their questions are tagged with `xpack` too.
 
 :::
 
+{%- endif %}
+
 ## The Discord channel
+
+{%- if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}
 
 For live discussions among members, join the **xPack Community** on
 [Discord](https://discord.com/invite/kbzWaJerFG).
 
-Currently, there are three channels available:
+Currently, there are several channels available:
 
 - `#xpm`
 - `#xcdl`
 - `#xpack-dev-tools`
 - `#general`
+
+{%- elsif githubProjectOrganization == "micro-os-plus" %}
+
+For live discussions among members, join the **µOS++ Community** on
+[Discord](https://discord.com/invite/Xu82xjZZ).
+
+Currently, there are several channels available:
+
+- `#rtos`
+- `#general`
+
+{%- endif %}
 
 These channels are open for free discussions on their respective topics.
 

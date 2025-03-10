@@ -3,18 +3,18 @@
 
 import CodeBlock from '@theme/CodeBlock';
 
-import Prerequisites from '../../developer/_common/_prerequisites.mdx';
-import GetProjectSources from '../../developer/_common/_get-project-sources.mdx';
+import CommonPrerequisites from '@site/docs/_common/_prerequisites.mdx';
+import CommonGetProjectSources from '@site/docs/_common/_get-project-sources.mdx';
 
-import DependenciesDetails from '../_project/_dependencies-details.mdx';
+import ProjectDependenciesDetails from '../_project/_dependencies-details.mdx';
 
-import More from '../_project/_more.mdx';
+import ProjectMore from '../_project/_more.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
-<Prerequisites nodeVersion="{{packageEnginesNodeVersion}}" nodeVersionMajor="{{packageEnginesNodeVersionMajor}}"/>
+<CommonPrerequisites nodeVersion="{{packageEnginesNodeVersion}}" nodeVersionMajor="{{packageEnginesNodeVersionMajor}}"/>
 
-<GetProjectSources />
+<CommonGetProjectSources />
 
 ## Release schedule
 
@@ -65,7 +65,7 @@ Keep:
 
 {%- endif %}
 
-<DependenciesDetails />
+<ProjectDependenciesDetails />
 
 ### Increase the version and update it in the top `package.json`
 
@@ -219,12 +219,12 @@ npm install {{packageScopedName}}@next
 Test if the package can be installed globally:
 
 ```bash
-npm install ----location=global {{packageScopedName}}@next
+npm install --location=global {{packageScopedName}}@next
 ```
 
 {%- endif %}
 
-Validate the web site content in a local build via the npm `build` script:
+Validate the website content in a local build via the npm `build` script:
 
 ```sh
 npm run build
@@ -244,7 +244,7 @@ published in the project
 
 ## Publish the website
 
-The Web site deployment is performed automatically when pushing to the
+The website deployment is performed automatically when pushing to the
 `website` branch, by a dedicated workflow in
 [GitHub Actions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions/workflows/publish-github-pages.yml).
 
@@ -327,4 +327,4 @@ Credit to [Shields IO](https://shields.io) for the badges.
 - https://jsdoc.app/index.html
 - https://redfin.engineering/node-modules-at-war-why-commonjs-and-es-modules-cant-get-along-9617135eeca1
 
-<More />
+<ProjectMore />

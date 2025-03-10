@@ -6,6 +6,9 @@
 title: Getting Started
 description: The initial steps to explore the project, {% if packageName == "xpm" or isXpackBinary == "true" %}including what xpm packets are, {% endif %}the project's features, benefits, compatibility, and available documentation.
 keywords:
+{%- if githubProjectOrganization == "micro-os-plus" %}
+  - micro-os-plus
+{%- endif %}
   - xpack
   - {% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}
   - overview
@@ -34,55 +37,67 @@ import ProjectContent from './_project/_content.mdx';
 
 {%- else %}
 
-import Documentation from '../_shared/_documentation.mdx';
-import ReleaseSchedule from '../_shared/_release-schedule.mdx';
+import SharedDocumentation from '../_shared/_documentation.mdx';
+import SharedReleaseSchedule from '../_shared/_release-schedule.mdx';
 
-import UserDeveloperMaintainer from './_common/_user-developer-maintainer.mdx';
-import License from './_common/_license.mdx';
-import Credits from './_common/_credits.mdx';
-import EnjoyedUsing from './_common/_enjoyed-using.mdx';
-import SupportAndFeedback from './_common/_support-and-feedback.mdx';
-import ChangeLog from './_common/_change-log.mdx';
-import Releases from './_common/_releases.mdx';
+import CommonUserDeveloperMaintainer from './_common/_user-developer-maintainer.mdx';
+import CommonLicense from './_common/_license.mdx';
+import CommonEnjoyedUsing from './_common/_enjoyed-using.mdx';
+import CommonSupportAndFeedback from './_common/_support-and-feedback.mdx';
+import CommonChangeLog from './_common/_change-log.mdx';
+import CommonReleases from './_common/_releases.mdx';
 
-import MoreCredits from './_project/_more-credits.mdx';
-import Status from './_project/_status.mdx';
-{%- if githubProjectOrganization == "xpack" %}
-import CompatibilityNotices from './_project/_compatibility-notices.mdx';
-{%- endif %}
+import ProjectMoreCredits from './_project/_more-credits.mdx';
+import ProjectMoreLicenses from './_project/_more-licenses.mdx';
+import ProjectStatus from './_project/_status.mdx';
+import ProjectCompatibilityNotices from './_project/_compatibility-notices.mdx';
 
-import Content from './_common/_content.mdx';
+import CommonContent from './_common/_content.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
+{%- if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}
+
 # Getting Started with {% if packageConfig.permalinkName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.permalinkName}}{% else %}the {{longXpackName}}{% endif %}
+
+{%- elsif githubProjectOrganization == "micro-os-plus" %}
+
+# Getting Started with the {% if packageConfig.descriptiveLongName %}{{packageConfig.descriptiveLongName}}{% else %}{{packageConfig.descriptiveName}}{% endif %}
+
+{%- else %}
+
+# Getting Started with the unsupported organization
+
+{%- endif %}
 
 [![license](https://img.shields.io/github/license/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/LICENSE)
 ![GitHub Repo stars](https://img.shields.io/github/stars/{{githubProjectOrganization}}/{{githubProjectName}})
 
-<UserDeveloperMaintainer />
+<CommonUserDeveloperMaintainer />
 
-<Content />
+<CommonContent />
 
-<Status />
+<ProjectStatus />
+
+{%- if githubProjectOrganization == "xpack-dev-tools" %}
 
 ## Documentation
 
-<Documentation/>
-
-<ReleaseSchedule/>
-
-{%- if packageWebsiteConfig.skipReleases != "true" %}
-
-<Releases />
+<SharedDocumentation/>
 
 {%- endif %}
 
-<ChangeLog />
+<SharedReleaseSchedule/>
 
-<SupportAndFeedback />
+{%- if packageWebsiteConfig.skipReleases != "true" %}
 
-{%- if githubProjectOrganization == "xpack" %}
+<CommonReleases />
+
+{%- endif %}
+
+<CommonChangeLog />
+
+<CommonSupportAndFeedback />
 
 ## Compatibility notices
 
@@ -91,16 +106,35 @@ According to [SemVer](https://semver.org) rules:
 > Major version X (X.y.z | X > 0) MUST be incremented if any
 backwards incompatible changes are introduced to the public API.
 
-<CompatibilityNotices />
+The breaking changes introduced by each major release,
+in reverse chronological order, are:
+
+<ProjectCompatibilityNotices />
+
+<CommonLicense />
+
+<ProjectMoreLicenses />
+
+{%- if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}
+<Link to="https://www.macstadium.com/"><img className="mac-stadium-img" alt="MacStadium" src="https://uploads-ssl.webflow.com/5ac3c046c82724970fc60918/5c019d917bba312af7553b49_MacStadium-developerlogo.png"></img></Link>
+
+## Credits
+
+Special thanks to **MacStadium**, for providing the Apple Silicon
+development infrastructure as part of their generous
+[Free and Open Source Software](https://www.macstadium.com/company/opensource)
+program.
+
+{%- else %}
+
+## Credits
 
 {%- endif %}
 
-<License />
+<ProjectMoreCredits />
 
-<Credits />
+Thanks to [Shields IO](https://shields.io) for the badges.
 
-<MoreCredits />
-
-<EnjoyedUsing />
+<CommonEnjoyedUsing />
 
 {%- endif %}

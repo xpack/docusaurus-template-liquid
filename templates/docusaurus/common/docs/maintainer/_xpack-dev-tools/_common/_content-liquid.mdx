@@ -10,21 +10,22 @@ import customField from '@site/src/libs/customField';
 import isXpackSubversionDouble from '@site/src/libs/isXpackSubversionDouble';
 import dateYYYYMMDD from '@site/src/libs/dateYYYYMMDD';
 
-import ReleaseSchedule from '../../_shared/_release-schedule.mdx';
-import GitHubActionsDurations from '../../_shared/_github-actions-durations.mdx';
+import SharedReleaseSchedule from '../../_shared/_release-schedule.mdx';
+import SharedGitHubActionsDurations from '../../_shared/_github-actions-durations.mdx';
 import {developmentDurations} from '../../_shared/_development-durations.mdx';
 
-import PlatformNativeBuild from '../_common/_platform-native-build.mdx';
-import PlatformDockerBuild from '../_common/_platform-docker-build.mdx';
-import GenerateTopCommons from '../_common/_generate-top-commons.mdx';
+import CommonPlatformNativeBuild from '../_common/_platform-native-build.mdx';
+import CommonPlatformDockerBuild from '../_common/_platform-docker-build.mdx';
+import CommonGenerateTopCommons from '../_common/_generate-top-commons.mdx';
 
-import MoreRepos from '../_project/_more-repos.mdx';
-import CheckUpstreamRelease from '../_project/_check-upstream-release.mdx';
-import UpdateVersionSpecific from '../_project/_update-version-specific.mdx';
-import MoreTests from '../_project/_more-tests.mdx';
-import ShareCustom from '../_project/_share-custom.mdx';
-import FirstDevelopmentRun from '../_project/_first-development-run.mdx';
-import FirstProductionRun from '../_project/_first-production-run.mdx';
+import CommonProjectMoreRepos from '../_project/_more-repos.mdx';
+import CommonProjectCheckUpstreamRelease from '../_project/_check-upstream-release.mdx';
+import CommonProjectUpdateVersionSpecific from '../_project/_update-version-specific.mdx';
+
+import ProjectMoreTests from '../_project/_more-tests.mdx';
+import ProjectShareCustom from '../_project/_share-custom.mdx';
+import ProjectFirstDevelopmentRun from '../_project/_first-development-run.mdx';
+import ProjectFirstProductionRun from '../_project/_first-production-run.mdx';
 import Patches from '../_project/_patches.mdx';
 
 {/* ------------------------------------------------------------------------ */}
@@ -42,6 +43,8 @@ import Patches from '../_project/_patches.mdx';
 {%- if platform == "linux-x64" or platform == "linux-arm64" or platform == "linux-arm" %}{% assign isLinux = true %}{% endif %}
 {%- if platform == "win32-x64" %}{% assign isWindows = true %}{% endif %}
 {%- endfor %}
+
+**{{packageScopedName}}** is an xpm package that packs platform specific archives, built with the [xPack Build Box (XBB)](https://xpack.github.io/xpack-build-box/).
 
 {% if isLinux and isMacOS %}The build scripts run on GNU/Linux and macOS.{% else %}{% if isLinux %}The build scripts run on GNU/Linux.{% endif %}{% if isMacOS %}The build scripts run on macOS.{% endif %}{% endif %}
 {% if isWindows %}The Windows binaries are
@@ -108,9 +111,9 @@ git -C ~/Work/{{githubProjectOrganization}}/xbb-helper-xpack.git pull
 xpm link -C ~/Work/{{githubProjectOrganization}}/xbb-helper-xpack.git
 ```
 
-<MoreRepos/>
+<CommonProjectMoreRepos/>
 
-<ReleaseSchedule/>
+<SharedReleaseSchedule/>
 
 ## Prepare the new releases
 
@@ -148,7 +151,7 @@ and will be updated when the new release is out.
 Check the latest versions at https://github.com/{{githubProjectOrganization}}/ and
 update the dependencies in `build-assets/package.json`.
 
-<CheckUpstreamRelease/>
+<CommonProjectCheckUpstreamRelease/>
 
 ### Increase the version and update it in the top `package.json`
 
@@ -170,7 +173,7 @@ is <code>{{releaseSemver}}-{{releaseSubversion}}</code>.
 
 - update the release specific properties (if any)
 
-<GenerateTopCommons />
+<CommonGenerateTopCommons />
 
 ### Update the website commons
 
@@ -193,7 +196,7 @@ or run the following in a terminal:
 Navigate to the **Maintainer Info** page,
 the **[Update the version specific code](http://localhost:3000/{{githubProjectName}}/docs/maintainer/#update-the-version-specific-code)** section.
 
-<UpdateVersionSpecific/>
+<CommonProjectUpdateVersionSpecific/>
 
 ### Fix possible open issues
 
@@ -267,7 +270,7 @@ will build again the previous release!
 
 Before the real build, run {% if names_array.size > 1 %}test/development builds on all platforms{% else %}a test/development build{% endif %}.
 
-<FirstDevelopmentRun/>
+<ProjectFirstDevelopmentRun/>
 
 ### Visual Studio Code extension
 
@@ -360,7 +363,7 @@ start a VS Code remote session, or connect with a terminal:
 caffeinate ssh xbbmi
 ```
 
-<PlatformNativeBuild platform="darwin-x64"/>
+<CommonPlatformNativeBuild platform="darwin-x64"/>
 
 {%- endif %}
 
@@ -376,7 +379,7 @@ start a VS Code remote session, or connect with a terminal:
 caffeinate ssh xbbma
 ```
 
-<PlatformNativeBuild platform="darwin-arm64"/>
+<CommonPlatformNativeBuild platform="darwin-arm64"/>
 
 {%- endif %}
 
@@ -391,7 +394,7 @@ start a VS Code remote session, or connect with a terminal:
 caffeinate ssh xbbli
 ```
 
-<PlatformDockerBuild platform="linux-x64"/>
+<CommonPlatformDockerBuild platform="linux-x64"/>
 
 {%- endif %}
 
@@ -406,7 +409,7 @@ start a VS Code remote session, or connect with a terminal:
 caffeinate ssh xbbli
 ```
 
-<PlatformDockerBuild platform="win32-x64"/>
+<CommonPlatformDockerBuild platform="win32-x64"/>
 
 {%- endif %}
 
@@ -421,7 +424,7 @@ start a VS Code remote session, or connect with a terminal:
 caffeinate ssh ampere
 ```
 
-<PlatformDockerBuild platform="linux-arm64"/>
+<CommonPlatformDockerBuild platform="linux-arm64"/>
 
 {%- endif %}
 
@@ -436,7 +439,7 @@ start a VS Code remote session, or connect with a terminal:
 caffeinate ssh xbbla32
 ```
 
-<PlatformDockerBuild platform="linux-arm"/>
+<CommonPlatformDockerBuild platform="linux-arm"/>
 
 {%- endif %}
 
@@ -650,7 +653,7 @@ Publish a new release of the helper on **npmjs**.
 In `templates/_xpack-dev-tools/build-assets/package-merge-liquid.json`, update the reference
 to `"@xpack-dev-tools/xbb-helper":`.
 
-<GenerateTopCommons />
+<CommonGenerateTopCommons />
 
 ### Check for disk space
 
@@ -728,7 +731,7 @@ the build may proceed with the previous version.
 
 The helper `xpack` branch must be updated and the npm package published.
 
-<FirstProductionRun/>
+<ProjectFirstProductionRun/>
 
 ### Manually trigger the build GitHub Actions
 
@@ -766,7 +769,7 @@ These commands use the `xpack-development` branch of this repo.
 
 ### Durations & resulting binaries
 
-<GitHubActionsDurations/>
+<SharedGitHubActionsDurations/>
 
 The workflow results and logs are available from the
 [GitHub Actions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions) page.
@@ -904,7 +907,7 @@ xattr -cr ${HOME}/Downloads/xpack-*
 
 {%- endif %}
 
-<MoreTests/>
+<ProjectMoreTests/>
 
 ## Publish the release
 
@@ -1075,7 +1078,7 @@ In case the release proves problematic and needs to be unpublished:
 
 ### Build the static website locally
 
-Validate the web site content in a local build via the npm `build` script:
+Validate the website content in a local build via the npm `build` script:
 
 ```sh
 (cd website; npm run build)
@@ -1171,7 +1174,7 @@ Close those that were addressed.
   [release](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/releases)
 - click the **Tweet** button
 
-<ShareCustom/>
+<ProjectShareCustom/>
 
 ## Analytics
 

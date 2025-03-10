@@ -1,0 +1,36 @@
+{/* DO NOT EDIT! */}
+{/* Automatically generated from docusaurus-template-liquid/templates/docusaurus. */}
+
+import CodeBlock from '@theme/CodeBlock';
+
+{/* ------------------------------------------------------------------------ */}
+
+### Prepare the release
+
+{% if isTypeScript == "true" -%}
+- terminate all running tasks (**Terminal** → **Terminate Task...**)
+{%- endif %}
+- switch to the `{{branchDevelopment}}` branch
+{%- if isTypeScript == "true" or isJavaScript == "true" -%}
+- `npm run fix`
+{%- endif %}
+- if there are changes, **commit** all changes into the `{{branchDevelopment}}` branch
+{%- if isTypeScript == "true" or isJavaScript == "true" -%}
+- `npm run test`
+{%- endif %}
+- `npm run pack`; check the list of packaged files, possibly
+  update `.npmignore`
+
+### Set the new version
+
+<CodeBlock language="sh"> {
+`npm version {{releaseVersion}}
+`} </CodeBlock>
+
+- the `postversion` npm script should also update tags via
+  `git push origin --tags`; this should trigger CI
+
+### CI tests
+
+- **wait for CI tests to complete**
+- check https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions

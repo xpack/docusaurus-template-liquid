@@ -9,6 +9,8 @@ The folder was created with:
 npx create-docusaurus website classic --typescript
 ```
 
+{%- if isTypeScript == "true" %}
+
 ## docusaurus-plugin-typedoc
 
 This plugin uses [TypeDoc](https://typedoc.org) to generate
@@ -29,3 +31,5 @@ categories or groups.
 [!NOTE]
 There is also another plugin, `docusaurus-plugin-typedoc-api`, but
 it is no longer maintained.
+
+{%- endif %}

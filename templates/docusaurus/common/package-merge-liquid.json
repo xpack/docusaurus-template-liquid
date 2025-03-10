@@ -25,6 +25,12 @@
     "generate-website-blog-post": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-blog-post.sh --{{githubProjectOrganization}}",
     "generate-dependencies-details": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-dependencies-details.sh --{{githubProjectOrganization}}"
   },
+  "author": {
+    "name": "Liviu Ionescu",
+    "email": "ilg@livius.net",
+    "url": "https://github.com/ilg-ul"
+  },
+  "license": "MIT",
   "dependencies": {
     "@docusaurus/core": "3.6.3",
     "@docusaurus/plugin-client-redirects": "3.6.3",
@@ -39,9 +45,15 @@
     "react-dom": "^18.0.0"
   },
   "$devDependenciesUrls": [
+    "https://www.npmjs.com/package/del-cli",
+{%- if isTypeScript == "true" %}
     "https://www.npmjs.com/package/docusaurus-plugin-typedoc",
+{%- endif %}
+    "https://www.npmjs.com/package/json",
     "https://www.npmjs.com/package/liquidjs",
+{%- if isTypeScript == "true" %}
     "https://www.npmjs.com/package/typedoc",
+{%- endif %}
     "https://www.npmjs.com/package/typescript"
   ],
   "devDependencies": {
@@ -57,14 +69,8 @@
 {%- if isTypeScript == "true" %}
     "typedoc": "^0.27.6",
 {%- endif %}
-    "typescript": "~5.6.3"
+  "typescript": "~5.6.3"
   },
-  "$devDependenciesUrls": [
-    "https://www.npmjs.com/package/del-cli",
-    "https://www.npmjs.com/package/json",
-    "https://www.npmjs.com/package/liquidjs",
-    "https://www.npmjs.com/package/typescript"
-  ],
   "browserslist": {
     "production": [
       ">0.5%",
