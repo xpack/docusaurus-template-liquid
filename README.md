@@ -1,7 +1,7 @@
 # docusaurus-template-liquid
 
 This project provides the template used to generate the Docusaurus
-web sites for the xPack Node.js projects. It uses the
+websites for the xPack Node.js projects. It uses the
 [LiquidJs](https://liquidjs.com) engine for substitutions.
 
 ## How to use

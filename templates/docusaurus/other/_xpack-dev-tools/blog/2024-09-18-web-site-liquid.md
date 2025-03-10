@@ -1,5 +1,5 @@
 ---
-title:  The project has a new web site
+title:  The project has a new website
 
 date:   2024-07-21 13:21:00 +0300
 
@@ -11,7 +11,7 @@ tags:
 ---
 
 After some experimentation with modern site generators,
-the **xPack GNU texinfo** project has a new web site.
+the **xPack GNU texinfo** project has a new website.
 
 <!--truncate-->
 

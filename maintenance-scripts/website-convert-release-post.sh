@@ -113,7 +113,7 @@ fi
 title=$(grep 'title: ' "${to_path}" | sed -e 's|^title:[ ]*||')
 
 seo_title="${title}"
-seo_title="$(echo "${seo_title}" | sed -e 's|The project has a new web site|New web site|')"
+seo_title="$(echo "${seo_title}" | sed -e 's|The project has a new web site|New website|')"
 seo_title="$(echo "${seo_title}" | sed -e 's|xPack .* v|Version |')"
 seo_title="$(echo "${seo_title}" | sed -e 's|GNU .* v|Version |')"
 
@@ -424,7 +424,7 @@ sed -i.bak -e 's|- .https://www.winehq.org/documentation/.(https://www.winehq.or
 # Fix cmake docs link
 sed -i.bak -e 's|- .https://cmake.org/documentation/.(https://cmake.org/documentation/)|- https://cmake.org/documentation/|' "${to_path}"
 
-# Fix links to web sites.
+# Fix links to websites.
 sed -i.bak -e 's|\[xPack \(.*\)\][(]https://xpack.github.io/dev-tools/\([a-w].*\)/[)]|[xPack \1](https://xpack-dev-tools.github.io/\2-xpack/)|g' "${to_path}"
 sed -i.bak -e 's|\[xPack \(.*\)\][(]https://xpack.github.io/\([a-w].*\)/[)]|[xPack \1](https://xpack-dev-tools.github.io/\2-xpack/)|g' "${to_path}"
 

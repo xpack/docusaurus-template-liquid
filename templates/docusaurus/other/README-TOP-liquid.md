@@ -7,9 +7,9 @@
 
 {%- if packageConfig.isOrganizationWeb == "true"  %}
 
-# The {{longXpackName}} web site source
+# The {{longXpackName}} website source
 
-The Docusaurus source code for the {{longXpackName}} web site.
+The Docusaurus source code for the {{longXpackName}} website.
 
 {%- else  %}
 
@@ -41,7 +41,7 @@ intended for reproducible builds.
 ## Project documentation
 
 For information on how to {% if packageWebsiteConfig.skipInstallCommand != "true" %}install and {% endif %}use this project, please refer to the
-[project web site]({{packageHomepage}}).
+[project website]({{packageHomepage}}).
 
 {%- endif  %}
 
