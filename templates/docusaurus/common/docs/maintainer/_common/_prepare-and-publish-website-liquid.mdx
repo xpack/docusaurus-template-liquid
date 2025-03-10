@@ -3,6 +3,20 @@
 
 {/* ------------------------------------------------------------------------ */}
 
+{%- if packageConfig.useDoxygen == "true" %}
+
+## Re-generate the Doxygen pages
+
+Run the `doxygen` npm script:
+
+```sh
+npm run doxygen -C website
+```
+
+The result is in the `website/static/reference` folder.
+
+{%- endif %}
+
 ## Prepare the website
 
 The documentation site is built with [Docusaurus](https://docusaurus.io) and
