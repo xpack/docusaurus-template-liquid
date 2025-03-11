@@ -23,7 +23,7 @@ To update the build scripts and build the development binaries:
 
 <CodeBlock language="sh"> {
 `export XBB_ENVIRONMENT_MACOSX_DEPLOYMENT_TARGET='11.0' && \\
-rm -f ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets/package-lock.json && \\
+rm -rf ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets/package-lock.json && \\
 git -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git pull && \\
 xpm run install -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets && \\
 git -C ~/Work/{{githubProjectOrganization}}/xbb-helper-xpack.git pull && \\
@@ -46,7 +46,7 @@ To update the build scripts and build the release binaries:
 
 <CodeBlock language="sh"> {
 `export XBB_ENVIRONMENT_MACOSX_DEPLOYMENT_TARGET='11.0' && \\
-rm -f ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/package-lock.json && \\
+rm -rf ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/package-lock.json && \\
 git -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git pull && \\
 xpm run install -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets && \\
 \\

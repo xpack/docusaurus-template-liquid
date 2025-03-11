@@ -22,7 +22,7 @@ xpm run clear-all-projects-builds -C ~/Work/{{githubProjectOrganization}}/{{gith
 To update the build scripts and build the development binaries:
 
 <CodeBlock language="sh"> {
-`rm -f ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets/package-lock.json && \\
+`rm -rf ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets/package-lock.json && \\
 git -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git pull && \\
 xpm run install -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets && \\
 git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull && \\
@@ -45,7 +45,7 @@ the <code>build-assets/build/{props.platform}/deploy</code> folder:
 To update the build scripts and build the release binaries:
 
 <CodeBlock language="sh"> {
-`rm -f ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/package-lock.json && \\
+`rm -rf ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/package-lock.json && \\
 git -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git pull && \\
 xpm run install -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets && \\
 \\

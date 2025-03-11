@@ -330,7 +330,7 @@ export XBB_ENVIRONMENT_SKIP_CHECKS="y"
 ```
 
 ```sh
-rm -f ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets/package-lock.json
+rm -rf ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets/package-lock.json
 git -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git pull
 
 xpm run install -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
