@@ -90,20 +90,20 @@ and preferred to possible system tools.
 </details>
 
 <details>
-<summary>Global installs and the user global xPacks store</summary>
+<summary>Global installs and the user's global xPacks store</summary>
 
 Given that some binary tools (such as toolchains) can be very large
 (hundreds of megabytes or more), it is impractical to keep multiple
 copies of these tools, one for each project.
 
 Instead, **xpm** installs the binary packages only once
-into a user global store (a platform-dependent folder
+into a user's global xPacks store (a platform-dependent folder
 within the home folder), thereby conserving disk space when the same
 tools are used across multiple projects.
 
 In order to allow the projects to access the binary tools installed in the
-user global store, instead of unpacking the archives in `xpacks`,
-**xpm** adds symbolic links pointing to the **user global xPacks store**.
+user's global xPacks store, instead of unpacking the archives in `xpacks`,
+**xpm** adds symbolic links pointing to the **user's global xPacks store**.
 
 The outcome is functionally equivalent to installing the tools into
 each project, but without the wasted disk space.

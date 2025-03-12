@@ -15,17 +15,17 @@ import CommonXpmCleanUps from '@site/docs/_common/_xpm-clean-ups.mdx';
 
 {%- if isXpackBinary == "true" %}
 
-The xpm binaries do not use any form of installer; instead they
+The xpm binaries do not use any form of system installer; instead they
 are distributed as
 portable (<code>.zip</code> or <code>.tar.gz</code>) archives;
 {%- else %}
 
-The xpm packages do not use any form of installer; instead they
+The xpm packages do not use any form of system installer; instead they
 are distributed as
 portable archives;
 {%- endif %}
 therefore they do not require to run any uninstaller; simply removing the
-links and possibly the user global xPacks store folder and
+links and possibly the user's global xPacks store folder and
 the user xPack cache folder is enough.
 
 To remove the links created by
@@ -42,7 +42,7 @@ and ask **xpm** to uninstall the package:
 `xpm uninstall {{packageScopedName}} --verbose
 `} </CodeBlock>
 
-To completely remove the package from the user global xPacks store:
+To completely remove the package from the user's global xPacks store:
 
 <CodeBlock language="sh"> {
 `xpm uninstall --global {{packageScopedName}} --verbose

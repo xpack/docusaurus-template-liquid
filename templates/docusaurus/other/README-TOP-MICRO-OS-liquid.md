@@ -1,7 +1,7 @@
 {% if isNpmPublished == "true"  -%}
 [![GitHub package.json version](https://img.shields.io/github/package-json/v/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/package.json)
-[![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/tags)
-[![NPM Version](https://img.shields.io/npm/v/{{packageScopedName}}?color=green)](https://www.npmjs.com/package/{{packageScopedName}}/)
+[![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/{{githubProjectOrganization}}/{{githubProjectName}}?color=blue)](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/tags)
+[![NPM Version](https://img.shields.io/npm/v/{{packageScopedName}}?color=blue)](https://www.npmjs.com/package/{{packageScopedName}}/)
 {%- endif  %}
 [![license](https://img.shields.io/github/license/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/LICENSE)
 
@@ -13,7 +13,7 @@ The Docusaurus source code for the {{longXpackName}} website.
 
 {%- else  %}
 
-# The {{packageConfig.descriptiveLongName}}
+# The {{packageConfig.descriptiveName}}
 
 {{ packageDescription }}.
 

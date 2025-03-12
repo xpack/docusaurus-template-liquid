@@ -8,9 +8,9 @@ import Admonition from '@theme/Admonition';
 
 import LinksVsForwarders from '@site/src/components/LinksVsForwarders';
 
-import SharedFoldersHierarchiesLinux from '../../_shared/_folders-hierarchies-linux.mdx';
-import SharedFoldersHierarchiesWindows from '../../_shared/_folders-hierarchies-windows.mdx';
-import SharedFoldersHierarchiesMacOS from '../../_shared/_folders-hierarchies-macos.mdx';
+import ProjectFoldersHierarchiesLinux from '@site/docs/_project/_folders-hierarchies-linux.mdx';
+import ProjectFoldersHierarchiesWindows from '@site/docs/_project/_folders-hierarchies-windows.mdx';
+import ProjectFoldersHierarchiesMacOS from '@site/docs/_project/_folders-hierarchies-macos.mdx';
 
 import CommonPrerequisites from '@site/docs/_common/_prerequisites.mdx';
 
@@ -179,7 +179,7 @@ export PATH=<...project-path...>/xpacks/.bin:$PATH
 
 For older development environments,
 it is also possible to install {{longXpackName}} only globally in
-the **user global xPacks store**, without any
+the **user's global xPacks store**, without any
 local links/forwarders; it
 is the developer's responsibility to configure the path to the tools.
 
@@ -192,7 +192,7 @@ No other files are installed in any system folders or other locations.
 :::note
 
 Installing packages locally into a project always installs the
-packages in the **user global xPacks store**; subsequent attempts to
+packages in the **user's global xPacks store**; subsequent attempts to
 install the packages globally will fail with _already installed_.
 
 :::
@@ -201,7 +201,7 @@ install the packages globally will fail with _already installed_.
 <summary>PATH setup</summary>
 
 In order to access the {{longXpackName}} binaries installed in
-the user global xPacks store,
+the user's global xPacks store,
 the project build configurations need a PATH adjustment:
 
 <Tabs groupId="operating-systems">
@@ -460,7 +460,7 @@ After install, the package creates a hierarchy of folders like the following
 
 <TabItem value="windows" label="Windows" default>
 
-<SharedFoldersHierarchiesWindows />
+<ProjectFoldersHierarchiesWindows />
 
 </TabItem>
 
@@ -470,7 +470,7 @@ After install, the package creates a hierarchy of folders like the following
 
 <TabItem value="macos" label="macOS">
 
-<SharedFoldersHierarchiesMacOS />
+<ProjectFoldersHierarchiesMacOS />
 
 </TabItem>
 
@@ -480,7 +480,7 @@ After install, the package creates a hierarchy of folders like the following
 
 <TabItem value="linux" label="GNU/Linux">
 
-<SharedFoldersHierarchiesLinux />
+<ProjectFoldersHierarchiesLinux />
 
 </TabItem>
 

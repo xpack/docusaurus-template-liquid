@@ -13,7 +13,7 @@ use the exact desired versions of the required {% if isXpackBinary == "true" %}t
 tools installed in the system{% else %}libraries, regardless of the
 libraries installed in the system{% endif %}.
 
-To achieve this goal, **xpm** records all locally installed binary packages
+To achieve this goal, **xpm** records all locally installed {% if isXpackBinary == "true" %}binary {% endif %}packages
 as {% if isXpackBinary == "true" %}development {% endif %}dependencies in the project `package.json` file.
 
 The result looks like this:
@@ -48,7 +48,7 @@ The result looks like this:
 
 If the `package.json` is saved in the revision system, the above
 definition acts as a hard reference to the specific version of
-**{{longXpackName}}**.
+the {{longXpackName}}.
 
 After cloning the project into a different location, the command `xpm install`
 can be used to install all {% if isXpackBinary == "true" %}development {% endif %}dependencies.

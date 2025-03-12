@@ -185,9 +185,9 @@ else
       relocate "docs/getting-started/_other-benefits.mdx"
 
       relocate "docs/getting-started/_overview.mdx"
-      if [ -f "docs/getting-started/_project/_overview.mdx" ] && grep "'../_shared/" "docs/getting-started/_project/_overview.mdx" >/dev/null
+      if [ -f "docs/getting-started/_project/_overview.mdx" ] && grep "'@site/docs/_project/" "docs/getting-started/_project/_overview.mdx" >/dev/null
       then
-        run_verbose sed -i.bak -e "s|'\.\./_shared|'../../_shared|" "docs/getting-started/_project/_overview.mdx"
+        run_verbose sed -i.bak -e "s|'\.\./_shared|'@site/docs/_project|" "docs/getting-started/_project/_overview.mdx"
       fi
 
       relocate "docs/getting-started/_release-schedule.mdx" "docs/_shared/_release-schedule.mdx"

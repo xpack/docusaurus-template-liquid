@@ -37,8 +37,10 @@ import ProjectContent from './_project/_content.mdx';
 
 {%- else %}
 
-import SharedDocumentation from '../_shared/_documentation.mdx';
-import SharedReleaseSchedule from '../_shared/_release-schedule.mdx';
+import ProjectDocumentation from '@site/docs/_project/_documentation.mdx';
+import ProjectReleaseSchedule from '@site/docs/_project/_release-schedule.mdx';
+
+import CommonContinuousIntegration from '@site/docs/_common/_continuous-integration.mdx';
 
 import CommonUserDeveloperMaintainer from './_common/_user-developer-maintainer.mdx';
 import CommonLicense from './_common/_license.mdx';
@@ -62,7 +64,7 @@ import CommonContent from './_common/_content.mdx';
 
 {%- elsif githubProjectOrganization == "micro-os-plus" %}
 
-# Getting Started with the {% if packageConfig.descriptiveLongName %}{{packageConfig.descriptiveLongName}}{% else %}{{packageConfig.descriptiveName}}{% endif %}
+# Getting Started with the {{packageConfig.descriptiveName}}
 
 {%- else %}
 
@@ -79,15 +81,19 @@ import CommonContent from './_common/_content.mdx';
 
 <ProjectStatus />
 
+## Testing
+
+<CommonContinuousIntegration />
+
 {%- if githubProjectOrganization == "xpack-dev-tools" %}
 
 ## Documentation
 
-<SharedDocumentation/>
+<ProjectDocumentation/>
 
 {%- endif %}
 
-<SharedReleaseSchedule/>
+<ProjectReleaseSchedule/>
 
 {%- if packageWebsiteConfig.skipReleases != "true" %}
 

@@ -6,7 +6,8 @@
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import CodeBlock from '@theme/CodeBlock';
+
+import CommonGetProjectSources from '@site/docs/_common/_get-project-sources.mdx';
 
 import CommonPlatformNativeSection from '../_common/_platform-native-section.mdx';
 import CommonPlatformDockerSection from '../_common/_platform-docker-section.mdx';
@@ -172,66 +173,7 @@ For details on installing the prerequisites, please read the
 [Build Prerequisites](https://xpack-dev-tools.github.io/docs/developer/install/prerequisites/)
 page.
 
-## Get project sources
-
-The project is hosted on GitHub:
-
-- https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}.git
-
-<details>
-<summary>Branches</summary>
-
-The project uses multiple branches:
-
-- `{{branchMain}}`, with the latest stable version (default)
-- `{{branchDevelopment}}`, with the current development version
-- `{{branchWebsite}}`, with the current content of the website
-
-All development is done in the `{{branchDevelopment}}` branch, and contributions via
-Pull Requests should be directed to this branch.
-
-When new releases are published, the `{{branchDevelopment}}` branch is merged
-into `{{branchMain}}`.
-
-Pushes to the `{{branchWebsite}}` branch trigger a GitHub Action to generate
-and publish the project website.
-
-</details>
-
-To clone the stable branch (`{{branchMain}}`), run the following commands in a
-terminal (on Windows use the _Git Bash_ console):
-
-```sh
-rm -rf ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git && \
-mkdir -p ~/Work/{{githubProjectOrganization}} && \
-git clone \
-  --branch {{branchMain}} \
-  https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}.git \
-  ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git
-```
-
-<details>
-<summary>For development purposes, clone the `{{branchDevelopment}}` branch.</summary>
-
-```sh
-rm -rf ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git && \
-mkdir -p ~/Work/{{githubProjectOrganization}} && \
-git clone \
-  --branch {{branchDevelopment}} \
-  https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}.git \
-  ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git
-```
-
-</details>
-
-:::tip
-
-To contribute Pull Requests, fork the project and be sure the **Copy the master branch only** is **disabled**.
-
-Use the `xpack-development` branch and be sure you contribute the
-Pull Requests back to the `xpack-development` branch.
-
-:::
+<CommonGetProjectSources />
 
 <details>
 <summary>Get the writable helper sources (optional, for development purposes)</summary>
@@ -240,7 +182,7 @@ The project has a dependency to a common **helper**, that is
 normally installed as a read-only dependency; **for development
 purposes**, to be able to make changes to the scripts located inside the helper,
 clone the `xpack-development` branch and link it to
-the user global xPacks store:
+the user's global xPacks store:
 
 ```sh
 rm -rf ~/Work/{{githubProjectOrganization}}/xbb-helper-xpack.git && \

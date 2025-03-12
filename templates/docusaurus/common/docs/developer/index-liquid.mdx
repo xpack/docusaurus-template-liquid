@@ -51,7 +51,7 @@ import CommonContent from './_common/_content.mdx';
 
 {%- elsif githubProjectOrganization == "micro-os-plus" %}
 
-# How to contribute to the {% if packageConfig.descriptiveLongName %}{{packageConfig.descriptiveLongName}}{% else %}{{packageConfig.descriptiveName}}{% endif %}
+# How to contribute to the {{packageConfig.descriptiveName}}
 
 {%- else %}
 
@@ -61,7 +61,7 @@ import CommonContent from './_common/_content.mdx';
 
 {% if isNpmPublished == "true" -%}
 [![GitHub package.json version](https://img.shields.io/github/package-json/v/{{githubProjectOrganization}}/{{githubProjectName}}?color=blue)](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/package.json)
-[![NPM Version](https://img.shields.io/npm/v/{% if packageScope != "" %}%40{{packageScope}}%2F{% endif %}{{packageName}}?color=green)](https://www.npmjs.com/package/{{packageScopedName}}/)
+[![NPM Version](https://img.shields.io/npm/v/{% if packageScope != "" %}%40{{packageScope}}%2F{% endif %}{{packageName}}?color=blue)](https://www.npmjs.com/package/{{packageScopedName}}/)
 {%- endif %}
 [![license](https://img.shields.io/github/license/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/issues)

@@ -5,23 +5,9 @@ import CodeBlock from '@theme/CodeBlock';
 
 {/* ------------------------------------------------------------------------ */}
 
-## Final updates
-
-### Update the `master` branch
-
-In this Git repo:
-
-- select the `{{branchMain}}` branch
-- **merge** the `{{branchDevelopment}}` branch into the `{{branchMain}}` branch
-- **push** the `{{branchMain}}` branch to GitHub
-
-### Close milestone
-
-In https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/milestones:
-
-- close the current milestone.
-
 ### Check npm package tags
+
+Run the following command in a terminal:
 
 ```sh
 npm dist-tag ls {{packageScopedName}}
@@ -33,7 +19,16 @@ When the release is considered stable, promote it as `latest`:
 
 <CodeBlock language="sh"> {
 `npm dist-tag add {{packageScopedName}}@{{releaseVersion}} latest
-npm dist-tag ls {{packageScopedName}}
 `} </CodeBlock>
 
+Check the result:
 
+<CodeBlock language="sh"> {
+`npm dist-tag ls {{packageScopedName}}
+`} </CodeBlock>
+
+In case the release proves problematic and needs to be unpublished:
+
+<CodeBlock language="sh"> {
+`npm unpublish {{packageScopedName}}@{{releaseVersion}}
+`} </CodeBlock>
