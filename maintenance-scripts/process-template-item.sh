@@ -418,10 +418,10 @@ fi
 if [ "${xpack_has_custom_user}" != "true" ]
 then
   skip_pages_array+=(\
+    "docs/user/_project/_content.mdx" \
   )
 else
   skip_pages_array+=(\
-    "docs/user/_project/_content.mdx" \
     "docs/user/_project/_more.mdx" \
     "docs/user/_project/_use-in-testing.mdx" \
     "docs/user/_project/_versioning.mdx" \

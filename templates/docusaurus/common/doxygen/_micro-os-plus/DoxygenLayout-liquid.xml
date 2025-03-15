@@ -46,7 +46,7 @@
     <tab type="examples" visible="yes" title="" intro=""/>
 
     <!-- https://www.doxygen.nl/manual/customize.html#layout -->
-    <tab type="user" url="{{githubProjectOrganization}}/{{githubProjectName}}" title="GitHub"/>
+    <tab type="user" url="{{repositoryUrl}}" title="GitHub"/>
 
   </navindex>
 

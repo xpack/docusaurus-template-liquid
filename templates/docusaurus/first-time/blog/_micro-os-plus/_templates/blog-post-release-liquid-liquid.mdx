@@ -1,0 +1,84 @@
+---
+
+title: {{packageConfig.descriptiveName}} {% raw %}v{{releaseVersion}}{% endraw %} released
+seo_title: Version {% raw %}{{releaseVersion}}{% endraw %} released
+description: Version {% raw %}v{{releaseVersion}}{% endraw %} is a TODO new/maintenance release
+keywords:
+  - micro-os-plus
+  - xpack
+  - {{packageName}}
+  - release
+
+date: {% raw %}{{releaseDate}}{% endraw %}
+
+authors: ilg-ul
+
+# To be listed in the Releases page.
+tags:
+  - releases
+
+# ----- Custom properties -----------------------------------------------------
+
+version: "{% raw %}{{releaseVersion}}{% endraw %}"
+
+release_tag_url: "https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/tree/v{% raw %}{{releaseVersion}}{% endraw %}"
+
+---
+
+import {PageMetadata} from '@docusaurus/theme-common';
+import Image from '@theme/IdealImage';
+import CodeBlock from '@theme/CodeBlock';
+import Link from '@docusaurus/Link';
+
+import CommonPrerequisites from './_common/_prerequisites.mdx';
+import CommonDownloadAnalytics from './_common/_download-analytics.mdx';
+
+TODO: select one summary
+
+Version **{% raw %}{{releaseVersion}}{% endraw %}** is a maintenance release; it fixes ...
+
+Version **{% raw %}{{releaseVersion}}{% endraw %}** is a new release; it adds ....
+
+<!-- truncate -->
+
+<PageMetadata title={frontMatter.seo_title} />
+
+The [{{packageConfig.descriptiveName}}]({{packageHomepage}})
+project is a C++ source code library.
+
+<CommonPrerequisites nodeVersion="{{packageEnginesNodeVersion}}"/>
+
+## Install
+
+The most convenient way to integrate the `{{packageScopedName}}`
+package into a project is to add it as a dependency via **xpm**.
+
+<CodeBlock language="console"> {
+`xpm install {{packageScopedName}}@${frontMatter.version} -verbose
+`} </CodeBlock>
+
+Comprehensive instructions can be found in the [Install Guide](/docs/install/).
+
+## Source code
+
+- <Link to={frontMatter.release_tag_url}>GitHub tag v{frontMatter.version} tree</Link>
+
+## Bug fixes
+
+- none
+
+## Enhancements
+
+- none
+
+## Known problems
+
+- none
+
+## CI tests
+
+Before publishing, a set of tests were performed .
+The results are available from:
+
+- [GitHub Actions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions)
+

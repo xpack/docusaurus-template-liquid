@@ -6,13 +6,11 @@ import CommonMesonIntegration from '../_common/_meson-integration.mdx';
 
 ## Build & integration info
 
-The project is written in C++, ...
+The project is written in C++, and it is expected to be used in C++ projects.
 
 The source code has been compiled natively with **GCC** and **LLVM/clang**,
 and cross-compiled on embedded **Arm** and **RISC-V** targets,
 ensuring it is free from warnings.
-
-...
 
 To facilitate the integration of this library into user projects,
 pre-made **CMake** and **meson** configuration files are provided
@@ -56,7 +54,9 @@ The following options must be passed to the compiler and linker:
 
 The library has the following dependencies:
 
-- none
+- `@micro-os-plus/diag-trace` - the **µOS++** `trace::printf()` tracing
+  infrastructure (optional, used only if `MICRO_OS_PLUS_TRACE_UTILS_LISTS*`
+  are defined)
 
 <CommonCmakeIntegration />
 

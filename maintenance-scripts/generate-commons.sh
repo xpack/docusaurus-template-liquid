@@ -150,9 +150,19 @@ function relocate()
 
 if [ "${do_init}" == "true" ]
 then
-  # TODO
-  echo "--init not implemented yet"
-  exit 1
+  cd "${project_folder_path}"
+  if [ -f "website/config.doxyfile" ]
+  then
+    mv website doxygen
+    mkdir -p website
+    mv doxygen website/doxygen
+    rm -rf website/doxygen/package*.json
+  fi
+
+  cd "${templates_folder_path}/docusaurus/common"
+  substitute "package-liquid-merge.json" "package.json" "${website_folder_path}"
+
+  exit 0
 else
 
   if false
