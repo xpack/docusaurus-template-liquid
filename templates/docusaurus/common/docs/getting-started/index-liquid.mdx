@@ -37,10 +37,15 @@ import ProjectContent from './_project/_content.mdx';
 
 {%- else %}
 
+import Link from '@docusaurus/Link';
+
 import ProjectDocumentation from '@site/docs/_project/_documentation.mdx';
 import ProjectReleaseSchedule from '@site/docs/_project/_release-schedule.mdx';
 
+{%- if packageConfig.skipCiTests != "true" %}
+
 import CommonContinuousIntegration from '@site/docs/_common/_continuous-integration.mdx';
+{%- endif %}
 
 import CommonUserDeveloperMaintainer from './_common/_user-developer-maintainer.mdx';
 import CommonLicense from './_common/_license.mdx';
@@ -48,11 +53,15 @@ import CommonEnjoyedUsing from './_common/_enjoyed-using.mdx';
 import CommonSupportAndFeedback from './_common/_support-and-feedback.mdx';
 import CommonChangeLog from './_common/_change-log.mdx';
 import CommonReleases from './_common/_releases.mdx';
-
+{% if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" -%}
+import CommonCreditsMacStadium from './_common/_credits-mac-stadium.mdx';
+{%- endif %}
 import ProjectMoreCredits from './_project/_more-credits.mdx';
 import ProjectMoreLicenses from './_project/_more-licenses.mdx';
 import ProjectStatus from './_project/_status.mdx';
+{%- if githubProjectOrganization != "xpack-dev-tools" %}
 import ProjectCompatibilityNotices from './_project/_compatibility-notices.mdx';
+{%- endif %}
 
 import CommonContent from './_common/_content.mdx';
 
@@ -81,9 +90,13 @@ import CommonContent from './_common/_content.mdx';
 
 <ProjectStatus />
 
+{%- if packageConfig.skipCiTests != "true" %}
+
 ## Testing
 
 <CommonContinuousIntegration />
+
+{%- endif %}
 
 {%- if githubProjectOrganization == "xpack-dev-tools" %}
 
@@ -105,6 +118,8 @@ import CommonContent from './_common/_content.mdx';
 
 <CommonSupportAndFeedback />
 
+{%- if githubProjectOrganization != "xpack-dev-tools" %}
+
 ## Compatibility notices
 
 According to [SemVer](https://semver.org) rules:
@@ -117,19 +132,14 @@ in reverse chronological order, are:
 
 <ProjectCompatibilityNotices />
 
+{%- endif %}
+
 <CommonLicense />
 
 <ProjectMoreLicenses />
 
-{%- if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}
-<Link to="https://www.macstadium.com/"><img className="mac-stadium-img" alt="MacStadium" src="https://uploads-ssl.webflow.com/5ac3c046c82724970fc60918/5c019d917bba312af7553b49_MacStadium-developerlogo.png"></img></Link>
-
-## Credits
-
-Special thanks to **MacStadium**, for providing the Apple Silicon
-development infrastructure as part of their generous
-[Free and Open Source Software](https://www.macstadium.com/company/opensource)
-program.
+{% if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" -%}
+<CommonCreditsMacStadium />
 
 {%- else %}
 

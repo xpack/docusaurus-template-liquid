@@ -9,7 +9,7 @@
 # for any purpose is hereby granted, under the terms of the MIT license.
 #
 # If a copy of the license was not distributed with this file, it can
-# be obtained from https://opensource.org/licenses/mit.
+# be obtained from https://opensource.org/licenses/MIT.
 #
 # -----------------------------------------------------------------------------
 
@@ -69,7 +69,7 @@ done
 # -----------------------------------------------------------------------------
 
 # The script is invoked from the website via the following npm script:
-# "website-generate-commons": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-commons.sh",
+# "website-generate-commons": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-website-commons.sh",
 
 current_folder_path="$(dirname $(dirname $(dirname $(dirname "${script_folder_path}"))))"
 if [ "$(basename "${current_folder_path}")" == "website" ]

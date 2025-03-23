@@ -106,7 +106,7 @@ exit 0
 
 
 # The script is invoked from the website via the following npm script:
-# "website-generate-commons": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-commons.sh",
+# "website-generate-commons": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-website-commons.sh",
 
 # set -x
 

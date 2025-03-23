@@ -9,7 +9,7 @@
 # for any purpose is hereby granted, under the terms of the MIT license.
 #
 # If a copy of the license was not distributed with this file, it can
-# be obtained from https://opensource.org/licenses/mit.
+# be obtained from https://opensource.org/licenses/MIT.
 #
 # -----------------------------------------------------------------------------
 
@@ -224,6 +224,28 @@ then
   then
     skip_pages_array+=(\
       "blog/_common/_download-analytics.mdx" \
+      "docs/_common/_branches-details.mdx" \
+      "docs/_common/_build-website-locally.mdx" \
+      "docs/_common/_code-formatting.mdx" \
+      "docs/_common/_continuous-integration.mdx" \
+      "docs/_common/_generate-top-commons.mdx" \
+      "docs/_common/_generate-website-commons.mdx" \
+      "docs/_common/_get-helper-sources-details.mdx" \
+      "docs/_common/_get-project-sources.mdx" \
+      "docs/_common/_manual-tests.mdx" \
+      "docs/_common/_prepare-website.mdx" \
+      "docs/_common/_prerequisites.mdx" \
+      "docs/_common/_publish-website.mdx" \
+      "docs/_common/_release-schedule-continuous.mdx" \
+      "docs/_common/_start-local-web-server.mdx" \
+      "docs/_common/_xpm-clean-ups.mdx" \
+      "docs/_project/_development-durations.mdx" \
+      "docs/_project/_documentation.mdx" \
+      "docs/_project/_folders-hierarchies-linux.mdx" \
+      "docs/_project/_folders-hierarchies-macos.mdx" \
+      "docs/_project/_folders-hierarchies-windows.mdx" \
+      "docs/_project/_github-actions-durations.mdx" \
+      "docs/_project/_release-schedule.mdx" \
       "docs/about/_common/HistoryXpm/index.tsx" \
       "docs/developer/_common/_platform-docker-section.mdx" \
       "docs/developer/_common/_platform-native-section.mdx" \
@@ -272,6 +294,38 @@ then
       "src/components/HomepageTools/styles.module.css" \
     )
   fi
+
+  if [ "${xpack_xpack_github_project_name}" == "xpack-build-box" ]
+  then
+    skip_pages_array+=(\
+      "docs/_common/_branches-details.mdx" \
+      "docs/_common/_build-website-locally.mdx" \
+      "docs/_common/_code-formatting.mdx" \
+      "docs/_common/_continuous-integration.mdx" \
+      "docs/_common/_generate-top-commons.mdx" \
+      "docs/_common/_generate-website-commons.mdx" \
+      "docs/_common/_get-helper-sources-details.mdx" \
+      "docs/_common/_get-project-sources.mdx" \
+      "docs/_common/_manual-tests.mdx" \
+      "docs/_common/_prepare-website.mdx" \
+      "docs/_common/_prerequisites.mdx" \
+      "docs/_common/_publish-website.mdx" \
+      "docs/_common/_release-schedule-continuous.mdx" \
+      "docs/_common/_start-local-web-server.mdx" \
+      "docs/_common/_xpm-clean-ups.mdx" \
+      "docs/_project/_development-durations.mdx" \
+      "docs/_project/_folders-hierarchies-linux.mdx" \
+      "docs/_project/_folders-hierarchies-macos.mdx" \
+      "docs/_project/_folders-hierarchies-windows.mdx" \
+      "docs/_project/_github-actions-durations.mdx" \
+      "docs/_project/_release-schedule.mdx" \
+      "docs/getting-started/_common/_benefits.mdx" \
+      "docs/getting-started/_common/_details-reproducible-operations.mdx" \
+      "docs/getting-started/_common/_features.mdx" \
+      "docs/getting-started/_common/_install-preamble.mdx" \
+      "docs/getting-started/_common/_what-are-xpm-packages.mdx" \
+    )
+  fi
 fi
 
 if [ "${xpack_has_custom_developer}" != "true" ]
@@ -311,9 +365,12 @@ else
   # Keep _common/_license, _common/_credits, _common/_enjoyed-using,
   # _common/_xpm-xcdl-features.
   skip_pages_array+=(\
-    "docs/getting-started/_common/_content.mdx" \
+    "docs/getting-started/_common/_change-log.mdx" \
     "docs/getting-started/_common/_commonjs-compatibility.mdx" \
+    "docs/getting-started/_common/_content.mdx" \
     "docs/getting-started/_common/_github-and-npmjs.mdx" \
+    "docs/getting-started/_common/_releases.mdx" \
+    "docs/getting-started/_common/_support-and-feedback.mdx" \
     "docs/getting-started/_project/_compatibility.mdx" \
     "docs/getting-started/_project/_compatibility-notices.mdx" \
     "docs/getting-started/_project/_more-credits.mdx" \
@@ -373,6 +430,11 @@ then
 else
   skip_pages_array+=(\
     "docs/install/_common/_content.mdx" \
+    "docs/install/_common/_initialise-the-project.mdx" \
+    "docs/install/_common/_installation-details.mdx" \
+    "docs/install/_common/_reproducibility-and-dependencies.mdx" \
+    "docs/install/_common/_uninstall.mdx" \
+    "docs/install/_common/_xpm-package-refresher.mdx" \
     "docs/install/_project/_troubleshooting-windows.mdx" \
   )
 fi
@@ -388,6 +450,22 @@ else
     "docs/maintainer/_common/_gcc-check-upstream-release.mdx" \
     "docs/maintainer/_common/_platform-docker-build.mdx" \
     "docs/maintainer/_common/_platform-native-build.mdx" \
+    "docs/maintainer/_common/_analytics.mdx" \
+    "docs/maintainer/_common/_check-git.mdx" \
+    "docs/maintainer/_common/_ci-tests.mdx" \
+    "docs/maintainer/_common/_close-milestone.mdx" \
+    "docs/maintainer/_common/_close-open-issues.mdx" \
+    "docs/maintainer/_common/_fix-open-issues.mdx" \
+    "docs/maintainer/_common/_increase-version.mdx" \
+    "docs/maintainer/_common/_prepare-new-blog-post.mdx" \
+    "docs/maintainer/_common/_prepare-release.mdx" \
+    "docs/maintainer/_common/_publish-release.mdx" \
+    "docs/maintainer/_common/_set-new-version.mdx" \
+    "docs/maintainer/_common/_share-on-twitter.mdx" \
+    "docs/maintainer/_common/_tag-npm-latest.mdx" \
+    "docs/maintainer/_common/_update-changelog.mdx" \
+    "docs/maintainer/_common/_update-main-branch.mdx" \
+    "docs/maintainer/_common/_update-website-config.mdx" \
     "docs/maintainer/_project/_check-upstream-release.mdx" \
     "docs/maintainer/_project/_custom.mdx" \
     "docs/maintainer/_project/_dependencies-detail.mdx" \
@@ -409,8 +487,6 @@ then
   )
 else
   skip_pages_array+=(\
-    "docs/project/about/_common/_the-author.mdx" \
-    "docs/project/about/_common/_the-project-history.mdx" \
     "docs/project/about/_common/_the-project.mdx" \
   )
 fi
@@ -490,6 +566,20 @@ if [ "${xpack_is_npm_published}" != "true" ]
 then
   skip_pages_array+=(\
     "blog/_common/_download-analytics.mdx" \
+  )
+fi
+
+if [ "${xpack_has_custom_user_sidebar}" != "true" ]
+then
+  skip_pages_array+=(\
+    "sidebar-docs-user-custom.js" \
+  )
+fi
+
+if [ "${xpack_has_custom_getting_started_sidebar}" != "true" ]
+then
+  skip_pages_array+=(\
+    "sidebar-docs-getting-started-custom.ts" \
   )
 fi
 

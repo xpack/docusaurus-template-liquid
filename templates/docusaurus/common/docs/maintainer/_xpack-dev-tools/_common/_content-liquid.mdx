@@ -16,6 +16,8 @@ import CommonGetProjectSources from '@site/docs/_common/_get-project-sources.mdx
 import CommonGetHelperSources from '@site/docs/_common/_get-helper-sources-details.mdx';
 import CommonGenerateTopCommons from '@site/docs/_common/_generate-top-commons.mdx';
 import CommonGenerateWebsiteCommons from '@site/docs/_common/_generate-website-commons.mdx';
+import CommonPublishWebsite from '@site/docs/_common/_publish-website.mdx';
+import CommonBuildWebsiteLocally from '@site/docs/_common/_build-website-locally.mdx';
 
 import CommonStartLocalWebServer from '@site/docs/_common/_start-local-web-server.mdx';
 
@@ -28,8 +30,6 @@ import CommonUpdateChangelog from '../_common/_update-changelog.mdx';
 import CommonCloseOpenIssues from '../_common/_close-open-issues.mdx';
 import CommonUpdateMainBranch from '../_common/_update-main-branch.mdx';
 import CommonPrepareNewBlogPost from '../_common/_prepare-new-blog-post.mdx'
-import CommonPublishWebsite from '../_common/_publish-website.mdx';
-import CommonBuildWebsiteLocally from '../_common/_build-website-locally.mdx';
 import CommonTagNpmLatest from '../_common/_tag-npm-latest.mdx';
 import CommonPrepareRelease from '../_common/_prepare-release.mdx'
 import CommonPublishRelease from '../_common/_publish-release.mdx';
@@ -41,9 +41,9 @@ import CommonAnalytics from '../_common/_analytics.mdx';
 import CommonPlatformNativeBuild from '../_common/_platform-native-build.mdx';
 import CommonPlatformDockerBuild from '../_common/_platform-docker-build.mdx';
 
-import CommonProjectMoreRepos from '../_project/_more-repos.mdx';
-import CommonProjectCheckUpstreamRelease from '../_project/_check-upstream-release.mdx';
-import CommonProjectUpdateVersionSpecific from '../_project/_update-version-specific.mdx';
+import ProjectMoreRepos from '../_project/_more-repos.mdx';
+import ProjectCheckUpstreamRelease from '../_project/_check-upstream-release.mdx';
+import ProjectUpdateVersionSpecific from '../_project/_update-version-specific.mdx';
 
 import ProjectMoreTests from '../_project/_more-tests.mdx';
 import ProjectShareCustom from '../_project/_share-custom.mdx';
@@ -81,7 +81,7 @@ page.
 
 <CommonGetHelperSources helperOrganizationName="xpack-dev-tools"  helperProjectName="xbb-helper-xpack" helperBranchName="xpack-development" />
 
-<CommonProjectMoreRepos/>
+<ProjectMoreRepos/>
 
 <ProjectReleaseSchedule/>
 
@@ -105,7 +105,7 @@ as seen above.
 Check the latest versions at https://github.com/{{githubProjectOrganization}}/ and
 update the dependencies in `build-assets/package.json`.
 
-<CommonProjectCheckUpstreamRelease/>
+<ProjectCheckUpstreamRelease/>
 
 <CommonIncreaseVersion />
 
@@ -130,7 +130,7 @@ is <code>{{releaseSemver}}-{{releaseSubversion}}</code>.
 
 <CommonStartLocalWebServer />
 
-<CommonProjectUpdateVersionSpecific/>
+<ProjectUpdateVersionSpecific/>
 
 <CommonFixOpenIssues />
 

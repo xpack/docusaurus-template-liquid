@@ -4,10 +4,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "generate-website-commons": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-commons.sh --{{githubProjectOrganization}}",
+    "generate-website-commons": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-website-commons.sh --{{githubProjectOrganization}}",
     "npm-outdated": "npm outdated",
     "npm-install": "npm install",
-    "npm-link-helpers": "npm link @xpack/docusaurus-template-liquid @xpack/npm-packages-helper @micro-os-plus/build-helper",
+    "npm-link-helpers": "npm link @xpack/docusaurus-template-liquid @xpack/npm-packages-helper{% if githubProjectOrganization == 'micro-os-plus' %} @micro-os-plus/build-helper{% endif %}",
     "npm-ci": "npm ci",
     "deep-clean": "del-cli .docusaurus build node_modules package-lock.json",
 {%- if packageWebsiteConfig.hasDoxygenReference == "true" %}
@@ -27,7 +27,9 @@
     "generate-typedoc": "docusaurus generate-typedoc",
     "typecheck": "tsc",
     "import-website-releases": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/import-releases.sh --{{githubProjectOrganization}}",
+{%- if githubProjectOrganization == "micro-os-plus" %}
     "generate-website-releases-from-tags": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-releases-for-tags.sh --{{githubProjectOrganization}}",
+{%- endif %}
     "generate-website-blog-post": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-blog-post.sh --{{githubProjectOrganization}}",
     "generate-dependencies-details": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-dependencies-details.sh --{{githubProjectOrganization}}"
   },
@@ -64,13 +66,15 @@
   ],
   "devDependencies": {
     "del-cli": "^6.0.0",
-    "open-cli": "^8.0.0",
-    "broken-link-checker": "^0.7.8",
 {%- if isTypeScript == "true" %}
     "docusaurus-plugin-typedoc": "^1.2.1",
 {%- endif %}
+{%- if githubProjectOrganization == "micro-os-plus" %}
     "@jothepro/doxygen-awesome-css": "github:jothepro/doxygen-awesome-css#v2.3.4",
     "@micro-os-plus/build-helper": "github:micro-os-plus/build-helper-xpack#xpack-development",
+    "open-cli": "^8.0.0",
+    "broken-link-checker": "^0.7.8",
+{%- endif %}
     "@docusaurus/module-type-aliases": "3.6.3",
     "@docusaurus/tsconfig": "3.6.3",
     "@docusaurus/types": "3.6.3",

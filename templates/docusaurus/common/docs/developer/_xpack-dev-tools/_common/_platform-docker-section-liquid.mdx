@@ -9,7 +9,7 @@ import {developmentDurations} from '@site/docs/_project/_development-durations.m
 
 {/* Arguments: props.platform */}
 
-{props.platform == "win32-x64" ? ( <p>The Windows builds run on GNU/Linux, using <a href="https://mingw-w64.org">mingw-w64</a>.</p> ) : ''}
+{props.platform === "win32-x64" ? ( <p>The Windows builds run on GNU/Linux, using <a href="https://mingw-w64.org">mingw-w64</a>.</p> ) : ''}
 
 To prepare the docker build:
 

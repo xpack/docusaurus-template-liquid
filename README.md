@@ -27,7 +27,7 @@ https://github.com/xpack/docusaurus-template-liquid.git \
 Install `del-cli`, `json` and `liquidjs`:
 
 ```sh
-(chmod -R +w website; cd website; npm install del-cli json liquidjs --save-dev)
+(mkdir -p website; chmod -R +w website; cd website; if [ ! -f package.json ]; then; npm init; fi; npm install del-cli json liquidjs --save-dev)
 ```
 
 Link the local helper & template projects:
@@ -39,7 +39,11 @@ Link the local helper & template projects:
 ### Add npm script
 
 ```json
-    "generate-website-commons": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-commons.sh --xpack-dev-tools --dry-run",
+    "generate-website-commons-init": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-website-commons.sh --micro-os-plus --init",
+```
+
+```json
+    "generate-website-commons-init": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-website-commons.sh --xpack-dev-tools --dry-run",
 ```
 
 ## `websiteConfig`

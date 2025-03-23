@@ -12,18 +12,26 @@ how to utilise some of the primitives available in the library.
 A typical run looks like:
 
 ```console
+test 1
+    Start 1: sample-test
 ...
+1/2 Test #1: sample-test ......................   Passed    0.00 sec
 ```
 
 #### unit-test
 
 The [unit-test.cpp](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/xpack/tests/src/unit-test.cpp)
 file is an exhaustive test designed to validate that all the
-library functions operate as expected.
+library functions operate as expected. It uses the
+[µTest++](https://github.com/micro-os-plus/micro-test-plus-xpack)
+testing framework.
 
 A typical run looks like:
 
 ```console
+test 2
+    Start 2: unit-test
 ...
+2/2 Test #2: unit-test ........................   Passed    0.29 sec
 ```
 

@@ -189,6 +189,16 @@ function generate_website_commons()
           #   run_verbose rm docs/maintainer/_content.mdx
           # fi
 
+          run_verbose rm -f "static/img/components-256.png"
+          run_verbose rm -f "docs/getting-started/_project/_more.mdx"
+          if [ -d "docs/_shared" ]
+          then
+            run_verbose mv "docs/_shared" "docs/_project"
+          fi
+
+          run_verbose rm -f "docs/install/_project/_automatic-install-quick-test.mdx"
+          run_verbose rm -f "docs/install/_project/_manual-install-quick-test.mdx"
+
           # -------------------------------------------------------------------
 
           # npm run deep-clean

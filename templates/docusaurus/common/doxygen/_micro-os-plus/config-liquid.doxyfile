@@ -250,6 +250,7 @@ PREDEFINED = \
 __DOXYGEN__ \
 __cplusplus \
 __cpp_exceptions \
+{% if packageName == "diag-trace" %}MICRO_OS_PLUS_TRACE \{% endif %}
 
 #---------------------------------------------------------------------------
 

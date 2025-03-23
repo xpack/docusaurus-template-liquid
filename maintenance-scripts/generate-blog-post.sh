@@ -9,7 +9,7 @@
 # for any purpose is hereby granted, under the terms of the MIT license.
 #
 # If a copy of the license was not distributed with this file, it can
-# be obtained from https://opensource.org/licenses/mit.
+# be obtained from https://opensource.org/licenses/MIT.
 #
 # -----------------------------------------------------------------------------
 
@@ -93,7 +93,7 @@ else
   version="${xpack_xpack_version}"
 fi
 
-post_relative_file_path="blog/$(date -u '+%Y-%m-%d')-${xpack_permalink_name:-${xpack_npm_package_name}}-v$(echo ${version} | tr '.' '-')-released.mdx"
+post_relative_file_path="blog/$(date '+%Y-%m-%d')-${xpack_permalink_name:-${xpack_npm_package_name}}-v$(echo ${version} | tr '.' '-')-released.mdx"
 
 post_file_path="${website_folder_path}/${post_relative_file_path}"
 
