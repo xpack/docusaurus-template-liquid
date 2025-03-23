@@ -9,7 +9,7 @@
 # for any purpose is hereby granted, under the terms of the MIT license.
 #
 # If a copy of the license was not distributed with this file, it can
-# be obtained from https://opensource.org/licenses/mit.
+# be obtained from https://opensource.org/licenses/MIT.
 #
 # -----------------------------------------------------------------------------
 
@@ -53,7 +53,7 @@ export script_folder_name="$(basename "${script_folder_path}")"
 argv="$@"
 
 # Runs as
-# .../node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-commons.sh
+# .../node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-website-commons.sh
 helper_folder_path="$(dirname $(dirname "${script_folder_path}"))/npm-packages-helper"
 
 source "${helper_folder_path}/maintenance-scripts/scripts-helper-source.sh"
@@ -61,6 +61,14 @@ source "${helper_folder_path}/maintenance-scripts/scripts-helper-source.sh"
 # Parse --init, --dry-run, --xpack, --xpack-dev-tools
 # and leave variables in the environment.
 parse_options "$@"
+
+# -----------------------------------------------------------------------------
+
+tmp_file_path="$(mktemp -t top_commons.XXXXX)"
+
+# Used to enforce an exit code of 255, required by xargs.
+trap 'trap_handler ERROR $LINENO $? ${tmp_file_path}; return 255' ERR
+
 
 # -----------------------------------------------------------------------------
 
@@ -100,11 +108,6 @@ templates_folder_path="$(dirname "${script_folder_path}")/templates"
 export project_folder_path
 export templates_folder_path
 export website_folder_path
-
-# -----------------------------------------------------------------------------
-
-# Used to enforce an exit code of 255, required by xargs.
-trap 'trap_handler "${script_name}" $LINENO $?; return 255' ERR
 
 # -----------------------------------------------------------------------------
 
@@ -150,19 +153,29 @@ function relocate()
 
 if [ "${do_init}" == "true" ]
 then
-  cd "${project_folder_path}"
-  if [ -f "website/config.doxyfile" ]
+  if [ "${is_micro_os_plus}" == "true" ]
   then
-    mv website doxygen
-    mkdir -p website
-    mv doxygen website/doxygen
-    rm -rf website/doxygen/package*.json
+    cd "${project_folder_path}"
+    if [ -f "website/config.doxyfile" ]
+    then
+      mv website doxygen
+      mkdir -p website
+      mv doxygen website/doxygen
+      rm -rf website/doxygen/package*.json
+    fi
+
+    cd "${templates_folder_path}/docusaurus/common"
+    substitute "package-merge-liquid.json" "package.json" "${website_folder_path}"
+
+    cd "${templates_folder_path}/docusaurus/other/_micro-os-plus"
+    blog_post_file_name="$(date '+%Y-%m-%d')-website.mdx"
+    substitute "first-website-post-liquid.mdx" "${blog_post_file_name}" "${website_folder_path}/blog"
+
+    exit 0
+  else
+    echo "--init not implemented yet"
+    exit 1
   fi
-
-  cd "${templates_folder_path}/docusaurus/common"
-  substitute "package-liquid-merge.json" "package.json" "${website_folder_path}"
-
-  exit 0
 else
 
   if false
