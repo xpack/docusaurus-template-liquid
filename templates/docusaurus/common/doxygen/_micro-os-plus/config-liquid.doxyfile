@@ -136,8 +136,9 @@ topics.doxyfile \
 # need to set EXTENSION_MAPPING for the extension otherwise the files are not
 # properly processed by doxygen.
 
-## -e 's|```.*|```|'
-INPUT_FILTER = "sed -e 's|__attribute__\s*[(]\s*[(].*[)]\s*[)]||g'"
+# Special precautions to avoid removing it in documentation, where it is
+# expected to be quoted, or generally not be preceded by spaces.
+INPUT_FILTER = "sed -e 's|^__attribute__\s*[(]\s*[(].*[)]\s*[)]||g' -e 's|\(\s+\)__attribute__\s*[(]\s*[(].*[)]\s*[)]|\1|g'"
 
 # The IMAGE_PATH tag can be used to specify one or more files or directories
 # that contain images that are to be included in the documentation (see the
