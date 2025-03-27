@@ -102,6 +102,7 @@ WARN_AS_ERROR = YES
 INPUT = \
 ../../include \
 ../../src \
+top-topic.doxyfile \
 topics.doxyfile \
 
 
