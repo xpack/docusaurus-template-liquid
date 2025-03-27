@@ -190,6 +190,12 @@ const config: Config = {
       }
     ],
 {%- endif %}
+{%- if packageWebsiteConfig.hasDoxygenDocusaurus == "true" %}
+    [
+      '@xpack/docusaurus-plugin-doxygen',
+      {}
+    ],
+{%- endif %}
 
     // Local plugins.
     './src/plugins/SelectReleasesPlugin',
