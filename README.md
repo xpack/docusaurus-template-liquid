@@ -90,7 +90,7 @@ if missing, the long name is used
 - hasCli
 - shareOnTwitter
 - isInstallGlobally
-- hasApi
+- hasTypedocApi
 - has100coverage
 
 For the xpm web
@@ -150,7 +150,7 @@ For XBB
     "title": "logger - The xPack Logger",
     "metadataDescription": "A Node.js CommonJS/ES6 module with a generic console logger class",
     "metadataKeywords": "xpm, xpack, build, test, dependencies, npm, reproducibility",
-    "hasApi": "true",
+    "hasTypedocApi": "true",
     "has100coverage": "true",
     "nodeVersion": "18.20.4"
   }

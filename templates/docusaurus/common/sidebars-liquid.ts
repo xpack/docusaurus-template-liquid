@@ -5,7 +5,7 @@ import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
 {%- if packageWebsiteConfig.hasCli == "true" %}
 import cliSidebar from "./sidebar-cli";
 {%- endif %}
-{%- if packageWebsiteConfig.hasApi == "true" %}
+{%- if packageWebsiteConfig.hasTypedocApi == "true" %}
 import typedocSidebarItems from "./docs/api/typedoc-sidebar.cjs";
 {%- endif %}
 {%- if packageWebsiteConfig.hasToolsSidebar == "true" %}
@@ -178,7 +178,7 @@ const sidebars: SidebarsConfig = {
   toolsSidebar,
 {%- endif %}
 
-{%- if packageWebsiteConfig.hasApi == "true" %}
+{%- if packageWebsiteConfig.hasTypedocApi == "true" %}
 
   typedocSidebar: [
     {

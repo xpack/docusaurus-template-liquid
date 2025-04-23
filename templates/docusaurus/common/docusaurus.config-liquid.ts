@@ -148,7 +148,7 @@ const config: Config = {
         disableInDev: false,
       },
     ],
-{%- if packageWebsiteConfig.hasApi == "true" %}
+{%- if packageWebsiteConfig.hasTypedocApi == "true" %}
     [
       'docusaurus-plugin-typedoc',
       {
@@ -364,7 +364,7 @@ const config: Config = {
 {%- if packageWebsiteConfig.hasCli == "true" %}
         cliNavbar,
 {%- endif %}
-{%- if packageWebsiteConfig.hasApi == "true" %}
+{%- if packageWebsiteConfig.hasTypedocApi == "true" %}
         {
           to: '/docs/api',
           label: 'API',
@@ -376,6 +376,7 @@ const config: Config = {
           label: 'API',
           position: 'left',
         },
+{%- endif %}
 {%- endif %}
 {%- if packageWebsiteConfig.hasToolsSidebar == "true" %}
         {
