@@ -20,6 +20,9 @@ import {customDocsUserSidebarCategory} from "./sidebar-docs-user-custom";
 {%- if packageWebsiteConfig.hasCustomSidebar == "true" %}
 import {customDocsSidebar} from "./sidebar-docs-custom";
 {%- endif %}
+{%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
+import doxygenSidebarItems from './docs/api/sidebar-doxygen.json';
+{%- endif %}
 
 /**
  * Creating a sidebar enables you to:
@@ -192,6 +195,23 @@ const sidebars: SidebarsConfig = {
       items: typedocSidebarItems,
     },
   ],
+{%- endif %}
+
+{%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
+
+  doyygenSidebar: [
+    {
+      type: 'category',
+      label: 'API Reference (Doxygen)',
+      link: {
+        type: 'doc',
+        id: 'api/index',
+      },
+      collapsed: false,
+      items: doxygenSidebarItems,
+    },
+  ],
+
 {%- endif %}
 
 {%- if packageWebsiteConfig.hasCli == "true" %}

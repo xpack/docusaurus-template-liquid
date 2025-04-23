@@ -9,9 +9,9 @@
  * be obtained from https://opensource.org/licenses/MIT.
  */
 
-// Not really a .doxyfile, since it does not define variables.
-// But also it cannot be .md, since Doxygen renders markdown files
-// as extra entries in the sidebar. Suggestions welcomed!
+// Not really a .doxyfile, since it does not define any variables.
+// But it cannot be .md either, since Doxygen renders markdown files
+// in the sidebar.
 
 -------------------------------------------------------------------------------
 /**

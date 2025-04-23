@@ -7,12 +7,15 @@
     "generate-website-commons": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-website-commons.sh --{{githubProjectOrganization}}",
     "npm-outdated": "npm outdated",
     "npm-install": "npm install",
-    "npm-link-helpers": "npm link @xpack/docusaurus-template-liquid @xpack/npm-packages-helper{% if githubProjectOrganization == 'micro-os-plus' %} @micro-os-plus/build-helper{% endif %}",
+    "npm-link-helpers": "npm link @xpack/docusaurus-template-liquid @xpack/npm-packages-helper{% if githubProjectOrganization == 'micro-os-plus' %} @micro-os-plus/build-helper{% endif %}{% if packageWebsiteConfig.hasDoxygenReference == "true" %}@xpack/docusaurus-plugin-doxygen{% endif %}",
     "npm-ci": "npm ci",
     "deep-clean": "del-cli .docusaurus build node_modules package-lock.json",
 {%- if packageWebsiteConfig.hasDoxygenReference == "true" %}
-    "doxygen": "del-cli static/reference doxygen/xml; (cd doxygen; doxygen config.doxyfile)",
-    "browser": "open-cli static/reference/index.html",
+    "doxygen": "del-cli static/doxygen doxygen/xml; (cd doxygen; doxygen config.doxyfile)",
+    "browser": "open-cli static/doxygen/index.html",
+{%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
+    "generate-doxygen": "docusaurus generate-doxygen",
+{%- endif %}
     "check-urls": "blc {{packageHomepage}} --recursive --ordered --filter-level 2 --exclude 'https://twitter.com*'",
 {%- endif %}
     "docusaurus": "docusaurus",
@@ -71,6 +74,9 @@
 {%- endif %}
 {%- if githubProjectOrganization == "micro-os-plus" %}
     "@jothepro/doxygen-awesome-css": "github:jothepro/doxygen-awesome-css#v2.3.4",
+{%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
+    "@xpack/docusaurus-plugin-doxygen": "github:xpack/docusaurus-plugin-doxygen#v0.1.0"
+{%- endif %}
     "@micro-os-plus/build-helper": "github:micro-os-plus/build-helper-xpack#xpack-development",
     "open-cli": "^8.0.0",
     "broken-link-checker": "^0.7.8",

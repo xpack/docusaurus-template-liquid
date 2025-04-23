@@ -190,7 +190,7 @@ const config: Config = {
       }
     ],
 {%- endif %}
-{%- if packageWebsiteConfig.hasDoxygenDocusaurus == "true" %}
+{%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
     [
       '@xpack/docusaurus-plugin-doxygen',
       {}
@@ -371,6 +371,13 @@ const config: Config = {
           position: 'left',
         },
 {%- elsif packageWebsiteConfig.hasDoxygenReference == "true" %}
+{%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
+        {
+          to: '/docs/api',
+          label: 'API',
+          position: 'left',
+        },
+{% else %}
         {
           to: 'pathname:///reference/topics.html',
           label: 'API',
