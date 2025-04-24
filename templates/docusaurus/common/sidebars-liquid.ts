@@ -164,7 +164,7 @@ const sidebars: SidebarsConfig = {
         {
           type: 'link',
           label: 'License',
-          href: 'https://opensource.org/license/MIT',
+          href: 'https://opensource.org/license/mit',
         },
       ]
     },
