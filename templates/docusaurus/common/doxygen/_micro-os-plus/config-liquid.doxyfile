@@ -73,7 +73,7 @@ PROJECT_LOGO = assets/wall-e-icon-64.png
 # This tag requires that the tag FULL_PATH_NAMES is set to YES.
 
 # Doxygen is run from the website folder, so the project is one step up.
-STRIP_FROM_PATH        =
+# STRIP_FROM_PATH        =
 
 # The STRIP_FROM_INC_PATH tag can be used to strip a user-defined part of the
 # path mentioned in the documentation of a class, which tells the reader which
@@ -82,7 +82,7 @@ STRIP_FROM_PATH        =
 # specify the list of include paths that are normally passed to the compiler
 # using the -I flag.
 
-STRIP_FROM_INC_PATH    =
+# STRIP_FROM_INC_PATH    =
 
 #---------------------------------------------------------------------------
 
