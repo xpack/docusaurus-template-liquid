@@ -73,7 +73,7 @@ function HomepageHeader() {
           <InstallWithCopy>xpm install {% if packageWebsiteConfig.isInstallGlobally == "true" %}--location=global {% endif %}{{packageScopedName}}@{{releaseVersion}} --verbose
           </InstallWithCopy>
 {%- else %}
-          <InstallWithCopy>npm install {% if packageWebsiteConfig.isInstallGlobally == "true" %}--global {% endif %}{{packageScopedName}}@{{releaseVersion}}
+          <InstallWithCopy>npm install {% if packageWebsiteConfig.isInstallGlobally == "true" %}--global {% endif %}{{packageScopedName}}@{{releaseVersion}}</InstallWithCopy>
 {%- endif %}
 
         </div>
