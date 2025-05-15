@@ -21,7 +21,7 @@ import {customDocsUserSidebarCategory} from "./sidebar-docs-user-custom";
 import {customDocsSidebar} from "./sidebar-docs-custom";
 {%- endif %}
 {%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
-import doxygenSidebarItems from './docs/api/sidebar-doxygen.json';
+import doxygenSidebarItems from './sidebar-category-doxygen.json';
 {%- endif %}
 
 /**
@@ -199,17 +199,8 @@ const sidebars: SidebarsConfig = {
 
 {%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
 
-  doyygenSidebar: [
-    {
-      type: 'category',
-      label: 'API Reference (Doxygen)',
-      link: {
-        type: 'doc',
-        id: 'api/index',
-      },
-      collapsed: false,
-      items: doxygenSidebarItems,
-    },
+  doxygenSidebar: [
+    doxygenSidebarItems,
   ],
 
 {%- endif %}
