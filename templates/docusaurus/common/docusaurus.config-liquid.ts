@@ -6,15 +6,15 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 // import logger from '@docusaurus/logger';
 import util from 'node:util';
-
-{%- if packageWebsiteConfig.hasCli == "true" %}
-
+{% if packageWebsiteConfig.hasCli == "true" -%}
 import cliNavbar from './docusaurus-config-navbar-cli';
 {%- endif %}
 {%- if packageWebsiteConfig.hasCustomDocsNavbarItem == "true" %}
 import {customDocsNavbarItem} from './navbar-docs-items';
 {%- endif %}
-
+{%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
+import doxygenApiMenu from './docusaurus-config-doxygen-menu-dropdown.json'
+{%- endif %}
 import {redirects} from './docusaurus-config-redirects';
 import {getCustomFields} from './customFields';
 
@@ -193,7 +193,13 @@ const config: Config = {
 {%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
     [
       '@xpack/docusaurus-plugin-doxygen',
-      {}
+      {
+        outputFolderPath: 'docs/api', // doxygen/mdx
+        outputBaseUrl: 'api',
+        redirectsOutputFolderPath: 'reference',
+        verbose: true,
+        runOnStart: false
+      }
     ],
 {%- endif %}
 
@@ -372,12 +378,8 @@ const config: Config = {
         },
 {%- elsif packageWebsiteConfig.hasDoxygenReference == "true" %}
 {%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
-        {
-          to: '/docs/api',
-          label: 'API',
-          position: 'left',
-        },
-{% else %}
+        doxygenApiMenu,
+{%- else %}
         {
           to: 'pathname:///reference/topics.html',
           label: 'API',
