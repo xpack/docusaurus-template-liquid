@@ -6,21 +6,12 @@
  * for any purpose is hereby granted, under the terms of the MIT license.
  *
  * If a copy of the license was not distributed with this file, it can
- * be obtained from https://opensource.org/licenses/mit.
+ * be obtained from https://opensource.org/licenses/MIT.
  */
 
-// Not really a .doxyfile, since it does not define any variables.
-// But it cannot be .md either, since Doxygen renders markdown files
-// in the sidebar.
-
--------------------------------------------------------------------------------
 /**
 
 @defgroup micro-os-plus-{{packageName}} {{packageConfig.descriptiveName}}
-
-*/
--------------------------------------------------------------------------------
-/**
 
 @defgroup micro-os-plus-{{packageName}}-cpp-api C++ API
 @ingroup micro-os-plus-{{packageName}}
@@ -29,9 +20,6 @@
 The µOS++ **{{packageName}}** implementation uses C++ templates,
 and thus the main API is C++.
 
-*/
--------------------------------------------------------------------------------
-/**
 
 @defgroup micro-os-plus-{{packageName}}-c-api C API
 @ingroup micro-os-plus-{{packageName}}
@@ -40,10 +28,6 @@ and thus the main API is C++.
 The µOS++ **{{packageName}}** is C++ specific, and there are no C equivalents
 for the C++ definitions.
 
-*/
--------------------------------------------------------------------------------
-
-/**
 
 @defgroup micro-os-plus-{{packageName}}-xxx-yyy XXX YYY
 @ingroup micro-os-plus-{{packageName}}-cpp-api
@@ -62,4 +46,3 @@ namespace os = micro_os_plus;
 ```
 
 */
--------------------------------------------------------------------------------
