@@ -1,8 +1,8 @@
 // DO NOT EDIT!
 // Automatically generated from docusaurus-template-liquid/templates/docusaurus.
 
-import {themes as prismThemes} from 'prism-react-renderer';
-import type {Config} from '@docusaurus/types';
+import { themes as prismThemes } from 'prism-react-renderer';
+import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 // import logger from '@docusaurus/logger';
 import util from 'node:util';
@@ -10,13 +10,13 @@ import util from 'node:util';
 import cliNavbar from './docusaurus-config-navbar-cli';
 {%- endif %}
 {%- if packageWebsiteConfig.hasCustomDocsNavbarItem == "true" %}
-import {customDocsNavbarItem} from './navbar-docs-items';
+import { customDocsNavbarItem } from './navbar-docs-items';
 {%- endif %}
 {%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
 import doxygenApiMenu from './docusaurus-config-doxygen-menu-dropdown.json'
 {%- endif %}
-import {redirects} from './docusaurus-config-redirects';
-import {getCustomFields} from './customFields';
+import { redirects } from './docusaurus-config-redirects';
+import { getCustomFields } from './customFields';
 
 // The node.js modules cannot be used in modules imported in browser code:
 // webpack < 5 used to include polyfills for node.js core modules by default.
@@ -29,7 +29,7 @@ const customFields = getCustomFields();
 console.log('customFields: ' + util.inspect(customFields));
 
 const actualBaseUrl = process.env.DOCUSAURUS_BASEURL ??
-    '{% if packageConfig.isWebPreview == "true" %}{{baseUrlPreview}}{% else %}{{baseUrl}}{% endif %}';
+  '{% if packageConfig.isWebPreview == "true" %}{{baseUrlPreview}}{% else %}{{baseUrl}}{% endif %}';
 
 // ----------------------------------------------------------------------------
 
@@ -72,6 +72,26 @@ const config: Config = {
 
   plugins: [
     [
+{%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
+      // '@docusaurus/plugin-content-docs',
+      './src/plugins/DocusaurusContentDocsWithDoxygenWrapper.js',
+      {
+        sidebarPath: './sidebars.ts',
+        // Please change this to your repo.
+        // Remove this to remove the "edit this page" links.
+        editUrl: 'https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/edit/{{branchWebsite}}/website/',
+        // showLastUpdateAuthor: true,
+        showLastUpdateTime: true,
+
+        doxygenPluginOptions: {
+          outputFolderPath: 'docs/api', // doxygen/mdx
+          outputBaseUrl: 'api',
+          redirectsOutputFolderPath: 'reference',
+          verbose: false,
+          runOnStart: true
+        }
+      },
+{%- else %}
       '@docusaurus/plugin-content-docs',
       {
         sidebarPath: './sidebars.ts',
@@ -81,6 +101,7 @@ const config: Config = {
         // showLastUpdateAuthor: true,
         showLastUpdateTime: true,
       },
+{%- endif %}
     ],
     [
       // https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-blog
@@ -187,18 +208,6 @@ const config: Config = {
         },
         typeDeclarationFormat: "table",
         useCodeBlocks: false, // Nice, but it might be mistaken for examples.
-      }
-    ],
-{%- endif %}
-{%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
-    [
-      '@xpack/docusaurus-plugin-doxygen',
-      {
-        outputFolderPath: 'docs/api', // doxygen/mdx
-        outputBaseUrl: 'api',
-        redirectsOutputFolderPath: 'reference',
-        verbose: false,
-        runOnStart: true
       }
     ],
 {%- endif %}
