@@ -197,8 +197,8 @@ const config: Config = {
         outputFolderPath: 'docs/api', // doxygen/mdx
         outputBaseUrl: 'api',
         redirectsOutputFolderPath: 'reference',
-        verbose: true,
-        runOnStart: false
+        verbose: false,
+        runOnStart: true
       }
     ],
 {%- endif %}
