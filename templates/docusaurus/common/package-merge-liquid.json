@@ -75,7 +75,7 @@
 {%- if githubProjectOrganization == "micro-os-plus" %}
     "@jothepro/doxygen-awesome-css": "github:jothepro/doxygen-awesome-css#v2.3.4",
 {%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
-    "@xpack/docusaurus-plugin-doxygen": "^0.1.8",
+    "@xpack/docusaurus-plugin-doxygen": "^0.1.9",
 {%- endif %}
     "@micro-os-plus/build-helper": "github:micro-os-plus/build-helper-xpack#xpack-development",
     "open-cli": "^8.0.0",
