@@ -27,7 +27,7 @@ https://github.com/xpack/docusaurus-template-liquid.git \
 Install `del-cli`, `json` and `liquidjs`:
 
 ```sh
-(mkdir -p website; chmod -R +w website; cd website; if [ ! -f package.json ]; then; npm init; fi; npm install del-cli json liquidjs --save-dev)
+(mkdir -p website; chmod -R +w website; cd website; if [ ! -f package.json ]; then; npm init --yes; fi; npm install del-cli json liquidjs --save-dev)
 ```
 
 Link the local helper & template projects:
@@ -38,6 +38,8 @@ Link the local helper & template projects:
 
 ### Add npm script
 
+in website/package.json:
+
 ```json
     "generate-website-commons-init": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-website-commons.sh --micro-os-plus --init",
 ```
@@ -46,7 +48,11 @@ Link the local helper & template projects:
     "generate-website-commons-init": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-website-commons.sh --xpack-dev-tools --dry-run",
 ```
 
-## `websiteConfig`
+Be sure topConfig.descriptiveName is defined.
+
+Run the action.
+
+## Add `websiteConfig`
 
 Add a `websiteConfig` object to `website/package.json`, after `engines`.
 
@@ -63,6 +69,33 @@ Add a `websiteConfig` object to `website/package.json`, after `engines`.
     "node": ">=18.0"
   }
 }
+```
+
+or
+
+```
+  "websiteConfig": {
+    "title": "The xPack Reproducible Build Framework",
+    "tagline": "Tools to manage, configure and build complex, package based, multi-target projects, in a reproducible way",
+    "metadataDescription": "The xPack Framework",
+    "metadataKeywords": "xpack, project, manage, build, test, dependencies, xpm, npm, reproducibility",
+    "nodeVersion": "18.20.4",
+    "hasCustomSidebar": "true",
+    "hasCustomDeveloper": "true",
+    "hasCustomGettingStarted": "true",
+    "customGettingStartedTitle": "Getting started with the xPack Project",
+    "skipInstallGuide": "true",
+    "skipFaq": "true",
+    "hasCustomMaintainer": "true",
+    "hasCustomAbout": "true",
+    "customAboutTitle": "About the xPack Project",
+    "hasCustomUser": "true",
+    "hasHomepageTools": "true",
+    "usePluralGuides": "true",
+    "skipInstallCommand": "true",
+    "skipReleases": "true",
+    "hasCustomHomepageFeatures": "true"
+  },
 ```
 
 ### Run actions once
