@@ -67,7 +67,7 @@ parse_options "$@"
 tmp_file_path="$(mktemp -t top_commons.XXXXX)"
 
 # Used to enforce an exit code of 255, required by xargs.
-trap 'trap_handler ERROR $LINENO $? ${tmp_file_path}; return 255' ERR
+# trap 'trap_handler ${script_name} $LINENO $? ${tmp_file_path}; return 255' ERR
 
 
 # -----------------------------------------------------------------------------
