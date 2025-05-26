@@ -51,6 +51,7 @@ The `include` folder contains all public header files for the µOS++ libraries.
 
 To provide isolation with other projects, the header files for the µOS++ libraries are located in the `micro-os-plus` folder.
 
+{%- if packageName != 'web-docusaurus' %}
 
 @dir include/micro-os-plus
 @brief Folder with C/C++ header files for the µOS++ libraries.
@@ -106,5 +107,7 @@ minimises naming conflicts, and enhances overall maintainability.
 This approach promotes modular development, facilitates code reuse, and ensures
 seamless integration of components within the µOS++ ecosystem, supporting the
 creation of efficient, robust, and scalable embedded systems.
+
+{%- endif %}
 
 */
