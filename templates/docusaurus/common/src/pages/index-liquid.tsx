@@ -30,6 +30,8 @@ import HomepageTools from '@site/src/components/HomepageTools';
 import InstallWithCopy from '@site/src/components/InstallWithCopy';
 {%- endif %}
 
+{%- assign platforms = packageWebsiteConfig.platforms | default: "" %}
+
 {%- if isNpmBinary == "true" %}
 {%- assign platforms = "win32-x64,darwin-x64,linux-x64" %}
 {%- endif %}
@@ -70,12 +72,10 @@ function HomepageHeader() {
 {%- if packageWebsiteConfig.skipInstallCommand != "true" %}
         <div className={styles.installWithCopy}>
 {%- if isXpackBinary == "true" or packageWebsiteConfig.isXpmDependency == "true" %}
-          <InstallWithCopy>xpm install {% if packageWebsiteConfig.isInstallGlobally == "true" %}--location=global {% endif %}{{packageScopedName}}@{{releaseVersion}} --verbose
-          </InstallWithCopy>
+          <InstallWithCopy>xpm install {% if packageWebsiteConfig.isInstallGlobally == "true" %}--location=global {% endif %}{{packageScopedName}}@{{releaseVersion}} --verbose</InstallWithCopy>
 {%- else %}
           <InstallWithCopy>npm install {% if packageWebsiteConfig.isInstallGlobally == "true" %}--global {% endif %}{{packageScopedName}}@{{releaseVersion}}</InstallWithCopy>
 {%- endif %}
-
         </div>
 {%- endif %}
       </div>
@@ -92,7 +92,7 @@ export default function Home(): JSX.Element {
       <HomepageHeader />
       <main>
         <HomepageFeatures />
-{%- if packageConfig.isOrganizationWeb == "true" %}
+{%- if packageWebsiteConfig.hasHomepageTools == "true" %}
         <hr className="hero__hr"/>
         <HomepageTools />
 {%- endif %}
