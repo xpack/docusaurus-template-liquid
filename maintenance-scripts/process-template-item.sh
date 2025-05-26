@@ -412,7 +412,6 @@ then
     "docs/install/_common/_manual-install-quick-test.mdx" \
     "docs/install/_common/_cli-liquid.mdx" \
     "docs/install/_common/_no-administrative-rights.mdx" \
-    "docs/install/_common/_prerequisites.mdx" \
     "docs/install/_project/_automatic-install-quick-test.mdx" \
     "docs/install/_project/_manual-install-quick-test.mdx" \
     "docs/install/_project/_miscellaneous.mdx" \
