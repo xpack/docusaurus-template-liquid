@@ -505,6 +505,14 @@ else
   )
 fi
 
+if [ "${xpack_has_custom_config_doxyfile}" == "true" ]
+then
+  skip_pages_array+=(\
+    "doxygen/config.doxyfile" \
+  )
+fi
+
+
 if [ "${xpack_skip_releases}" == "true" ]
 then
   skip_pages_array+=(\
