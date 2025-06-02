@@ -71,27 +71,19 @@ const config: Config = {
   },
 
   plugins: [
-    [
 {%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
-      // '@docusaurus/plugin-content-docs',
-      './src/plugins/DocusaurusContentDocsWithDoxygenWrapper.js',
+    [
+      '@xpack/docusaurus-plugin-doxygen',
       {
-        sidebarPath: './sidebars.ts',
-        // Please change this to your repo.
-        // Remove this to remove the "edit this page" links.
-        editUrl: 'https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/edit/{{branchWebsite}}/website/',
-        // showLastUpdateAuthor: true,
-        showLastUpdateTime: true,
-
-        doxygenPluginOptions: {
-          outputFolderPath: 'docs/api', // doxygen/mdx
-          outputBaseUrl: 'api',
-          redirectsOutputFolderPath: 'reference',
-          verbose: false,
-          runOnStart: true
-        }
-      },
-{%- else %}
+        outputFolderPath: 'docs/api', // doxygen/mdx
+        outputBaseUrl: 'api',
+        redirectsOutputFolderPath: 'reference',
+        verbose: false,
+        runOnStart: true
+      }
+    ],
+{%- endif %}
+    [
       '@docusaurus/plugin-content-docs',
       {
         sidebarPath: './sidebars.ts',
@@ -101,7 +93,6 @@ const config: Config = {
         // showLastUpdateAuthor: true,
         showLastUpdateTime: true,
       },
-{%- endif %}
     ],
     [
       // https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-blog
