@@ -68,7 +68,7 @@ All files in this directory are intended for inclusion in user projects and prov
 @brief Topics related to the µOS++ framework.
 
 @details
-## Description
+# Description
 
 The [µOS++ Framework](https://micro-os-plus.github.io) is the principal project
 within the µOS++ (micro-os-plus) ecosystem, providing a comprehensive suite of modern
