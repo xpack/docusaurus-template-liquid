@@ -62,6 +62,7 @@ The `include/micro-os-plus` folder contains the public C++ header files for the 
 These headers define the APIs, data structures, data types and inline implementations that are available to users of the libraries.
 All files in this directory are intended for inclusion in user projects and provide the main interface to the utilities functionality.
 
+{%- endif %}
 
 @defgroup micro-os-plus µOS++ Topics
 @brief Topics related to the µOS++ framework.
@@ -90,6 +91,7 @@ software development.
 By adopting µOS++, developers benefit from a robust, scalable, and
 well-documented foundation for building high-quality embedded applications.
 
+{%- if packageName != 'web-docusaurus' %}
 
 @namespace micro_os_plus
 @brief The primary namespace for the µOS++ framework.
