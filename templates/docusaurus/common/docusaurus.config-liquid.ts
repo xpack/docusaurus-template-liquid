@@ -77,7 +77,6 @@ const config: Config = {
       {
         // redirectsOutputFolderPath: 'reference',
         verbose: false,
-        runOnStart: false,
         suggestToDoDescriptions: false
       }
     ],
