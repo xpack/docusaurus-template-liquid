@@ -75,11 +75,10 @@ const config: Config = {
     [
       '@xpack/docusaurus-plugin-doxygen',
       {
-        outputFolderPath: 'docs/api', // doxygen/mdx
-        outputBaseUrl: 'api',
-        redirectsOutputFolderPath: 'reference',
+        // redirectsOutputFolderPath: 'reference',
         verbose: false,
-        runOnStart: true
+        runOnStart: false,
+        suggestToDoDescriptions: false
       }
     ],
 {%- endif %}
