@@ -82,71 +82,9 @@ const config: Config = {
     ],
 {%- endif %}
     [
-      '@docusaurus/plugin-content-docs',
-      {
-        sidebarPath: './sidebars.ts',
-        // Please change this to your repo.
-        // Remove this to remove the "edit this page" links.
-        editUrl: 'https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/edit/{{branchWebsite}}/website/',
-        // showLastUpdateAuthor: true,
-        showLastUpdateTime: true,
-      },
-    ],
-    [
-      // https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-blog
-      '@docusaurus/plugin-content-blog',
-      {
-        showReadingTime: true,
-        blogSidebarCount: 8,
-        feedOptions: {
-          type: ['rss', 'atom'],
-          xslt: true,
-        },
-        // Please change this to your repo.
-        // Remove this to remove the "edit this page" links.
-        editUrl: 'https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/edit/{{branchWebsite}}/website/',
-        // Useful options to enforce blogging best practices
-        onInlineTags: 'warn',
-        onInlineAuthors: 'warn',
-        onUntruncatedBlogPosts: 'warn',
-      },
-    ],
-    [
-      '@docusaurus/plugin-content-pages',
-      {}
-    ],
-    [
       // https://docusaurus.io/docs/next/api/plugins/@docusaurus/plugin-client-redirects#redirects
       '@docusaurus/plugin-client-redirects',
       redirects,
-    ],
-    [
-      '@docusaurus/plugin-debug',
-      {}
-    ],
-    [
-      // https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-google-gtag
-      // https://tagassistant.google.com
-      '@docusaurus/plugin-google-gtag',
-      {
-        trackingID: '{% if githubProjectOrganization == "xpack" %}G-8WX9T80JEK{% elsif githubProjectOrganization == "xpack-dev-tools" %}G-7QE5W7V05S{% elsif githubProjectOrganization == "micro-os-plus" %}G-E9T84WD3CK{% else %}???{% endif %}',
-        anonymizeIP: false,
-      }
-    ],
-    [
-      // https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-sitemap
-      '@docusaurus/plugin-sitemap',
-      {
-        lastmod: 'date',
-        changefreq: 'weekly',
-        priority: 0.5,
-        ignorePatterns: [
-          actualBaseUrl + 'blog/archive/**',
-          actualBaseUrl + 'blog/authors/**',
-          actualBaseUrl + 'blog/tags/**'
-        ],
-        filename: 'sitemap.xml',
-      }
     ],
     [
       '@docusaurus/plugin-ideal-image',
@@ -205,14 +143,9 @@ const config: Config = {
     './src/plugins/SelectReleasesPlugin',
   ],
 
-  themes: [
-    [
-      '@docusaurus/theme-classic',
-      {
-        customCss: './src/css/custom.css',
-      }
-    ],
 {%- if packageWebsiteConfig.skipAlgolia != "true" %}
+
+  themes: [
     [
       // Explicitly required when not using `preset-classic`.
       // https://docusaurus.io/docs/search#using-algolia-docsearch
@@ -220,7 +153,65 @@ const config: Config = {
       {
       }
     ],
+  ],
 {%- endif %}
+
+  presets: [
+    [
+      'classic',
+      {
+        docs: {
+          sidebarPath: './sidebars.ts',
+          // Please change this to your repo.
+          // Remove this to remove the "edit this page" links.
+          editUrl: 'https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/edit/{{branchWebsite}}/website/',
+          // showLastUpdateAuthor: true,
+          showLastUpdateTime: true,
+        },
+        // https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-blog
+        blog: {
+          showReadingTime: true,
+          blogSidebarCount: 8,
+          feedOptions: {
+            type: ['rss', 'atom'],
+            xslt: true,
+          },
+          // Please change this to your repo.
+          // Remove this to remove the "edit this page" links.
+          editUrl: 'https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/edit/{{branchWebsite}}/website/',
+          // Useful options to enforce blogging best practices
+          onInlineTags: 'warn',
+          onInlineAuthors: 'warn',
+          onUntruncatedBlogPosts: 'warn',
+        },
+        pages: {},
+        // https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-google-gtag
+        // https://tagassistant.google.com
+        gtag: {
+          trackingID: '{% if githubProjectOrganization == "xpack" %}G-8WX9T80JEK{% elsif githubProjectOrganization == "xpack-dev-tools" %}G-7QE5W7V05S{% elsif githubProjectOrganization == "micro-os-plus" %}G-E9T84WD3CK{% else %}???{% endif %}',
+          anonymizeIP: false,
+        },
+        // https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-sitemap
+        sitemap: {
+          lastmod: 'date',
+          changefreq: 'weekly',
+          priority: 0.5,
+          ignorePatterns: [
+            actualBaseUrl + 'blog/archive/**',
+            actualBaseUrl + 'blog/authors/**',
+            actualBaseUrl + 'blog/tags/**'
+          ],
+          filename: 'sitemap.xml',
+        },
+
+        debug: true,
+
+        theme: {
+          customCss: './src/css/custom.css',
+        },
+
+      } satisfies Preset.Options,
+    ],
   ],
 
   // https://docusaurus.io/docs/api/docusaurus-config#headTags
@@ -614,6 +605,11 @@ const config: Config = {
     },
 {%- endif %}
   } satisfies Preset.ThemeConfig,
+
+  future: {
+    v4: true,
+    experimental_faster: true,
+  },
 
   customFields: customFields,
 };
