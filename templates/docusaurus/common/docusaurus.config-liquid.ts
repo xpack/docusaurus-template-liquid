@@ -606,10 +606,11 @@ const config: Config = {
 {%- endif %}
   } satisfies Preset.ThemeConfig,
 
-  future: {
-    v4: true,
-    experimental_faster: true,
-  },
+  // TODO: find out how to disable cascade CSSs.
+  // future: {
+  //   v4: true,
+  //   experimental_faster: true,
+  // },
 
   customFields: customFields,
 };
