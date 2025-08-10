@@ -1,4 +1,3 @@
-
 import CommonCmakeIntegration from '../_common/_cmake-integration.mdx';
 import CommonMesonIntegration from '../_common/_meson-integration.mdx';
 
@@ -38,7 +37,7 @@ The source files to be added to user projects are:
 
 ### Preprocessor definitions
 
-There are several preprocessor definitions used to configure the build:
+There are several preprocessor definitions utilised to configure the build:
 
 - `MICRO_OS_PLUS_INCLUDE_CONFIG_H` - to include `<micro-os-plus/config.h>`
 - `MICRO_OS_PLUS_TRACE` - to include the trace calls
@@ -55,7 +54,7 @@ The following options must be passed to the compiler and linker:
 The library has the following dependencies:
 
 - `@micro-os-plus/diag-trace` - the **µOS++** `trace::printf()` tracing
-  infrastructure (optional, used only if `MICRO_OS_PLUS_TRACE_UTILS_LISTS*`
+  infrastructure (optional, utilised only if `MICRO_OS_PLUS_TRACE_UTILS_LISTS*`
   are defined)
 
 <CommonCmakeIntegration />

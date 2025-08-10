@@ -4,7 +4,7 @@
 # Automatically generated from docusaurus-template-liquid/templates/docusaurus.
 
 title: Getting Started
-description: The initial steps to explore the project, {% if packageName == "xpm" or isXpackBinary == "true" %}including what xpm packets are, {% endif %}the project's features, benefits, compatibility, and available documentation.
+description: The initial steps to explore the project, {% if packageName == "xpm" or isXpackBinary == "true" %}including what xpm packages are, {% endif %}the project's features, benefits, compatibility, and available documentation.
 keywords:
 {%- if githubProjectOrganization == "micro-os-plus" %}
   - micro-os-plus
@@ -69,7 +69,7 @@ import CommonContent from './_common/_content.mdx';
 
 {%- if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}
 
-# Getting Started with {% if packageConfig.permalinkName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.permalinkName}}{% else %}the {{longXpackName}}{% endif %}
+# Getting Started with {{preferredName}}
 
 {%- elsif githubProjectOrganization == "micro-os-plus" %}
 
@@ -77,7 +77,7 @@ import CommonContent from './_common/_content.mdx';
 
 {%- else %}
 
-# Getting Started with the unsupported organization
+# Getting Started with the unsupported organisation
 
 {%- endif %}
 

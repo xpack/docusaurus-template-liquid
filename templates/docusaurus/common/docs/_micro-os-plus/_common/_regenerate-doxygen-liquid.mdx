@@ -5,18 +5,18 @@
 
 {%- if packageConfig.useDoxygen == "true" %}
 
-### Re-generate the Doxygen pages
+### Regenerate the Doxygen pages
 
-Run the **doxygen** npm script:
+Execute the **doxygen** npm script:
 
 ```sh
 npm run doxygen -C website
 ```
 
-For the moment the doxygen program must be installed on the host,
-it is not available as an xpm dependency.
+At present, the doxygen programme must be installed on the host,
+as it is not available as an xpm dependency.
 
-With the current configuration, the static html pages are generated
-in the `website/static/doxygen` folder.
+With the current configuration, the static HTML pages are generated
+within the `website/static/doxygen` folder.
 
 {%- endif %}

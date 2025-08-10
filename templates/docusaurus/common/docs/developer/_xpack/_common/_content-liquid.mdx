@@ -49,9 +49,15 @@ The current version is compiled with TypeScript {{packageDependenciesTypescriptV
 - https://www.typescriptlang.org
 - https://www.typescriptlang.org/docs/handbook
 
+{% if package.type == "module" %}
+The compiler is configured to produce ECMAScript6 `es2020` files
+that can be imported
+by any other project either via `import`.
+{% else %}
 The compiler is configured to produce `es2020` & `commonjs` files,
 which means ECMAScript6 with legacy CommonJS modules, that can be imported
 by any other project either via `require()` or `import`.
+{% endif %}
 
 For more details on how to configure `tsconfig.json`, please see:
 
@@ -66,6 +72,36 @@ The module uses ECMAScript 6 class definitions and modules.
 TBD
 
 {%- endif %}
+
+{%- if packageUseTypeScriptEslint == "true" %}
+
+## Style
+
+As style, the project uses [typescript-eslint](https://typescript-eslint.io),
+a set of rules for static analysis of JavaScript and TypeScript code
+
+For spacial cases, it is possible to configure/disable some rules.
+
+```js
+/* eslint-disable-next-line no-xxx-yyy */
+```
+
+The known rules are documented in the
+[eslint](https://eslint.org/docs/latest/rules/)
+project.
+
+Known and accepted exceptions:
+
+<ProjectStyleExceptions />
+
+{%- if packageUsePrettier == "true" %}
+
+## Prettier
+
+The project uses [Prettier](https://prettier.io) to format the code.
+{%- endif %}
+
+{%- elsif packageUseStandard == "true" %}
 
 ## Standard style
 
@@ -128,21 +164,32 @@ To manually fix compliance with the style guide (where possible):
 ...
 `} </CodeBlock>
 
+{% endif %}
+
 ## Documentation metadata
 
+{%- if packageUseApiExtractor == "true" %}
 {%- if isTypeScript == "true" %}
 
-The documentation metadata uses the
+The documentation metadata utilises the
+[TSDoc](https://tsdoc.org) tags, without
+explicit types, as they are provided by TypeScript.
+
+{%- endif %}
+{%- else %}
+{%- if isTypeScript == "true" %}
+
+The documentation metadata utilises the
 [TypeDoc](https://typedoc.org/guides/doccomments/) tags, without
-explicit types, since they are provided by TypeScript.
+explicit types, as they are provided by TypeScript.
 
 :::note
 
 Microsoft is currently developing a new project ([TSDoc](https://tsdoc.org))
-which tries to standardise TypeScript documentation metadata.
+which attempts to standardise TypeScript documentation metadata.
 
 This standard is generally compatible with TypeDoc; at the time of
-this writing, among the visible differences is the lack
+this writing, amongst the visible differences is the absence
 of the `@category` or `@group` tags.
 
 :::
@@ -151,7 +198,7 @@ of the `@category` or `@group` tags.
 
 The documentation metadata follows the [JSdoc](http://usejsdoc.org) tags.
 
-To enforce checking at file level, add the following comments right after
+To enforce checking at file level, add the following comments immediately after
 the `use strict`:
 
 ```js
@@ -160,7 +207,7 @@ the `use strict`:
 /* eslint max-len: [ "error", 80, { "ignoreUrls": true } ] */
 ```
 
-Note: be sure C style comments are used, C++ styles are not parsed by
+Note: ensure C style comments are used, as C++ styles are not parsed by
 [ESLint](http://eslint.org).
 
 {%- else %}
@@ -168,15 +215,18 @@ Note: be sure C style comments are used, C++ styles are not parsed by
 TBD
 
 {%- endif %}
+{%- endif %}
+
+{%- if packageWebsiteConfig.skipTests != "true" %}
 
 ## Tests
 
-The tests use the [`node-tap`](http://www.node-tap.org) framework
+The tests utilise the [`node-tap`](http://www.node-tap.org) framework
 (_A Test-Anything-Protocol library for Node.js_, written by Isaac Schlueter).
 
-Tests can be written in TypeScript, assuming `ts-node` is also installed.
+Tests can be written in TypeScript, provided `ts-node` is also installed.
 
-As for any `npm` package, the standard way to run the project tests is via
+As with any `npm` package, the standard method to execute the project tests is via
 `npm run test`:
 
 ```sh
@@ -190,11 +240,11 @@ npm run test
 
 ### Coverage tests
 
-Coverage tests are a good indication on how much of the source files is
-exercised by the tests. Ideally all source files should be covered 100%,
-for all 4 criteria (statements, branches, functions, lines).
+Coverage tests provide a good indication of how much of the source files is
+exercised by the tests. Ideally, all source files should achieve 100% coverage
+across all 4 criteria (statements, branches, functions, lines).
 
-Thus, passing coverage tests was enforced for all tests, as seen before.
+Thus, passing coverage tests was enforced for all tests, as demonstrated previously.
 
 #### Coverage exceptions
 
@@ -206,17 +256,22 @@ and `/* c8 ignore start */` `/* c8 ignore stop */` for
 <ProjectCoverageExceptions />
 
 {%- endif %}
+{%- endif %}
+
+{%- if packageConfig.skipCiTests != "true" %}
 
 ### Continuous Integration (CI)
 
-The module is {% if packageWebsiteConfig.has100coverage == "true" %}tested with 100% coverage and{% endif %}
-CI tested on every push via
+The module is {% if packageWebsiteConfig.has100coverage == "true" %}tested with 100% coverage and is{% endif %}
+subject to CI testing on every push via
 [GitHub Actions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions), on Ubuntu,
-Windows and macOS, using node 18, 20 and 22.
+Windows and macOS, utilising node 18, 20 and 22.
+
+{%- endif %}
 
 {%- if isTypeScript == "true" %}
 
-## Tricks & tips
+## Tips & tricks
 
 To trace TypeScript module resolution:
 

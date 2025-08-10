@@ -6,19 +6,21 @@
 <details>
 <summary>Branches</summary>
 
-The project uses multiple branches:
+This project utilises multiple branches:
 
-- `master`, {% if branchMain != "master" %}not actively used{% else %}with the latest stable version (default){% endif %}
+- `master`, {% if branchMain != "master" %}not actively used{% else %}containing the latest stable version (default){% endif %}
 {%- if branchMain == "xpack" %}
-- `xpack`, with the latest stable version (default)
+- `xpack`, containing the latest stable version (default)
 {%- endif %}
-- `{{branchDevelopment}}`, with the current development version
-- `{{branchWebsite}}`, with the current content of the website; pushes to this branch automatically trigger publishes the main website
-{%- if branchWebpreview != "" %}
-- `{{branchWebpreview}}`, with the current content of the preview website; pushes to this branch automatically trigger publishes the preview website
+- `{{branchDevelopment}}`, containing the current development version
+{%- if branchWebsite != branchMain %}
+- `{{branchWebsite}}`, containing the current website content; pushes to this branch automatically trigger publication of the main website
+{%- endif %}
+{%- if branchWebpreview != branchDevelopment %}
+- `{{branchWebpreview}}`, containing the current preview website content; pushes to this branch automatically trigger publication of the preview website
 {%- endif %}
 
-All development is done in the `{{branchDevelopment}}` branch, and contributions via
+All development is conducted in the `{{branchDevelopment}}` branch, and contributions via
 Pull Requests should be directed to this branch.
 
 When new releases are published, the `{{branchDevelopment}}` branch is merged

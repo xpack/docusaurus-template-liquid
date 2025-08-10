@@ -49,7 +49,7 @@ import CommonTheAuthor from './_common/_the-author.mdx';
 
 {%- if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}
 
-# About {% if packageConfig.permalinkName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.permalinkName}}{% else %}the {{longXpackName}}{% endif %}
+# About {{preferredName}}
 
 {%- elsif githubProjectOrganization == "micro-os-plus" %}
 
@@ -57,7 +57,7 @@ import CommonTheAuthor from './_common/_the-author.mdx';
 
 {%- else %}
 
-# About an unsupported organization
+# About an unsupported organisation
 
 {%- endif %}
 

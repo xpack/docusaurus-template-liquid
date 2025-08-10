@@ -34,7 +34,7 @@ import ProjectContent from './_project/_content.mdx';
 
 {%- if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}
 
-# The {% if packageConfig.permalinkName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.permalinkName}}{% else %}{{longXpackName}}{% endif %} Frequently Asked Questions
+# The {{preferredName}} Frequently Asked Questions
 
 {%- elsif githubProjectOrganization == "micro-os-plus" %}
 
@@ -42,7 +42,7 @@ import ProjectContent from './_project/_content.mdx';
 
 {%- else %}
 
-# The unsupported organization FAQ
+# The unsupported organisation FAQ
 
 {%- endif %}
 

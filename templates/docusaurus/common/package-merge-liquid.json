@@ -27,7 +27,7 @@
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "generate-typedoc": "docusaurus generate-typedoc",
+    "generate-typedoc": "typedoc",
     "typecheck": "tsc",
     "import-website-releases": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/import-releases.sh --{{githubProjectOrganization}}",
 {%- if githubProjectOrganization == "micro-os-plus" %}
@@ -58,7 +58,7 @@
   "$devDependenciesUrls": [
     "https://www.npmjs.com/package/del-cli",
 {%- if isTypeScript == "true" %}
-    "https://www.npmjs.com/package/docusaurus-plugin-typedoc",
+    "https://www.npmjs.com/package/typedoc-plugin-markdown",
 {%- endif %}
     "https://www.npmjs.com/package/json",
     "https://www.npmjs.com/package/liquidjs",
@@ -69,9 +69,6 @@
   ],
   "devDependencies": {
     "del-cli": "^6.0.0",
-{%- if isTypeScript == "true" %}
-    "docusaurus-plugin-typedoc": "^1.2.1",
-{%- endif %}
 {%- if githubProjectOrganization == "micro-os-plus" %}
     "@jothepro/doxygen-awesome-css": "github:jothepro/doxygen-awesome-css#v2.3.4",
 {%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
@@ -88,9 +85,10 @@
     "json": "^11.0.0",
     "liquidjs": "^10.20.1",
 {%- if isTypeScript == "true" %}
-    "typedoc": "^0.27.6",
+    "typedoc": "^0.28.7",
+    "typedoc-plugin-markdown": "^4.7.0",
 {%- endif %}
-    "typescript": "~5.6.3"
+    "typescript": "~5.8.3"
   },
   "browserslist": {
     "production": [
@@ -106,6 +104,6 @@
   },
   "websiteConfig": {},
   "engines": {
-    "node": ">=18.0"
+    "node": ">=20.0"
   }
 }

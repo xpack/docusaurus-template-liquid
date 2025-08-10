@@ -1,6 +1,8 @@
 {% if isNpmPublished == "true"  -%}
 [![GitHub package.json version](https://img.shields.io/github/package-json/v/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/package.json)
+{%- if packageConfig.hasNoGithubReleases != "true" %}
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/releases)
+{%- endif  %}
 [![NPM Version](https://img.shields.io/npm/v/{{packageScopedName}}?color=blue)](https://www.npmjs.com/package/{{packageScopedName}}/)
 {%- endif  %}
 [![license](https://img.shields.io/github/license/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/LICENSE)

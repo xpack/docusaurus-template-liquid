@@ -6,21 +6,21 @@
 ### Prepare the release
 
 {% if isTypeScript == "true" -%}
-- terminate all running tasks (**Terminal** → **Terminate Task...**)
+- Terminate all running tasks (**Terminal** → **Terminate Task...**)
 {%- endif %}
-- switch to the `{{branchDevelopment}}` branch
+- Switch to the `{{branchDevelopment}}` branch
 {%- if isTypeScript == "true" or isJavaScript == "true" -%}
 - `npm run fix`
 {%- endif %}
-- if there are changes, **commit** all changes into the `{{branchDevelopment}}` branch
+- If there are changes, **commit** all changes to the `{{branchDevelopment}}` branch
 {%- if isTypeScript == "true" or isJavaScript == "true" -%}
 - `npm run test`
 {%- endif %}
-- check the latest commits `npm run git-log`
-- update `CHANGELOG.md`, add a line like _**\* v{{releaseVersion}} published on npmjs.com**_
-- **commit** with the message _**CHANGELOG: publish npm v{{releaseVersion}}**_
-- check the list of files included in the npm package:
+- Check the latest commits `npm run git-log`
+- Update `CHANGELOG.md`, add a line such as _**\* v{{releaseVersion}} published on npmjs.com**_
+- **Commit** with the message _**CHANGELOG: publish npm v{{releaseVersion}}**_
+- Check the list of files included in the npm package:
   ```sh
   npm run pack
   ```
-- possibly update `.npmignore`
+- Possibly update `.npmignore`

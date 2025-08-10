@@ -5,7 +5,7 @@
 
 title: Contributor's Guide{% if packageWebsiteConfig.usePluralGuides == "true" %}s{% endif %}
 {%- if isTypeScript == "true" or isJavaScript == "true" %}
-description: Guidance for developers aiming to contribute new features or bug fixes, detailing how to build the module, including prerequisites, repositories utilised, and scripts.
+description: Guidance for developers aiming to contribute new features or bug fixes, detailing how to build the {% if isNpmBinary == "true" %}project{% else %}module{% endif %}, including prerequisites, repositories utilised, and scripts.
 {%- elsif isXpackBinary == "true" %}
 description: Guidance for developers aiming to contribute new features or bug fixes, detailing how to build the binaries, including prerequisites, repositories utilised, and scripts.
 {%- else %}
@@ -47,7 +47,7 @@ import CommonContent from './_common/_content.mdx';
 
 {%- if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}
 
-# How to contribute to {% if packageConfig.permalinkName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.permalinkName}}{% else %}the {{longXpackName}}{% endif %}
+# How to contribute to {{preferredName}}
 
 {%- elsif githubProjectOrganization == "micro-os-plus" %}
 
@@ -55,7 +55,7 @@ import CommonContent from './_common/_content.mdx';
 
 {%- else %}
 
-# How to contribute to unsupported organization
+# How to contribute to unsupported organisation
 
 {%- endif %}
 
@@ -70,17 +70,24 @@ import CommonContent from './_common/_content.mdx';
 [![CI on Push](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions/workflows/test-ci.yml/badge.svg)](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions/workflows/test-ci.yml)
 {%- endif %}
 {%- if isTypeScript == "true" %}
+{%- if packageConfig.useEslint == "true" %}
+[![TypeScript ESLint](https://img.shields.io/badge/TypeScript_ESLint-3178C6?style=flat&logo=typescript&logoColor=white)](https://typescript-eslint.io/)
+{%- else %}
 [![TS-Standard - TypeScript Standard Style Guide](https://badgen.net/badge/code%20style/ts-standard/blue?icon=typescript)](https://github.com/standard/ts-standard/)
+{%- endif %}
+{%- endif %}
+{%- if isJavaScript == "true" %}
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen)](https://standardjs.com)
 {%- endif %}
 {%- if isJavaScript == "true" %}
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen)](https://standardjs.com)
 {%- endif %}
 [![license](https://img.shields.io/github/license/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/LICENSE)
 
-This page is designed for developers who plan to contribute new features
-or fix bugs in the
+This page is designed for developers who intend to contribute new features
+or resolve bugs within the
 **{{longXpackName}}**
-project and provides documentation on how to build and test the package.
+project and provides documentation on building and testing the package.
 
 <CommonContent />
 

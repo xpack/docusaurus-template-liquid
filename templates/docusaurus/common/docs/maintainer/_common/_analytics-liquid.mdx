@@ -6,7 +6,7 @@
 ## Analytics
 
 {% if isXpackBinary == "true" %}
-- GitHub [`{{githubProjectOrganization}}/{{githubProjectName}}`](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/) repo
+- GitHub [`{{githubProjectOrganization}}/{{githubProjectName}}`](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/) repository
   - latest xPack release
 [![Github All Releases](https://img.shields.io/github/downloads/{{githubProjectOrganization}}/{{githubProjectName}}/latest/total)](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/releases)
   - all xPack releases [![Github All Releases](https://img.shields.io/github/downloads/{{githubProjectOrganization}}/{{githubProjectName}}/total)](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/releases){% if packageWebsiteConfig.showDeprecatedGnuMcuAnalytics == 'true' %}
@@ -19,6 +19,6 @@
 [![NPM Downloads](https://img.shields.io/npm/dm/{% if packageScope != "" %}%40{{packageScope}}%2F{% endif %}{{packageName}}?color=green)](https://www.npmjs.com/package/{{packageScopedName}}/)
   - all releases [![NPM Downloads](https://img.shields.io/npm/dt/{% if packageScope != "" %}%40{{packageScope}}%2F{% endif %}{{packageName}}?color=green)](https://www.npmjs.com/package/{{packageScopedName}}/)
 
-Credit to [Shields IO](https://shields.io) for the badges{% if isXpackBinary == "true" %} and to
+Credits to [Shields IO](https://shields.io) for the badges{% if isXpackBinary == "true" %} and to
 [Somsubhra/github-release-stats](https://github.com/Somsubhra/github-release-stats)
 for the individual file counters{% endif %}.

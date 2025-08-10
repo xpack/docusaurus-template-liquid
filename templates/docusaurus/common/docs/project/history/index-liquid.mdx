@@ -23,7 +23,7 @@ import ProjectContent from './_project/_content.mdx';
 
 {%- if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}
 
-# The {% if packageConfig.permalinkName and packageWebsiteConfig.preferShortName == "true" %}history of {{packageConfig.permalinkName}}{% else %}{{longXpackName}} history{% endif %}
+# The history of **{{preferredName}}**
 
 {%- elsif githubProjectOrganization == "micro-os-plus" %}
 
@@ -31,7 +31,7 @@ import ProjectContent from './_project/_content.mdx';
 
 {%- else %}
 
-# The history of an unsupported organization
+# The history of an unsupported organisation
 
 {%- endif %}
 

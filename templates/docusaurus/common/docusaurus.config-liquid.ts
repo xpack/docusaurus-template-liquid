@@ -1,19 +1,22 @@
 // DO NOT EDIT!
 // Automatically generated from docusaurus-template-liquid/templates/docusaurus.
 
+/* eslint-disable */
 import { themes as prismThemes } from 'prism-react-renderer';
 import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 // import logger from '@docusaurus/logger';
 import util from 'node:util';
-{% if packageWebsiteConfig.hasCli == "true" -%}
+{% if packageConfig.hasCli == "true" -%}
 import cliNavbar from './docusaurus-config-navbar-cli';
 {%- endif %}
 {%- if packageWebsiteConfig.hasCustomDocsNavbarItem == "true" %}
 import { customDocsNavbarItem } from './navbar-docs-items';
 {%- endif %}
 {%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
-import doxygenApiMenu from './docusaurus-config-doxygen-menu-dropdown.json'
+import doxygenApiMenu from './docusaurus-config-menu-doxygen.json'
+{%- elsif packageWebsiteConfig.hasTSDocDocusaurusApi == "true" %}
+import tsdocApiMenu from './docusaurus-config-navbar-tsdoc.json'
 {%- endif %}
 import { redirects } from './docusaurus-config-redirects';
 import { getCustomFields } from './customFields';
@@ -70,17 +73,11 @@ const config: Config = {
     locales: ['en'],
   },
 
+  markdown: {
+    format: 'detect'
+  },
+
   plugins: [
-{%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
-    [
-      '@xpack/docusaurus-plugin-doxygen',
-      {
-        // redirectsOutputFolderPath: 'reference',
-        verbose: false,
-        suggestToDoDescriptions: false
-      }
-    ],
-{%- endif %}
     [
       // https://docusaurus.io/docs/next/api/plugins/@docusaurus/plugin-client-redirects#redirects
       '@docusaurus/plugin-client-redirects',
@@ -146,13 +143,13 @@ const config: Config = {
 {%- if packageWebsiteConfig.skipAlgolia != "true" %}
 
   themes: [
-    [
-      // Explicitly required when not using `preset-classic`.
-      // https://docusaurus.io/docs/search#using-algolia-docsearch
-      '@docusaurus/theme-search-algolia',
-      {
-      }
-    ],
+    // [
+    //   // Explicitly required when not using `preset-classic`.
+    //   // https://docusaurus.io/docs/search#using-algolia-docsearch
+    //   '@docusaurus/theme-search-algolia',
+    //   {
+    //   }
+    // ],
   ],
 {%- endif %}
 
@@ -207,7 +204,19 @@ const config: Config = {
         debug: true,
 
         theme: {
+{%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
+          customCss: [
+            './src/css/custom.css',
+            './src/css/custom-doxygen2docusaurus.css'
+          ],
+{%- elsif packageWebsiteConfig.hasTSDocDocusaurusApi == "true" %}
+          customCss: [
+            './src/css/custom.css',
+            './src/css/custom-tsdoc2docusaurus.css'
+          ],
+{%- else %}
           customCss: './src/css/custom.css',
+{%- endif %}
         },
 
       } satisfies Preset.Options,
@@ -313,7 +322,7 @@ const config: Config = {
             },
 {%- if packageWebsiteConfig.skipInstallGuide != "true" %}
             {
-              label: '{% if packageWebsiteConfig.customInstallLabel %}{{packageWebsiteConfig.customInstallLabel}}{% else %}Install Guide{% if packageWebsiteConfig.usePluralGuides == "true" %}s{% endif %}{% endif %}',
+              label: '{% if packageWebsiteConfig.customInstallLabel %}{{packageWebsiteConfig.customInstallLabel}}{% else %}Installation Guide{% if packageWebsiteConfig.usePluralGuides == "true" %}s{% endif %}{% endif %}',
               to: '/docs/install'
             },
 {%- endif %}
@@ -356,7 +365,7 @@ const config: Config = {
           ],
         },
 {%- endif %}
-{%- if packageWebsiteConfig.hasCli == "true" %}
+{%- if packageConfig.hasCli == "true" %}
         cliNavbar,
 {%- endif %}
 {%- if packageWebsiteConfig.hasTypedocApi == "true" %}
@@ -365,6 +374,8 @@ const config: Config = {
           label: 'API',
           position: 'left',
         },
+{%- elsif packageWebsiteConfig.hasTSDocDocusaurusApi == "true" %}
+        tsdocApiMenu,
 {%- elsif packageWebsiteConfig.hasDoxygenReference == "true" %}
 {%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
         doxygenApiMenu,

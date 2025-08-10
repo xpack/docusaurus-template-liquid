@@ -2,7 +2,7 @@
 // Automatically generated from docusaurus-template-liquid/templates/docusaurus.
 
 import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
-{%- if packageWebsiteConfig.hasCli == "true" %}
+{%- if packageConfig.hasCli == "true" %}
 import cliSidebar from "./sidebar-cli";
 {%- endif %}
 {%- if packageWebsiteConfig.hasTypedocApi == "true" %}
@@ -22,6 +22,8 @@ import {customDocsSidebar} from "./sidebar-docs-custom";
 {%- endif %}
 {%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
 import doxygenSidebarItems from './sidebar-category-doxygen.json';
+{%- elsif packageWebsiteConfig.hasTSDocDocusaurusApi == "true" %}
+import tsdocSidebarItems from './sidebar-category-tsdoc.json';
 {%- endif %}
 
 /**
@@ -52,7 +54,7 @@ const sidebars: SidebarsConfig = {
     {
       type: 'doc',
       id: 'install/index',
-      label: '{% if packageWebsiteConfig.customInstallLabel %}{{packageWebsiteConfig.customInstallLabel}}{% else %}Install Guides{% endif %}'
+      label: '{% if packageWebsiteConfig.customInstallLabel %}{{packageWebsiteConfig.customInstallLabel}}{% else %}Installation Guides{% endif %}'
     },
     {
       type: 'doc',
@@ -89,7 +91,7 @@ const sidebars: SidebarsConfig = {
     {
       type: 'doc',
       id: 'install/index',
-      label: '{% if packageWebsiteConfig.customInstallLabel %}{{packageWebsiteConfig.customInstallLabel}}{% else %}Install Guide{% endif %}'
+      label: '{% if packageWebsiteConfig.customInstallLabel %}{{packageWebsiteConfig.customInstallLabel}}{% else %}Installation Guide{% endif %}'
     },
 {%- endif %}
 {%- if packageWebsiteConfig.hasCustomUserSidebar == "true" %}
@@ -203,9 +205,15 @@ const sidebars: SidebarsConfig = {
     doxygenSidebarItems,
   ],
 
+{%- elsif packageWebsiteConfig.hasTSDocDocusaurusApi == "true" %}
+
+  tsdocSidebar: [
+    tsdocSidebarItems,
+  ],
+
 {%- endif %}
 
-{%- if packageWebsiteConfig.hasCli == "true" %}
+{%- if packageConfig.hasCli == "true" %}
 
   cliSidebar,
 {%- endif %}

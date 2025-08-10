@@ -5,36 +5,36 @@ import CodeBlock from '@theme/CodeBlock';
 
 {/* ------------------------------------------------------------------------ */}
 
-## Install
+## Installation
 
 The package is available as
 [`{{packageScopedName}}`](https://www.npmjs.com/package/{{packageScopedName}}/)
 from the public [`npmjs`](https://www.npmjs.com) repository;
-it can be added as a
-{% if packageWebsiteConfig.hasCli != "true" %}dependency to any TypeScript or JavaScript{% else %}development dependency to any **npm**{% endif %}
+it may be added as a
+{% if packageConfig.hasCli != "true" %}dependency to any TypeScript or JavaScript{% else %}development dependency to any **npm**{% endif %}
 project.
 
 The command to install the
 **latest** available version of **{{packageScopedName}}** is:
 
 ```sh
-npm install {{packageScopedName}}@latest{% if packageWebsiteConfig.hasCli == "true" %} --save-dev{% endif %}
+npm install {{packageScopedName}}@latest{% if packageConfig.hasCli == "true" %} --save-dev{% endif %}
 ```
 
-To install a **specific version**, mention it explicitly:
+To install a **specific version**, specify it explicitly:
 
 <CodeBlock language="sh"> {
-`npm install {{packageScopedName}}@{{releaseVersion}}{% if packageWebsiteConfig.hasCli == "true" %} --save-dev{% endif %}
+`npm install {{packageScopedName}}@{{releaseVersion}}{% if packageConfig.hasCli == "true" %} --save-dev{% endif %}
 `} </CodeBlock>
 
-{%- if packageWebsiteConfig.hasCli != "true" %}
+{%- if packageConfig.hasCli != "true" %}
 
 The package does not provide any executables, and generally there are **no
 reasons to install it globally**.
 
 {%- else %}
 
-The package does provides executables, and can also
+The package does provide executables, and may also
 be installed globally.
 
 The command to install the
@@ -44,7 +44,7 @@ The command to install the
 npm install --location=global {{packageScopedName}}@latest
 ```
 
-To install a **specific version**, mention it explicitly:
+To install a **specific version**, specify it explicitly:
 
 <CodeBlock language="sh"> {
 `npm install --location=global {{packageScopedName}}@{{releaseVersion}}
@@ -54,16 +54,16 @@ To install a **specific version**, mention it explicitly:
 
 ## Uninstall
 
-As any **npm** package, **{{packageScopedName}}** can be uninstalled
+As with any **npm** package, **{{packageScopedName}}** may be uninstalled
 from the project and the dependency removed from `package.json` with:
 
 ```console
 npm uninstall {{packageScopedName}}
 ```
 
-{%- if packageWebsiteConfig.hasCli == "true" %}
+{%- if packageConfig.hasCli == "true" %}
 
-If installed globally, it can be uninstalled with:
+If installed globally, it may be uninstalled with:
 
 ```console
 npm uninstall --location=global {{packageScopedName}}

@@ -9,14 +9,14 @@ import CodeBlock from '@theme/CodeBlock';
 <summary>Reproducibility and `{% if isXpackBinary == "true" %}devDependencies{% else %}dependencies{% endif %}`</summary>
 
 To ensure reproducibility, it is essential for each project to always
-use the exact desired versions of the required {% if isXpackBinary == "true" %}tools, regardless of the
+utilise the exact desired versions of the required {% if isXpackBinary == "true" %}tools, regardless of the
 tools installed in the system{% else %}libraries, regardless of the
 libraries installed in the system{% endif %}.
 
-To achieve this goal, **xpm** records all locally installed {% if isXpackBinary == "true" %}binary {% endif %}packages
+To achieve this objective, **xpm** records all locally installed {% if isXpackBinary == "true" %}binary {% endif %}packages
 as {% if isXpackBinary == "true" %}development {% endif %}dependencies in the project `package.json` file.
 
-The result looks like this:
+The result appears as follows:
 
 <CodeBlock language="json"> {
 `  "xpack": {
@@ -47,11 +47,11 @@ The result looks like this:
 `} </CodeBlock>
 
 If the `package.json` is saved in the revision system, the above
-definition acts as a hard reference to the specific version of
-the {{longXpackName}}.
+definition acts as a firm reference to the specific version of
+{{preferredName}}.
 
 After cloning the project into a different location, the command `xpm install`
-can be used to install all {% if isXpackBinary == "true" %}development {% endif %}dependencies.
+may be used to install all {% if isXpackBinary == "true" %}development {% endif %}dependencies.
 
 This is particularly useful for CI/CD environments.
 

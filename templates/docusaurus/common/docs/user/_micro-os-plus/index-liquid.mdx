@@ -55,17 +55,17 @@ import Content from './_project/_content.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
-# How to use {% if packageConfig.permalinkName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.permalinkName}}{% else %}the {{longXpackName}}{% endif %}
+# How to use {{preferredName}}
 
-{%- if isXpackBinary == "true" or packageWebsiteConfig.hasCli == "true" %}
+{%- if isXpackBinary == "true" or packageConfig.hasCli == "true" %}
 
-This section is intended for those who plan to integrate
-{% if packageConfig.permalinkName and packageWebsiteConfig.preferShortName == "true" %}**{{packageConfig.permalinkName}}**{% else %}the **{{longXpackName}}**{% endif %} into their workflows.
+This page is intended for those who plan to integrate
+**{{preferredName}}** into their workflows.
 
 {%- else %}
 
-This section is intended for those who plan to use this
-module in their
+This page is intended for those who plan to use this
+library in their
 own projects.
 
 {%- endif %}
@@ -78,9 +78,9 @@ own projects.
 
 ### Reference
 
-For more details on the available class definitions, including all methods,
-accessors, properties, etc,
-please see the TypeDoc
+For further details on the available class definitions, including all methods,
+accessors, properties, etc.,
+please refer to the TypeDoc
 [API](/docs/api/) pages.
 
 {%- endif %}

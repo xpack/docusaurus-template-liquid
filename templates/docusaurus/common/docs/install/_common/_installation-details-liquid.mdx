@@ -6,16 +6,16 @@
 <details>
 <summary>Installation details</summary>
 
-The above `xpm install` command will do the following:
+The above `xpm install` command will perform the following:
 
-* identify the {% if isXpackBinary == "true" %}platform specific archive for the {% endif %}desired version
+* identify the {% if isXpackBinary == "true" %}platform-specific archive for the {% endif %}desired version
   of {{packageScopedName}}, download it into a cache and unpack
   it into a versioned folder
-  in the **user's global xPacks store** (if not already there);
+  within the **user's global xPacks store** (if not already present);
   check the output of the `xpm install` command for the actual
   folder used on your platform;
 * create a local symbolic link
-  like <code>xpacks/{{packageScopedName}}</code> pointing to the
+  such as <code>xpacks/{{packageScopedName}}</code> pointing to the
   versioned folder in the user's global xPacks store
 {%- if isXpackBinary == "true" %}
 * add links/forwarders into
@@ -24,13 +24,13 @@ The above `xpm install` command will do the following:
 {% endif %}
 * add <code>{{packageScopedName}}</code> to
   `package.json` as a
-  {% if isXpackBinary == "true" %}development {% endif %}dependency; this associates a specific version of the {{longXpackName}} with
+  {% if isXpackBinary == "true" %}development {% endif %}dependency; this associates a specific version of {{preferredName}} with
   the current project (details below).
 
 :::tip
 
-The install location can be configured using the
-`XPACKS_STORE_FOLDER` environment variable; for more details please check the
+The installation location may be configured using the
+`XPACKS_STORE_FOLDER` environment variable; for more details please refer to the
 [xpm folders](https://xpack.github.io/xpm/folders/) page.
 
 :::

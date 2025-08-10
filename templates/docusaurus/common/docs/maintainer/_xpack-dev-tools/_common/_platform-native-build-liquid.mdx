@@ -13,7 +13,7 @@ To check the available space:
 xpm run check-space -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
 ```
 
-To free the space used by all previous builds of all `{{githubProjectOrganization}}` packages:
+To free the space utilised by all previous builds of all `{{githubProjectOrganization}}` packages:
 
 ```sh
 xpm run clear-all-projects-builds -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
@@ -35,7 +35,7 @@ xpm install --config ${props.platform} -C ~/Work/{{githubProjectOrganization}}/{
 xpm run build-development --config ${props.platform} -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
 `} </CodeBlock>
 
-{developmentDurations[ props.platform ]}, the output of the build script is a compressed
+After {developmentDurations[ props.platform ]}, the output of the build script is a compressed
 archive and its SHA signature, created in
 the <code>build-assets/build/{props.platform}/deploy</code> folder:
 

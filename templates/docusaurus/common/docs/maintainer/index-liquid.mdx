@@ -42,7 +42,7 @@ import CommonContent from './_common/_content.mdx';
 
 {%- if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}
 
-# How to make new {% if packageConfig.permalinkName and packageWebsiteConfig.preferShortName == "true" %}{{packageConfig.permalinkName}}{% else %}{{longXpackName}}{% endif %} releases
+# How to make new {{preferredName}} releases
 
 {%- elsif githubProjectOrganization == "micro-os-plus" %}
 
@@ -69,11 +69,15 @@ import CommonContent from './_common/_content.mdx';
 [![CI on Push](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions/workflows/test-ci.yml/badge.svg)](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions/workflows/test-ci.yml)
 {%- endif %}
 {%- if isTypeScript == "true" %}
+{%- if packageConfig.useEslint == "true" %}
+[![TypeScript ESLint](https://img.shields.io/badge/TypeScript_ESLint-3178C6?style=flat&logo=typescript&logoColor=white)](https://typescript-eslint.io/)
+{%- else %}
 [![TS-Standard - TypeScript Standard Style Guide](https://badgen.net/badge/code%20style/ts-standard/blue?icon=typescript)](https://github.com/standard/ts-standard/)
+{%- endif %}
 {%- elsif isJavaScript == "true" %}
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen)](https://standardjs.com)
 {%- endif %}
-[![license](https://img.shields.io/github/license/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/LICENSE)
+[![licence](https://img.shields.io/github/license/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/LICENSE)
 
 This page is designed for maintainers of the
 {%- if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}
@@ -81,7 +85,7 @@ This page is designed for maintainers of the
 {%- elsif githubProjectOrganization == "micro-os-plus" %}
 **{{packageConfig.descriptiveName}}**
 {%- endif %}
-project and provides documentation on how to create new releases.
+project and provides documentation on creating new releases.
 
 <CommonContent />
 

@@ -69,8 +69,8 @@ There are no fixed releases.
 
 ### Reformat source files
 
-- reformat the source files that were changed
-- commit and push
+- Reformat the source files that were changed
+- Commit and push
 
 <CommonManualTests />
 
@@ -82,17 +82,17 @@ There are no fixed releases.
 
 ### Test on all platforms
 
-In addition, it is possible to manually trigger a **test-all** job, that
-runs all available tests, on all supported platforms.
+In addition, it is possible to manually trigger a **test-all** job, which
+executes all available tests, on all supported platforms.
 
 For this:
 
-- ensure that the `xpack-development` branch is pushed
-- run the **trigger-workflow-test-all** action
+- Ensure that the `xpack-development` branch is pushed
+- Execute the **trigger-workflow-test-all** action
   ```sh
   xpm run trigger-workflow-test-all -C tests
   ```
-- wait for the **test-all** job to complete
+- Wait for the **test-all** job to complete
   (https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions/workflows/test-all.yml)
 
 <CommonPrepareNewBlogPost />
