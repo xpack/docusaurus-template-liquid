@@ -172,6 +172,10 @@ then
     substitute "first-website-post-liquid.mdx" "${blog_post_file_name}" "${website_folder_path}/blog"
 
     exit 0
+  elif [ "${is_xpack}" == "true" ]
+  then
+    cd "${templates_folder_path}/docusaurus/common"
+    substitute "package-merge-liquid.json" "package.json" "${website_folder_path}"
   else
     echo "--init not implemented yet"
     exit 1

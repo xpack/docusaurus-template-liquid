@@ -275,7 +275,7 @@ fi
 
 s="s|The full details of installing the ..xPack .*.. on various platforms|Comprehensive instructions for installing **${xpack_website_config_long_name}** on different platforms|"
 sed -i.bak -e "${s}" "${to_path}"
-s="s|are presented in the separate .Install.* page|can be found in the [Install Guide](/docs/install/)|"
+s="s|are presented in the separate .Install.* page|can be found in the [Installation Guide](/docs/install/)|"
 sed -i.bak -e "${s}" "${to_path}"
 
 # Convert admonition.
@@ -370,11 +370,11 @@ sed -i.bak -e 's|the separate \[How to install the RISC-V toolchain\?\].{{ site.
 
 sed -i.bak -e 's|separate .Install.... site.baseurl ../riscv-none-embed-gcc/install/. page.|project [README](https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack).|' "${to_path}"
 
-sed -i.bak -e 's|separate .Install.... site.baseurl ../dev-tools/riscv-none-elf-gcc/install/. page.|[Install Guide](/docs/install/).|' "${to_path}"
+sed -i.bak -e 's|separate .Install.... site.baseurl ../dev-tools/riscv-none-elf-gcc/install/. page.|[Installation Guide](/docs/install/).|' "${to_path}"
 
 # Fix other references to Install.
-sed -i.bak -e 's|separate \[.*\]... site.baseurl ../dev-tools/.*/install/) page|[Install Guide](/docs/install/)|' "${to_path}"
-sed -i.bak -e 's|\[.*\]... site.baseurl ../dev-tools/.*/install/)|[Install Guide](/docs/install/)|' "${to_path}"
+sed -i.bak -e 's|separate \[.*\]... site.baseurl ../dev-tools/.*/install/) page|[Installation Guide](/docs/install/)|' "${to_path}"
+sed -i.bak -e 's|\[.*\]... site.baseurl ../dev-tools/.*/install/)|[Installation Guide](/docs/install/)|' "${to_path}"
 
 # Fix references to README-BUILD.md.
 s="[Maintainer Info](/docs/maintainer/)"

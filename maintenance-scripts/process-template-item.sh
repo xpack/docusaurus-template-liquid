@@ -492,9 +492,12 @@ fi
 
 if [ "${xpack_has_custom_user}" != "true" ]
 then
-  skip_pages_array+=(\
-    "docs/user/_project/_content.mdx" \
-  )
+  if [ "${xpack_npm_package_is_xpack_binary}" == "true" ]
+  then
+    skip_pages_array+=(\
+      "docs/user/_project/_content.mdx" \
+    )
+  fi
 else
   skip_pages_array+=(\
     "docs/user/_project/_more.mdx" \
