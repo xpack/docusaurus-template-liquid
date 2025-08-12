@@ -222,13 +222,11 @@ If, for any reason, you decide not to install **{{packageScopedName}}**, you can
 benefit from it by utilising the `npx` command, as a trampoline to start **{{packageWebsiteConfig.programName}}**:
 
 <CodeBlock language="console"> {
-`$ npx {{packageWebsiteConfig.programName}} --version
+`$ npx --package {{packageScopedName}} -- {{packageWebsiteConfig.programName}} --version
 {{releaseVersion}}
 `} </CodeBlock>
 
-However, for regular usage, this method is not efficient, since
-**npx** will need to prepare the Node.js module
-for each execution, and this takes some time.
+However, for regular use, this method may be less convenient, as invoking **npx** requires a more verbose command.
 
 ## npm folders
 
