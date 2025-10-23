@@ -39,7 +39,13 @@ const actualBaseUrl = process.env.DOCUSAURUS_BASEURL ??
 const config: Config = {
   title: '{% if packageWebsiteConfig.title %}{{packageWebsiteConfig.title}}{% else %}{{longXpackName}}{% endif %}' +
     ((process.env.DOCUSAURUS_IS_PREVIEW === 'true') ? ' (preview)' : ''),
-  tagline: '{% if packageWebsiteConfig.tagline %}{{packageWebsiteConfig.tagline}}{% elsif isXpackBinary == "true" and packageConfig.descriptiveName %}A binary distribution of {{packageConfig.descriptiveName}}{% else %}{{packageDescription}}{% endif %}',
+{%- if packageWebsiteConfig.tagline %}
+  tagline: '{{packageWebsiteConfig.tagline}}',
+{%- elsif  isXpackBinary == "true" and packageConfig.upstreamDescriptiveName %}
+  tagline: 'A binary distribution of {{packageConfig.upstreamDescriptiveName}}',
+{%- else %}
+  tagline: '{{packageDescription}}',
+{%- endif %}
 
   // Explicitly set in headTags.
   // favicon: '/img/favicon.ico',
@@ -57,7 +63,6 @@ const config: Config = {
 
   onBrokenAnchors: 'throw',
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'throw',
 
   onDuplicateRoutes: 'throw',
 
@@ -74,7 +79,10 @@ const config: Config = {
   },
 
   markdown: {
-    format: 'detect'
+    format: 'detect',
+    hooks: {
+        onBrokenMarkdownLinks: 'throw'
+    }
   },
 
   plugins: [

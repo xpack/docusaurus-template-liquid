@@ -16,6 +16,9 @@ import CommonGetProjectSources from '@site/docs/_common/_get-project-sources.mdx
 import CommonGetHelperSources from '@site/docs/_common/_get-helper-sources-details.mdx';
 import CommonGenerateTopCommons from '@site/docs/_common/_generate-top-commons.mdx';
 import CommonGenerateWebsiteCommons from '@site/docs/_common/_generate-website-commons.mdx';
+import CommonUpdateTopCommons from '@site/docs/_common/_update-top-commons.mdx';
+import CommonUpdateWebsiteCommons from '@site/docs/_common/_update-website-commons.mdx';
+
 import CommonPublishWebsite from '@site/docs/_common/_publish-website.mdx';
 import CommonBuildWebsiteLocally from '@site/docs/_common/_build-website-locally.mdx';
 
@@ -63,7 +66,7 @@ import ProjectPatches from '../_project/_patches.mdx';
 
 {%- for platform in platforms_array %}
 {%- if platform == "darwin-x64" or platform == "darwin-arm64" %}{% assign isMacOS = true %}{% endif %}
-{%- if platform == "linux-x64" or platform == "linux-arm64" or platform == "linux-arm" %}{% assign isLinux = true %}{% endif %}
+{%- if platform == "linux-x64" or platform == "linux-arm64" %}{% assign isLinux = true %}{% endif %}
 {%- if platform == "win32-x64" %}{% assign isWindows = true %}{% endif %}
 {%- endfor %}
 
@@ -105,6 +108,10 @@ as described above.
 Check the latest versions at https://github.com/{{githubProjectOrganization}}/ and
 update the dependencies in `build-assets/package.json`.
 
+<CommonGenerateTopCommons />
+
+<CommonGenerateWebsiteCommons />
+
 <ProjectCheckUpstreamRelease/>
 
 <CommonIncreaseVersion />
@@ -119,14 +126,9 @@ is <code>{{releaseSemver}}-{{releaseSubversion}}</code>.
 
 <CommonUpdateWebsiteConfig />
 
-<CommonGenerateTopCommons />
+<CommonUpdateTopCommons />
 
-<CommonGenerateWebsiteCommons />
-
-### Commit the website changes
-
-- **Stage** `website` and top `README.md`
-- **Commit** with the message _**website: regenerate commons**_
+<CommonUpdateWebsiteCommons />
 
 <CommonStartLocalWebServer />
 
@@ -158,7 +160,6 @@ will build the previous release again!
 {%- if platform == "darwin-arm64" %}{% assign names_array = names_array | concat: "arm64 macOS" %}{% endif %}
 {%- if platform == "win32-x64" or platform == "linux-x64" %}{% assign names_array = names_array | concat: "x64 GNU/Linux" %}{% endif %}
 {%- if platform == "linux-arm64" %}{% assign names_array = names_array | concat: "arm64 GNU/Linux" %}{% endif %}
-{%- if platform == "linux-arm" %}{% assign names_array = names_array | concat: "arm GNU/Linux" %}{% endif %}
 {%- endfor %}
 
 {%- assign names_array = names_array | uniq %}
@@ -177,6 +178,8 @@ triggered via the VS Code graphical interface, utilising the
 
 <ProjectPatches/>
 
+{%- if packageConfig.useSelfHostedRunners == "true" %}
+
 ### Restart the Docker daemons
 
 If, for any reason, the Docker builds need to be cancelled, it is very
@@ -189,6 +192,8 @@ machines:
 ```sh
 sudo systemctl restart docker
 ```
+
+{%- endif %}
 
 ### Verify if both projects are pushed
 
@@ -209,9 +214,8 @@ the build may proceed with the previous version.
 {%- for platform in platforms_array %}{% if platform == "darwin-x64" %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
 {%- for platform in platforms_array %}{% if platform == "darwin-arm64" %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
 {%- for platform in platforms_array %}{% if platform == "linux-x64" %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
-{%- for platform in platforms_array %}{% if platform == "win32-x64" %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
 {%- for platform in platforms_array %}{% if platform == "linux-arm64" %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
-{%- for platform in platforms_array %}{% if platform == "linux-arm" %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
+{%- for platform in platforms_array %}{% if platform == "win32-x64" %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
 
 {%- for name in names_array %}
 
@@ -227,6 +231,10 @@ export XBB_ENVIRONMENT_SKIP_CHECKS="y"
 ```
 
 ```sh
+rm -rf ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/package-lock.json
+```
+
+```sh
 rm -rf ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets/package-lock.json
 git -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git pull
 
@@ -237,7 +245,7 @@ xpm link -C ~/Work/{{githubProjectOrganization}}/xbb-helper-xpack.git
 
 xpm run link-deps -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
 
-xpm run deep-clean --config darwin-x64  -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets && \
+xpm run deep-clean --config darwin-x64 -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets && \
 xpm install --config darwin-x64 -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets && \
 xpm run build-development --config darwin-x64 -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
 ```
@@ -295,21 +303,6 @@ caffeinate ssh xbbli
 
 {%- endif %}
 
-{%- if name == "win32-x64" %}
-
-### Build the x64 Windows binaries
-
-Execute the Docker build on the production machine (`xbbli`);
-start a VS Code remote session, or connect with a terminal:
-
-```sh
-caffeinate ssh xbbli
-```
-
-<CommonPlatformDockerBuild platform="win32-x64"/>
-
-{%- endif %}
-
 {%- if name == "linux-arm64" %}
 
 ### Build the ARM64 GNU/Linux binaries
@@ -325,18 +318,18 @@ caffeinate ssh ampere
 
 {%- endif %}
 
-{%- if name == "linux-arm" %}
+{%- if name == "win32-x64" %}
 
-### Build the ARM GNU/Linux (32-bit) binaries
+### Build the x64 Windows binaries
 
-Execute the Docker build on the production machine (`xbbla32`);
+Execute the Docker build on the production machine (`xbbli`);
 start a VS Code remote session, or connect with a terminal:
 
 ```sh
-caffeinate ssh xbbla32
+caffeinate ssh xbbli
 ```
 
-<CommonPlatformDockerBuild platform="linux-arm"/>
+<CommonPlatformDockerBuild platform="win32-x64"/>
 
 {%- endif %}
 
@@ -344,10 +337,10 @@ caffeinate ssh xbbla32
 
 ### Update the durations of the development builds
 
-In `website/docs/_shared/_development-durations.mdx`, update
+In `website/docs/_project/_development-durations.mdx`, update
 the durations of the builds.
 
-Commit with the message _**website: update development durations**_.
+Commit with the message _**website: update development durations**_
 
 ### Update the trees in the Installation Guide page
 
@@ -359,28 +352,30 @@ Commit with the message _**website: update development durations**_.
 
 {%- for platform in platforms_array %}
 {%- if platform == "darwin-x64" or platform == "darwin-arm64" %}{% assign isMacOS = true %}{% endif %}
-{%- if platform == "linux-x64" or platform == "linux-arm64" or platform == "linux-arm" %}{% assign isLinux = true %}{% endif %}
+{%- if platform == "linux-x64" or platform == "linux-arm64" %}{% assign isLinux = true %}{% endif %}
 {%- if platform == "win32-x64" %}{% assign isWindows = true %}{% endif %}
 {%- endfor %}
 
 Copy the trees displayed at the end of the test builds and paste to the
 **Folder hierarchy** section within the web file:
 
+<ul>
 {% if isLinux -%}
-- `website/docs/_shared/_folders-hierarchies-linux.mdx`
+<li> <code>website/docs/_project/_folders-hierarchies-linux.mdx</code></li>
 {%- endif %}
 {% if isMacOS -%}
-- `website/docs/_shared/_folders-hierarchies-macos.mdx`
+<li> <code>website/docs/_project/_folders-hierarchies-macos.mdx</code></li>
 {%- endif %}
 {% if isWindows -%}
-- `website/docs/_shared/_folders-hierarchies-windows.mdx`
+<li> <code>website/docs/_project/_folders-hierarchies-windows.mdx</code></li>
 {%- endif %}
+</ul>
 
 If present, replace the actual version
-(such as **{{upstreamVersion}}**) with the following expression:
+(such as **{{releaseVersion}}**) with the following expression:
 
 ```txt
-${customField('upstreamVersion')}
+${customField('releaseVersion')}
 ```
 
 {% if isMacOS -%}
@@ -393,7 +388,7 @@ via Homebrew, and create a link to `/usr/local/bin`.
 :::
 {% endif %}
 
-Commit with the message _**website: update folder hierarchies**_.
+Commit with the message _**website: update folder hierarchies**_
 
 ### Update the list of links in top package.json
 
@@ -403,7 +398,7 @@ Commit with the message _**website: update folder hierarchies**_.
 {%- for platform in platforms_array %}
 {%- if platform == "win32-x64" %}{% assign names_array = names_array | concat: "Windows" %}{% endif %}
 {%- if platform == "darwin-x64" or platform == "darwin-arm64" %}{% assign names_array = names_array | concat: "macOS" %}{% endif %}
-{%- if platform == "linux-x64" or platform == "linux-arm64" or platform == "linux-arm" %}{% assign names_array = names_array | concat: "GNU/Linux" %}{% endif %}
+{%- if platform == "linux-x64" or platform == "linux-arm64" %}{% assign names_array = names_array | concat: "GNU/Linux" %}{% endif %}
 {%- endfor %}
 
 {%- assign names_array = names_array | uniq %}
@@ -413,7 +408,7 @@ sequence, {% if names_array.size > 1 %}for each platform ({{ names_array | join:
 and check the
 differences compared to the repository.
 
-Commit if necessary with the message _**package.json: update executables links**_.
+Commit if necessary with the message _**package.json: update executables links**_
 
 ### How to build a debug version
 
@@ -439,7 +434,10 @@ place them in the XBB cache (`Work/cache`) and restart the build.
 
 ## Execute the production builds
 
-The automation is provided by GitHub Actions and three self-hosted runners.
+{%- if packageConfig.useSelfHostedRunners == "true" %}
+
+The automation is provided by GitHub Actions and three self-hosted runners
+(the GitHub hosted runners do not have the necessary resources).
 
 ### Start the self-hosted runners
 
@@ -462,7 +460,6 @@ requires `GITHUB_API_XPACK_DEV_TOOLS_RUNNERS_TOKEN` to be present.
 {%- if platform == "darwin-arm64" %}{% assign names_array = names_array | concat: "xbbma" %}{% assign single_runner = true %}{% assign isMacOS = true %}{% endif %}
 {%- if platform == "linux-x64" or platform == "win32-x64" %}{% assign names_array = names_array | concat: "xbbli" %}{% assign dual_runner = true %}{% assign dual_runners_array = dual_runners_array | concat: "xbbli" %}{% endif %}
 {%- if platform == "linux-arm64" %}{% assign names_array = names_array | concat: "ampere" %}{% assign dual_runner = true %}{% assign dual_runners_array = dual_runners_array | concat: "ampere" %}{% endif %}
-{%- if platform == "linux-arm" %}{% assign names_array = names_array | concat: "xbbla32" %}{% assign single_runner = true %}{% endif %}
 {%- endfor %}
 
 {%- assign names_array = names_array | uniq %}
@@ -509,12 +506,6 @@ export XBB_ENVIRONMENT_MACOSX_DEPLOYMENT_TARGET="11.0"
 ~/actions-runners/{{githubProjectOrganization}}/run.sh &
 ```
 
-```sh
-unset WORK_FOLDER_PATH
-export XBB_ENVIRONMENT_MACOSX_DEPLOYMENT_TARGET="11.0"
-~/actions-runners/{{githubProjectOrganization}}/run.sh &
-```
-
 {%- endif %}
 
 On all other machines, start the runner with:
@@ -541,6 +532,11 @@ killall Runner.Listener
 
 The status of all self-hosted runners is available at the [GitHub Runners](https://github.com/organizations/{{githubProjectOrganization}}/settings/actions/runners) page.
 
+{%- else %}
+
+The automation is provided by GitHub Actions on GitHub-hosted runners.
+{%- endif %}
+
 ### Publish the helper
 
 Publish a new release of the helper on **npmjs**.
@@ -551,6 +547,8 @@ In `templates/_xpack-dev-tools/build-assets/package-merge-liquid.json`, update t
 to `"@xpack-dev-tools/xbb-helper":`.
 
 <CommonGenerateTopCommons />
+
+{%- if packageConfig.useSelfHostedRunners == "true" %}
 
 ### Check for disk space
 
@@ -570,7 +568,7 @@ This is equivalent to executing a `df` command.
 
 {%- for platform in platforms_array %}
 {%- if platform == "darwin-x64" or platform == "darwin-arm64" %}{% assign isMacOS = true %}{% endif %}
-{%- if platform == "linux-x64" or platform == "linux-arm64" or platform == "linux-arm" or platform == "win32-x64" %}{% assign isLinux = true %}{% endif %}
+{%- if platform == "linux-x64" or platform == "linux-arm64" or platform == "win32-x64" %}{% assign isLinux = true %}{% endif %}
 {%- endfor %}
 
 <Tabs groupId="operating-systems">
@@ -613,6 +611,8 @@ This is equivalent to executing a comprehensive `rm` to remove the `build` folde
 rm -rf ~/Work/{{githubProjectOrganization}}/*/build-assets/build
 ```
 
+{%- endif %}
+
 ### Commit and push
 
 - **Push** the `xpack-development` branch to GitHub
@@ -640,14 +640,12 @@ To trigger the GitHub Actions builds, utilise the xpm actions:
 {%- for platform in platforms_array %}{% if platform == "darwin-x64" %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
 {%- for platform in platforms_array %}{% if platform == "darwin-arm64" %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
 {%- for platform in platforms_array %}{% if platform == "linux-x64" %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
-{%- for platform in platforms_array %}{% if platform == "win32-x64" %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
 {%- for platform in platforms_array %}{% if platform == "linux-arm64" %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
-{%- for platform in platforms_array %}{% if platform == "linux-arm" %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
+{%- for platform in platforms_array %}{% if platform == "win32-x64" %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
 
 {% for name in names_array -%}
 - **trigger-workflow-build-{{name}}**
-{% endfor -%}
-{% comment %}{% endcomment %}```
+{% endfor %}
 
 The scripts behind these actions require the `GITHUB_API_DISPATCH_TOKEN`
 variable to be present
@@ -665,10 +663,10 @@ These commands utilise the `xpack-development` branch of this repository.
 The workflow results and logs are available from the
 [GitHub Actions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions) page.
 
-Update the values in `website/docs/_shared/_github-actions-durations.mdx`
+Update the values in `website/docs/_project/_github-actions-durations.mdx`
 with those shown by GitHub Actions.
 
-Commit with the message _**website: update actions durations**_.
+Commit with the message _**website: update actions durations**_
 
 The resulting binaries are available for testing from
 [pre-releases/test](https://github.com/xpack-dev-tools/pre-releases/releases/tag/test/).
@@ -677,7 +675,7 @@ The resulting binaries are available for testing from
 
 ### Automated tests
 
-The automation is provided by GitHub Actions.
+The automation is provided by GitHub Actions on GitHub-hosted runners.
 
 {%- assign platforms_array = platforms | split: "," %}
 
@@ -688,7 +686,7 @@ The automation is provided by GitHub Actions.
 {%- for platform in platforms_array %}
 {%- if platform == "darwin-x64" %}{% assign isMacOSX64 = true %}{% endif %}
 {%- if platform == "linux-x64" %}{% assign isLinuxX64 = true %}{% endif %}
-{%- if platform == "linux-arm64" or platform == "linux-arm" %}{% assign isLinuxArm = true %}{% endif %}
+{%- if platform == "linux-arm64" %}{% assign isLinuxArm = true %}{% endif %}
 {%- endfor %}
 
 To trigger the GitHub Actions tests, execute the xpm actions:
@@ -699,7 +697,7 @@ To trigger the GitHub Actions tests, execute the xpm actions:
 <li><b>trigger-workflow-test-docker-linux-x64</b></li>
 {%- endif %}
 {%- if isLinuxArm %}
-<li><b>trigger-workflow-test-docker-linux-arm</b></li>
+<li><b>trigger-workflow-test-docker-linux-arm64</b></li>
 {%- endif %}
 </ul>
 
@@ -709,7 +707,7 @@ xpm run trigger-workflow-test-prime -C ~/Work/{{githubProjectOrganization}}/{{gi
 xpm run trigger-workflow-test-docker-linux-x64 -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
 {%- endif %}
 {%- if isLinuxArm %}
-xpm run trigger-workflow-test-docker-linux-arm -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
+xpm run trigger-workflow-test-docker-linux-arm64 -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
 {%- endif %}
 ```
 
@@ -722,47 +720,11 @@ binaries.
 
 {%- assign platforms_array = platforms | split: "," %}
 
-{%- assign isLinuxArm32 = false %}
-
-{%- for platform in platforms_array %}
-{%- if platform == "linux-arm" %}{% assign isLinuxArm32 = true %}{% endif %}
-{%- endfor %}
-
-{%- if isLinuxArm32 %}
-:::caution
-
-Some of the `docker-linux-arm` tests have an issue on Debian and the
-**Clean working area** step fails.
-
-:::
-{%- endif %}
-
 The test results are available from the
 [GitHub Actions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions) page.
 
 After executing the prime tests, download the test results and compare
 with previous runs.
-
-{%- if isMacOSX64 %}
-
-#### Additional macOS tests
-
-Since GitHub Actions provides a limited range of versions for the macOS
-runner, the multi-version macOS tests execute on Travis.
-
-To trigger the Travis test, execute the **trigger-travis-macos** xpm action:
-
-```sh
-xpm run trigger-travis-macos -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
-```
-
-This script requires the `TRAVIS_COM_TOKEN` variable to be present
-in the environment.
-
-The test results are available from
-[Travis CI](https://app.travis-ci.com/github/{{githubProjectOrganization}}/{{githubProjectName}}/builds/).
-
-{%- endif %}
 
 ### Manual tests
 
@@ -774,6 +736,14 @@ git -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git pull
 xpm run install -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
 xpm run test-pre-release -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
 ```
+
+{%- if packageConfig.useSelfHostedRunners != "true" and isMacOSX64 %}
+
+:::caution
+Since the builds were performed on the latest GitHub macOS runners,
+it is strongly recommended to also execute the tests on an older macOS 11 machine.
+:::
+{%- endif %}
 
 For additional tests, on each platform,
 download the archive from
@@ -838,17 +808,10 @@ watching the {{githubProjectName}} project.
 
 <CommonPrepareNewBlogPost />
 
-### Update the web install page
-
-- Check and possibly update the output of the `--version` runs in
-  - `website/docs/install/_project/_automatic-install-quick-test.mdx`
-  - `website/docs/install/_project/_manual-install-quick-test.mdx`
-- **Commit** with the message _**website: update quick tests**_
-
 ### Check the list of links in top package.json
 
 - Open the top `package.json` file
-- Check if the links in the `bin` property cover the actual binaries
+- Check if the links in the {% if isXpackBinary %}`xpack.executables`{% else %}`bin`{% endif %} property cover the actual binaries
 {%- if packageConfig.permalinkName == "wine" %}
 - Rename `widl` -> `winewidl`
 - Remove `function_grep.pl`
@@ -886,7 +849,7 @@ Execute the **trigger-workflow-test-xpm** xpm action:
 xpm run trigger-workflow-test-xpm -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
 ```
 
-This will install the package via `xpm install` on all supported platforms.
+This will test if the package can be installed via `xpm install` on all supported platforms.
 
 The test results are available from the
 [GitHub Actions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions) page.
@@ -900,12 +863,12 @@ from the **Generate tests report** GitHub Action to
 download the `test-report.zip` file, unzip it
 and copy the markdown file to `website/docs/tests`.
 
-Edit the `website/docs/tests/index.md` file to add the
-new page.
+Edit the `website/docs/tests/index.md` file to **add the
+new page** to the list.
 
 Check the **Known problems** link in the blog post.
 
-Commit with the message _**website: add test results**_.
+Commit with the message _**website: add test results**_
 
 {%- endif %}
 
@@ -938,6 +901,8 @@ Commit with the message _**website: add test results**_.
 - Navigate to https://github.com/{{githubProjectOrganization}}/pre-releases/releases/tag/test/
 - Remove the test binaries
 
+{%- if packageConfig.useSelfHostedRunners == "true" %}
+
 ### Clean the work area
 
 Execute the **trigger-workflow-deep-clean** xpm action:
@@ -950,6 +915,8 @@ This will remove the build folders on all self-hosted runners.
 
 The results are available from the
 [GitHub Actions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions) page.
+
+{%- endif %}
 
 <CommonCloseOpenIssues />
 

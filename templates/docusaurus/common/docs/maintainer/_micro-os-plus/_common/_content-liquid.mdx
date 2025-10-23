@@ -90,7 +90,7 @@ For this:
 - Ensure that the `xpack-development` branch is pushed
 - Execute the **trigger-workflow-test-all** action
   ```sh
-  xpm run trigger-workflow-test-all -C tests
+  xpm run trigger-workflow-test-all -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/tests
   ```
 - Wait for the **test-all** job to complete
   (https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions/workflows/test-all.yml)

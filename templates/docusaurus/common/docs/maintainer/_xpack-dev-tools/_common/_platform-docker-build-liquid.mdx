@@ -22,7 +22,8 @@ xpm run clear-all-projects-builds -C ~/Work/{{githubProjectOrganization}}/{{gith
 To update the build scripts and build the development binaries:
 
 <CodeBlock language="sh"> {
-`rm -rf ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets/package-lock.json && \\
+`rm -rf ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/package-lock.json && \\
+rm -rf ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets/package-lock.json && \\
 git -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git pull && \\
 xpm run install -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets && \\
 git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull && \\
@@ -35,7 +36,7 @@ xpm run docker-link-deps --config ${props.platform} -C ~/Work/{{githubProjectOrg
 xpm run docker-build-development --config ${props.platform} -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
 `} </CodeBlock>
 
-After {developmentDurations[ props.platform ]}, the output of the build script is a compressed
+{developmentDurations[ props.platform ]}, the output of the build script is a compressed
 archive and its SHA signature, created in
 the <code>build-assets/build/{props.platform}/deploy</code> folder:
 
@@ -46,6 +47,7 @@ To update the build scripts and build the release binaries:
 
 <CodeBlock language="sh"> {
 `rm -rf ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/package-lock.json && \\
+rm -rf ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets/package-lock.json && \\
 git -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git pull && \\
 xpm run install -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets && \\
 \\

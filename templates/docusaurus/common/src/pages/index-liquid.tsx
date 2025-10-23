@@ -3,7 +3,7 @@
  * Automatically generated from docusaurus-template-liquid/templates/docusaurus.
  *
  * This file is part of the xPack project (http://xpack.github.io).
- * Copyright (c) 2024 Liviu Ionescu. All rights reserved.
+ * Copyright (c) 2024-2025 Liviu Ionescu. All rights reserved.
  *
  * Permission to use, copy, modify, and/or distribute this software
  * for any purpose is hereby granted, under the terms of the MIT license.
@@ -30,7 +30,9 @@ import HomepageTools from '@site/src/components/HomepageTools';
 import InstallWithCopy from '@site/src/components/InstallWithCopy';
 {%- endif %}
 
+{%- if platforms == "" %}
 {%- assign platforms = packageWebsiteConfig.platforms | default: "" %}
+{%- endif %}
 
 {%- if isNpmBinary == "true" %}
 {%- assign platforms = "win32-x64,darwin-x64,linux-x64" %}

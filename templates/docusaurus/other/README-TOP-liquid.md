@@ -31,7 +31,7 @@ The Docusaurus source code for the {{longXpackName}} website.
 {%- assign names_array = names_array | uniq  %}
 
 A standalone{% if names_array.size > 1 %}, cross-platform ({{ names_array | join: ", " }}){% else %} {{ names_array | first }}{% endif %} binary
-distribution of {{packageConfig.descriptiveName}},
+distribution of {{packageConfig.upstreamDescriptiveName}},
 intended for reproducible builds.
 
 {%- else  %}

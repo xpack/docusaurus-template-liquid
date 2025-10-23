@@ -10,7 +10,7 @@ The website deployment is performed automatically when pushing to the
 [GitHub Actions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions/workflows/publish-github-pages.yml).
 
 - Open {{packageHomepage}}docs/maintainer/#publish-the-website in a separate window
-- Stop the local web server
+- **Stop** the local web server
 - Switch to the `{{branchWebsite}}` branch
 - **Merge** the `{{branchDevelopment}}` branch into the `{{branchWebsite}}` branch
 - **Push** the `{{branchWebsite}}` branch to GitHub
@@ -18,8 +18,8 @@ The website deployment is performed automatically when pushing to the
   At this point, an automated GitHub Action will generate and publish the website.
   :::
 - Check out the `{{branchDevelopment}}` branch
-- Wait for the publication to complete
-- Refresh the web page
+- **Wait** for the publication to complete
+- **Refresh** the web page
 - The new release blog post is available
 at {{packageHomepage}}blog/
 - Record the post URL, as it must be used to update the release page

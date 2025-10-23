@@ -43,12 +43,12 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@docusaurus/core": "3.8.1",
-    "@docusaurus/faster": "3.8.1",
-    "@docusaurus/plugin-client-redirects": "3.8.1",
-    "@docusaurus/plugin-ideal-image": "3.8.1",
-    "@docusaurus/preset-classic": "3.8.1",
-    "@docusaurus/theme-search-algolia": "3.8.1",
+    "@docusaurus/core": "3.9.2",
+    "@docusaurus/faster": "3.9.2",
+    "@docusaurus/plugin-client-redirects": "3.9.2",
+    "@docusaurus/plugin-ideal-image": "3.9.2",
+    "@docusaurus/preset-classic": "3.9.2",
+    "@docusaurus/theme-search-algolia": "3.9.2",
     "@mdx-js/react": "^3.0.0",
     "clsx": "^2.0.0",
     "prism-react-renderer": "^2.3.0",
@@ -68,7 +68,7 @@
     "https://www.npmjs.com/package/typescript"
   ],
   "devDependencies": {
-    "del-cli": "^6.0.0",
+    "del-cli": "^7.0.0",
 {%- if githubProjectOrganization == "micro-os-plus" %}
     "@jothepro/doxygen-awesome-css": "github:jothepro/doxygen-awesome-css#v2.3.4",
 {%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
@@ -79,16 +79,16 @@
     "open-cli": "^8.0.0",
     "broken-link-checker": "^0.7.8",
 {%- endif %}
-    "@docusaurus/module-type-aliases": "3.8.1",
-    "@docusaurus/tsconfig": "3.8.1",
-    "@docusaurus/types": "3.8.1",
+    "@docusaurus/module-type-aliases": "3.9.2",
+    "@docusaurus/tsconfig": "3.9.2",
+    "@docusaurus/types": "3.9.2",
     "json": "^11.0.0",
     "liquidjs": "^10.20.1",
 {%- if isTypeScript == "true" %}
     "typedoc": "^0.28.7",
     "typedoc-plugin-markdown": "^4.7.0",
 {%- endif %}
-    "typescript": "~5.8.3"
+    "typescript": "~5.9.3"
   },
   "browserslist": {
     "production": [
