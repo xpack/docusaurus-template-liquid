@@ -77,7 +77,7 @@ Add a `websiteConfig` object to `website/package.json`, after `engines`.
 
 or
 
-```
+```json
   "websiteConfig": {
     "title": "The xPack Reproducible Build Framework",
     "tagline": "Tools to manage, configure and build complex, package based, multi-target projects, in a reproducible way",
@@ -192,6 +192,26 @@ For XBB
     "nodeVersion": "18.20.4"
   }
 }
+```
+
+```json
+{
+  "websiteConfig": {
+    "programName": "m4",
+    "branding": "m4 (GNU M4) ",
+    "tagline": "A binary distribution of GNU M4"
+    "isSecondaryTool": "true",
+    "$link": "https://ftp.gnu.org/gnu/m4/",
+    "m4ReleaseDate": "10 May 2025",
+    "shareOnTwitter": "true"
+  }
+}
+```
+
+```json
+  "websiteConfig": {
+    "platforms": "linux-x64,linux-arm64,linux-arm,darwin-x64,darwin-arm64"
+  }
 ```
 
 ## Run the scripts
