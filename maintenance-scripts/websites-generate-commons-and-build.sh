@@ -207,6 +207,11 @@ function generate_website_commons()
 
           run_verbose npm run generate-website-commons
 
+          # In case the docusaurus deps have changed.
+          run_verbose npm run deep-clean
+          run_verbose npm run npm-install
+          run_verbose npm run npm-link-helpers
+
           run_verbose npm run clear
           run_verbose npm run build
 
