@@ -239,9 +239,18 @@ stamps_folder_name="$(echo "${script_name}" | sed -e 's|\.sh$||')"
 if [ "${is_xpack}" == "true" ]
 then
   xpack_github_folder_path="${my_projects_folder_path}/xpack.github"
-  export stamps_folder_path="${xpack_github_folder_path}/stamps/${stamps_folder_name}"
   export packages_folder_path="${xpack_github_folder_path}/packages"
   export www_folder_path="${xpack_github_folder_path}/www"
+  export stamps_folder_path="${xpack_github_folder_path}/stamps/${stamps_folder_name}"
+
+  if [ "${do_restart}" == "true" ]
+  then
+    echo "Clearing stamps folder path: '${stamps_folder_path}'..."
+    rm -rf "${stamps_folder_path}"
+  else
+    echo "Stamps folder path: '${stamps_folder_path}'..."
+  fi
+  echo
 
   for file_path in "${packages_folder_path}"/*/.git "${www_folder_path}"/*/.git
   do
@@ -250,14 +259,26 @@ then
 elif [ "${is_xpack_dev_tools}" == "true" ]
 then
   xpack_dev_tools_github_folder_path="${my_projects_folder_path}/xpack-dev-tools.github"
-  export stamps_folder_path="${xpack_dev_tools_github_folder_path}/stamps/${stamps_folder_name}"
   export xpacks_folder_path="${xpack_dev_tools_github_folder_path}/xPacks"
   export www_folder_path="${xpack_dev_tools_github_folder_path}/www"
+  export stamps_folder_path="${xpack_dev_tools_github_folder_path}/stamps/${stamps_folder_name}"
+
+  if [ "${do_restart}" == "true" ]
+  then
+    echo "Clearing stamps folder path: '${stamps_folder_path}'..."
+    rm -rf "${stamps_folder_path}"
+  else
+    echo "Stamps folder path: '${stamps_folder_path}'..."
+  fi
+  echo
 
   for file_path in "${xpacks_folder_path}"/*/.git "${www_folder_path}"/*/.git "${xpack_dev_tools_github_folder_path}/xpack-build-box.git/.git"
   do
     generate_website_commons "${file_path}"
   done
+elif [ "${is_micro_os_plus}" == "true" ]
+then
+  echo TODO
 else
   echo "Unsupported configuration..."
   exit 1

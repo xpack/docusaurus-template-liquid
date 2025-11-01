@@ -4,9 +4,11 @@
   "description": "The template used to generate the Docusaurus websites for the xPack projects from files with liquid substitutions",
   "main": "",
   "scripts": {
+   "xpack-generate-websites-commons-and-build-restart": "bash maintenance-scripts/websites-generate-commons-and-build.sh --xpack --restart",
     "xpack-generate-websites-commons-and-build": "bash maintenance-scripts/websites-generate-commons-and-build.sh --xpack",
     "xpack-commit-websites": "bash maintenance-scripts/websites-commit-and-push.sh --xpack",
     "xpack-commit-and-push-websites": "bash maintenance-scripts/websites-commit-and-push.sh --xpack --push",
+    "xpack-dev-tools-generate-websites-commons-and-build-restart": "bash maintenance-scripts/websites-generate-commons-and-build.sh --xpack-dev-tools --restart",
     "xpack-dev-tools-generate-websites-commons-and-build": "bash maintenance-scripts/websites-generate-commons-and-build.sh --xpack-dev-tools",
     "xpack-dev-tools-commit-websites": "bash maintenance-scripts/websites-commit-and-push.sh --xpack-dev-tools",
     "xpack-dev-tools-commit-and-push-websites": "bash maintenance-scripts/websites-commit-and-push.sh --xpack-dev-tools --push",
