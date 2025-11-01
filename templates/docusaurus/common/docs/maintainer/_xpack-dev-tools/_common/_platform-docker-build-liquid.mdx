@@ -53,5 +53,5 @@ xpm run install -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.gi
 \\
 xpm run deep-clean --config ${props.platform}  -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets && \\
 xpm run docker-prepare --config ${props.platform} -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets && \\
-xpm run docker-build-development --config ${props.platform} -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
+xpm run docker-build --config ${props.platform} -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
 `} </CodeBlock>
