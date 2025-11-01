@@ -12,7 +12,8 @@ import {developmentDurations} from '@site/docs/_project/_development-durations.m
 To prepare the native build:
 
 <CodeBlock language="sh"> {
-`xpm run install -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets && \\
+`npm --prefix ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets  install && \\
+xpm install -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets && \\
 xpm install --config ${props.platform} -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
 `} </CodeBlock>
 
@@ -20,7 +21,8 @@ xpm install --config ${props.platform} -C ~/Work/{{githubProjectOrganization}}/{
 <summary>... or, with the writable helper ...</summary>
 
 <CodeBlock language="sh"> {
-`xpm run install -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets && \\
+`npm --prefix ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets  install && \\
+xpm install -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets && \\
 xpm run link-deps -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets && \\
 xpm install --config ${props.platform} -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
 `} </CodeBlock>

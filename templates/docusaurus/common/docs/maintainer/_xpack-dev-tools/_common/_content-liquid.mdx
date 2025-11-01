@@ -238,7 +238,8 @@ rm -rf ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/package-lo
 rm -rf ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets/package-lock.json
 git -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git pull
 
-xpm run install -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
+npm --prefix ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets install
+xpm install -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
 
 git -C ~/Work/{{githubProjectOrganization}}/xbb-helper-xpack.git pull
 xpm link -C ~/Work/{{githubProjectOrganization}}/xbb-helper-xpack.git
@@ -733,7 +734,8 @@ and execute the tests, utilise:
 
 ```sh
 git -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git pull
-xpm run install -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
+npm --prefix ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets install
+xpm install -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
 xpm run test-pre-release -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
 ```
 
