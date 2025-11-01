@@ -19,7 +19,7 @@ git clone \
 https://github.com/xpack/docusaurus-template-liquid.git \
 ~/Work/xpack/docusaurus-template-liquid.git
 
-(cd ~/Work/xpack/docusaurus-template-liquid.git; npm link)
+npm --prefix ~/Work/xpack/docusaurus-template-liquid.git link
 ```
 
 ### Top dependencies
@@ -33,7 +33,7 @@ Install `del-cli`, `json` and `liquidjs`:
 Link the local helper & template projects:
 
 ```sh
-(cd website; npm link @xpack/npm-packages-helper @xpack/docusaurus-template-liquid)
+npm --prefix website link @xpack/npm-packages-helper @xpack/docusaurus-template-liquid
 ```
 
 ### Add npm script
