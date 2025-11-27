@@ -51,10 +51,11 @@ For a **specific version**, use the explicit version numbers:
 `npm install {{packageScopedName}}@{{releaseVersion}}{% if packageConfig.hasCli == "true" %} --save-dev{% endif %}
 `} </CodeBlock>
 
+{%- if isXpackBinary == "true" or packageConfig.hasCli == "true" %}
 
 ### Global installation
 
-Since the package provides executables, it may also
+Since the {% if isXpackBinary == "true" %}package provides executables{% elsif packageConfig.hasCli == "true" %}package includes command-line tools{% endif %}, it may also
 be installed globally and utilised in any project.
 
 ```sh
@@ -66,8 +67,6 @@ For a **specific version**, use the explicit version numbers:
 <CodeBlock language="sh"> {
 `npm install --location=global {{packageScopedName}}@{{releaseVersion}}
 `} </CodeBlock>
-
-{%- if isXpackBinary == "true" %}
 
 <Tabs groupId="operating-systems">
 

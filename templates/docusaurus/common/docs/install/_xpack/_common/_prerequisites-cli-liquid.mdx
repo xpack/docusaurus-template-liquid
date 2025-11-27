@@ -16,7 +16,7 @@ Installing **{% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}
 For those new to Node.js, it is highly recommended to read the instructions
 on the [xPack Prerequisites](https://xpack.github.io/install/) page.
 
-{%- if isXpackBinary == "true" %}
+{%- if isXpackBinary == "true" or packageConfig.hasCli == "true" %}
 
 ### Quick instructions
 

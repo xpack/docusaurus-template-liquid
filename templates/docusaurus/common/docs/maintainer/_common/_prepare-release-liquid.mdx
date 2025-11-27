@@ -9,11 +9,11 @@
 - Terminate all running tasks (**Terminal** → **Terminate Task...**)
 {%- endif %}
 - Switch to the `{{branchDevelopment}}` branch
-{%- if isTypeScript == "true" or isJavaScript == "true" -%}
+{% if isTypeScript == "true" or isJavaScript == "true" -%}
 - `npm run fix`
 {%- endif %}
 - If there are changes, **commit** all changes to the `{{branchDevelopment}}` branch
-{%- if isTypeScript == "true" or isJavaScript == "true" -%}
+{% if isTypeScript == "true" or isJavaScript == "true" -%}
 - `npm run test`
 {%- endif %}
 - Check the latest commits `npm run git-log`
