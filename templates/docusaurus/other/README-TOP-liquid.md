@@ -6,6 +6,7 @@
 [![NPM Version](https://img.shields.io/npm/v/{{packageScopedName}}?color=blue)](https://www.npmjs.com/package/{{packageScopedName}}/)
 {%- endif  %}
 [![license](https://img.shields.io/github/license/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/LICENSE)
+[![Website](https://img.shields.io/website?url=https%3A%2F%2F{{githubProjectOrganization}}.github.io%2F{{githubProjectName}}%2F)]({{packageHomepage}})
 
 {%- if packageConfig.isOrganizationWeb == "true"  %}
 
