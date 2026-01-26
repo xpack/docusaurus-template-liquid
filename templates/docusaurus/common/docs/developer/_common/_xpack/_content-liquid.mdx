@@ -8,9 +8,13 @@ import CodeBlock from '@theme/CodeBlock';
 import CommonPrerequisites from '@site/docs/_common/_prerequisites.mdx';
 import CommonGetProjectSources from '@site/docs/_common/_get-project-sources.mdx';
 
+{%- if packageWebsiteConfig.skipTests != "true" %}
+
 import ProjectTestResults from '../_project/_test-results.mdx';
-import ProjectStyleExceptions from '../_project/_style-exceptions.mdx';
 import ProjectCoverageExceptions from '../_project/_coverage-exceptions.mdx';
+{%- endif %}
+
+import ProjectStyleExceptions from '../_project/_style-exceptions.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 

@@ -597,6 +597,13 @@ then
   )
 fi
 
+if [ "${xpack_skip_tests}" == "true" ]
+then
+  skip_pages_array+=(\
+    "docs/developer/_project/_test-results.mdx" \
+  )
+fi
+
 
 # -----------------------------------------------------------------------------
 
