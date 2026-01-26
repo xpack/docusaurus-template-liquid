@@ -563,6 +563,10 @@ then
   skip_pages_array+=(\
     "src/components/HomepageFeatures/FeatureList.tsx" \
   )
+else
+  skip_pages_array+=(\
+    "src/components/HomepageFeatures/CustomFeatureList.tsx" \
+  )
 fi
 
 if [ "${xpack_has_homepage_tools}" != "true" ]
