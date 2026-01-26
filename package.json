@@ -1,6 +1,6 @@
 {
   "name": "@xpack/docusaurus-template-liquid",
-  "version": "0.0.0",
+  "version": "1.0.0-pre",
   "description": "The template used to generate the Docusaurus websites for the xPack projects from files with liquid substitutions",
   "main": "",
   "scripts": {
