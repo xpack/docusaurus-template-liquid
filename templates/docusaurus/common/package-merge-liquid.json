@@ -9,6 +9,7 @@
     "npm-install": "npm install",
     "npm-link-helpers": "npm link @xpack/docusaurus-template-liquid @xpack/npm-packages-helper{% if githubProjectOrganization == 'micro-os-plus' %} @micro-os-plus/build-helper{% endif %}{% if packageWebsiteConfig.hasDoxygenReference == "true" %} @xpack/docusaurus-plugin-doxygen{% endif %}",
     "npm-ci": "npm ci",
+    "clean": "del-cli .docusaurus build",
     "deep-clean": "del-cli .docusaurus build node_modules package-lock.json",
 {%- if packageWebsiteConfig.hasDoxygenReference == "true" %}
     "doxygen": "del-cli static/doxygen doxygen/xml; (cd doxygen; doxygen config.doxyfile)",
@@ -17,6 +18,15 @@
     "generate-doxygen": "docusaurus generate-doxygen",
 {%- endif %}
     "check-urls": "blc {{packageHomepage}} --recursive --ordered --filter-level 2 --exclude 'https://twitter.com*'",
+{%- endif %}
+{%- if packageWebsiteConfig.hasTSDocDocusaurusApi == "true" %}
+    "compile-tsdoc": "del-cli --force tsdoc/dist && tsc --project config/tsconfig-api-extractor.json",
+    "api-extractor-init": "api-extractor init",
+    "api-extractor": "api-extractor run --local --verbose",
+    "patch-doc-model-json": "bash config/patch-doc-model-json.sh tsdoc/doc-model/website.api.json website @xpack/xpm-lib",
+    "api-documenter": "del-cli --force tsdoc/markdown && api-documenter markdown --input-folder tsdoc/doc-model --output-folder tsdoc/markdown",
+    "tsdoc2docusaurus": "tsdoc2docusaurus --id website",
+    "generate-website-tsdoc": "npm run compile-tsdoc && npm run api-extractor && npm run patch-doc-model-json && npm run api-documenter && npm run tsdoc2docusaurus",
 {%- endif %}
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
@@ -27,8 +37,6 @@
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "generate-typedoc": "typedoc",
-    "typecheck": "tsc",
     "import-website-releases": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/import-releases.sh --{{githubProjectOrganization}}",
 {%- if githubProjectOrganization == "micro-os-plus" %}
     "generate-website-releases-from-tags": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-releases-for-tags.sh --{{githubProjectOrganization}}",
@@ -49,11 +57,11 @@
     "@docusaurus/plugin-ideal-image": "3.9.2",
     "@docusaurus/preset-classic": "3.9.2",
     "@docusaurus/theme-search-algolia": "3.9.2",
-    "@mdx-js/react": "^3.0.0",
+    "@mdx-js/react": "^3.1.1",
     "clsx": "^2.0.0",
     "prism-react-renderer": "^2.3.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
   },
   "$devDependenciesUrls": [
     "https://www.npmjs.com/package/del-cli",
@@ -85,9 +93,14 @@
     "json": "^11.0.0",
     "liquidjs": "^10.24.0",
 {%- if isTypeScript == "true" %}
-    "typedoc": "^0.28.7",
-    "typedoc-plugin-markdown": "^4.7.0",
+    "typedoc": "^0.28.16",
+    "typedoc-plugin-markdown": "^4.9.0",
+    "@xpack/tsdoc2docusaurus": "github:xpack/tsdoc2docusaurus-cli-ts#v1.3.0",
 {%- endif %}
+    "@microsoft/api-documenter": "^7.28.2",
+    "@microsoft/api-extractor": "^7.55.2",
+    "@xpack/docusaurus-template-liquid": "github:xpack/docusaurus-template-liquid",
+    "@xpack/npm-packages-helper": "github:xpack/npm-packages-helper",
     "typescript": "~5.9.3"
   },
   "browserslist": {
