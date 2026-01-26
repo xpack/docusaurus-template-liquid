@@ -27,14 +27,16 @@ npm --prefix ~/Work/xpack/docusaurus-template-liquid.git link
 Install `del-cli`, `json` and `liquidjs`:
 
 ```sh
-(mkdir -p website; chmod -R +w website; cd website; if [ ! -f package.json ]; then; npm init --yes; fi; npm install del-cli json liquidjs --save-dev)
+(mkdir -p website; chmod -R +w website; cd website; if [ ! -f package.json ]; then; npm init --yes; fi; npm install del-cli json liquidjs github:xpack/npm-packages-helper github:xpack/docusaurus-template-liquid --save-dev)
 ```
 
 Link the local helper & template projects:
 
 ```sh
-npm --prefix website link @xpack/npm-packages-helper @xpack/docusaurus-template-liquid
+(mkdir -p website; npm link @xpack/npm-packages-helper @xpack/docusaurus-template-liquid)
 ```
+
+Note: for unknown reasons, `npm --prefix website` fails.
 
 ### Add npm script
 
@@ -56,9 +58,13 @@ Be sure topConfig.descriptiveName is defined.
 
 Run the action.
 
+```sh
+npm --prefix website run generate-website-commons-init
+```
+
 ## Add `websiteConfig`
 
-Add a `websiteConfig` object to `website/package.json`, after `engines`.
+Add a `websiteConfig` object to `website/package.json`, just before `engines`.
 
 ```json
 {
@@ -67,10 +73,10 @@ Add a `websiteConfig` object to `website/package.json`, after `engines`.
     "tagline": "Tools to manage, configure and build complex, package based, multi-target projects, in a reproducible way.",
     "metadataDescription": "A Node.js CommonJS/ES6 module with a generic console logger class",
     "metadataKeywords": "xpm, xpack, build, test, dependencies, npm, reproducibility",
-    "nodeVersion": "18.20.4"
+    "nodeVersion": "20.19.4"
   },
   "engines": {
-    "node": ">=18.0"
+    "node": ">=20.0"
   }
 }
 ```
@@ -152,6 +158,8 @@ For XBB
 
 ### Examples
 
+#### xpack 
+
 ```json
 {
   "websiteConfig": {
@@ -177,7 +185,24 @@ For XBB
     "hasCustomUserSidebar": "true",
     "hasCustomUserInformation": "true",
     "nodeVersion": "18.20.4"
-  }
+  },
+}
+```
+
+```json
+{
+  "websiteConfig": {
+    "title": "doxygen2docusaurus - Doxygen Documentation Converter",
+    "tagline": "A Node.js CLI application to convert Doxygen XML files into Docusaurus documentation",
+    "programName": "doxygen2docusaurus",
+    "hasCustomSidebar": "true",
+    "hasCustomDocsNavbarItem": "true",
+    "hasCustomHomepageFeatures": "true",
+    "hasTSDocDocusaurusApi": "true",
+    "skipTests": "true",
+    "skipAlgolia": "true",
+    "nodeVersion": "20.18.0"
+  },
 }
 ```
 
@@ -190,9 +215,31 @@ For XBB
     "hasTypedocApi": "true",
     "has100coverage": "true",
     "nodeVersion": "18.20.4"
-  }
+  },
 }
 ```
+
+Library project with TSDoc API:
+
+```json
+{
+  "websiteConfig": {
+    "title": "xpm-lib - The xpm library",
+    "tagline": "A Node.js TypeScript library for xpm and xpm enabled projects",
+    "metadataDescription": "A Node.js ES6 module with xpm common code",
+    "metadataKeywords": "xpm, xpack, liquid, typescript, nodejs, es6, module, library",
+    "hasCustomSidebar": "true",
+    "hasCustomDocsNavbarItem": "true",
+    "hasCustomHomepageFeatures": "true",
+    "hasTSDocDocusaurusApi": "true",
+    "skipTests": "true",
+    "skipAlgolia": "true",
+    "nodeVersion": "20.18.1"
+  },
+}
+```
+
+#### xpack-dev-tools
 
 ```json
 {
@@ -213,6 +260,10 @@ For XBB
     "platforms": "linux-x64,linux-arm64,linux-arm,darwin-x64,darwin-arm64"
   }
 ```
+
+#### micro-os-plus
+
+TBD
 
 ## Run the scripts
 
