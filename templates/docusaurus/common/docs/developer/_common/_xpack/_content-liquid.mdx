@@ -168,7 +168,7 @@ To manually fix compliance with the style guide (where possible):
 
 ## Documentation metadata
 
-{%- if packageUseApiExtractor == "true" %}
+{%- if packageUseApiExtractor == "true" or packageWebsiteConfig.useApiDocumenter == "true" %}
 {%- if isTypeScript == "true" %}
 
 The documentation metadata utilises the
@@ -265,7 +265,7 @@ and `/* c8 ignore start */` `/* c8 ignore stop */` for
 The module is {% if packageWebsiteConfig.has100coverage == "true" %}tested with 100% coverage and is{% endif %}
 subject to CI testing on every push via
 [GitHub Actions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions), on Ubuntu,
-Windows and macOS, utilising node 18, 20 and 22.
+Windows and macOS, utilising node {{ packageConfig.githubActionsNodeVersions | join: ", " | replace_last: ", ", " and " }}.
 
 {%- endif %}
 
@@ -273,7 +273,8 @@ Windows and macOS, utilising node 18, 20 and 22.
 
 ## Tips & tricks
 
-To trace TypeScript module resolution:
+To trace which files module imports resolve to, enable TypeScript
+module resolution tracing:
 
 ```json
     "compile": "tsc --traceResolution  -p ./",
