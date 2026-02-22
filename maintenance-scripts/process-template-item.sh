@@ -335,7 +335,6 @@ then
   )
 else
   skip_pages_array+=(\
-    "docs/developer/_common/_content.mdx" \
     "docs/developer/_project/_coverage-exceptions.mdx" \
     "docs/developer/_project/_style-exceptions.mdx" \
     "docs/developer/_project/_test-results.mdx" \
@@ -603,6 +602,19 @@ then
     "docs/developer/_project/_test-results.mdx" \
   )
 fi
+
+if [ "${xpack_is_typescript}" == "false" ]
+then
+  skip_pages_array+=(\
+    "config/api-extractor-original.json" \
+    "config/api-extractor.json" \
+    "config/patch-doc-model-json.sh" \
+    "config/tsconfig-api-extractor.json" \
+    "config/tsdoc2docusaurus.json" \
+    "config/README.md" \
+  )
+fi  
+
 
 
 # -----------------------------------------------------------------------------
