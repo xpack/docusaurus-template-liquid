@@ -11,11 +11,22 @@ The website deployment is performed automatically when pushing to the
 
 - Open {{packageHomepage}}docs/maintainer/#publish-the-website in a separate window
 - **Stop** the local web server
+{%- if hasBranchWebpreview == 'true' %}
+- Switch to the `{{branchWebpreview}}` branch
+- **Merge** the `{{branchDevelopment}}` branch into the `{{branchWebpreview}}` branch
+- **Push** the `{{branchWebpreview}}` branch to GitHub
+  :::info
+  At this point, an automated GitHub Action will generate and publish 
+  the [preview website]({{package.homepagePreview}}).
+  :::
+{%- endif %}
 - Switch to the `{{branchWebsite}}` branch
 - **Merge** the `{{branchDevelopment}}` branch into the `{{branchWebsite}}` branch
 - **Push** the `{{branchWebsite}}` branch to GitHub
   :::info
-  At this point, an automated GitHub Action will generate and publish the website.
+  At this point, an automated forwarding GitHub Action will trigger 
+  a GitHub Action in the separate project to generate and publish 
+  the [website]{{package.homepage}}.
   :::
 - Check out the `{{branchDevelopment}}` branch
 - **Wait** for the publication to complete
