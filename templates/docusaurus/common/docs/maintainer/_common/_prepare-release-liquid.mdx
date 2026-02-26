@@ -7,15 +7,15 @@
 
 {% if isTypeScript == "true" -%}
 - Terminate all running tasks (**Terminal** → **Terminate Task...**)
-{%- endif %}
+{% endif -%}
 - Switch to the `{{branchDevelopment}}` branch
 {% if isTypeScript == "true" or isJavaScript == "true" -%}
 - `npm run fix`
-{%- endif %}
+{% endif -%}
 - If there are changes, **commit** all changes to the `{{branchDevelopment}}` branch
 {% if isTypeScript == "true" or isJavaScript == "true" -%}
 - `npm run test`
-{%- endif %}
+{% endif -%}
 - Check the latest commits `npm run git-log`
 - Update `CHANGELOG.md`, add a line such as _**\* v{{releaseVersion}} published on npmjs.com**_
 - **Commit** with the message _**CHANGELOG: publish npm v{{releaseVersion}}**_

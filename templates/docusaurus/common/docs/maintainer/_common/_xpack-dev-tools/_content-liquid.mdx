@@ -308,11 +308,11 @@ caffeinate ssh xbbli
 
 ### Build the ARM64 GNU/Linux binaries
 
-Execute the Docker build on the production machine (`ampere`);
+Execute the Docker build on the production machine (`berry5`);
 start a VS Code remote session, or connect with a terminal:
 
 ```sh
-caffeinate ssh ampere
+caffeinate ssh berry5
 ```
 
 <CommonPlatformDockerBuild platform="linux-arm64"/>
@@ -460,7 +460,7 @@ requires `GITHUB_API_XPACK_DEV_TOOLS_RUNNERS_TOKEN` to be present.
 {%- if platform == "darwin-x64" %}{% assign names_array = names_array | concat: "xbbmi" %}{% assign single_runner = true %}{% assign isMacOS = true %}{% endif %}
 {%- if platform == "darwin-arm64" %}{% assign names_array = names_array | concat: "xbbma" %}{% assign single_runner = true %}{% assign isMacOS = true %}{% endif %}
 {%- if platform == "linux-x64" or platform == "win32-x64" %}{% assign names_array = names_array | concat: "xbbli" %}{% assign dual_runner = true %}{% assign dual_runners_array = dual_runners_array | concat: "xbbli" %}{% endif %}
-{%- if platform == "linux-arm64" %}{% assign names_array = names_array | concat: "ampere" %}{% assign dual_runner = true %}{% assign dual_runners_array = dual_runners_array | concat: "ampere" %}{% endif %}
+{%- if platform == "linux-arm64" %}{% assign names_array = names_array | concat: "berry5" %}{% assign dual_runner = true %}{% assign dual_runners_array = dual_runners_array | concat: "berry5" %}{% endif %}
 {%- endfor %}
 
 {%- assign names_array = names_array | uniq %}
