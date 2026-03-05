@@ -21,6 +21,7 @@ The website deployment is performed automatically when pushing to the
   :::
 {%- endif %}
 - Switch to the `{{branchWebsite}}` branch
+- run the `npm install` command, to ensure `package-lock.json` is up to date
 - **Merge** the `{{branchDevelopment}}` branch into the `{{branchWebsite}}` branch
 - **Push** the `{{branchWebsite}}` branch to GitHub
   :::info
