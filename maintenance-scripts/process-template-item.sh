@@ -258,6 +258,7 @@ then
       "docs/maintainer/_check-upstream-release.mdx" \
       "docs/maintainer/_common/_gcc-check-upstream-release.mdx" \
       "docs/maintainer/_common/_arm-toolchain-check-upstream-release.mdx" \
+      "docs/maintainer/_common/_arm-toolchain-get-upstream-versions.mdx" \
       "docs/maintainer/_common/_arm-toolchain-update-version-specific.mdx" \
       "docs/maintainer/_common/_platform-docker-build.mdx" \
       "docs/maintainer/_common/_platform-native-build.mdx" \
@@ -284,6 +285,7 @@ then
     then
       skip_pages_array+=(\
         "docs/maintainer/_common/_arm-toolchain-check-upstream-release.mdx" \
+        "docs/maintainer/_common/_arm-toolchain-get-upstream-versions.mdx" \
         "docs/maintainer/_common/_arm-toolchain-update-version-specific.mdx" \
         "docs/user/_common/_arm-toolchain-versioning.mdx" \
       )
@@ -335,6 +337,7 @@ then
   )
 else
   skip_pages_array+=(\
+    "docs/developer/_common/_content.mdx" \
     "docs/developer/_project/_coverage-exceptions.mdx" \
     "docs/developer/_project/_style-exceptions.mdx" \
     "docs/developer/_project/_test-results.mdx" \
