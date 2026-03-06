@@ -484,10 +484,10 @@ Create a `screen` session, to provide a persistent standard output for
 the runners:
 
 ```sh
-screen -S ga
+tmux new -s ga
 ```
 
-To exit it, use `# Ctrl-a Ctrl-d`.
+To exit it, use `Ctrl-b d`.
 
 {%- if dual_runner %}
 
