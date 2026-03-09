@@ -13,7 +13,7 @@ The website deployment is performed automatically when pushing to the
 - **Stop** the local web server
 {%- if hasBranchWebpreview == 'true' %}
 - Switch to the `{{branchWebpreview}}` branch
-- **Merge** the `{{branchDevelopment}}` branch into the `{{branchWebpreview}}` branch
+- **Rebase** the `{{branchDevelopment}}` branch onto the `{{branchWebpreview}}` branch
 - **Push** the `{{branchWebpreview}}` branch to GitHub
   :::info
   At this point, an automated GitHub Action will generate and publish 
@@ -22,7 +22,7 @@ The website deployment is performed automatically when pushing to the
 {%- endif %}
 - Switch to the `{{branchWebsite}}` branch
 - run the `npm install` command, to ensure `package-lock.json` is up to date
-- **Merge** the `{{branchDevelopment}}` branch into the `{{branchWebsite}}` branch
+- **Rebase** the `{{branchDevelopment}}` branch onto the `{{branchWebsite}}` branch
 - **Push** the `{{branchWebsite}}` branch to GitHub
   :::info
   At this point, an automated forwarding GitHub Action will trigger 
