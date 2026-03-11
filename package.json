@@ -23,6 +23,8 @@
   },
   "homepage": "https://github.com/xpack/docusaurus-template-liquid#readme",
   "devDependencies": {
+    "@xpack/npm-packages-helper": "github:xpack/npm-packages-helper",
+    "del-cli": "^7.0.0",
     "json": "^11.0.0",
     "liquidjs": "^10.25.0"
   },
@@ -39,7 +41,12 @@
     "xpack-dev-tools-remove-web-tags": "bash maintenance-scripts/websites-remove-web-tags.sh --xpack-dev-tools",
     "npm-install": "npm install",
     "npm-link-helpers": "npm link @xpack/npm-packages-helper",
-    "npm-link": "npm link"
+    "npm-outdated": "npm outdated",
+    "npm-pack": "npm pack",
+    "npm-link": "npm link",
+    "git-log": "git log --pretty='%cd * %h %s' --date=short",
+    "deep-clean": "del-cli node_modules package-lock.json *.tgz",
+    "postversion": "git push origin --all && git push origin --tags"
   },
   "engines": {
     "node": ">=20.0.0"
