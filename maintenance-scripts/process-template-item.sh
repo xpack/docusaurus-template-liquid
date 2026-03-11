@@ -541,6 +541,7 @@ if [ "${xpack_website_config_is_gcc_toolchain}" != "true" ]
 then
   skip_pages_array+=(\
     "docs/_common/_gcc-release-schedule.mdx" \
+    "docs/maintainer/_common/_first-development-run-gcc.mdx" \
   )
 fi
 
