@@ -2,22 +2,6 @@
   "name": "@xpack/docusaurus-template-liquid",
   "version": "1.0.0-pre",
   "description": "The template used to generate the Docusaurus websites for the xPack projects from files with liquid substitutions",
-  "main": "",
-  "scripts": {
-   "xpack-generate-websites-commons-and-build-restart": "bash maintenance-scripts/websites-generate-commons-and-build.sh --xpack --restart",
-    "xpack-generate-websites-commons-and-build": "bash maintenance-scripts/websites-generate-commons-and-build.sh --xpack",
-    "xpack-commit-websites": "bash maintenance-scripts/websites-commit-and-push.sh --xpack",
-    "xpack-commit-and-push-websites": "bash maintenance-scripts/websites-commit-and-push.sh --xpack --push",
-    "xpack-dev-tools-generate-websites-commons-and-build-restart": "bash maintenance-scripts/websites-generate-commons-and-build.sh --xpack-dev-tools --restart",
-    "xpack-dev-tools-generate-websites-commons-and-build": "bash maintenance-scripts/websites-generate-commons-and-build.sh --xpack-dev-tools",
-    "xpack-dev-tools-commit-websites": "bash maintenance-scripts/websites-commit-and-push.sh --xpack-dev-tools",
-    "xpack-dev-tools-commit-and-push-websites": "bash maintenance-scripts/websites-commit-and-push.sh --xpack-dev-tools --push",
-    "xpack-dev-tools-import-websites-releases": "bash maintenance-scripts/websites-import-releases.sh --xpack-dev-tools",
-    "xpack-dev-tools-remove-web-tags": "bash maintenance-scripts/websites-remove-web-tags.sh --xpack-dev-tools",
-    "npm-install": "npm install",
-    "npm-link-helpers": "npm link @xpack/npm-packages-helper",
-    "npm-link": "npm link"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/xpack/docusaurus-template-liquid.git"
@@ -40,9 +24,24 @@
   "homepage": "https://github.com/xpack/docusaurus-template-liquid#readme",
   "devDependencies": {
     "json": "^11.0.0",
-    "liquidjs": "^10.20.1"
+    "liquidjs": "^10.25.0"
+  },
+  "scripts": {
+   "xpack-generate-websites-commons-and-build-restart": "bash maintenance-scripts/websites-generate-commons-and-build.sh --xpack --restart",
+    "xpack-generate-websites-commons-and-build": "bash maintenance-scripts/websites-generate-commons-and-build.sh --xpack",
+    "xpack-commit-websites": "bash maintenance-scripts/websites-commit-and-push.sh --xpack",
+    "xpack-commit-and-push-websites": "bash maintenance-scripts/websites-commit-and-push.sh --xpack --push",
+    "xpack-dev-tools-generate-websites-commons-and-build-restart": "bash maintenance-scripts/websites-generate-commons-and-build.sh --xpack-dev-tools --restart",
+    "xpack-dev-tools-generate-websites-commons-and-build": "bash maintenance-scripts/websites-generate-commons-and-build.sh --xpack-dev-tools",
+    "xpack-dev-tools-commit-websites": "bash maintenance-scripts/websites-commit-and-push.sh --xpack-dev-tools",
+    "xpack-dev-tools-commit-and-push-websites": "bash maintenance-scripts/websites-commit-and-push.sh --xpack-dev-tools --push",
+    "xpack-dev-tools-import-websites-releases": "bash maintenance-scripts/websites-import-releases.sh --xpack-dev-tools",
+    "xpack-dev-tools-remove-web-tags": "bash maintenance-scripts/websites-remove-web-tags.sh --xpack-dev-tools",
+    "npm-install": "npm install",
+    "npm-link-helpers": "npm link @xpack/npm-packages-helper",
+    "npm-link": "npm link"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.0.0"
   }
 }
