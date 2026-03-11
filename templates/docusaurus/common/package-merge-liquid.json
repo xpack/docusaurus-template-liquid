@@ -13,9 +13,10 @@
     "deep-clean": "del-cli .docusaurus build node_modules package-lock.json",
 {%- if packageWebsiteConfig.hasDoxygenReference == "true" %}
     "doxygen": "del-cli static/doxygen doxygen/xml; (cd doxygen; doxygen config.doxyfile)",
-    "browser": "open-cli static/doxygen/index.html",
+    "browse-doxygen": "open-cli static/doxygen/index.html",
 {%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
-    "generate-doxygen": "docusaurus generate-doxygen",
+    "convert-doxygen": "doxygen2docusaurus",
+    "generate-website-doxygen": "npm run doxygen && npm run convert-doxygen",
 {%- endif %}
     "check-urls": "blc {{packageHomepage}} --recursive --ordered --filter-level 2 --exclude 'https://twitter.com*'",
 {%- endif %}
@@ -63,26 +64,18 @@
     "react": "^19.2.3",
     "react-dom": "^19.2.3"
   },
-  "$devDependenciesUrls": [
-    "https://www.npmjs.com/package/del-cli",
+  "$dependenciesUrls": {
+    "del-cli": "https://www.npmjs.com/package/del-cli",
 {%- if isTypeScript == "true" %}
-    "https://www.npmjs.com/package/typedoc-plugin-markdown",
+    "typedoc-plugin-markdown": "https://www.npmjs.com/package/typedoc-plugin-markdown",
 {%- endif %}
-    "https://www.npmjs.com/package/json",
-    "https://www.npmjs.com/package/liquidjs",
-{%- if isTypeScript == "true" %}
-    "https://www.npmjs.com/package/typedoc",
-{%- endif %}
-    "https://www.npmjs.com/package/typescript"
-  ],
+    "json": "https://www.npmjs.com/package/json",
+    "liquidjs": "https://www.npmjs.com/package/liquidjs",
+    "typescript": "https://www.npmjs.com/package/typescript"
+  },
   "devDependencies": {
     "del-cli": "^7.0.0",
 {%- if githubProjectOrganization == "micro-os-plus" %}
-    "@jothepro/doxygen-awesome-css": "github:jothepro/doxygen-awesome-css#v2.3.4",
-{%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
-    "@xpack/docusaurus-plugin-doxygen": "^0.3.0",
-    "react-markdown": "^10.1.0",
-{%- endif %}
     "@micro-os-plus/build-helper": "github:micro-os-plus/build-helper-xpack#xpack-development",
     "open-cli": "^8.0.0",
     "broken-link-checker": "^0.7.8",
@@ -91,7 +84,7 @@
     "@docusaurus/tsconfig": "3.9.2",
     "@docusaurus/types": "3.9.2",
     "json": "^11.0.0",
-    "liquidjs": "^10.24.0",
+    "liquidjs": "^10.25.0",
 {%- if isTypeScript == "true" %}
     "typedoc": "^0.28.16",
     "typedoc-plugin-markdown": "^4.9.0",
@@ -115,7 +108,6 @@
       "last 5 safari version"
     ]
   },
-  "websiteConfig": {},
   "engines": {
     "node": ">=20.0"
   }
