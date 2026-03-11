@@ -14,7 +14,7 @@ import cliNavbar from './docusaurus-config-navbar-cli';
 import { customDocsNavbarItem } from './navbar-docs-items';
 {%- endif %}
 {%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
-import doxygenApiMenu from './docusaurus-config-menu-doxygen.json'
+import doxygenApiMenu from './docusaurus-config-navbar-doxygen.json'
 {%- elsif packageWebsiteConfig.hasTSDocDocusaurusApi == "true" %}
 import tsdocApiMenu from './docusaurus-config-navbar-tsdoc.json'
 {%- endif %}
