@@ -3,48 +3,6 @@
   "name": "website",
   "version": "0.0.0",
   "private": true,
-  "scripts": {
-    "generate-website-commons": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-website-commons.sh --{{githubProjectOrganization}}",
-    "npm-outdated": "npm outdated",
-    "npm-install": "npm install",
-    "npm-link-helpers": "npm link @xpack/docusaurus-template-liquid @xpack/npm-packages-helper{% if githubProjectOrganization == 'micro-os-plus' %} @micro-os-plus/build-helper{% endif %}{% if packageWebsiteConfig.hasDoxygenReference == "true" %} @xpack/docusaurus-plugin-doxygen{% endif %}",
-    "npm-ci": "npm ci",
-    "clean": "del-cli .docusaurus build",
-    "deep-clean": "del-cli .docusaurus build node_modules package-lock.json",
-{%- if packageWebsiteConfig.hasDoxygenReference == "true" %}
-    "doxygen": "del-cli static/doxygen doxygen/xml; (cd doxygen; doxygen config.doxyfile)",
-    "browse-doxygen": "open-cli static/doxygen/index.html",
-{%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
-    "convert-doxygen": "doxygen2docusaurus",
-    "generate-website-doxygen": "npm run doxygen && npm run convert-doxygen",
-{%- endif %}
-    "check-urls": "blc {{packageHomepage}} --recursive --ordered --filter-level 2 --exclude 'https://twitter.com*'",
-{%- endif %}
-{%- if packageWebsiteConfig.hasTSDocDocusaurusApi == "true" %}
-    "compile-tsdoc": "del-cli --force tsdoc/dist && tsc --project config/tsconfig-api-extractor.json",
-    "api-extractor-init": "api-extractor init",
-    "api-extractor": "api-extractor run --local --verbose",
-    "patch-doc-model-json": "bash config/patch-doc-model-json.sh tsdoc/doc-model/website.api.json website @xpack/xpm-lib",
-    "api-documenter": "del-cli --force tsdoc/markdown && api-documenter markdown --input-folder tsdoc/doc-model --output-folder tsdoc/markdown",
-    "tsdoc2docusaurus": "tsdoc2docusaurus --id website",
-    "generate-website-tsdoc": "npm run compile-tsdoc && npm run api-extractor && npm run patch-doc-model-json && npm run api-documenter && npm run tsdoc2docusaurus",
-{%- endif %}
-    "docusaurus": "docusaurus",
-    "start": "docusaurus start",
-    "build": "docusaurus build",
-    "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy",
-    "clear": "docusaurus clear",
-    "serve": "docusaurus serve",
-    "write-translations": "docusaurus write-translations",
-    "write-heading-ids": "docusaurus write-heading-ids",
-    "import-website-releases": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/import-releases.sh --{{githubProjectOrganization}}",
-{%- if githubProjectOrganization == "micro-os-plus" %}
-    "generate-website-releases-from-tags": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-releases-for-tags.sh --{{githubProjectOrganization}}",
-{%- endif %}
-    "generate-website-blog-post": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-blog-post.sh --{{githubProjectOrganization}}",
-    "generate-dependencies-details": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-dependencies-details.sh --{{githubProjectOrganization}}"
-  },
   "author": {
     "name": "Liviu Ionescu",
     "email": "ilg@livius.net",
@@ -76,7 +34,6 @@
   "devDependencies": {
     "del-cli": "^7.0.0",
 {%- if githubProjectOrganization == "micro-os-plus" %}
-    "@micro-os-plus/build-helper": "github:micro-os-plus/build-helper-xpack#xpack-development",
     "open-cli": "^8.0.0",
     "broken-link-checker": "^0.7.8",
 {%- endif %}
@@ -95,6 +52,49 @@
     "@xpack/docusaurus-template-liquid": "github:xpack/docusaurus-template-liquid",
     "@xpack/npm-packages-helper": "github:xpack/npm-packages-helper",
     "typescript": "~5.9.3"
+  },
+  "scripts": {
+    "generate-website-commons": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-website-commons.sh --{{githubProjectOrganization}}",
+    "npm-outdated": "npm outdated",
+    "npm-install": "npm install",
+    "npm-link-helpers": "npm link @xpack/docusaurus-template-liquid @xpack/npm-packages-helper",
+    "npm-ci": "npm ci",
+    "clean": "del-cli .docusaurus build",
+    "deep-clean": "del-cli .docusaurus build node_modules package-lock.json",
+{%- if packageWebsiteConfig.hasDoxygenReference == "true" %}
+    "doxygen": "del-cli static/doxygen doxygen/xml; (cd doxygen; doxygen config.doxyfile)",
+    "browse-doxygen": "open-cli static/doxygen/index.html",
+{%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
+    "convert-doxygen": "doxygen2docusaurus",
+    "generate-website-doxygen": "npm run doxygen && npm run convert-doxygen",
+{%- endif %}
+    "check-urls": "blc {{packageHomepage}} --recursive --ordered --filter-level 2 --exclude 'https://twitter.com*'",
+{%- endif %}
+{%- if packageWebsiteConfig.hasTSDocDocusaurusApi == "true" %}
+    "compile-tsdoc": "del-cli --force tsdoc/dist && tsc --project config/tsconfig-api-extractor.json",
+    "api-extractor-init": "api-extractor init",
+    "api-extractor": "api-extractor run --local --verbose",
+    "patch-doc-model-json": "bash config/patch-doc-model-json.sh tsdoc/doc-model/website.api.json website @xpack/xpm-lib",
+    "api-documenter": "del-cli --force tsdoc/markdown && api-documenter markdown --input-folder tsdoc/doc-model --output-folder tsdoc/markdown",
+    "tsdoc2docusaurus": "tsdoc2docusaurus --id website",
+    "tsdoc2docusaurus-webpreview": "tsdoc2docusaurus --id webpreview",
+    "generate-website-tsdoc": "npm run compile-tsdoc && npm run api-extractor && npm run patch-doc-model-json && npm run api-documenter && npm run tsdoc2docusaurus",
+{%- endif %}
+    "docusaurus": "docusaurus",
+    "start": "docusaurus start",
+    "build": "docusaurus build",
+    "swizzle": "docusaurus swizzle",
+    "deploy": "docusaurus deploy",
+    "clear": "docusaurus clear",
+    "serve": "docusaurus serve",
+    "write-translations": "docusaurus write-translations",
+    "write-heading-ids": "docusaurus write-heading-ids",
+    "import-website-releases": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/import-releases.sh --{{githubProjectOrganization}}",
+{%- if githubProjectOrganization == "micro-os-plus" %}
+    "generate-website-releases-from-tags": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-releases-for-tags.sh --{{githubProjectOrganization}}",
+{%- endif %}
+    "generate-website-blog-post": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-blog-post.sh --{{githubProjectOrganization}}",
+    "generate-dependencies-details": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-dependencies-details.sh --{{githubProjectOrganization}}"
   },
   "browserslist": {
     "production": [
