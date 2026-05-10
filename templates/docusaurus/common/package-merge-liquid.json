@@ -10,12 +10,12 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@docusaurus/core": "3.10.0",
-    "@docusaurus/faster": "3.10.0",
-    "@docusaurus/plugin-client-redirects": "3.10.0",
-    "@docusaurus/plugin-ideal-image": "3.10.0",
-    "@docusaurus/preset-classic": "3.10.0",
-    "@docusaurus/theme-search-algolia": "3.10.0",
+    "@docusaurus/core": "3.10.1",
+    "@docusaurus/faster": "3.10.1",
+    "@docusaurus/plugin-client-redirects": "3.10.1",
+    "@docusaurus/plugin-ideal-image": "3.10.1",
+    "@docusaurus/preset-classic": "3.10.1",
+    "@docusaurus/theme-search-algolia": "3.10.1",
     "@mdx-js/react": "^3.1.1",
     "clsx": "^2.0.0",
     "prism-react-renderer": "^2.3.0",
@@ -34,9 +34,9 @@
     "open-cli": "^8.0.0",
     "broken-link-checker": "^0.7.8",
 {%- endif %}
-    "@docusaurus/module-type-aliases": "3.10.0",
-    "@docusaurus/tsconfig": "3.10.0",
-    "@docusaurus/types": "3.10.0",
+    "@docusaurus/module-type-aliases": "3.10.1",
+    "@docusaurus/tsconfig": "3.10.1",
+    "@docusaurus/types": "3.10.1",
     "json": "^11.0.0",
     "liquidjs": "^10.25.0",
 {%- if isTypeScript == "true" %}
@@ -44,13 +44,13 @@
     "@microsoft/api-documenter": "^7.28.2",
     "@microsoft/api-extractor": "^7.55.2",
 {%- endif %}
+{%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
+    "@xpack/doxygen2docusaurus": "^2.2.0",
+{%- endif %}
     "@xpack/docusaurus-template-liquid": "github:xpack/docusaurus-template-liquid",
     "@xpack/npm-packages-helper": "github:xpack/npm-packages-helper",
     "typescript": "~5.9.3"
   },
-   "overrides": {
-    "webpackbar": "7.0.0"
-   },
   "scripts": {
     "generate-website-commons": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-website-commons.sh --{{githubProjectOrganization}}",
     "npm-outdated": "npm outdated",
