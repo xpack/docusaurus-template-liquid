@@ -29,12 +29,13 @@ For information on how to {% if packageWebsiteConfig.skipInstallCommand != "true
 {%- if isNpmPublished == "true"  %}
 
 The source code of the current release is available on
-[GitHub tag v{{releaseVersion}} tree](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/tree/v{{releaseVersion}}).
+GitHub as [{{githubProjectOrganization}}/{{githubProjectName}}](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}),
+the [v{{releaseVersion}}](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/tree/v{{releaseVersion}}) tree.
 
 {%- else  %}
 
 The source code is available on
-[GitHub](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/).
+GitHub as [{{githubProjectOrganization}}/{{githubProjectName}}](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/).
 
 {%- endif  %}
 
@@ -48,6 +49,6 @@ with all rights reserved to
 {%- if packageScopedName == "@micro-os-plus/micro-test-plus" %}
 
 The code from Boost UT is released under the terms of the
-[Boost Version 1.0 Software License](https://www.boost.org/LICENSE_1_0.txt).
+[Boost Software License, Version 1.0](https://www.boost.org/LICENSE_1_0.txt).
 
 {%- endif %}

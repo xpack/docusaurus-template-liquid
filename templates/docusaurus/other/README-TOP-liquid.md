@@ -53,12 +53,13 @@ For information on how to {% if packageWebsiteConfig.skipInstallCommand != "true
 {%- if isNpmPublished == "true"  %}
 
 The source code of the current release is available on
-[GitHub tag v{{releaseVersion}} tree](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/tree/v{{releaseVersion}}).
+GitHub as [{{githubProjectOrganization}}/{{githubProjectName}}](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}),
+the [v{{releaseVersion}}](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/tree/v{{releaseVersion}}) tree.
 
 {%- else  %}
 
 The source code is available on
-[GitHub](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/).
+GitHub as [{{githubProjectOrganization}}/{{githubProjectName}}](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/).
 
 {%- endif  %}
 
