@@ -6,11 +6,11 @@
 title: About
 description: Details about the project, including its history, the history of the website, and details about the author.
 keywords:
-{%- if githubProjectOrganization == "micro-os-plus" %}
+{%- if githubProjectOrganization == 'micro-os-plus' %}
   - micro-os-plus
 {%- endif %}
   - xpack
-  - {% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}
+  - {% if topConfig.permalinkName != '' %}{{topConfig.permalinkName}}{% else %}{{packageName}}{% endif %}
   - about
   - history
   - web
@@ -20,15 +20,15 @@ date: 2024-10-24 23:58:00 +0300
 
 ---
 
-{%- if packageWebsiteConfig.hasCustomAbout == "true" %}
+{%- if websiteConfig.hasCustomAbout %}
 
 import ProjectContent from './_project/_content.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
-{%- if packageWebsiteConfig.customAboutTitle %}
+{%- if websiteConfig.customAboutTitle != '' %}
 
-# {{packageWebsiteConfig.customAboutTitle}}
+# {{websiteConfig.customAboutTitle}}
 
 {%- endif %}
 
@@ -47,13 +47,13 @@ import CommonTheAuthor from './_common/_the-author.mdx';
 {/* ------------------------------------------------------------------------ */}
 
 
-{%- if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}
+{%- if githubProjectOrganization == 'xpack' or githubProjectOrganization == 'xpack-dev-tools' %}
 
-# About {{preferredName}}
+# About {{topConfig.preferredName}}
 
 {%- elsif githubProjectOrganization == "micro-os-plus" %}
 
-# About the {{packageConfig.descriptiveName}}
+# About the {{topConfig.descriptiveName}}
 
 {%- else %}
 

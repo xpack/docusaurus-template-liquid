@@ -6,11 +6,11 @@
 title: Help Centre
 description: The project's support channel, where you can ask questions, start discussions, and report issues.
 keywords:
-{%- if githubProjectOrganization == "micro-os-plus" %}
+{%- if githubProjectOrganization == 'micro-os-plus' %}
   - micro-os-plus
 {%- endif %}
   - xpack
-  - {% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}
+  - {% if topConfig.permalinkName != '' %}{{topConfig.permalinkName}}{% else %}{{packageName}}{% endif %}
   - support
   - discussions
   - issues
@@ -23,13 +23,13 @@ import ProjectDocumentation from '@site/docs/_project/_documentation.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
-{%- if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}
+{%- if githubProjectOrganization == 'xpack' or githubProjectOrganization == 'xpack-dev-tools' %}
 
-# How to obtain help for {{preferredName}}
+# How to obtain help for {{topConfig.preferredName}}
 
 {%- elsif githubProjectOrganization == "micro-os-plus" %}
 
-# How to obtain help for the {{packageConfig.descriptiveName}}
+# How to obtain help for the {{topConfig.descriptiveName}}
 
 {%- else %}
 
@@ -37,11 +37,11 @@ import ProjectDocumentation from '@site/docs/_project/_documentation.mdx';
 
 {%- endif %}
 
-{%- if packageConfig.isOrganizationWeb == "true" %}
+{%- if topConfig.isOrganisationWeb %}
 
 ## Quick tips
 
-The **{{packageConfig.descriptiveName}}** comprises multiple individual
+The **{{topConfig.descriptiveName}}** comprises multiple individual
 projects, each hosted on its own GitHub repository. Therefore, the most
 effective way to receive prompt answers is to utilise the
 GitHub Discussions
@@ -62,7 +62,7 @@ pages.
 If you encounter any issues within the content of these pages (such as typographical errors or
 incorrect phrasing) or have suggestions for improving the documentation,
 please share them through the
-{%- if packageConfig.isOrganizationWeb == "true" %}
+{%- if topConfig.isOrganisationWeb %}
 GitHub Discussions pages. Utilise the top-level
 [GitHub Discussions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/discussions)
 page for issues relating to the main xPack Project site, or the individual project's GitHub Discussions pages for specific projects.
@@ -85,23 +85,23 @@ documentation.
 Before posting any questions or providing feedback,
 verify whether the subject has not already been addressed.
 
-{% if packageWebsiteConfig.skipFaq != "true" -%}
-- Check the {% if packageConfig.isOrganizationWeb == "true" %}FAQ{% else %}[FAQ](/docs/faq/){% endif %}
+{% unless websiteConfig.skipFaq -%}
+- Check the {% if topConfig.isOrganisationWeb %}FAQ{% else %}[FAQ](/docs/faq/){% endif %}
 for similar problems
-{%- endif %}
-- Review the {% if packageConfig.isOrganizationWeb == "true" %}GitHub Discussions{% else %}[GitHub Discussions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/discussions){% endif %} for
+{%- endunless %}
+- Review the {% if topConfig.isOrganisationWeb %}GitHub Discussions{% else %}[GitHub Discussions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/discussions){% endif %} for
 similar topics
-- Examine the {% if packageConfig.isOrganizationWeb == "true" %}
+- Examine the {% if topConfig.isOrganisationWeb %}
 GitHub Issues{% else %}[GitHub Issues](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/issues){% endif %}
 tracker and the
-{% if packageConfig.isOrganizationWeb == "true" %}GitHub Pull Requests{% else %}[GitHub Pull Requests](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/pulls){% endif %}
+{% if topConfig.isOrganisationWeb %}GitHub Pull Requests{% else %}[GitHub Pull Requests](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/pulls){% endif %}
 for similar problems.
 
 ## Ask questions in GitHub Discussions
 
 If you still cannot find a solution, have interesting use cases,
 custom configurations, or any experiences you wish to share with
-others, please {% if packageConfig.isOrganizationWeb == "true" %}
+others, please {% if topConfig.isOrganisationWeb %}
 utilise the top-level
 [GitHub Discussions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/discussions)
 page for questions relating to the top xPack Project. For specific projects,
@@ -111,7 +111,7 @@ pages.{% endif %}
 Initiate a **New discussion**; utilise the **Q&A** category for questions,
 **Ideas** for suggestions and **General** for everything else.
 
-{%- if packageConfig.isOrganizationWeb != "true" %}
+{%- unless topConfig.isOrganisationWeb %}
 
 ## Register a new support ticket only if necessary
 
@@ -130,9 +130,9 @@ for questions and support; instead, **utilise the
 
 :::
 
-{%- endif %}
+{%- endunless %}
 
-{%- if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}
+{%- if githubProjectOrganization == 'xpack' or githubProjectOrganization == 'xpack-dev-tools' %}
 
 ## Stack Overflow
 
@@ -151,7 +151,7 @@ project, and some of their questions are tagged with `xpack` as well.
 
 ## The Discord channel
 
-{%- if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}
+{%- if githubProjectOrganization == 'xpack' or githubProjectOrganization == 'xpack-dev-tools' %}
 
 For live discussions amongst members, join the **xPack Community** on
 [Discord](https://discord.com/invite/kbzWaJerFG).

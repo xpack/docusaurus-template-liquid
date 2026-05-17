@@ -41,7 +41,7 @@
 # title of most generated pages and in a few other places.
 # The default value is: My Project.
 
-PROJECT_NAME = {{packageConfig.permalinkName}}
+PROJECT_NAME = {{topConfig.permalinkName}}
 
 # The PROJECT_NUMBER tag can be used to enter a project or revision number. This
 # could be handy for archiving the generated documentation or if some version
@@ -53,7 +53,7 @@ PROJECT_NUMBER = {{releaseVersion}}
 # for a project that appears at the top of each page and should give viewer a
 # quick idea about the purpose of the project. Keep the description short.
 
-PROJECT_BRIEF = "{{packageConfig.descriptiveName}}"
+PROJECT_BRIEF = "{{topConfig.descriptiveName}}"
 
 # With the PROJECT_LOGO tag one can specify a logo or an icon that is included
 # in the documentation. The maximum height of the logo should not exceed 55
@@ -220,7 +220,7 @@ PREDEFINED = \
 __DOXYGEN__ \
 __cplusplus \
 __cpp_exceptions \
-{% if packageName == "diag-trace" %}MICRO_OS_PLUS_TRACE \{% endif %}
+{% if packageName == 'diag-trace' %}MICRO_OS_PLUS_TRACE \{% endif %}
 
 #---------------------------------------------------------------------------
 
@@ -246,7 +246,7 @@ __cpp_exceptions \
 # captures the structure of the code including all documentation.
 # The default value is: NO.
 
-{%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
+{%- if websiteConfig.hasDoxygenDocusaurusApi %}
 
 GENERATE_XML           = YES
 {%- else %}

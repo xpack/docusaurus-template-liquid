@@ -6,11 +6,11 @@
 title: History
 description: The most important moments since the project was created.
 keywords:
-{%- if githubProjectOrganization == "micro-os-plus" %}
+{%- if githubProjectOrganization == 'micro-os-plus' %}
   - micro-os-plus
 {%- endif %}
   - xpack
-  - {% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}
+  - {% if topConfig.permalinkName != '' %}{{topConfig.permalinkName}}{% else %}{{packageName}}{% endif %}
   - history
 
 date: 2024-10-24 23:58:00 +0300
@@ -21,13 +21,13 @@ import ProjectContent from './_project/_content.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
-{%- if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}
+{%- if githubProjectOrganization == 'xpack' or githubProjectOrganization == 'xpack-dev-tools' %}
 
-# The history of **{{preferredName}}**
+# The history of **{{topConfig.preferredName}}**
 
 {%- elsif githubProjectOrganization == "micro-os-plus" %}
 
-# The {{packageConfig.descriptiveName}} history
+# The {{topConfig.descriptiveName}} history
 
 {%- else %}
 

@@ -7,8 +7,8 @@
 
 To accommodate the diverse requirements of its audience, this site provides
 distinct pages:
-**[User's Guide](/docs/user/)**{% if packageWebsiteConfig.skipContributorGuide != "true" %},
-**[Contributor's Guide](/docs/developer/)**{% endif %} and
+**[User's Guide](/docs/user/)**{% unless websiteConfig.skipContributorGuide %},
+**[Contributor's Guide](/docs/developer/)**{% endunless %} and
 **[Maintainer's Guide](/docs/maintainer/)**.
 Each guide is tailored to ensure users can efficiently access the
 information and resources most relevant to their specific roles or requirements.

@@ -25,7 +25,7 @@ export function getCustomFields() {
 
   let upstreamVersion = releaseSemver;
 
-{%- if packageWebsiteConfig.hasTwoNumbersVersion == "true" %}
+{%- if websiteConfig.hasTwoNumbersVersion %}
 
   if (releaseSemver.endsWith('.0')) {
     // Remove the patch number if zero (wine uses both 2 and 3 numbers).

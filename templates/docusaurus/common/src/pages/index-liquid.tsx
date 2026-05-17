@@ -22,19 +22,19 @@ import HeadTitle from '@site/src/components/HeadTitle';
 import styles from './index.module.css';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 
-{%- if packageWebsiteConfig.hasHomepageTools == "true" %}
+{%- if websiteConfig.hasHomepageTools %}
 
 import HomepageTools from '@site/src/components/HomepageTools';
 {%- endif %}
-{%- if packageWebsiteConfig.skipInstallCommand != "true" %}
+{%- unless websiteConfig.skipInstallCommand %}
 import InstallWithCopy from '@site/src/components/InstallWithCopy';
-{%- endif %}
+{%- endunless %}
 
 {%- if platforms == "" %}
-{%- assign platforms = packageWebsiteConfig.platforms | default: "" %}
+{%- assign platforms = websiteConfig.platforms | default: '' %}
 {%- endif %}
 
-{%- if isNpmBinary == "true" %}
+{%- if isNpmBinary %}
 {%- assign platforms = "win32-x64,darwin-x64,linux-x64" %}
 {%- endif %}
 {%- assign platforms_array = platforms | split: "," %}
@@ -44,20 +44,20 @@ import InstallWithCopy from '@site/src/components/InstallWithCopy';
 {%- assign isWindows = false %}
 
 {%- for platform in platforms_array %}
-{%- if platform == "darwin-x64" or platform == "darwin-arm64" %}{% assign isMacOS = true %}{% endif %}
-{%- if platform == "linux-x64" or platform == "linux-arm64" or platform == "linux-arm" %}{% assign isLinux = true %}{% endif %}
-{%- if platform == "win32-x64" %}{% assign isWindows = true %}{% endif %}
+{%- if platform == 'darwin-x64' or platform == 'darwin-arm64' %}{% assign isMacOS = true %}{% endif %}
+{%- if platform == 'linux-x64' or platform == 'linux-arm64' or platform == 'linux-arm' %}{% assign isLinux = true %}{% endif %}
+{%- if platform == 'win32-x64' %}{% assign isWindows = true %}{% endif %}
 {%- endfor %}
 
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <HeadTitle title="Welcome to {% if packageWebsiteConfig.title %}{{packageWebsiteConfig.title}}{% else %}the {{longXpackName}}{% endif %}!" />
+      <HeadTitle title="Welcome to {% if websiteConfig.title != '' %}{{websiteConfig.title}}{% else %}the {{longXpackName}}{% endif %}!" />
       <div className="container">
         <Heading as="h1" className="hero__title">{siteConfig.title}</Heading>
         <p className="hero__subtitle">{siteConfig.tagline}
-{%- if platforms != "" or isNpmBinary == "true" %}
+{%- if platforms != '' or isNpmBinary %}
         <span className="margin-left-platforms">
 {%- if isWindows %}
           <span className="tagline-platform-windows"></span>
@@ -71,15 +71,15 @@ function HomepageHeader() {
         </span>
 {%- endif %}
         </p>
-{%- if packageWebsiteConfig.skipInstallCommand != "true" %}
+{%- unless websiteConfig.skipInstallCommand %}
         <div className={styles.installWithCopy}>
-{%- if isXpackBinary == "true" or packageWebsiteConfig.isXpmDependency == "true" %}
-          <InstallWithCopy>xpm install {% if packageWebsiteConfig.isInstallGlobally == "true" %}--location=global {% endif %}{{packageScopedName}}@{{releaseVersion}} --verbose</InstallWithCopy>
+{%- if isXpackBinary or websiteConfig.isXpmDependency %}
+          <InstallWithCopy>xpm install {% if websiteConfig.isInstallGlobally %}--location=global {% endif %}{{packageScopedName}}@{{releaseVersion}} --verbose</InstallWithCopy>
 {%- else %}
-          <InstallWithCopy>npm install {% if packageWebsiteConfig.isInstallGlobally == "true" %}--global {% endif %}{{packageScopedName}}@{{releaseVersion}}</InstallWithCopy>
+          <InstallWithCopy>npm install {% if websiteConfig.isInstallGlobally %}--global {% endif %}{{packageScopedName}}@{{releaseVersion}}</InstallWithCopy>
 {%- endif %}
         </div>
-{%- endif %}
+{%- endunless %}
       </div>
     </header>
   );
@@ -94,7 +94,7 @@ export default function Home(): JSX.Element {
       <HomepageHeader />
       <main>
         <HomepageFeatures />
-{%- if packageWebsiteConfig.hasHomepageTools == "true" %}
+{%- if websiteConfig.hasHomepageTools %}
         <hr className="hero__hr"/>
         <HomepageTools />
 {%- endif %}

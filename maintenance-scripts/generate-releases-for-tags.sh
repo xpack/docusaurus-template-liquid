@@ -84,7 +84,7 @@ function process_tag()
   local version="$(echo "${tag}" | sed -e 's|^v||')"
   local date=$(date -r ${seconds} '+%Y-%m-%d %H:%M:%S %z')
 
-  local post_relative_file_path="blog/$(date -r ${seconds} '+%Y-%m-%d')-${xpack_permalink_name}-$(echo $tag | sed -e 's|[.]|-|g')-released.mdx"
+  local post_relative_file_path="blog/$(date -r ${seconds} '+%Y-%m-%d')-${xpack_top_config_permalink_name}-$(echo $tag | sed -e 's|[.]|-|g')-released.mdx"
 
   if [ ! -f "${website_folder_path}/${post_relative_file_path}" ]
   then

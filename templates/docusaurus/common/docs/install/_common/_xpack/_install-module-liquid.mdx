@@ -11,23 +11,23 @@ The package is available as
 [`{{packageScopedName}}`](https://www.npmjs.com/package/{{packageScopedName}}/)
 from the public [`npmjs`](https://www.npmjs.com) repository;
 it may be added as a
-{% if packageConfig.hasCli != "true" %}dependency to any TypeScript or JavaScript{% else %}development dependency to any **npm**{% endif %}
+{% unless topConfig.hasCli %}dependency to any TypeScript or JavaScript{% else %}development dependency to any **npm**{% endunless %}
 project.
 
 The command to install the
 **latest** available version of **{{packageScopedName}}** is:
 
 ```sh
-npm install {{packageScopedName}}@latest{% if packageConfig.hasCli == "true" %} --save-dev{% endif %}
+npm install {{packageScopedName}}@latest{% if topConfig.hasCli %} --save-dev{% endif %}
 ```
 
 To install a **specific version**, specify it explicitly:
 
 <CodeBlock language="sh"> {
-`npm install {{packageScopedName}}@{{releaseVersion}}{% if packageConfig.hasCli == "true" %} --save-dev{% endif %}
+`npm install {{packageScopedName}}@{{releaseVersion}}{% if topConfig.hasCli %} --save-dev{% endif %}
 `} </CodeBlock>
 
-{%- if packageConfig.hasCli != "true" %}
+{%- unless topConfig.hasCli %}
 
 The package does not provide any executables, and generally there are **no
 reasons to install it globally**.
@@ -50,7 +50,7 @@ To install a **specific version**, specify it explicitly:
 `npm install --location=global {{packageScopedName}}@{{releaseVersion}}
 `} </CodeBlock>
 
-{%- endif %}
+{%- endnless %}
 
 ## Uninstall
 
@@ -61,7 +61,7 @@ from the project and the dependency removed from `package.json` with:
 npm uninstall {{packageScopedName}}
 ```
 
-{%- if packageConfig.hasCli == "true" %}
+{%- if topConfig.hasCli %}
 
 If installed globally, it may be uninstalled with:
 

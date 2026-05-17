@@ -3,19 +3,19 @@
 # DO NOT EDIT!
 # Automatically generated from docusaurus-template-liquid/templates/docusaurus.
 
-title: User's Guide{% if packageWebsiteConfig.usePluralGuides == "true" %}s{% endif %}
-{%- if githubProjectOrganization == "xpack" %}
-description: {% if packageWebsiteConfig.userGuideDescription %}{{packageWebsiteConfig.userGuideDescription}}{% else %}User information, including how to integrate it in a project, how to instantiate objects, how to call various functions.{% endif %}
+title: User's Guide{% if websiteConfig.usePluralGuides %}s{% endif %}
+{%- if githubProjectOrganization == 'xpack' %}
+description: {% if websiteConfig.userGuideDescription != '' %}{{websiteConfig.userGuideDescription}}{% else %}User information, including how to integrate it in a project, how to instantiate objects, how to call various functions.{% endif %}
 {%- elsif githubProjectOrganization == "xpack-dev-tools" %}
-description: {% if packageWebsiteConfig.userGuideDescription %}{{packageWebsiteConfig.userGuideDescription}}{% else %}User information, including the versioning scheme, usage of shared libraries, and RPATH configuration on GNU/Linux.{% endif %}
+description: {% if websiteConfig.userGuideDescription != '' %}{{websiteConfig.userGuideDescription}}{% else %}User information, including the versioning scheme, usage of shared libraries, and RPATH configuration on GNU/Linux.{% endif %}
 {%- else %}
 description: TODO
 {%- endif %}
 keywords:
   - xpack
-  - {% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}
+  - {% if topConfig.permalinkName != '' %}{{topConfig.permalinkName}}{% else %}{{packageName}}{% endif %}
   - user
-  - guide{% if isXpackBinary == "true" %}
+  - guide{% if isXpackBinary %}
   - versioning
   - shared
   - rpath{% endif %}
@@ -24,15 +24,15 @@ date: 2024-10-24 23:58:00 +0300
 
 ---
 
-{%- if packageWebsiteConfig.hasCustomUser == "true" %}
+{%- if websiteConfig.hasCustomUser %}
 
 import ProjectContent from './_project/_content.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
-{%- if packageWebsiteConfig.customUserTitle %}
+{%- if websiteConfig.customUserTitle != '' %}
 
-# {{packageWebsiteConfig.customUserTitle}}
+# {{websiteConfig.customUserTitle}}
 
 {%- endif %}
 
@@ -40,7 +40,7 @@ import ProjectContent from './_project/_content.mdx';
 
 {%- else %}
 
-{%- if isXpackBinary == "true" %}
+{%- if isXpackBinary %}
 
 import Content from './_common/_content.mdx';
 
@@ -52,17 +52,17 @@ import Content from './_project/_content.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
-# How to utilise {{preferredName}}
+# How to utilise {{topConfig.preferredName}}
 
-{%- if isXpackBinary == "true" or packageConfig.hasCli == "true" %}
+{%- if isXpackBinary or topConfig.hasCli %}
 
 This page is intended for those who plan to integrate
-**{{preferredName}}** into their workflows.
+**{{topConfig.preferredName}}** into their workflows.
 
 {%- else %}
 
 This page is intended for those who plan to utilise this
-{% if isNpmBinary == "true" %}application{% else %}module{% endif %} within their
+{% if isNpmBinary %}application{% else %}module{% endif %} within their
 own projects.
 
 {%- endif %}
@@ -71,7 +71,7 @@ own projects.
 
 {%- endif %}
 
-{%- if packageWebsiteConfig.hasTypedocApi == "true" %}
+{%- if websiteConfig.hasTypedocApi %}
 
 ### Reference
 

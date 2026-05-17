@@ -13,7 +13,7 @@ which comprises a collection of files/folders
 and a `package.json` file with the package metadata.
 
 **xpm** can install source and binary packages.
-{%- if isXpackBinary == "true" %}
+{%- if isXpackBinary %}
 Binary packages include references to regular archives with the platform-specific binaries (such as `.tar.gz` for Unix or `.zip` for Windows).
 These archives are unpacked and links/forwarders to
 the executables are created within a `.bin` folder.

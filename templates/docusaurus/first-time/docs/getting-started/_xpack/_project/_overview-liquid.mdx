@@ -3,12 +3,12 @@
 
 TODO
 
-{%- if packageConfig.hasCli != "true" %}
+{%- unless topConfig.hasCli %}
 
 This module is primarily intended to be incorporated within projects
 such as the `xpm` CLI application.
 
-{%- endif %}
+{%- endunless %}
 
 ## Features & Benefits
 

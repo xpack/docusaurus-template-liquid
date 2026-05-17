@@ -36,20 +36,20 @@ a **node** >=20.0).
 <summary>Local installations</summary>
 
 One of the xPack design goals is to allow each project to
-select the exact versions of the {% if isXpackBinary == "true" %}tools{% else %}libraries{% endif %} it requires.
+select the exact versions of the {% if isXpackBinary %}tools{% else %}libraries{% endif %} it requires.
 
 Similarly to **npm** being able to install specific versions of the
 JavaScript tools into each project,
 **xpm** was also designed to be able to install specific versions of the
-required {% if isXpackBinary == "true" %}binary tools{% else %}libraries{% endif %} locally into each project.
+required {% if isXpackBinary %}binary tools{% else %}libraries{% endif %} locally into each project.
 
 Therefore, similarly to the way **npm** installs the JavaScript packages into
-`node_modules`, **xpm** installs the {% if isXpackBinary == "true" %}binary tools{% else %}libraries{% endif %} into
+`node_modules`, **xpm** installs the {% if isXpackBinary %}binary tools{% else %}libraries{% endif %} into
 `xpacks`. Here there will be separate folders with the installed
 packages, for example
 <code>xpacks/{{packageScopedName}}</code>.
 
-{%- if isXpackBinary == "true" %}
+{%- if isXpackBinary %}
 
 Each such folder includes the `package.json` file with the
 project metadata and a sub-folder `.content` with the extracted
@@ -67,7 +67,7 @@ settings such as **Show Hidden Files**.
 
 </details>
 
-{%- if isXpackBinary == "true" %}
+{%- if isXpackBinary %}
 
 <details>
 <summary>The `xpacks/.bin` folder</summary>

@@ -5,7 +5,7 @@ import CommonManualInstallQuickTest from '../_common/_manual-install-quick-test.
 
 <CommonManualInstallQuickTest
   descriptiveName="{{longXpackName}}"
-  permalinkName="{% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}"
-  programName="{{packageWebsiteConfig.programName}}"
-  branding="{{packageWebsiteConfig.branding}}"
+  permalinkName="{% if topConfig.permalinkName != '' %}{{topConfig.permalinkName}}{% else %}{{packageName}}{% endif %}"
+  programName="{{websiteConfig.programName}}"
+  branding="{{websiteConfig.branding}}"
 />

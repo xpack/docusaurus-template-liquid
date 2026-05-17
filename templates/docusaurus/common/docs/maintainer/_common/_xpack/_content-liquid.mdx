@@ -79,7 +79,7 @@ There are no fixed releases.
 
 ### Manual install test
 
-{%- if packageConfig.hasCli != "true" %}
+{%- unless topConfig.hasCli %}
 
 Test if the package can be installed in a project:
 
@@ -97,7 +97,7 @@ Test if the package can be installed globally:
 npm install --location=global {{packageScopedName}}@test
 ```
 
-{%- endif %}
+{%- endunless %}
 
 <CommonPrepareWebsite />
 

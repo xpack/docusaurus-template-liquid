@@ -8,8 +8,8 @@
 
 This project utilises multiple branches:
 
-- `master`, {% if branchMain != "master" %}not actively used{% else %}containing the latest stable version (default){% endif %}
-{%- if branchMain == "xpack" %}
+- `master`, {% if branchMain != 'master' %}not actively used{% else %}containing the latest stable version (default){% endif %}
+{%- if branchMain == 'xpack' %}
 - `xpack`, containing the latest stable version (default)
 {%- endif %}
 - `{{branchDevelopment}}`, containing the current development version

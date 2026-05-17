@@ -6,22 +6,22 @@ import CodeBlock from '@theme/CodeBlock';
 {/* ------------------------------------------------------------------------ */}
 
 <details>
-<summary>Reproducibility and `{% if isXpackBinary == "true" %}devDependencies{% else %}dependencies{% endif %}`</summary>
+<summary>Reproducibility and `{% if isXpackBinary %}devDependencies{% else %}dependencies{% endif %}`</summary>
 
 To ensure reproducibility, it is essential for each project to always
-utilise the exact desired versions of the required {% if isXpackBinary == "true" %}tools, regardless of the
+utilise the exact desired versions of the required {% if isXpackBinary %}tools, regardless of the
 tools installed in the system{% else %}libraries, regardless of the
 libraries installed in the system{% endif %}.
 
-To achieve this objective, **xpm** records all locally installed {% if isXpackBinary == "true" %}binary {% endif %}packages
-as {% if isXpackBinary == "true" %}development {% endif %}dependencies in the project `package.json` file.
+To achieve this objective, **xpm** records all locally installed {% if isXpackBinary %}binary {% endif %}packages
+as {% if isXpackBinary %}development {% endif %}dependencies in the project `package.json` file.
 
 The result appears as follows:
 
 <CodeBlock language="json"> {
 `  "xpack": {
     "minimumXpmRequired": "0.20.7",
-{%- if isXpackBinary == "true" %}
+{%- if isXpackBinary %}
     "dependencies": {},
     "devDependencies": {
       "{{packageScopedName}}": {
@@ -48,10 +48,10 @@ The result appears as follows:
 
 If the `package.json` is saved in the revision system, the above
 definition acts as a firm reference to the specific version of
-{{preferredName}}.
+{{topConfig.preferredName}}.
 
 After cloning the project into a different location, the command `xpm install`
-may be used to install all {% if isXpackBinary == "true" %}development {% endif %}dependencies.
+may be used to install all {% if isXpackBinary %}development {% endif %}dependencies.
 
 This is particularly useful for CI/CD environments.
 

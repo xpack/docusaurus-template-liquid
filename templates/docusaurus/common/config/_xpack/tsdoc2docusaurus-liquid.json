@@ -1,5 +1,5 @@
 {
-{%- if hasBranchWebpreview == 'true' %}
+{%- if hasBranchWebpreview %}
   "webpreview": {
     "apiJsonInputFolderPath": "tsdoc/doc-model",
     "apiMarkdownInputFolderPath": "tsdoc/markdown",

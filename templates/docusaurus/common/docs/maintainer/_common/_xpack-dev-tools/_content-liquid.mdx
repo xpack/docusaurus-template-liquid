@@ -66,9 +66,9 @@ import ProjectPatches from '../_project/_patches.mdx';
 {%- assign isWindows = false %}
 
 {%- for platform in platforms_array %}
-{%- if platform == "darwin-x64" or platform == "darwin-arm64" %}{% assign isMacOS = true %}{% endif %}
-{%- if platform == "linux-x64" or platform == "linux-arm64" %}{% assign isLinux = true %}{% endif %}
-{%- if platform == "win32-x64" %}{% assign isWindows = true %}{% endif %}
+{%- if platform == 'darwin-x64' or platform == 'darwin-arm64' %}{% assign isMacOS = true %}{% endif %}
+{%- if platform == 'linux-x64' or platform == 'linux-arm64' %}{% assign isLinux = true %}{% endif %}
+{%- if platform == 'win32-x64' %}{% assign isWindows = true %}{% endif %}
 {%- endfor %}
 
 **{{packageScopedName}}** is an xpm package that packages platform-specific archives, built with the [xPack Build Box (XBB)](https://xpack.github.io/xpack-build-box/).
@@ -161,10 +161,10 @@ will build the previous release again!
 {%- assign names_array = "" | split: "" %}
 
 {%- for platform in platforms_array %}
-{%- if platform == "darwin-x64" %}{% assign names_array = names_array | concat: "x64 macOS" %}{% endif %}
-{%- if platform == "darwin-arm64" %}{% assign names_array = names_array | concat: "arm64 macOS" %}{% endif %}
-{%- if platform == "win32-x64" or platform == "linux-x64" %}{% assign names_array = names_array | concat: "x64 GNU/Linux" %}{% endif %}
-{%- if platform == "linux-arm64" %}{% assign names_array = names_array | concat: "arm64 GNU/Linux" %}{% endif %}
+{%- if platform == 'darwin-x64' %}{% assign names_array = names_array | concat: 'x64 macOS' %}{% endif %}
+{%- if platform == 'darwin-arm64' %}{% assign names_array = names_array | concat: 'arm64 macOS' %}{% endif %}
+{%- if platform == 'win32-x64' or platform == 'linux-x64' %}{% assign names_array = names_array | concat: 'x64 GNU/Linux' %}{% endif %}
+{%- if platform == 'linux-arm64' %}{% assign names_array = names_array | concat: 'arm64 GNU/Linux' %}{% endif %}
 {%- endfor %}
 
 {%- assign names_array = names_array | uniq %}
@@ -183,7 +183,7 @@ triggered via the VS Code graphical interface, utilising the
 
 <ProjectPatches/>
 
-{%- if packageConfig.useSelfHostedRunners == "true" %}
+{%- if topConfig.useSelfHostedRunners %}
 
 ### Restart the Docker daemons
 
@@ -216,15 +216,15 @@ the build may proceed with the previous version.
 {%- assign platforms_array = platforms | split: "," %}
 {%- assign names_array = "" | split: "" %}
 
-{%- for platform in platforms_array %}{% if platform == "darwin-x64" %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
-{%- for platform in platforms_array %}{% if platform == "darwin-arm64" %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
-{%- for platform in platforms_array %}{% if platform == "linux-x64" %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
-{%- for platform in platforms_array %}{% if platform == "linux-arm64" %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
-{%- for platform in platforms_array %}{% if platform == "win32-x64" %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
+{%- for platform in platforms_array %}{% if platform == 'darwin-x64' %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
+{%- for platform in platforms_array %}{% if platform == 'darwin-arm64' %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
+{%- for platform in platforms_array %}{% if platform == 'linux-x64' %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
+{%- for platform in platforms_array %}{% if platform == 'linux-arm64' %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
+{%- for platform in platforms_array %}{% if platform == 'win32-x64' %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
 
 {%- for name in names_array %}
 
-{%- if name == "darwin-x64" %}
+{%- if name == 'darwin-x64' %}
 
 ### Build the x64 macOS binaries
 
@@ -278,7 +278,7 @@ caffeinate ssh xbbmi
 
 {%- endif %}
 
-{%- if name == "darwin-arm64" %}
+{%- if name == 'darwin-arm64' %}
 
 ### Build the ARM64 macOS binaries
 
@@ -294,7 +294,7 @@ caffeinate ssh xbbma
 
 {%- endif %}
 
-{%- if name == "linux-x64" %}
+{%- if name == 'linux-x64' %}
 
 ### Build the x64 GNU/Linux binaries
 
@@ -309,7 +309,7 @@ caffeinate ssh xbbli
 
 {%- endif %}
 
-{%- if name == "linux-arm64" %}
+{%- if name == 'linux-arm64' %}
 
 ### Build the ARM64 GNU/Linux binaries
 
@@ -324,7 +324,7 @@ caffeinate ssh ampere
 
 {%- endif %}
 
-{%- if name == "win32-x64" %}
+{%- if name == 'win32-x64' %}
 
 ### Build the x64 Windows binaries
 
@@ -357,9 +357,9 @@ Commit with the message _**website: update development durations**_
 {%- assign isWindows = false %}
 
 {%- for platform in platforms_array %}
-{%- if platform == "darwin-x64" or platform == "darwin-arm64" %}{% assign isMacOS = true %}{% endif %}
-{%- if platform == "linux-x64" or platform == "linux-arm64" %}{% assign isLinux = true %}{% endif %}
-{%- if platform == "win32-x64" %}{% assign isWindows = true %}{% endif %}
+{%- if platform == 'darwin-x64' or platform == 'darwin-arm64' %}{% assign isMacOS = true %}{% endif %}
+{%- if platform == 'linux-x64' or platform == 'linux-arm64' %}{% assign isLinux = true %}{% endif %}
+{%- if platform == 'win32-x64' %}{% assign isWindows = true %}{% endif %}
 {%- endfor %}
 
 Copy the trees displayed at the end of the test builds and paste to the
@@ -402,9 +402,9 @@ Commit with the message _**website: update folder hierarchies**_
 {%- assign names_array = "" | split: "" %}
 
 {%- for platform in platforms_array %}
-{%- if platform == "win32-x64" %}{% assign names_array = names_array | concat: "Windows" %}{% endif %}
-{%- if platform == "darwin-x64" or platform == "darwin-arm64" %}{% assign names_array = names_array | concat: "macOS" %}{% endif %}
-{%- if platform == "linux-x64" or platform == "linux-arm64" %}{% assign names_array = names_array | concat: "GNU/Linux" %}{% endif %}
+{%- if platform == 'win32-x64' %}{% assign names_array = names_array | concat: 'Windows' %}{% endif %}
+{%- if platform == 'darwin-x64' or platform == 'darwin-arm64' %}{% assign names_array = names_array | concat: 'macOS' %}{% endif %}
+{%- if platform == 'linux-x64' or platform == 'linux-arm64' %}{% assign names_array = names_array | concat: 'GNU/Linux' %}{% endif %}
 {%- endfor %}
 
 {%- assign names_array = names_array | uniq %}
@@ -440,7 +440,7 @@ place them in the XBB cache (`Work/cache`) and restart the build.
 
 ## Execute the production builds
 
-{%- if packageConfig.useSelfHostedRunners == "true" %}
+{%- if topConfig.useSelfHostedRunners %}
 
 The automation is provided by GitHub Actions and three self-hosted runners
 (the GitHub hosted runners do not have the necessary resources).
@@ -462,10 +462,10 @@ requires `GITHUB_API_XPACK_DEV_TOOLS_RUNNERS_TOKEN` to be present.
 {%- assign names_array = "" | split: "" %}
 
 {%- for platform in platforms_array %}
-{%- if platform == "darwin-x64" %}{% assign names_array = names_array | concat: "xbbmi" %}{% assign single_runner = true %}{% assign isMacOS = true %}{% endif %}
-{%- if platform == "darwin-arm64" %}{% assign names_array = names_array | concat: "xbbma" %}{% assign single_runner = true %}{% assign isMacOS = true %}{% endif %}
-{%- if platform == "linux-x64" or platform == "win32-x64" %}{% assign names_array = names_array | concat: "xbbli" %}{% assign dual_runner = true %}{% assign dual_runners_array = dual_runners_array | concat: "xbbli" %}{% endif %}
-{%- if platform == "linux-arm64" %}{% assign names_array = names_array | concat: "ampere" %}{% assign single_runner = true %}{% endif %}
+{%- if platform == 'darwin-x64' %}{% assign names_array = names_array | concat: 'xbbmi' %}{% assign single_runner = true %}{% assign isMacOS = true %}{% endif %}
+{%- if platform == 'darwin-arm64' %}{% assign names_array = names_array | concat: 'xbbma' %}{% assign single_runner = true %}{% assign isMacOS = true %}{% endif %}
+{%- if platform == 'linux-x64' or platform == 'win32-x64' %}{% assign names_array = names_array | concat: 'xbbli' %}{% assign dual_runner = true %}{% assign dual_runners_array = dual_runners_array | concat: 'xbbli' %}{% endif %}
+{%- if platform == 'linux-arm64' %}{% assign names_array = names_array | concat: 'ampere' %}{% assign single_runner = true %}{% endif %}
 {%- endfor %}
 
 {%- assign names_array = names_array | uniq %}
@@ -554,7 +554,7 @@ to `"@xpack-dev-tools/xbb-helper":`.
 
 <CommonGenerateTopCommons />
 
-{%- if packageConfig.useSelfHostedRunners == "true" %}
+{%- if topConfig.useSelfHostedRunners %}
 
 ### Check for disk space
 
@@ -573,8 +573,8 @@ This is equivalent to executing a `df` command.
 {%- assign isLinux = false %}
 
 {%- for platform in platforms_array %}
-{%- if platform == "darwin-x64" or platform == "darwin-arm64" %}{% assign isMacOS = true %}{% endif %}
-{%- if platform == "linux-x64" or platform == "linux-arm64" or platform == "win32-x64" %}{% assign isLinux = true %}{% endif %}
+{%- if platform == 'darwin-x64' or platform == 'darwin-arm64' %}{% assign isMacOS = true %}{% endif %}
+{%- if platform == 'linux-x64' or platform == 'linux-arm64' or platform == 'win32-x64' %}{% assign isLinux = true %}{% endif %}
 {%- endfor %}
 
 <Tabs groupId="operating-systems">
@@ -643,11 +643,11 @@ To trigger the GitHub Actions builds, utilise the xpm actions:
 {%- assign platforms_array = platforms | split: "," %}
 {%- assign names_array = "" | split: "" %}
 
-{%- for platform in platforms_array %}{% if platform == "darwin-x64" %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
-{%- for platform in platforms_array %}{% if platform == "darwin-arm64" %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
-{%- for platform in platforms_array %}{% if platform == "linux-x64" %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
-{%- for platform in platforms_array %}{% if platform == "linux-arm64" %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
-{%- for platform in platforms_array %}{% if platform == "win32-x64" %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
+{%- for platform in platforms_array %}{% if platform == 'darwin-x64' %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
+{%- for platform in platforms_array %}{% if platform == 'darwin-arm64' %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
+{%- for platform in platforms_array %}{% if platform == 'linux-x64' %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
+{%- for platform in platforms_array %}{% if platform == 'linux-arm64' %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
+{%- for platform in platforms_array %}{% if platform == 'win32-x64' %}{% assign names_array = names_array | concat: platform %}{% endif %}{% endfor %}
 
 {% for name in names_array -%}
 - **trigger-workflow-build-{{name}}**
@@ -690,9 +690,9 @@ The automation is provided by GitHub Actions on GitHub-hosted runners.
 {%- assign isLinuxArm = false %}
 
 {%- for platform in platforms_array %}
-{%- if platform == "darwin-x64" %}{% assign isMacOSX64 = true %}{% endif %}
-{%- if platform == "linux-x64" %}{% assign isLinuxX64 = true %}{% endif %}
-{%- if platform == "linux-arm64" %}{% assign isLinuxArm = true %}{% endif %}
+{%- if platform == 'darwin-x64' %}{% assign isMacOSX64 = true %}{% endif %}
+{%- if platform == 'linux-x64' %}{% assign isLinuxX64 = true %}{% endif %}
+{%- if platform == 'linux-arm64' %}{% assign isLinuxArm = true %}{% endif %}
 {%- endfor %}
 
 To trigger the GitHub Actions tests, execute the xpm actions:
@@ -757,7 +757,7 @@ xpm install -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/bu
 xpm run test-pre-release -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
 ```
 
-{%- if packageConfig.useSelfHostedRunners != "true" and isMacOS %}
+{%- if topConfig.useSelfHostedRunners != true and isMacOS %}
 
 :::caution
 Since the builds were performed on the latest GitHub macOS runners,
@@ -775,7 +775,7 @@ and check the binaries.
 {%- assign isMacOS = false %}
 
 {%- for platform in platforms_array %}
-{%- if platform == "darwin-x64" or platform == "darwin-arm64" %}{% assign isMacOS = true %}{% endif %}
+{%- if platform == 'darwin-x64' or platform == 'darwin-arm64' %}{% assign isMacOS = true %}{% endif %}
 {%- endfor %}
 
 {%- if isMacOS %}
@@ -832,7 +832,7 @@ watching the {{githubProjectName}} project.
 
 - Open the top `package.json` file
 - Check if the links in the {% if isXpackBinary %}`xpack.executables`{% else %}`bin`{% endif %} property cover the actual binaries
-{%- if packageConfig.permalinkName == "wine" %}
+{%- if topConfig.permalinkName == 'wine' %}
 - Rename `widl` -> `winewidl`
 - Remove `function_grep.pl`
 {%- endif %}
@@ -874,7 +874,7 @@ This will test if the package can be installed via `xpm install` on all supporte
 The test results are available from the
 [GitHub Actions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions) page.
 
-{%- if packageConfig.showTestsResults == 'true' %}
+{%- if topConfig.showTestsResults %}
 
 ### Copy the test results
 
@@ -928,7 +928,7 @@ Commit with the message _**test-sourceforge-downloads.yml update**_
 - Navigate to https://github.com/{{githubProjectOrganization}}/pre-releases/releases/tag/test/
 - Remove the test binaries
 
-{%- if packageConfig.useSelfHostedRunners == "true" %}
+{%- if topConfig.useSelfHostedRunners %}
 
 ### Clean the work area
 

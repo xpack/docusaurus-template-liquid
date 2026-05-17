@@ -8,7 +8,7 @@
 
 The above `xpm install` command will perform the following:
 
-* identify the {% if isXpackBinary == "true" %}platform-specific archive for the {% endif %}desired version
+* identify the {% if isXpackBinary %}platform-specific archive for the {% endif %}desired version
   of {{packageScopedName}}, download it into a cache and unpack
   it into a versioned folder
   within the **user's global xPacks store** (if not already present);
@@ -17,14 +17,14 @@ The above `xpm install` command will perform the following:
 * create a local symbolic link
   such as <code>xpacks/{{packageScopedName}}</code> pointing to the
   versioned folder in the user's global xPacks store
-{%- if isXpackBinary == "true" %}
+{%- if isXpackBinary %}
 * add links/forwarders into
   the local `xpacks/.bin` folder, referring to the binaries in
   <code>xpacks/{{packageScopedName}}/.content/bin</code>;
 {% endif %}
 * add <code>{{packageScopedName}}</code> to
   `package.json` as a
-  {% if isXpackBinary == "true" %}development {% endif %}dependency; this associates a specific version of {{preferredName}} with
+  {% if isXpackBinary %}development {% endif %}dependency; this associates a specific version of {{topConfig.preferredName}} with
   the current project (details below).
 
 :::tip

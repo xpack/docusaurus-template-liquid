@@ -7,11 +7,11 @@ import ProjectOverview from '../_project/_overview.mdx';
 
 <ProjectOverview />
 
-{%- if packageWebsiteConfig.skipInstallCommand != "true" %}
+{%- unless websiteConfig.skipInstallCommand %}
 
 ## Installation
 
-{% if packageConfig.permalinkName %}[{{packageScopedName}}](https://www.npmjs.com/package/{{packageScopedName}}) is an npm package available{% else %}The {{longXpackName}} is an npm package available as [{{packageScopedName}}](https://www.npmjs.com/package/{{packageScopedName}}){% endif %}
+{% if topConfig.permalinkName != '' %}[{{packageScopedName}}](https://www.npmjs.com/package/{{packageScopedName}}) is an npm package available{% else %}The {{longXpackName}} is an npm package available as [{{packageScopedName}}](https://www.npmjs.com/package/{{packageScopedName}}){% endif %}
 from the npmjs.com public registry and may be installed via **npm**.
 
 :::tip
@@ -25,4 +25,4 @@ the right side. Click it to copy the command.
 For comprehensive installation instructions, please visit the
 [Installation Guide](/docs/install/) page.
 
-{%- endif %}
+{%- endunless %}

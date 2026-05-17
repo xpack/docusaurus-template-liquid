@@ -8,17 +8,17 @@ import CodeBlock from '@theme/CodeBlock';
 import CommonPrerequisites from '@site/docs/_common/_prerequisites.mdx';
 import CommonGetProjectSources from '@site/docs/_common/_get-project-sources.mdx';
 
-{%- if packageWebsiteConfig.skipTests != "true" %}
+{%- unless websiteConfig.skipTests %}
 
 import ProjectTestResults from '../_project/_test-results.mdx';
 import ProjectCoverageExceptions from '../_project/_coverage-exceptions.mdx';
-{%- endif %}
+{%- endunless %}
 
 import ProjectStyleExceptions from '../_project/_style-exceptions.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
-{%- if isJavaScript == "true" %}
+{%- if isJavaScript %}
 
 This project is currently written in JavaScript, but a rewrite in
 TypeScript is planned.
@@ -46,14 +46,14 @@ npm run compile-watch
 
 ## Language standard compliance
 
-{%- if isTypeScript == "true" %}
+{%- if isTypeScript %}
 
 The current version is compiled with TypeScript {{packageDependenciesTypescriptVersion}}:
 
 - https://www.typescriptlang.org
 - https://www.typescriptlang.org/docs/handbook
 
-{% if package.type == "module" %}
+{% if packageType == 'module' %}
 The compiler is configured to produce ECMAScript6 `es2020` files
 that can be imported
 by any other project either via `import`.
@@ -67,7 +67,7 @@ For more details on how to configure `tsconfig.json`, please see:
 
 - [TSConfig](https://www.typescriptlang.org/tsconfig/)
 
-{%- elsif isJavaScript == "true" %}
+{%- elsif isJavaScript %}
 
 The module uses ECMAScript 6 class definitions and modules.
 
@@ -77,7 +77,7 @@ TBD
 
 {%- endif %}
 
-{%- if packageUseTypeScriptEslint == "true" %}
+{%- if useTypeScriptEslint %}
 
 ## Style
 
@@ -98,18 +98,18 @@ Known and accepted exceptions:
 
 <ProjectStyleExceptions />
 
-{%- if packageUsePrettier == "true" %}
+{%- if usePrettier %}
 
 ## Prettier
 
 The project uses [Prettier](https://prettier.io) to format the code.
 {%- endif %}
 
-{%- elsif packageUseStandard == "true" %}
+{%- elsif useStandard %}
 
 ## Standard style
 
-{%- if isTypeScript == "true" %}
+{%- if isTypeScript %}
 
 As style, the project uses `ts-standard`, the TypeScript variant of
 [Standard Style](https://standardjs.com/#typescript),
@@ -125,7 +125,7 @@ The known rules are documented in the
 [typescript-eslint](https://github.com/typescript-eslint/typescript-eslint/tree/main/packages/eslint-plugin/docs/rules)
 project.
 
-{%- elsif isJavaScript == "true" %}
+{%- elsif isJavaScript %}
 
 As style, the project uses the
 [JavaScript Standard Style](https://standardjs.com/),
@@ -164,7 +164,7 @@ To manually fix compliance with the style guide (where possible):
 `% npm run fix
 
 > {{packageScopedName}}@{{releaseVersion}} fix
-> {% if isTypeScript == "true" %}ts-standard --fix src && {% endif %}standard --fix test
+> {% if isTypeScript %}ts-standard --fix src && {% endif %}standard --fix test
 ...
 `} </CodeBlock>
 
@@ -172,8 +172,8 @@ To manually fix compliance with the style guide (where possible):
 
 ## Documentation metadata
 
-{%- if packageUseApiExtractor == "true" or packageWebsiteConfig.useApiDocumenter == "true" %}
-{%- if isTypeScript == "true" %}
+{%- if useApiExtractor or websiteConfig.useApiDocumenter %}
+{%- if isTypeScript %}
 
 The documentation metadata utilises the
 [TSDoc](https://tsdoc.org) tags, without
@@ -181,7 +181,7 @@ explicit types, as they are provided by TypeScript.
 
 {%- endif %}
 {%- else %}
-{%- if isTypeScript == "true" %}
+{%- if isTypeScript %}
 
 The documentation metadata utilises the
 [TypeDoc](https://typedoc.org/guides/doccomments/) tags, without
@@ -198,7 +198,7 @@ of the `@category` or `@group` tags.
 
 :::
 
-{%- elsif isJavaScript == "true" %}
+{%- elsif isJavaScript %}
 
 The documentation metadata follows the [JSdoc](http://usejsdoc.org) tags.
 
@@ -221,7 +221,7 @@ TBD
 {%- endif %}
 {%- endif %}
 
-{%- if packageWebsiteConfig.skipTests != "true" %}
+{%- unless websiteConfig.skipTests %}
 
 ## Tests
 
@@ -240,7 +240,7 @@ npm run test
 
 <ProjectTestResults />
 
-{%- if packageWebsiteConfig.has100coverage == "true" %}
+{%- if websiteConfig.has100coverage %}
 
 ### Coverage tests
 
@@ -262,18 +262,18 @@ and `/* c8 ignore start */` `/* c8 ignore stop */` for
 {%- endif %}
 {%- endif %}
 
-{%- if packageConfig.skipCiTests != "true" %}
+{%- unless topConfig.skipCiTests %}
 
 ### Continuous Integration (CI)
 
-The module is {% if packageWebsiteConfig.has100coverage == "true" %}tested with 100% coverage and is{% endif %}
+The module is {% if websiteConfig.has100coverage %}tested with 100% coverage and is{% endif %}
 subject to CI testing on every push via
 [GitHub Actions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions), on Ubuntu,
-Windows and macOS, utilising node {{ packageConfig.githubActionsNodeVersions | join: ", " | replace_last: ", ", " and " }}.
+Windows and macOS, utilising node {{ topConfig.githubActionsNodeVersions | join: ", " | replace_last: ", ", " and " }}.
 
-{%- endif %}
+{%- endunless %}
 
-{%- if isTypeScript == "true" %}
+{%- if isTypeScript %}
 
 ## Tips & tricks
 

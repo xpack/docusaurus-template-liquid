@@ -11,7 +11,7 @@
 
 /**
 
-@defgroup micro-os-plus-{{packageName}} {{packageConfig.descriptiveName}}
+@defgroup micro-os-plus-{{packageName}} {{topConfig.descriptiveName}}
 
 @defgroup micro-os-plus-{{packageName}}-cpp-api C++ API
 @ingroup micro-os-plus-{{packageName}}

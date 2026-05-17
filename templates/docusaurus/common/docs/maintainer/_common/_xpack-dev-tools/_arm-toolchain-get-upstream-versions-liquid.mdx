@@ -9,7 +9,7 @@ import versionMinor from '@site/src/libs/versionMinor';
 ### Update to the latest Arm release
 
 - Download the new _Source code_ archive (such as
-<code>arm-gnu-toolchain-src-snapshot-{versionMajor()}.{versionMinor()}.rel{{packageWebsiteConfig.armSubRelease}}.tar.xz</code>) from
+<code>arm-gnu-toolchain-src-snapshot-{versionMajor()}.{versionMinor()}.rel{{websiteConfig.armSubRelease}}.tar.xz</code>) from
 [Arm GNU Toolchain Downloads](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads/)
 - Unpack the archive
 - The GCC version is within `gcc/gcc/BASE-VER`
@@ -17,13 +17,13 @@ import versionMinor from '@site/src/libs/versionMinor';
 - The GDB version is within `binutils-gdb--gdb/gdb/version.in`
 - The newlib version is within `newlib-cygwin/newlib/configure`; search for `VERSION=`
 - Download the latest **macOS (x86_64) hosted cross toolchains** archive (such as
-<code>arm-gnu-toolchain-{versionMajor()}.{versionMinor()}.rel{{packageWebsiteConfig.armSubRelease}}-darwin-arm64-{{packageWebsiteConfig.triplet}}.tar.xz</code>)
+<code>arm-gnu-toolchain-{versionMajor()}.{versionMinor()}.rel{{websiteConfig.armSubRelease}}-darwin-arm64-{{websiteConfig.triplet}}.tar.xz</code>)
 - Unpack the archive
-- Create a folder <code>build-assets/extras/{versionMajor()}.{versionMinor()}.rel{{packageWebsiteConfig.armSubRelease}}</code>
+- Create a folder <code>build-assets/extras/{versionMajor()}.{versionMinor()}.rel{{websiteConfig.armSubRelease}}</code>
 - Copy the file with the configurations
-(<code>{versionMajor()}.{versionMinor()}.rel{{packageWebsiteConfig.armSubRelease}}-darwin-x86_64-{{packageWebsiteConfig.triplet}}-manifest.txt</code>) to the new folder within extras
+(<code>{versionMajor()}.{versionMinor()}.rel{{websiteConfig.armSubRelease}}-darwin-x86_64-{{websiteConfig.triplet}}-manifest.txt</code>) to the new folder within extras
 - Download the manifest.txt with the individual source URLs
-(<code>arm-gnu-toolchain-src-snapshot-{versionMajor()}.{versionMinor()}.rel{{packageWebsiteConfig.armSubRelease}}-manifest.txt</code>)
+(<code>arm-gnu-toolchain-src-snapshot-{versionMajor()}.{versionMinor()}.rel{{websiteConfig.armSubRelease}}-manifest.txt</code>)
 - Copy to the new folder within extras
 
 :::info

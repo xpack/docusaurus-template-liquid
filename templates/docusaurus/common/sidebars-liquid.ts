@@ -2,27 +2,27 @@
 // Automatically generated from docusaurus-template-liquid/templates/docusaurus.
 
 import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
-{%- if packageConfig.hasCli == "true" %}
+{%- if topConfig.hasCli %}
 import cliSidebar from "./sidebar-cli";
 {%- endif %}
-{%- if packageWebsiteConfig.hasTypedocApi == "true" %}
+{%- if websiteConfig.hasTypedocApi %}
 import typedocSidebarItems from "./docs/api/typedoc-sidebar.cjs";
 {%- endif %}
-{%- if packageWebsiteConfig.hasToolsSidebar == "true" %}
+{%- if websiteConfig.hasToolsSidebar %}
 import toolsSidebar from './sidebars-tools.js';
 {%- endif %}
-{%- if packageWebsiteConfig.hasCustomGettingStartedSidebar == "true" %}
+{%- if websiteConfig.hasCustomGettingStartedSidebar %}
 import {customDocsGettingStartedSidebarCategory} from "./sidebar-docs-getting-started-custom";
 {%- endif %}
-{%- if packageWebsiteConfig.hasCustomUserSidebar == "true" %}
+{%- if websiteConfig.hasCustomUserSidebar %}
 import {customDocsUserSidebarCategory} from "./sidebar-docs-user-custom";
 {%- endif %}
-{%- if packageWebsiteConfig.hasCustomSidebar == "true" %}
+{%- if websiteConfig.hasCustomSidebar %}
 import {customDocsSidebar} from "./sidebar-docs-custom";
 {%- endif %}
-{%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
+{%- if websiteConfig.hasDoxygenDocusaurusApi %}
 import doxygenSidebarItems from './sidebar-category-doxygen.json';
-{%- elsif packageWebsiteConfig.hasTSDocDocusaurusApi == "true" %}
+{%- elsif websiteConfig.hasTSDocDocusaurusApi %}
 import tsdocSidebarItems from './sidebar-category-tsdoc.json';
 {%- endif %}
 
@@ -37,11 +37,11 @@ import tsdocSidebarItems from './sidebar-category-tsdoc.json';
  Create as many sidebars as you want.
  */
 const sidebars: SidebarsConfig = {
-{% if packageWebsiteConfig.hasCustomSidebar == "true" %}
+{% if websiteConfig.hasCustomSidebar %}
   docsSidebar: customDocsSidebar,
 {%- else %}
   docsSidebar: [
-{%- if packageWebsiteConfig.hasCustomGettingStartedSidebar == "true" %}
+{%- if websiteConfig.hasCustomGettingStartedSidebar %}
     customDocsGettingStartedSidebarCategory,
 {%- else %}
     {
@@ -50,11 +50,11 @@ const sidebars: SidebarsConfig = {
       label: 'Getting Started'
     },
 {%- endif %}
-{%- if packageConfig.isOrganizationWeb == "true" %}
+{%- if topConfig.isOrganisationWeb %}
     {
       type: 'doc',
       id: 'install/index',
-      label: '{% if packageWebsiteConfig.customInstallLabel %}{{packageWebsiteConfig.customInstallLabel}}{% else %}Installation Guides{% endif %}'
+      label: '{% if websiteConfig.customInstallLabel != "" %}{{websiteConfig.customInstallLabel}}{% else %}Installation Guides{% endif %}'
     },
     {
       type: 'doc',
@@ -87,14 +87,14 @@ const sidebars: SidebarsConfig = {
       label: 'Help Centre'
     },
 {%- else %}
-{%- if packageWebsiteConfig.skipInstallGuide != "true" %}
+{%- unless websiteConfig.skipInstallGuide %}
     {
       type: 'doc',
       id: 'install/index',
-      label: '{% if packageWebsiteConfig.customInstallLabel %}{{packageWebsiteConfig.customInstallLabel}}{% else %}Installation Guide{% endif %}'
+      label: '{% if websiteConfig.customInstallLabel != "" %}{{websiteConfig.customInstallLabel}}{% else %}Installation Guide{% endif %}'
     },
-{%- endif %}
-{%- if packageWebsiteConfig.hasCustomUserSidebar == "true" %}
+{%- endunless %}
+{%- if websiteConfig.hasCustomUserSidebar %}
     customDocsUserSidebarCategory,
 {%- else %}
     {
@@ -103,46 +103,46 @@ const sidebars: SidebarsConfig = {
       label: 'User\'s Guide'
     },
 {%- endif %}
-{%- if packageWebsiteConfig.skipContributorGuide != "true" %}
+{%- unless websiteConfig.skipContributorGuide %}
     {
       type: 'doc',
       id: 'developer/index',
       label: 'Contributor\'s Guide'
     },
-{%- endif %}
-{%- if packageWebsiteConfig.skipMaintainerGuide != "true" %}
+{%- endunless %}
+{%- unless websiteConfig.skipMaintainerGuide %}
     {
       type: 'doc',
       id: 'maintainer/index',
       label: 'Maintainer\'s Guide'
     },
-{%- endif %}
-{%- if packageConfig.showTestsResults == 'true' %}
+{%- endunless %}
+{%- if topConfig.showTestsResults %}
     {
       type: 'doc',
       id: 'tests/index',
       label: 'Tests results'
     },
 {%- endif %}
-{%- if packageWebsiteConfig.skipFaq != "true" %}
+{%- unless packageWebsiteConfig.skipFaq %}
     {
       type: 'doc',
       id: 'faq/index',
       label: 'FAQ'
     },
-{%- endif %}
+{%- endunless %}
     {
       type: 'doc',
       id: 'support/index',
       label: 'Help Centre'
     },
-{%- if packageWebsiteConfig.skipReleases != "true" %}
+{%- unless websiteConfig.skipReleases %}
     {
       type: 'doc',
       id: 'releases/index',
       label: 'Releases'
     },
-{%- endif %}
+{%- endunless %}
 {%- endif %}
     {
       type: 'category',
@@ -173,17 +173,17 @@ const sidebars: SidebarsConfig = {
   ],
 {%- endif %}
 
-{%- if packageConfig.showTestsResults == 'true' %}
+{%- if topConfig.showTestsResults %}
 
   testsSidebar: [{type: 'autogenerated', dirName: 'tests'}],
 {%- endif %}
 
-{%- if packageWebsiteConfig.hasToolsSidebar == "true" %}
+{%- if websiteConfig.hasToolsSidebar %}
 
   toolsSidebar,
 {%- endif %}
 
-{%- if packageWebsiteConfig.hasTypedocApi == "true" %}
+{%- if websiteConfig.hasTypedocApi %}
 
   typedocSidebar: [
     {
@@ -199,13 +199,13 @@ const sidebars: SidebarsConfig = {
   ],
 {%- endif %}
 
-{%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
+{%- if websiteConfig.hasDoxygenDocusaurusApi %}
 
   doxygenSidebar: [
     doxygenSidebarItems,
   ],
 
-{%- elsif packageWebsiteConfig.hasTSDocDocusaurusApi == "true" %}
+{%- elsif websiteConfig.hasTSDocDocusaurusApi %}
 
   tsdocSidebar: [
     tsdocSidebarItems,
@@ -213,7 +213,7 @@ const sidebars: SidebarsConfig = {
 
 {%- endif %}
 
-{%- if packageConfig.hasCli == "true" %}
+{%- if topConfig.hasCli %}
 
   cliSidebar,
 {%- endif %}

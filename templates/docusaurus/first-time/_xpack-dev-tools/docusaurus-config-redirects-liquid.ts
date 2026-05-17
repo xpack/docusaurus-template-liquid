@@ -25,7 +25,7 @@ export const redirects = {
     //     to: '/docs/newDoc2',
     //     from: ['/docs/oldDocFrom2019', '/docs/legacyDocFrom2016'],
     //   },
-{%- if packageConfig.isOrganizationWeb != "true" %}
+{%- unless topConfig.isOrganisationWeb %}
 
     {
       from: '/docs/developer-info',
@@ -40,7 +40,7 @@ export const redirects = {
       to: '/docs/user',
     }
 
-{%- endif %}
+{%- endunless %}
   ],
   createRedirects(existingPath) {
     console.log(existingPath);
@@ -59,7 +59,7 @@ export const redirects = {
     //   }
     //   return undefined; // Return a falsy value: no redirect created
     //   },
-{%- if packageConfig.isOrganizationWeb != "true" %}
+{%- unless topConfig.isOrganisationWeb %}
 
     if (existingPath.includes('/user-info')) {
       return [
@@ -75,6 +75,6 @@ export const redirects = {
       ];
     }
 
-{%- endif %}
+{%- endunless %}
   }
 }

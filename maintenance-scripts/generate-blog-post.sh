@@ -93,7 +93,7 @@ else
   version="${xpack_xpack_version}"
 fi
 
-post_relative_file_path="blog/$(date '+%Y-%m-%d')-${xpack_permalink_name:-${xpack_npm_package_name}}-v$(echo ${version} | tr '.' '-')-released.mdx"
+post_relative_file_path="blog/$(date '+%Y-%m-%d')-${xpack_top_config_permalink_name:-${xpack_package_name}}-v$(echo ${version} | tr '.' '-')-released.mdx"
 
 post_file_path="${website_folder_path}/${post_relative_file_path}"
 
@@ -103,9 +103,9 @@ post_file_path="${website_folder_path}/${post_relative_file_path}"
 #   exit 1
 # fi
 
-xpack_binaries_folder_path="${HOME}/Downloads/xpack-binaries/${xpack_permalink_name}"
+xpack_binaries_folder_path="${HOME}/Downloads/xpack-binaries/${xpack_top_config_permalink_name}"
 
-if [ "${xpack_npm_package_is_xpack_binary}" == "true" ]
+if [ "${xpack_is_xpack_binary}" ]
 then
   download_binaries "${xpack_binaries_folder_path}"
 

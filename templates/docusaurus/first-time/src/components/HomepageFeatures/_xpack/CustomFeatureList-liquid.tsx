@@ -19,7 +19,7 @@ export const FeatureList: FeatureItem[] = [
     Svg: require('@site/static/img/mosaic.svg').default,
     description: (
       <>
-{% if packageConfig.hasCli == "true" -%}
+{% if topConfig.hasCli -%}
         The CLI application is compatible with any shell, and can be utilized across multiple platforms (<b>Windows</b>, <b>macOS</b>, <b>GNU/Linux</b>).
 {% else -%}
         The module is compatible with <b>TypeScript</b> and <b>JavaScript</b> projects, and can be utilised across multiple platforms (<b>Windows</b>, <b>macOS</b>, <b>GNU/Linux</b>).
@@ -32,7 +32,7 @@ export const FeatureList: FeatureItem[] = [
     Svg: require('@site/static/img/check-badge.svg').default,
     description: (
       <>
-{% if packageConfig.hasCli == "true" -%}
+{% if topConfig.hasCli -%}
         Projects refer to this application via an explicitly versioned <b>dependency</b>. This ensures reproducibility, which is especially beneficial in <b>CI/CD</b> environments.
 {% else -%}
         Projects refer to this module via an explicitly versioned <b>dependency</b>. This ensures reproducibility, which is especially beneficial in <b>CI/CD</b> environments.
@@ -45,7 +45,7 @@ export const FeatureList: FeatureItem[] = [
     Svg: require('@site/static/img/globe.svg').default,
     description: (
       <>
-{% if packageConfig.hasCli == "true" -%}
+{% if topConfig.hasCli -%}
         The application can be installed with <b><Link to="https://docs.npmjs.com/cli/npm">npm</Link></b> from the <b>npmjs.com</b> public repository, just like millions of other packages.
 {% else -%}
         The module can be installed with <b><Link to="https://docs.npmjs.com/cli/npm">npm</Link></b> from the <b>npmjs.com</b> public repository, just like millions of other packages.

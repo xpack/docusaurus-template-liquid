@@ -160,7 +160,7 @@ skip_pages_array=("BEGIN")
 if [ "${is_xpack}" == "true" ]
 then
 
-  if [ "${xpack_is_organization_web}" == "true" ]
+  if [ "${xpack_top_config_is_organisation_web}" == "true" ]
   then
     skip_pages_array+=(\
       "docs/developer/_test-results.mdx" \
@@ -176,14 +176,14 @@ then
     )
   fi
 
-  if [ "${xpack_has_metadata_minimum}" != "true" ]
+  if [ "${xpack_website_config_has_metadata_minimum}" != "true" ]
   then
     skip_pages_array+=(\
       "docs/metadata/_common/_minimum-required.mdx" \
     )
   fi
 
-  if [ "${xpack_has_cli}" != "true" ]
+  if [ "${xpack_top_config_has_cli}" != "true" ]
   then
     skip_pages_array+=(\
       "docs/install/_common/_prerequisites-cli.mdx" \
@@ -199,14 +199,14 @@ then
     )
   fi
 
-  if [ "${xpack_has_policies}" != "true" ]
+  if [ "${xpack_website_config_has_policies}" != "true" ]
   then
     skip_pages_array+=(\
       "docs/user/policies/_common/_policies.mdx" \
     )
   fi
 
-  if [ "${xpack_skip_contributor_guide}" == "true" ]
+  if [ "${xpack_website_config_skip_contributor_guide}" == "true" ]
   then
     skip_pages_array+=(\
       "docs/developer/_common/_prerequisites.mdx" \
@@ -220,7 +220,7 @@ then
 
 elif [ "${is_xpack_dev_tools}" == "true" ]
 then
-  if [ "${xpack_is_organization_web}" == "true" ]
+  if [ "${xpack_top_config_is_organisation_web}" == "true" ]
   then
     skip_pages_array+=(\
       "blog/_common/_download-analytics.mdx" \
@@ -297,7 +297,7 @@ then
     )
   fi
 
-  if [ "${xpack_xpack_github_project_name}" == "xpack-build-box" ]
+  if [ "${xpack_github_project_name}" == "xpack-build-box" ]
   then
     skip_pages_array+=(\
       "docs/_common/_branches-details.mdx" \
@@ -330,7 +330,7 @@ then
   fi
 fi
 
-if [ "${xpack_has_custom_developer}" != "true" ]
+if [ "${xpack_website_config_has_custom_developer}" != "true" ]
 then
   skip_pages_array+=(\
     "docs/developer/_project/_content.mdx" \
@@ -346,7 +346,7 @@ else
   )
 fi
 
-if [ "${xpack_skip_contributor_guide}" == "true" ]
+if [ "${xpack_website_config_skip_contributor_guide}" == "true" ]
 then
   skip_pages_array+=(\
     "docs/developer/index.mdx" \
@@ -358,7 +358,7 @@ then
   )
 fi
 
-if [ "${xpack_has_custom_getting_started}" != "true" ]
+if [ "${xpack_website_config_has_custom_getting_started}" != "true" ]
 then
   skip_pages_array+=(\
     "docs/getting-started/_project/_content.mdx" \
@@ -383,7 +383,7 @@ else
   )
 fi
 
-if [ "${xpack_skip_install_guide}" == "true" ]
+if [ "${xpack_website_config_skip_install_guide}" == "true" ]
 then
   skip_pages_array+=(\
     "docs/_shared/_folders-hierarchies-linux.mdx" \
@@ -404,7 +404,7 @@ then
   )
 fi
 
-if [ "${xpack_skip_install_command}" == "true" ]
+if [ "${xpack_website_config_skip_install_command}" == "true" ]
 then
   skip_pages_array+=(\
     "docs/_shared/_folders-hierarchies-linux.mdx" \
@@ -423,7 +423,7 @@ then
   )
 fi
 
-if [ "${xpack_has_custom_install}" != "true" ]
+if [ "${xpack_website_config_has_custom_install}" != "true" ]
 then
   skip_pages_array+=(\
     "docs/install/_project/_content.mdx" \
@@ -440,7 +440,7 @@ else
   )
 fi
 
-if [ "${xpack_has_custom_maintainer}" != "true" ]
+if [ "${xpack_website_config_has_custom_maintainer}" != "true" ]
 then
   skip_pages_array+=(\
     "docs/maintainer/_project/_content.mdx" \
@@ -481,7 +481,7 @@ else
   )
 fi
 
-if [ "${xpack_has_custom_about}" != "true" ]
+if [ "${xpack_website_config_has_custom_about}" != "true" ]
 then
   skip_pages_array+=(\
     "docs/project/about/_project/_content.mdx" \
@@ -492,9 +492,9 @@ else
   )
 fi
 
-if [ "${xpack_has_custom_user}" != "true" ]
+if [ "${xpack_website_config_has_custom_user}" != "true" ]
 then
-  if [ "${xpack_npm_package_is_xpack_binary}" == "true" ]
+  if [ "${xpack_is_xpack_binary}" == "true" ]
   then
     skip_pages_array+=(\
       "docs/user/_project/_content.mdx" \
@@ -510,7 +510,7 @@ else
   )
 fi
 
-if [ "${xpack_has_custom_config_doxyfile}" == "true" ]
+if [ "${xpack_website_config_has_custom_config_doxyfile}" == "true" ]
 then
   skip_pages_array+=(\
     "doxygen/config.doxyfile" \
@@ -518,7 +518,7 @@ then
 fi
 
 
-if [ "${xpack_skip_releases}" == "true" ]
+if [ "${xpack_website_config_skip_releases}" == "true" ]
 then
   skip_pages_array+=(\
     "docs/releases/index.mdx" \
@@ -527,7 +527,7 @@ then
   )
 fi
 
-if [ "${xpack_skip_faq}" == "true" ]
+if [ "${xpack_website_config_skip_faq}" == "true" ]
 then
   skip_pages_array+=(\
     "docs/faq/index.mdx" \
@@ -545,7 +545,7 @@ then
   )
 fi
 
-if [ "${xpack_npm_package_is_xpack_binary}" != "true" ]
+if [ "${xpack_is_xpack_binary}" != "true" ]
 then
   skip_pages_array+=(\
     "blog/_common/_deprecation-notices-glib-2.27.mdx" \
@@ -561,7 +561,7 @@ then
   )
 fi
 
-if [ "${xpack_has_custom_homepage_features}" == "true" ]
+if [ "${xpack_website_config_has_custom_homepage_features}" == "true" ]
 then
   skip_pages_array+=(\
     "src/components/HomepageFeatures/FeatureList.tsx" \
@@ -572,7 +572,7 @@ else
   )
 fi
 
-if [ "${xpack_has_homepage_tools}" != "true" ]
+if [ "${xpack_website_config_has_homepage_tools}" != "true" ]
 then
   skip_pages_array+=(\
     "src/components/HomepageTools/styles.module.css" \
@@ -586,28 +586,28 @@ then
   )
 fi
 
-if [ "${xpack_has_custom_user_sidebar}" != "true" ]
+if [ "${xpack_website_config_has_custom_user_sidebar}" != "true" ]
 then
   skip_pages_array+=(\
     "sidebar-docs-user-custom.js" \
   )
 fi
 
-if [ "${xpack_has_custom_getting_started_sidebar}" != "true" ]
+if [ "${xpack_website_config_has_custom_getting_started_sidebar}" != "true" ]
 then
   skip_pages_array+=(\
     "sidebar-docs-getting-started-custom.ts" \
   )
 fi
 
-if [ "${xpack_skip_tests}" == "true" ]
+if [ "${xpack_website_config_skip_tests}" == "true" ]
 then
   skip_pages_array+=(\
     "docs/developer/_project/_test-results.mdx" \
   )
 fi
 
-if [ "${xpack_is_typescript}" == "false" ]
+if [ "${xpack_top_config_is_typescript}" != "true" ]
 then
   skip_pages_array+=(\
     "config/api-extractor-original.json" \

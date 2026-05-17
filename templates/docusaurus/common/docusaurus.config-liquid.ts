@@ -7,15 +7,15 @@ import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 // import logger from '@docusaurus/logger';
 import util from 'node:util';
-{% if packageConfig.hasCli == "true" -%}
+{% if topConfig.hasCli -%}
 import cliNavbar from './docusaurus-config-navbar-cli';
 {%- endif %}
-{%- if packageWebsiteConfig.hasCustomDocsNavbarItem == "true" %}
+{%- if websiteConfig.hasCustomDocsNavbarItem %}
 import { customDocsNavbarItem } from './navbar-docs-items';
 {%- endif %}
-{%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
+{%- if websiteConfig.hasDoxygenDocusaurusApi %}
 import doxygenApiMenu from './docusaurus-config-navbar-doxygen.json'
-{%- elsif packageWebsiteConfig.hasTSDocDocusaurusApi == "true" %}
+{%- elsif websiteConfig.hasTSDocDocusaurusApi %}
 import tsdocApiMenu from './docusaurus-config-navbar-tsdoc.json'
 {%- endif %}
 import { redirects } from './docusaurus-config-redirects';
@@ -32,17 +32,17 @@ const customFields = getCustomFields();
 console.log('customFields: ' + util.inspect(customFields));
 
 const actualBaseUrl = process.env.DOCUSAURUS_BASEURL ??
-  '{% if packageConfig.isWebPreview == "true" %}{{baseUrlPreview}}{% else %}{{baseUrl}}{% endif %}';
+  '{% if topConfig.isWebPreview %}{{baseUrlPreview}}{% else %}{{baseUrl}}{% endif %}';
 
 // ----------------------------------------------------------------------------
 
 const config: Config = {
-  title: '{% if packageWebsiteConfig.title %}{{packageWebsiteConfig.title}}{% else %}{{longXpackName}}{% endif %}' +
+  title: '{% if websiteConfig.title != "" %}{{websiteConfig.title}}{% else %}{{longXpackName}}{% endif %}' +
     ((process.env.DOCUSAURUS_IS_PREVIEW === 'true') ? ' (preview)' : ''),
-{%- if packageWebsiteConfig.tagline %}
-  tagline: '{{packageWebsiteConfig.tagline}}',
-{%- elsif  isXpackBinary == "true" and packageConfig.upstreamDescriptiveName %}
-  tagline: 'A binary distribution of {{packageConfig.upstreamDescriptiveName}}',
+{%- if websiteConfig.tagline != '' %}
+  tagline: '{{websiteConfig.tagline}}',
+{%- elsif isXpackBinary and topConfig.upstreamDescriptiveName != '' %}
+  tagline: 'A binary distribution of {{topConfig.upstreamDescriptiveName}}',
 {%- else %}
   tagline: '{{packageDescription}}',
 {%- endif %}
@@ -101,7 +101,7 @@ const config: Config = {
         disableInDev: false,
       },
     ],
-{%- if packageWebsiteConfig.hasTypedocApi == "true" %}
+{%- if websiteConfig.hasTypedocApi %}
     [
       'docusaurus-plugin-typedoc',
       {
@@ -148,7 +148,7 @@ const config: Config = {
     './src/plugins/SelectReleasesPlugin',
   ],
 
-{%- if packageWebsiteConfig.skipAlgolia != "true" %}
+{%- unless websiteConfig.skipAlgolia %}
 
   themes: [
     // [
@@ -159,7 +159,7 @@ const config: Config = {
     //   }
     // ],
   ],
-{%- endif %}
+{%- endunless %}
 
   presets: [
     [
@@ -212,12 +212,12 @@ const config: Config = {
         debug: true,
 
         theme: {
-{%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
+{%- if websiteConfig.hasDoxygenDocusaurusApi %}
           customCss: [
             './src/css/custom.css',
             './src/css/custom-doxygen2docusaurus.css'
           ],
-{%- elsif packageWebsiteConfig.hasTSDocDocusaurusApi == "true" %}
+{%- elsif websiteConfig.hasTSDocDocusaurusApi %}
           customCss: [
             './src/css/custom.css',
             './src/css/custom-tsdoc2docusaurus.css'
@@ -291,17 +291,17 @@ const config: Config = {
     metadata: [
       {
         name: 'keywords',
-{%- if packageWebsiteConfig.metadataKeywords %}
-        content: '{{packageWebsiteConfig.metadataKeywords}}'
-{%- elsif githubProjectOrganization == "xpack-dev-tools" %}
-        content: 'xpack, binary, development, tools, reproducibility, {% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}'
+{%- if websiteConfig.metadataKeywords != '' %}
+        content: '{{websiteConfig.metadataKeywords}}'
+{%- elsif githubProjectOrganization == 'xpack-dev-tools' %}
+        content: 'xpack, binary, development, tools, reproducibility, {% if topConfig.permalinkName != "" %}{{topConfig.permalinkName}}{% else %}{{packageName}}{% endif %}'
 {%- else %}
-        content: 'xpack, {% if packageConfig.permalinkName %}{{packageConfig.permalinkName}}{% else %}{{packageName}}{% endif %}'
+        content: 'xpack, {% if topConfig.permalinkName != "" %}{{topConfig.permalinkName}}{% else %}{{packageName}}{% endif %}'
 {%- endif %}
       }
     ],
     navbar: {
-      title: {% if githubProjectOrganization == "xpack" %}'The xPack Project'{% elsif githubProjectOrganization == "xpack-dev-tools" %}'The xPack Binary Tools'{% elsif githubProjectOrganization == "micro-os-plus" %}'The µOS++ Project'{% else %}???{% endif %},
+      title: '{% if githubProjectOrganization == "xpack" %}The xPack Project{% elsif githubProjectOrganization == "xpack-dev-tools" %}The xPack Binary Tools{% elsif githubProjectOrganization == "micro-os-plus" %}The µOS++ Project{% else %}???{% endif %}',
 
       logo: {
         alt: '{% if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}xPack{% elsif githubProjectOrganization == "micro-os-plus" %}µOS++{% else %}???{% endif %} Logo',
@@ -311,11 +311,11 @@ const config: Config = {
       items: [
         {
           to: '/',
-          label: {% if packageConfig.isOrganizationWeb == "true" %}'{{githubProjectOrganization}}'{% else %}{% if packageConfig.permalinkName %}'{{packageConfig.permalinkName}}'{% else %}'{{packageName}}'{% endif %}{% endif %},
+          label: {% if topConfig.isOrganisationWeb %}'{{githubProjectOrganization}}'{% else %}{% if topConfig.permalinkName != '' %}'{{topConfig.permalinkName}}'{% else %}'{{packageName}}'{% endif %}{% endif %},
           className: 'header-home-link',
           position: 'left'
         },
-{%- if packageWebsiteConfig.hasCustomDocsNavbarItem == "true" %}
+{%- if websiteConfig.hasCustomDocsNavbarItem %}
         customDocsNavbarItem,
 {%- else %}
         {
@@ -328,44 +328,44 @@ const config: Config = {
               label: 'Getting Started',
               to: '/docs/getting-started'
             },
-{%- if packageWebsiteConfig.skipInstallGuide != "true" %}
+{%- unless websiteConfig.skipInstallGuide %}
             {
-              label: '{% if packageWebsiteConfig.customInstallLabel %}{{packageWebsiteConfig.customInstallLabel}}{% else %}Installation Guide{% if packageWebsiteConfig.usePluralGuides == "true" %}s{% endif %}{% endif %}',
+              label: '{% if websiteConfig.customInstallLabel != "" %}{{websiteConfig.customInstallLabel}}{% else %}Installation Guide{% if websiteConfig.usePluralGuides %}s{% endif %}{% endif %}',
               to: '/docs/install'
             },
-{%- endif %}
+{%- endunless %}
             {
-              label: 'User\'s Guide{% if packageWebsiteConfig.usePluralGuides == "true" %}s{% endif %}',
+              label: 'User\'s Guide{% if websiteConfig.usePluralGuides %}s{% endif %}',
               to: '/docs/user'
             },
-{%- if packageWebsiteConfig.skipContributorGuide != "true" %}
+{%- unless websiteConfig.skipContributorGuide %}
             {
-              label: 'Contributor\'s Guide{% if packageWebsiteConfig.usePluralGuides == "true" %}s{% endif %}',
+              label: 'Contributor\'s Guide{% if websiteConfig.usePluralGuides %}s{% endif %}',
               to: '/docs/developer'
             },
-{%- endif %}
-{%- if packageWebsiteConfig.skipMaintainerGuide != "true" %}
+{%- endunless %}
+{%- unless websiteConfig.skipMaintainerGuide %}
             {
-              label: 'Maintainer\'s Guide{% if packageWebsiteConfig.usePluralGuides == "true" %}s{% endif %}',
+              label: 'Maintainer\'s Guide{% if websiteConfig.usePluralGuides %}s{% endif %}',
               to: '/docs/maintainer'
             },
-{%- endif %}
-{%- if packageWebsiteConfig.skipFaq != "true" %}
+{%- endunless %}
+{%- unless websiteConfig.skipFaq %}
             {
               label: 'FAQ',
               to: '/docs/faq'
             },
-{%- endif %}
+{%- endunless %}
             {
               label: 'Help Centre',
               to: '/docs/support'
             },
-{%- if packageWebsiteConfig.skipReleases != "true" %}
+{%- unless websiteConfig.skipReleases %}
             {
               label: 'Releases',
               to: '/docs/releases'
             },
-{%- endif %}
+{%- endunless %}
             {
               label: 'About',
               to: '/docs/project/about'
@@ -373,19 +373,19 @@ const config: Config = {
           ],
         },
 {%- endif %}
-{%- if packageConfig.hasCli == "true" %}
+{%- if topConfig.hasCli %}
         cliNavbar,
 {%- endif %}
-{%- if packageWebsiteConfig.hasTypedocApi == "true" %}
+{%- if websiteConfig.hasTypedocApi %}
         {
           to: '/docs/api',
           label: 'API',
           position: 'left',
         },
-{%- elsif packageWebsiteConfig.hasTSDocDocusaurusApi == "true" %}
+{%- elsif websiteConfig.hasTSDocDocusaurusApi %}
         tsdocApiMenu,
-{%- elsif packageWebsiteConfig.hasDoxygenReference == "true" %}
-{%- if packageWebsiteConfig.hasDoxygenDocusaurusApi == "true" %}
+{%- elsif websiteConfig.hasDoxygenReference %}
+{%- if websiteConfig.hasDoxygenDocusaurusApi %}
         doxygenApiMenu,
 {%- else %}
         {
@@ -395,7 +395,7 @@ const config: Config = {
         },
 {%- endif %}
 {%- endif %}
-{%- if packageWebsiteConfig.hasToolsSidebar == "true" %}
+{%- if websiteConfig.hasToolsSidebar %}
         {
           type: 'docSidebar',
           label: 'Tools',
@@ -439,7 +439,7 @@ const config: Config = {
               label: `{{githubProjectName}} project`,
               href: `https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/`,
             },
-{%- if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}
+{%- if githubProjectOrganization == 'xpack' or githubProjectOrganization == 'xpack-dev-tools' %}
             {
               label: 'xpack org',
               href: 'https://github.com/xpack/',
@@ -448,7 +448,7 @@ const config: Config = {
               label: 'xpack-dev-tools org',
               href: 'https://github.com/xpack-dev-tools/',
             },
-{%- elsif githubProjectOrganization == "micro-os-plus" %}
+{%- elsif githubProjectOrganization == 'micro-os-plus' %}
             {
               label: 'micro-os-plus org',
               href: 'https://github.com/micro-os-plus/',
@@ -460,13 +460,13 @@ const config: Config = {
 {%- endif %}
           ]
         },
-{%- if isXpackBinary == "true" %}
+{%- if isXpackBinary %}
         {
           label: `${customFields.xpackVersion}`,
           position: 'right',
           href: `https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/releases/tag/v${customFields.xpackVersion}`,
         },
-{%- elsif isNpmPublished == "true" %}
+{%- elsif isNpmPublished %}
         {
           label: `${customFields.releaseVersion}`,
           position: 'right',
@@ -485,7 +485,7 @@ const config: Config = {
               label: 'Getting Started',
               to: '/docs/getting-started',
             },
-{%- if packageWebsiteConfig.skipReleases != "true" %}
+{%- unless websiteConfig.skipReleases %}
             {
               label: 'Releases',
               to: '/docs/releases',
@@ -495,7 +495,7 @@ const config: Config = {
               label: 'Support',
               to: '/docs/support',
             },
-{%- endif %}
+{%- endunless %}
             {
               label: 'About',
               to: '/docs/project/about',
@@ -513,7 +513,7 @@ const config: Config = {
               label: 'GitHub Discussions',
               href: 'https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/discussions',
             },
-{%- if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}
+{%- if githubProjectOrganization == 'xpack' or githubProjectOrganization == 'xpack-dev-tools' %}
             {
               label: 'Stack Overflow',
               href: 'https://stackoverflow.com/questions/tagged/xpack',
@@ -526,7 +526,7 @@ const config: Config = {
               label: 'X/Twitter',
               href: 'https://twitter.com/xpack_project',
             },
-{%- elsif githubProjectOrganization == "micro-os-plus" %}
+{%- elsif githubProjectOrganization == 'micro-os-plus' %}
             {
               label: 'Stack Overflow',
               href: 'https://stackoverflow.com/questions/tagged/micro-os-plus',
@@ -553,7 +553,7 @@ const config: Config = {
               label: 'GitHub {{githubProjectName}} project',
               href: 'https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/',
             },
-{%- if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}
+{%- if githubProjectOrganization == 'xpack' or githubProjectOrganization == 'xpack-dev-tools' %}
             {
               label: 'GitHub xpack org',
               href: 'https://github.com/xpack/',
@@ -581,7 +581,7 @@ const config: Config = {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
     },
-{%- if packageWebsiteConfig.skipAlgolia != "true" %}
+{%- unless websiteConfig.skipAlgolia %}
     // https://docusaurus.io/docs/search#using-algolia-docsearch
     // https://docsearch.algolia.com/docs/docsearch-v3/
     algolia: {
@@ -622,7 +622,7 @@ const config: Config = {
       // Optional: whether the insights feature is enabled or not on Docsearch (`false` by default)
       insights: false,
     },
-{%- endif %}
+{%- endunless %}
   } satisfies Preset.ThemeConfig,
 
   // TODO: find out how to disable cascade CSSs.

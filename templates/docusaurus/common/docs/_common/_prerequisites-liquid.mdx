@@ -8,8 +8,8 @@ import CodeBlock from '@theme/CodeBlock';
 ## Prerequisites
 
 **{{packageScopedName}}** is
-{%- if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}
-a portable Node.js {% if isNpmBinary == "true" %}project{% else %}module{% endif %};
+{%- if githubProjectOrganization == 'xpack' or githubProjectOrganization == 'xpack-dev-tools' %}
+a portable Node.js {% if isNpmBinary %}project{% else %}module{% endif %};
 {%- elsif githubProjectOrganization == "micro-os-plus" %}
 an xpm package that provides a C++ source code library;
 {%- endif %}
@@ -23,7 +23,7 @@ The prerequisites are:
 - node >= {props.nodeVersion || 'N.N.N'}
 - npm
 
-{% if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}
+{% if githubProjectOrganization == 'xpack' or githubProjectOrganization == 'xpack-dev-tools' %}
 To ensure compatibility with older node versions, it is preferable to revert to an older one:
 
 <CodeBlock language="console"> {

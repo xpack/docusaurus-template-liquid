@@ -56,7 +56,7 @@ Pull Requests back to the `{{branchDevelopment}}` branch.
 
 ## Add links for development
 
-{%- if isXpack == "true" %}
+{%- if isXpack %}
 
 During development, it is convenient to maintain a writable instance of the
 library to enable changes in parallel with the parent project.
@@ -75,7 +75,7 @@ And in the projects referring it:
 xpm link {{packageScopedName}}
 ```
 
-{%- elsif isNpmBinary == "true" %}
+{%- elsif isNpmBinary %}
 
 During development, it is convenient to maintain a writable instance of the
 source code to enable changes in parallel with the parent project.

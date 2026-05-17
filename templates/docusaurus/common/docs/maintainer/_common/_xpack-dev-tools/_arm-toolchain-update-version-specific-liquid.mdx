@@ -16,22 +16,22 @@ import versionMinor from '@site/src/libs/versionMinor';
 With a Git client:
 
 - Check out the upstream branch mentioned in the release notes
-  (such as <code>users/ARM/binutils-{{packageWebsiteConfig.binutilsVersionMajor}}_{{packageWebsiteConfig.binutilsVersionMinor}}-branch</code>)
+  (such as <code>users/ARM/binutils-{{websiteConfig.binutilsVersionMajor}}_{{websiteConfig.binutilsVersionMinor}}-branch</code>)
 - **Push** it to origin with the same name
 - Enable a filter on the current branch
 - Identify the commit ID from release notes or manifest.txt (search back in time)
-- Add a tag such as <code>binutils-{{packageWebsiteConfig.binutilsVersionMajor}}.{{packageWebsiteConfig.binutilsVersionMinor}}-{{packageWebsiteConfig.triplet}}-{versionMajor()}.{versionMinor()}.rel{{packageWebsiteConfig.armSubRelease}}</code>
+- Add a tag such as <code>binutils-{{websiteConfig.binutilsVersionMajor}}.{{websiteConfig.binutilsVersionMinor}}-{{websiteConfig.triplet}}-{versionMajor()}.{versionMinor()}.rel{{websiteConfig.armSubRelease}}</code>
 - **Push** the tag to origin
 - Check the tag at https://github.com/xpack-dev-tools/binutils-gdb/tags/
 
 Similarly for GDB:
 
 - Check out the branch mentioned in the release notes
-  (such as <code>gdb-{{packageWebsiteConfig.gdbVersionMajor}}-branch</code>)
+  (such as <code>gdb-{{websiteConfig.gdbVersionMajor}}-branch</code>)
 - **Push** it to origin with the same name
 - Enable a filter on the current branch
 - Identify the commit ID from release notes or manifest.txt (search back in time)
-- Add a tag such as <code>gdb-{{packageWebsiteConfig.gdbVersionMajor}}-{{packageWebsiteConfig.triplet}}-{versionMajor()}.{versionMinor()}.rel{{packageWebsiteConfig.armSubRelease}}</code>
+- Add a tag such as <code>gdb-{{websiteConfig.gdbVersionMajor}}-{{websiteConfig.triplet}}-{versionMajor()}.{versionMinor()}.rel{{websiteConfig.armSubRelease}}</code>
 - **Push** the tag to origin
 - Check the tag at https://github.com/xpack-dev-tools/binutils-gdb/tags/
 
@@ -44,8 +44,8 @@ With a Git client:
 - **Push** it to origin with the same name
 - Enable a filter on the current branch
 - Identify the commit ID from release notes or manifest.txt (search back in time)
-- Create a branch like <code>arm-{versionMajor()}-{{packageWebsiteConfig.triplet}}-{versionMajor()}.{versionMinor()}.rel{{packageWebsiteConfig.armSubRelease}}-xpack</code>
-- Create a tag like <code>arm-{versionMajor()}-{{packageWebsiteConfig.triplet}}-{versionMajor()}.{versionMinor()}.rel{{packageWebsiteConfig.armSubRelease}}</code>
+- Create a branch like <code>arm-{versionMajor()}-{{websiteConfig.triplet}}-{versionMajor()}.{versionMinor()}.rel{{websiteConfig.armSubRelease}}-xpack</code>
+- Create a tag like <code>arm-{versionMajor()}-{{websiteConfig.triplet}}-{versionMajor()}.{versionMinor()}.rel{{websiteConfig.armSubRelease}}</code>
 - **Push** the tag to origin
 - Check the tag at https://github.com/xpack-dev-tools/gcc/tags/
 - Cherry-pick the `system.h: do not define abort() on mingw` commit
@@ -61,7 +61,7 @@ With a Git client:
 - **Push** it to origin with the same name
 - Enable a filter on the current branch
 - Identify the commit ID from release notes or manifest.txt (search back in time)
-- Create a tag like <code>newlib-{{packageWebsiteConfig.newlibVersion}}-{{packageWebsiteConfig.triplet}}-{versionMajor()}.{versionMinor()}.rel{{packageWebsiteConfig.armSubRelease}}</code>
+- Create a tag like <code>newlib-{{websiteConfig.newlibVersion}}-{{websiteConfig.triplet}}-{versionMajor()}.{versionMinor()}.rel{{websiteConfig.armSubRelease}}</code>
 - **Push** the tag to origin
 - Check the tag at https://github.com/xpack-dev-tools/newlib-cygwin/tags/
 
@@ -76,5 +76,5 @@ Check the release notes and update the `libgmp`, `libisl`, `libmpfr`, `libmpc`, 
 ### Check configure options
 
 Verify if the configure options utilised in
-the <code>{versionMajor()}.{versionMinor()}.rel{{packageWebsiteConfig.armSubRelease}}-darwin-x86_64-{{packageWebsiteConfig.triplet}}-manifest.txt</code> file
+the <code>{versionMajor()}.{versionMinor()}.rel{{websiteConfig.armSubRelease}}-darwin-x86_64-{{websiteConfig.triplet}}-manifest.txt</code> file
 are utilised in the build scripts.

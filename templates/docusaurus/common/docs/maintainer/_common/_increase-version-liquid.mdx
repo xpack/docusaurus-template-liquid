@@ -9,7 +9,7 @@ As required by npm projects, this one also utilises [SemVer](https://semver.org)
 
 - Determine the next version (such as <code>{{releaseVersion}}</code>)
 - Update the version in the top `package.json` file
-{%- if releaseSubversion != "" %}
+{%- if releaseSubversion != '' %}
 - Use the new version, suffixed by `.pre`,
 such as <code>{{releaseVersion}}.pre</code>.
 {%- else %}

@@ -5,14 +5,14 @@
 
 ## The project history
 
-{%- if githubProjectOrganization == "xpack" or githubProjectOrganization == "xpack-dev-tools" %}
+{%- if githubProjectOrganization == 'xpack' or githubProjectOrganization == 'xpack-dev-tools' %}
 
-The **{{preferredName}}** history is presented
+The **{{topConfig.preferredName}}** history is presented
 on a separate [History](/docs/project/history/) page.
 
 {%- elsif githubProjectOrganization == "micro-os-plus" %}
 
-The {{packageConfig.descriptiveName}} history is presented
+The {{topConfig.descriptiveName}} history is presented
 on a separate [History](/docs/project/history/) page.
 
 {%- endif %}

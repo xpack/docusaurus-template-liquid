@@ -16,7 +16,7 @@ import ProjectTroubleshootingWindows from '../_project/_troubleshooting-windows.
 
 ## Installation
 
-{%- if packageConfig.permalinkName == 'xpm' %}
+{%- if topConfig.permalinkName == 'xpm' %}
 
 :::caution
 
@@ -33,7 +33,7 @@ The package is available as
 [`{{packageScopedName}}`](https://www.npmjs.com/package/{{packageScopedName}}/)
 from the public [`npmjs`](https://www.npmjs.com) repository;
 it may be added as a
-{% if packageConfig.hasCli != "true" %}dependency{% else %}development dependency{% endif %} to any **npm**
+{% unless topConfig.hasCli %}dependency{% else %}development dependency{% endunless %} to any **npm**
 project or it may be installed into the user's global environment.
 
 ### Project installation
@@ -42,20 +42,20 @@ The command to install the
 **latest** available version of **{{packageScopedName}}** as a development dependency in an **npm** project is:
 
 ```sh
-npm install {{packageScopedName}}@latest{% if packageConfig.hasCli == "true" %} --save-dev{% endif %}
+npm install {{packageScopedName}}@latest{% if topConfig.hasCli %} --save-dev{% endif %}
 ```
 
 For a **specific version**, use the explicit version numbers:
 
 <CodeBlock language="sh"> {
-`npm install {{packageScopedName}}@{{releaseVersion}}{% if packageConfig.hasCli == "true" %} --save-dev{% endif %}
+`npm install {{packageScopedName}}@{{releaseVersion}}{% if topConfig.hasCli %} --save-dev{% endif %}
 `} </CodeBlock>
 
-{%- if isXpackBinary == "true" or packageConfig.hasCli == "true" %}
+{%- if isXpackBinary or topConfig.hasCli %}
 
 ### Global installation
 
-Since the {% if isXpackBinary == "true" %}package provides executables{% elsif packageConfig.hasCli == "true" %}package includes command-line tools{% endif %}, it may also
+Since the {% if isXpackBinary %}package provides executables{% elsif topConfig.hasCli %}package includes command-line tools{% endif %}, it may also
 be installed globally and utilised in any project.
 
 ```sh
@@ -80,15 +80,15 @@ does not require administrative rights.
 The result of installing **{{packageScopedName}}** is a set of files in the `%APPDATA%\npm` folder:
 
 ```txt
-C:\>dir "%APPDATA%"\npm\{{packageWebsiteConfig.programName}}*
+C:\>dir "%APPDATA%"\npm\{{websiteConfig.programName}}*
  Volume in drive C has no label.
  Volume Serial Number is B02D-925C
 
  Directory of C:\Users\ilg\AppData\Roaming\npm
 
-29/07/2024  07:24               397 {{packageWebsiteConfig.programName}}
-29/07/2024  07:24               329 {{packageWebsiteConfig.programName}}.cmd
-29/07/2024  07:24               821 {{packageWebsiteConfig.programName}}.ps1
+29/07/2024  07:24               397 {{websiteConfig.programName}}
+29/07/2024  07:24               329 {{websiteConfig.programName}}.cmd
+29/07/2024  07:24               821 {{websiteConfig.programName}}.ps1
                3 File(s)          1,547 bytes
                0 Dir(s)  39,088,439,296 bytes free
 ```
@@ -98,7 +98,7 @@ prerequisites section, you should
 already have this path configured and the programme should start normally:
 
 <CodeBlock language="console"> {
-`C:\>{{packageWebsiteConfig.programName}} --version
+`C:\>{{websiteConfig.programName}} --version
 {{releaseVersion}}
 `} </CodeBlock>
 
@@ -113,14 +113,14 @@ in the previous section, you should
 already have **npm** correctly configured to utilise a location in the home folder.
 
 <CodeBlock language="console"> {
-`% which {{packageWebsiteConfig.programName}}
-/Users/ilg/.nvm/versions/node/${props.nodeVersion}/bin/{{packageWebsiteConfig.programName}}
+`% which {{websiteConfig.programName}}
+/Users/ilg/.nvm/versions/node/${props.nodeVersion}/bin/{{websiteConfig.programName}}
 `} </CodeBlock>
 
-To test if **{{packageWebsiteConfig.programName}}** starts:
+To test if **{{websiteConfig.programName}}** starts:
 
 <CodeBlock language="console"> {
-`% {{packageWebsiteConfig.programName}} --version
+`% {{websiteConfig.programName}} --version
 {{releaseVersion}}
 `} </CodeBlock>
 
@@ -169,7 +169,7 @@ but if you executed the `install-nvm-node-npm-xpm.sh` scripts described
 in the previous section, you should
 already have **npm** correctly configured to utilise a location in the home folder.
 
-{%- if packageConfig.permalinkName == 'xpm' %}
+{%- if topConfig.permalinkName == 'xpm' %}
 
 :::note
 
@@ -180,12 +180,12 @@ added in the 0.6.2 release of xpm.
 
 {%- endif %}
 
-To test if {{packageWebsiteConfig.programName}} starts:
+To test if {{websiteConfig.programName}} starts:
 
 <CodeBlock language="console"> {
-`$ which {{packageWebsiteConfig.programName}}
-/home/ilg/.nvm/versions/node/${props.nodeVersion}/bin/{{packageWebsiteConfig.programName}}
-$ {{packageWebsiteConfig.programName}} --version
+`$ which {{websiteConfig.programName}}
+/home/ilg/.nvm/versions/node/${props.nodeVersion}/bin/{{websiteConfig.programName}}
+$ {{websiteConfig.programName}} --version
 {{releaseVersion}}
 `} </CodeBlock>
 
@@ -209,7 +209,7 @@ The command to remove **{{packageScopedName}}** from the global user environment
 npm uninstall --location=global {{packageScopedName}}
 ```
 
-{%- if isXpackBinary == "true" %}
+{%- if isXpackBinary %}
 
 <CommonNoAdministrativeRights />
 
@@ -218,10 +218,10 @@ npm uninstall --location=global {{packageScopedName}}
 ## npx
 
 If, for any reason, you decide not to install **{{packageScopedName}}**, you can still
-benefit from it by utilising the `npx` command, as a trampoline to start **{{packageWebsiteConfig.programName}}**:
+benefit from it by utilising the `npx` command, as a trampoline to start **{{websiteConfig.programName}}**:
 
 <CodeBlock language="console"> {
-`$ npx --package {{packageScopedName}} -- {{packageWebsiteConfig.programName}} --version
+`$ npx --package {{packageScopedName}} -- {{websiteConfig.programName}} --version
 {{releaseVersion}}
 `} </CodeBlock>
 
