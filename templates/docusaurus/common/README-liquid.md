@@ -9,7 +9,7 @@ The folder was created with:
 npx create-docusaurus website classic --typescript
 ```
 
-{%- if isTypeScript %}
+{%- if topConfig.isTypescript %}
 
 ## docusaurus-plugin-typedoc
 

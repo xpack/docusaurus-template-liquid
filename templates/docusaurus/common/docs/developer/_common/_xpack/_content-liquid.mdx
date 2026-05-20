@@ -18,7 +18,7 @@ import ProjectStyleExceptions from '../_project/_style-exceptions.mdx';
 
 {/* ------------------------------------------------------------------------ */}
 
-{%- if isJavaScript %}
+{%- if topConfig.isJavascript %}
 
 This project is currently written in JavaScript, but a rewrite in
 TypeScript is planned.
@@ -46,7 +46,7 @@ npm run compile-watch
 
 ## Language standard compliance
 
-{%- if isTypeScript %}
+{%- if topConfig.isTypescript %}
 
 The current version is compiled with TypeScript {{packageDependenciesTypescriptVersion}}:
 
@@ -67,7 +67,7 @@ For more details on how to configure `tsconfig.json`, please see:
 
 - [TSConfig](https://www.typescriptlang.org/tsconfig/)
 
-{%- elsif isJavaScript %}
+{%- elsif topConfig.isJavascript %}
 
 The module uses ECMAScript 6 class definitions and modules.
 
@@ -77,7 +77,7 @@ TBD
 
 {%- endif %}
 
-{%- if useTypeScriptEslint %}
+{%- if topConfig.useTypescriptEslint %}
 
 ## Style
 
@@ -105,11 +105,11 @@ Known and accepted exceptions:
 The project uses [Prettier](https://prettier.io) to format the code.
 {%- endif %}
 
-{%- elsif useStandard %}
+{%- elsif topConfig.useStandard %}
 
 ## Standard style
 
-{%- if isTypeScript %}
+{%- if topConfig.isTypescript %}
 
 As style, the project uses `ts-standard`, the TypeScript variant of
 [Standard Style](https://standardjs.com/#typescript),
@@ -125,7 +125,7 @@ The known rules are documented in the
 [typescript-eslint](https://github.com/typescript-eslint/typescript-eslint/tree/main/packages/eslint-plugin/docs/rules)
 project.
 
-{%- elsif isJavaScript %}
+{%- elsif topConfig.isJavascript %}
 
 As style, the project uses the
 [JavaScript Standard Style](https://standardjs.com/),
@@ -164,7 +164,7 @@ To manually fix compliance with the style guide (where possible):
 `% npm run fix
 
 > {{packageScopedName}}@{{releaseVersion}} fix
-> {% if isTypeScript %}ts-standard --fix src && {% endif %}standard --fix test
+> {% if topConfig.isTypescript %}ts-standard --fix src && {% endif %}standard --fix test
 ...
 `} </CodeBlock>
 
@@ -172,8 +172,8 @@ To manually fix compliance with the style guide (where possible):
 
 ## Documentation metadata
 
-{%- if useApiExtractor or websiteConfig.useApiDocumenter %}
-{%- if isTypeScript %}
+{%- if topConfig.useApiExtractor or websiteConfig.useApiDocumenter %}
+{%- if topConfig.isTypescript %}
 
 The documentation metadata utilises the
 [TSDoc](https://tsdoc.org) tags, without
@@ -181,7 +181,7 @@ explicit types, as they are provided by TypeScript.
 
 {%- endif %}
 {%- else %}
-{%- if isTypeScript %}
+{%- if topConfig.isTypescript %}
 
 The documentation metadata utilises the
 [TypeDoc](https://typedoc.org/guides/doccomments/) tags, without
@@ -198,7 +198,7 @@ of the `@category` or `@group` tags.
 
 :::
 
-{%- elsif isJavaScript %}
+{%- elsif topConfig.isJavascript %}
 
 The documentation metadata follows the [JSdoc](http://usejsdoc.org) tags.
 
@@ -260,7 +260,7 @@ and `/* c8 ignore start */` `/* c8 ignore stop */` for
 <ProjectCoverageExceptions />
 
 {%- endif %}
-{%- endif %}
+{%- endunless %}
 
 {%- unless topConfig.skipCiTests %}
 
@@ -273,7 +273,7 @@ Windows and macOS, utilising node {{ topConfig.githubActionsNodeVersions | join:
 
 {%- endunless %}
 
-{%- if isTypeScript %}
+{%- if topConfig.isTypescript %}
 
 ## Tips & tricks
 

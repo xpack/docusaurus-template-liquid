@@ -58,7 +58,7 @@ import CommonContent from './_common/_content.mdx';
 [![GitHub package.json version](https://img.shields.io/github/package-json/v/{{githubProjectOrganization}}/{{githubProjectName}}?color=blue)](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/package.json)
 [![NPM Version](https://img.shields.io/npm/v/{% if packageScope != "" %}%40{{packageScope}}%2F{% endif %}{{packageName}}?color=blue)](https://www.npmjs.com/package/{{packageScopedName}}/)
 {%- endif %}
-{%- if isTypeScript or isJavaScript %}
+{%- if topConfig.isTypescript or topConfig.isJavascript %}
 {%- unless topConfig.skipCiTests %}
 [![CI on Push](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions/workflows/test-ci.yml/badge.svg)](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions/workflows/test-ci.yml)
 {%- endunless %}
@@ -68,13 +68,13 @@ import CommonContent from './_common/_content.mdx';
 {%- unless topConfig.skipCiTests %}
 [![CI on Push](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions/workflows/test-ci.yml/badge.svg)](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions/workflows/test-ci.yml)
 {%- endunless %}
-{%- if isTypeScript %}
+{%- if topConfig.isTypescript %}
 {%- if topConfig.useEslint %}
 [![TypeScript ESLint](https://img.shields.io/badge/TypeScript_ESLint-3178C6?style=flat&logo=typescript&logoColor=white)](https://typescript-eslint.io/)
 {%- else %}
 [![TS-Standard - TypeScript Standard Style Guide](https://badgen.net/badge/code%20style/ts-standard/blue?icon=typescript)](https://github.com/standard/ts-standard/)
 {%- endif %}
-{%- elsif isJavaScript %}
+{%- elsif topConfig.isJavascript %}
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen)](https://standardjs.com)
 {%- endif %}
 [![licence](https://img.shields.io/github/license/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/LICENSE)

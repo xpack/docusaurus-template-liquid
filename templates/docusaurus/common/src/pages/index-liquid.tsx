@@ -34,7 +34,7 @@ import InstallWithCopy from '@site/src/components/InstallWithCopy';
 {%- assign platforms = websiteConfig.platforms | default: '' %}
 {%- endif %}
 
-{%- if isNpmBinary %}
+{%- if isNpmExecutable %}
 {%- assign platforms = "win32-x64,darwin-x64,linux-x64" %}
 {%- endif %}
 {%- assign platforms_array = platforms | split: "," %}
@@ -57,7 +57,7 @@ function HomepageHeader() {
       <div className="container">
         <Heading as="h1" className="hero__title">{siteConfig.title}</Heading>
         <p className="hero__subtitle">{siteConfig.tagline}
-{%- if platforms != '' or isNpmBinary %}
+{%- if platforms != '' or isNpmExecutable %}
         <span className="margin-left-platforms">
 {%- if isWindows %}
           <span className="tagline-platform-windows"></span>

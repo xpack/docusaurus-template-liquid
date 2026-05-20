@@ -5,15 +5,15 @@
 
 ### Prepare the release
 
-{% if isTypeScript -%}
+{% if topConfig.isTypescript -%}
 - Terminate all running tasks (**Terminal** → **Terminate Task...**)
 {% endif -%}
 - Switch to the `{{branchDevelopment}}` branch
-{% if isTypeScript or isJavaScript -%}
+{% if topConfig.isTypescript or topConfig.isJavascript -%}
 - `npm run fix`
 {% endif -%}
 - If there are changes, **commit** all changes to the `{{branchDevelopment}}` branch
-{% if isTypeScript or isJavaScript -%}
+{% if topConfig.isTypescript or topConfig.isJavascript -%}
 - `npm run test`
 {% endif -%}
 - Check the latest commits `npm run git-log`
