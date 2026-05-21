@@ -104,10 +104,15 @@ function generate_website_commons()
 
     name="$(basename "$(pwd)")"
 
-    top_config="$(json -f "package.json" -o json-0 topConfig)"
+    if [ ! -f "config/top-templates.json" ]
+    then
+      echo "${name} has no config/top-templates.json..."
+      return
+    fi
+    top_config="$(json -f "config/top-templates.json" -o json-0)"
     if [ -z "${top_config}" ]
     then
-      echo "${name} has no topConfig..."
+      echo "${name} has no valid config/top-templates.json..."
       return
     fi
 
@@ -137,90 +142,98 @@ function generate_website_commons()
 
     if [ -d "website" ]
     then
-      website_config="$(json -f "website/package.json" -o json-0 websiteConfig)"
 
-      if [ ! -z "${website_config}" ]
+      if [ ! -f "website/config/website-templates.json" ]
       then
-        (
-          cd website
-
-          # -------------------------------------------------------------------
-          # Custom actions.
-
-          # if [ ! -d "docs/project" ]
-          # then
-          #   run_verbose mkdir -pv docs/project/about docs/project/history
-          #   run_verbose cp docs/about/_more-intro.mdx docs/project/about
-          #   run_verbose cp docs/about/_website.mdx docs/project/about
-          #   run_verbose cp docs/about/_history.mdx docs/project/history
-          # fi
-
-          # if [ ! -f "docs/project/history/_history.mdx" ]
-          # then
-          #   run_verbose cp docs/about/_history.mdx docs/project/history
-          # fi
-
-          # run_verbose rm -rf docs/about
-
-          # if [ -f "docs/faq/_project-content.mdx" ]
-          # then
-          #   run_verbose chmod +w "docs/faq/_project-content.mdx"
-          #   run_verbose mkdir "docs/faq/_project"
-          #   run_verbose mv "docs/faq/_project-content.mdx" "docs/faq/_project/_content.mdx"
-          # fi
-
-          # if [ -f "docs/project/history/_project-content.mdx" ]
-          # then
-          #   run_verbose chmod +w "docs/project/history/_project-content.mdx"
-          #   run_verbose mkdir "docs/project/history/_project"
-          #   run_verbose mv "docs/project/history/_project-content.mdx" "docs/project/history/_project/_content.mdx"
-          # fi
-
-          # if [ -f "docs/user/_project-content.mdx" ]
-          # then
-          #   run_verbose chmod +w "docs/user/_project-content.mdx"
-          #   run_verbose mkdir "docs/user/_project"
-          #   run_verbose mv "docs/user/_project-content.mdx" "docs/user/_project/_content.mdx"
-          # fi
-
-          # if [ -f "docs/maintainer/_content.mdx" ]
-          # then
-          #   run_verbose chmod +w docs/maintainer/_content.mdx
-          #   run_verbose rm docs/maintainer/_content.mdx
-          # fi
-
-          run_verbose rm -f "static/img/components-256.png"
-          run_verbose rm -f "docs/getting-started/_project/_more.mdx"
-          if [ -d "docs/_shared" ]
-          then
-            run_verbose mv "docs/_shared" "docs/_project"
-          fi
-
-          run_verbose rm -f "docs/install/_project/_automatic-install-quick-test.mdx"
-          run_verbose rm -f "docs/install/_project/_manual-install-quick-test.mdx"
-
-          # -------------------------------------------------------------------
-
-          # npm run deep-clean
-          run_verbose npm install
-          run_verbose npm run npm-link-helpers
-
-          run_verbose npm run generate-website-commons
-
-          # In case the docusaurus deps have changed.
-          run_verbose npm run deep-clean
-          run_verbose npm install
-          run_verbose npm run npm-link-helpers
-
-          run_verbose npm run clear
-          run_verbose npm run build
-
-          run_verbose mkdir -pv "${stamps_folder_path}"
-          run_verbose touch "${stamps_folder_path}/${git_folder_name}"
-        )
-      else
-        echo "${name} has no websiteConfig..."
+        echo "${name} has no website/config/website-templates.json..."
+        return
       fi
+
+      website_config="$(json -f "website/config/website-templates.json" -o json-0)"
+
+      if [ -z "${website_config}" ]
+      then
+        echo "${name} has no valid website/config/website-templates.json..."
+        return
+      fi
+
+      (
+        cd website
+
+        # -------------------------------------------------------------------
+        # Custom actions.
+
+        # if [ ! -d "docs/project" ]
+        # then
+        #   run_verbose mkdir -pv docs/project/about docs/project/history
+        #   run_verbose cp docs/about/_more-intro.mdx docs/project/about
+        #   run_verbose cp docs/about/_website.mdx docs/project/about
+        #   run_verbose cp docs/about/_history.mdx docs/project/history
+        # fi
+
+        # if [ ! -f "docs/project/history/_history.mdx" ]
+        # then
+        #   run_verbose cp docs/about/_history.mdx docs/project/history
+        # fi
+
+        # run_verbose rm -rf docs/about
+
+        # if [ -f "docs/faq/_project-content.mdx" ]
+        # then
+        #   run_verbose chmod +w "docs/faq/_project-content.mdx"
+        #   run_verbose mkdir "docs/faq/_project"
+        #   run_verbose mv "docs/faq/_project-content.mdx" "docs/faq/_project/_content.mdx"
+        # fi
+
+        # if [ -f "docs/project/history/_project-content.mdx" ]
+        # then
+        #   run_verbose chmod +w "docs/project/history/_project-content.mdx"
+        #   run_verbose mkdir "docs/project/history/_project"
+        #   run_verbose mv "docs/project/history/_project-content.mdx" "docs/project/history/_project/_content.mdx"
+        # fi
+
+        # if [ -f "docs/user/_project-content.mdx" ]
+        # then
+        #   run_verbose chmod +w "docs/user/_project-content.mdx"
+        #   run_verbose mkdir "docs/user/_project"
+        #   run_verbose mv "docs/user/_project-content.mdx" "docs/user/_project/_content.mdx"
+        # fi
+
+        # if [ -f "docs/maintainer/_content.mdx" ]
+        # then
+        #   run_verbose chmod +w docs/maintainer/_content.mdx
+        #   run_verbose rm docs/maintainer/_content.mdx
+        # fi
+
+        run_verbose rm -f "static/img/components-256.png"
+        run_verbose rm -f "docs/getting-started/_project/_more.mdx"
+        if [ -d "docs/_shared" ]
+        then
+          run_verbose mv "docs/_shared" "docs/_project"
+        fi
+
+        run_verbose rm -f "docs/install/_project/_automatic-install-quick-test.mdx"
+        run_verbose rm -f "docs/install/_project/_manual-install-quick-test.mdx"
+
+        # -------------------------------------------------------------------
+
+        # npm run deep-clean
+        run_verbose npm install
+        run_verbose npm run npm-link-helpers
+
+        run_verbose npm run generate-website-commons
+
+        # In case the docusaurus deps have changed.
+        run_verbose npm run deep-clean
+        run_verbose npm install
+        run_verbose npm run npm-link-helpers
+
+        run_verbose npm run clear
+        run_verbose npm run build
+
+        run_verbose mkdir -pv "${stamps_folder_path}"
+        run_verbose touch "${stamps_folder_path}/${git_folder_name}"
+      )
 
     else
       echo "${name} has no website..."

@@ -66,11 +66,16 @@ function update_and_publish()
 
     name="$(basename "$(pwd)")"
 
-    top_config="$(json -f "package.json" -o json-0 topConfig)"
+    if [ ! -f "config/top-templates.json" ]
+    then
+      echo "${name} has no config/top-templates.json..."
+      return
+    fi
+    top_config="$(json -f "config/top-templates.json" -o json-0)"
     if [ -z "${top_config}" ]
     then
-      echo "${name} has no topConfig..."
-      continue
+      echo "${name} has no valid config/top-templates.json..."
+      return
     fi
 
     has_empty_master="$(echo "${top_config}" | json hasEmptyMaster)"
@@ -107,17 +112,24 @@ function update_and_publish()
     if [ -d "website" ]
     then
 
-      website_config="$(json -f "website/package.json" -o json-0 websiteConfig)"
-
-      if [ ! -z "${website_config}" ]
+      if [ ! -f "website/config/website-templates.json" ]
       then
-        run_verbose git add website README.md
-        run_verbose git commit -m "website: re-generate commons" || true
-        # run_verbose git commit -m "website: rework with _project" || true
-        # run_verbose git commit -m "website: re-generate descriptive & permalink names" || true
-      else
-        echo "${name} has no websiteConfig..."
+        echo "${name} has no website/config/website-templates.json..."
+        return
       fi
+
+      website_config="$(json -f "website/config/website-templates.json" -o json-0)"
+
+      if [ -z "${website_config}" ]
+      then
+        echo "${name} has no valid website/config/website-templates.json..."
+        return
+      fi
+
+      run_verbose git add website README.md
+      run_verbose git commit -m "website: re-generate commons" || true
+      # run_verbose git commit -m "website: rework with _project" || true
+      # run_verbose git commit -m "website: re-generate descriptive & permalink names" || true
     else
       echo "${name} has no website..."
     fi
