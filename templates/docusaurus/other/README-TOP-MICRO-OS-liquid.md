@@ -21,7 +21,7 @@ The Docusaurus source code for the {{longXpackName}} website.
 
 ## Project documentation
 
-For information on how to {% if websiteConfig.skipInstallCommand != "true" %}install and {% endif %}use this project, please refer to the
+For information on how to {% if packageWebsiteConfig.skipInstallCommand == false %}install and {% endif %}use this project, please refer to the
 [project website]({{packageHomepage}}).
 
 ## Project source

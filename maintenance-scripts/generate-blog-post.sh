@@ -105,7 +105,7 @@ post_file_path="${website_folder_path}/${post_relative_file_path}"
 
 xpack_binaries_folder_path="${HOME}/Downloads/xpack-binaries/${xpack_top_config_permalink_name}"
 
-if [ "${xpack_is_xpack_binary}" ]
+if [ "${xpack_is_xpack_binary}" == "true" ]
 then
   download_binaries "${xpack_binaries_folder_path}"
 
