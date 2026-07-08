@@ -182,9 +182,9 @@ However, for support, please utilise GitHub Discussions whenever possible.
 ## X/Twitter
 
 New releases and other announcements are posted on
-[X/Twitter](https://twitter.com/xpack_project).
+[X/Twitter](https://x.com/{% if githubProjectOrganization == 'xpack' or githubProjectOrganization == 'xpack-dev-tools' %}xpack_project{% elsif githubProjectOrganization == 'micro-os-plus' %}micro_os_plus{% endif %}/).
 
-Follow the hashtag `#xpack_project` for the latest updates.
+Follow the hashtag `#{% if githubProjectOrganization == 'xpack' or githubProjectOrganization == 'xpack-dev-tools' %}xpack_project{% elsif githubProjectOrganization == 'micro-os-plus' %}micro_os_plus{% endif %}` for the latest updates.
 
 ## Use of private email
 
