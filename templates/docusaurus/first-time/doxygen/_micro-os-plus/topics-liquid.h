@@ -1,5 +1,5 @@
 /*
- * This file is part of the µOS++ project (https://micro-os-plus.github.com).
+ * This file is part of the µOS++ project (https://micro-os-plus.github.io).
  * Copyright (c) 2021-2026 Liviu Ionescu. All rights reserved.
  *
  * Permission to use, copy, modify, and/or distribute this software for any
@@ -7,6 +7,10 @@
  *
  * If a copy of the license was not distributed with this file, it can be
  * obtained from https://opensource.org/licenses/mit.
+ */
+
+/*
+ * Note: the order is important, it also gives the order in the sidebar.
  */
 
 /**

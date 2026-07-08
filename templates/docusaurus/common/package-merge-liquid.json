@@ -63,8 +63,12 @@
     "doxygen": "del-cli static/doxygen doxygen/xml; (cd doxygen; doxygen config.doxyfile)",
     "browse-doxygen": "open-cli static/doxygen/index.html",
 {%- if websiteConfig.hasDoxygenDocusaurusApi %}
-    "convert-doxygen": "doxygen2docusaurus",
+    "convert-doxygen": "doxygen2docusaurus{% if hasBranchWebpreview %} --id website{% endif %}",
     "generate-website-doxygen": "npm run doxygen && npm run convert-doxygen",
+{%- if hasBranchWebpreview %}
+    "convert-webpreview-doxygen": "doxygen2docusaurus --id webpreview",
+    "generate-webpreview-doxygen": "npm run doxygen && npm run convert-webpreview-doxygen",
+{%- endif %}
 {%- endif %}
     "check-urls": "blc {{packageHomepage}} --recursive --ordered --filter-level 2 --exclude 'https://twitter.com*'",
 {%- endif %}
@@ -72,7 +76,7 @@
     "compile-tsdoc": "del-cli --force tsdoc/dist && tsc --project config/tsconfig-api-extractor.json",
     "api-extractor-init": "api-extractor init",
     "api-extractor": "api-extractor run --local --verbose",
-    "patch-doc-model-json": "bash config/patch-doc-model-json.sh tsdoc/doc-model/website.api.json website @xpack/xpm-lib",
+    "patch-doc-model-json": "bash config/patch-doc-model-json.sh tsdoc/doc-model/website.api.json website {{packageScopedName}}",
     "api-documenter": "del-cli --force tsdoc/markdown && api-documenter markdown --input-folder tsdoc/doc-model --output-folder tsdoc/markdown",
     "tsdoc2docusaurus": "tsdoc2docusaurus --id website",
     "generate-website-tsdoc": "npm run compile-tsdoc && npm run api-extractor && npm run patch-doc-model-json && npm run api-documenter && npm run tsdoc2docusaurus",

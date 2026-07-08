@@ -5,7 +5,7 @@
 {%- endif  %}
 [![license](https://img.shields.io/github/license/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/LICENSE)
 
-{%- if topConfig.isOrganisationWeb  %}
+{%- if topConfig.isOrganizationWeb %}
 
 # The {{longXpackName}} website source
 
@@ -26,7 +26,7 @@ For information on how to {% if packageWebsiteConfig.skipInstallCommand == false
 
 ## Project source
 
-{%- if isNpmPublished  %}
+{%- if isNpmPublished %}
 
 The source code of the current release is available on
 GitHub as [{{githubProjectOrganization}}/{{githubProjectName}}](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}),
@@ -46,7 +46,7 @@ Unless otherwise stated, the original content is released under the terms of the
 with all rights reserved to
 [Liviu Ionescu](https://github.com/ilg-ul).
 
-{%- if packageScopedName == '@micro-os-plus/micro-test-plus' %}
+{%- if packageScopedName == "@micro-os-plus/micro-test-plus" %}
 
 The code from Boost UT is released under the terms of the
 [Boost Software License, Version 1.0](https://www.boost.org/LICENSE_1_0.txt).
