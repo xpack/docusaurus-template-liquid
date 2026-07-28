@@ -3,9 +3,21 @@
 
 ### Tests details
 
+```console
+> xpm run test --config native-cmake-sys-release
+> ctest -V --test-dir build/native-cmake-sys-release
+...
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+```
+
 #### sample-test
 
-The [sample-test.cpp](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/xpack/tests/src/sample-test.cpp)
+The [sample/src/main.cpp](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/xpack/tests/src/sample/src/main.cpp)
 file is a straightforward application designed to demonstrate
 how to utilise some of the primitives available in the library.
 
@@ -20,7 +32,7 @@ test 1
 
 #### unit-test
 
-The [unit-test.cpp](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/xpack/tests/src/unit-test.cpp)
+The [unit/src/main.cpp](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/xpack/tests/src/unit/src/main.cpp)
 file is an exhaustive test designed to validate that all the
 library functions operate as expected. It uses the
 [µTest++](https://github.com/micro-os-plus/micro-test-plus-xpack)
