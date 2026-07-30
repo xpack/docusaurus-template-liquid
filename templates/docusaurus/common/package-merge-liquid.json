@@ -1,5 +1,5 @@
 {
-  "DO NOT EDIT": "Automatically generated from docusaurus-template-liquid/templates/docusaurus",
+  "DO NOT EDIT": "Automatically generated from template file: {{fromFilePath}}",
   "name": "website",
   "version": "0.0.0",
   "private": true,
@@ -45,7 +45,7 @@
     "@microsoft/api-extractor": "^7.55.2",
 {%- endif %}
 {%- if websiteConfig.hasDoxygenDocusaurusApi %}
-    "@xpack/doxygen2docusaurus": "^2.2.0",
+    "@xpack/doxygen2docusaurus": "^2.2.2",
 {%- endif %}
     "@xpack/docusaurus-template-liquid": "github:xpack/docusaurus-template-liquid",
     "@xpack/npm-packages-helper": "github:xpack/npm-packages-helper",
