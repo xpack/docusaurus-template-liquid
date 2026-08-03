@@ -98,7 +98,7 @@
 {%- if githubProjectOrganization == 'micro-os-plus' %}
     "generate-website-releases-from-tags": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-releases-for-tags.sh --{{githubProjectOrganization}}",
 {%- endif %}
-    "generate-website-blog-post": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-blog-post.sh --{{githubProjectOrganization}}",
+    "generate-website-blog-post": "node node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-blog-post.mjs --{{githubProjectOrganization}}",
     "generate-dependencies-details": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-dependencies-details.sh --{{githubProjectOrganization}}"
   },
   "browserslist": {
