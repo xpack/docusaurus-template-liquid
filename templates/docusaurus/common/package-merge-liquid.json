@@ -99,7 +99,7 @@
     "generate-website-releases-from-tags": "node node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-releases-for-tags.mjs --{{githubProjectOrganization}}",
 {%- endif %}
     "generate-website-blog-post": "node node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-blog-post.mjs --{{githubProjectOrganization}}",
-    "generate-dependencies-details": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-dependencies-details.sh --{{githubProjectOrganization}}"
+    "generate-dependencies-details": "node node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-dependencies-details.mjs --{{githubProjectOrganization}}"
   },
   "browserslist": {
     "production": [
