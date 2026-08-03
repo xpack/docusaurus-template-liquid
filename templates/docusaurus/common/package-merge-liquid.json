@@ -52,7 +52,7 @@
     "typescript": "~5.9.3"
   },
   "scripts": {
-    "generate-website-commons": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-website-commons.sh --{{githubProjectOrganization}}",
+    "generate-website-commons": "node node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-website-commons.mjs --{{githubProjectOrganization}}",
     "npm-outdated": "npm outdated",
     "npm-install": "npm install",
     "npm-link-helpers": "npm link @xpack/docusaurus-template-liquid @xpack/npm-packages-helper",
