@@ -61,7 +61,7 @@ trap 'trap_handler ERROR $LINENO $? ${tmp_file_path}; return 255' ERR
 # -----------------------------------------------------------------------------
 
 # $1 = *.git
-function remove-web-tags()
+function remove_web_tags()
 {
   (
     local from_folder_path="$(dirname "${1}")"
@@ -117,7 +117,7 @@ then
 
   for file_path in "${packages_folder_path}"/*/.git "${www_folder_path}"/*/.git
   do
-    remove-web-tags "${file_path}"
+    remove_web_tags "${file_path}"
   done
 elif [ "${is_xpack_dev_tools}" == "true" ]
 then
@@ -128,7 +128,7 @@ then
 
   for file_path in "${xpacks_folder_path}"/*/.git "${www_folder_path}"/*/.git "${xpack_dev_tools_github_folder_path}/xpack-build-box.git/.git"
   do
-    remove-web-tags "${file_path}"
+    remove_web_tags "${file_path}"
   done
 else
   echo "Unsupported configuration..."
