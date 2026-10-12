@@ -22,6 +22,10 @@ import HeadTitle from '@site/src/components/HeadTitle';
 import styles from './index.module.css';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 
+{%- if websiteConfig.hasHomepageExample %}
+import HomepageExample from '@site/src/components/HomepageExample';
+{%- endif %}
+
 {%- if websiteConfig.hasHomepageTools %}
 
 import HomepageTools from '@site/src/components/HomepageTools';
@@ -97,6 +101,10 @@ export default function Home(): JSX.Element {
 {%- if websiteConfig.hasHomepageTools %}
         <hr className="hero__hr"/>
         <HomepageTools />
+{%- endif %}
+{%- if websiteConfig.hasHomepageExample %}
+        <hr className="hero__hr"/>
+        <HomepageExample />
 {%- endif %}
       </main>
     </Layout>
