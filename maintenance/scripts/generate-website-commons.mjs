@@ -45,16 +45,18 @@ const scriptPath = path.resolve(process.argv[1]);
 const scriptName = path.basename(scriptPath);
 const scriptFolderPath = path.dirname(scriptPath);
 
+// debugger
+
 // Runs as
-// .../website/node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-website-commons.mjs
+// .../website/node_modules/@xpack/docusaurus-template-liquid/maintenance/scripts/generate-website-commons.mjs
 const nodeModulesFolderPath = path.dirname(
-  path.dirname(path.dirname(scriptFolderPath)),
-);
+  path.dirname(path.dirname(path.dirname(scriptFolderPath))));
 const npmHelperMaintenanceScriptsPath = path.join(
   nodeModulesFolderPath,
   "@xpack",
   "npm-packages-helper",
-  "maintenance-scripts",
+  "maintenance", 
+  "scripts",
 );
 
 const {
@@ -73,7 +75,7 @@ const {
 // ----------------------------------------------------------------------------
 
 const templatesFolderPath = path.join(
-  path.dirname(scriptFolderPath),
+  path.dirname(path.dirname(scriptFolderPath)),
   "templates",
 );
 
@@ -588,9 +590,9 @@ if (!options.isXpack && !options.isXpackDevTools && !options.isMicroOsPlus) {
 }
 
 // The script is invoked via the following website npm script:
-// "generate-website-commons": "node node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-website-commons.mjs"
+// "generate-website-commons": "node node_modules/@xpack/docusaurus-template-liquid/maintenance/scripts/generate-website-commons.mjs"
 const currentFolderPath = path.dirname(
-  path.dirname(path.dirname(path.dirname(scriptFolderPath))),
+  path.dirname(path.dirname(path.dirname(path.dirname(scriptFolderPath)))),
 );
 
 let websiteFolderPath;

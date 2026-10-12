@@ -40,10 +40,10 @@ export script_folder_name="$(basename "${script_folder_path}")"
 argv="$@"
 
 # Runs as
-# .../xpack.github/packages/docusaurus-template-liquid.git/maintenance-scripts/websites-update-and-publish.sh
-helper_folder_path="$(dirname "${script_folder_path}")/node_modules/@xpack/npm-packages-helper"
+# .../xpack.github/packages/docusaurus-template-liquid.git/maintenance/scripts/websites-update-and-publish.sh
+helper_folder_path="$(dirname $(dirname $(dirname "${script_folder_path}")))/node_modules/@xpack/npm-packages-helper"
 
-source "${helper_folder_path}/maintenance-scripts/scripts-helper-source.sh"
+source "${helper_folder_path}/maintenance/scripts/scripts-helper-source.sh"
 
 # Parse --init, --dry-run, --xpack, --xpack-dev-tools
 # and leave variables in the environment.
@@ -178,9 +178,9 @@ function update_and_publish()
 # -----------------------------------------------------------------------------
 
 # Runs as
-# .../xpack.github/packages/docusaurus-template-liquid.git/maintenance-scripts/websites-update-and-publish.sh
+# .../xpack.github/packages/docusaurus-template-liquid.git/maintenance/scripts/websites-update-and-publish.sh
 
-my_projects_folder_path="$(dirname $(dirname $(dirname $(dirname "${script_folder_path}"))))"
+my_projects_folder_path="$(dirname $(dirname $(dirname $(dirname $(dirname "${script_folder_path}")))))"
 
 if [ "${is_xpack}" == "true" ]
 then

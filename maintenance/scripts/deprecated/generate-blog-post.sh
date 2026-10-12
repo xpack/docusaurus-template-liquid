@@ -53,10 +53,10 @@ export script_folder_name="$(basename "${script_folder_path}")"
 argv="$@"
 
 # Rus as
-# .../node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-blog-post.sh",
-helper_folder_path="$(dirname $(dirname "${script_folder_path}"))/npm-packages-helper"
+# .../node_modules/@xpack/docusaurus-template-liquid/maintenance/scripts/generate-blog-post.sh",
+helper_folder_path="$(dirname $(dirname $(dirname "${script_folder_path}")))/npm-packages-helper"
 
-source "${helper_folder_path}/maintenance-scripts/scripts-helper-source.sh"
+source "${helper_folder_path}/maintenance/scripts/scripts-helper-source.sh"
 
 # Parse options
 # and leave variables in the environment.

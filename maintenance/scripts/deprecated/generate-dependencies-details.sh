@@ -69,9 +69,9 @@ done
 # -----------------------------------------------------------------------------
 
 # The script is invoked from the website via the following npm script:
-# "website-generate-commons": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-website-commons.sh",
+# "website-generate-commons": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance/scripts/generate-website-commons.sh",
 
-current_folder_path="$(dirname $(dirname $(dirname $(dirname "${script_folder_path}"))))"
+current_folder_path="$(dirname $(dirname $(dirname $(dirname $(dirname "${script_folder_path}")))))"
 if [ "$(basename "${current_folder_path}")" == "website" ]
 then
   website_folder_path="${current_folder_path}"
@@ -93,9 +93,9 @@ else
   # project_folder_path="${current_folder_path}"
 fi
 
-templates_folder_path="$(dirname "${script_folder_path}")/templates"
+templates_folder_path="$(dirname $(dirname "${script_folder_path}"))/templates"
 
-# source "${current_folder_path}/node_modules/@xpack/npm-packages-helper/maintenance-scripts/compute-context.sh"
+# source "${current_folder_path}/node_modules/@xpack/npm-packages-helper/maintenance/scripts/compute-context.sh"
 
 # -----------------------------------------------------------------------------
 

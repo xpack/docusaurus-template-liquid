@@ -40,10 +40,10 @@ export script_folder_name="$(basename "${script_folder_path}")"
 argv="$@"
 
 # Runs as
-# .../xpack.github/packages/docusaurus-template-liquid.git/maintenance-scripts/websites-import-releases.sh
-helper_folder_path="$(dirname "${script_folder_path}")/node_modules/@xpack/npm-packages-helper"
+# .../xpack.github/packages/docusaurus-template-liquid.git/maintenance/scripts/import-releases.sh
+helper_folder_path="$(dirname $(dirname $(dirname "${script_folder_path}")))/npm-packages-helper"
 
-source "${helper_folder_path}/maintenance-scripts/scripts-helper-source.sh"
+source "${helper_folder_path}/maintenance/scripts/scripts-helper-source.sh"
 
 # Parse --init
 # and leave variables in the environment.
@@ -51,42 +51,19 @@ parse_options "$@"
 
 # -----------------------------------------------------------------------------
 
-# templates_folder_path="$(dirname "${script_folder_path}")/templates"
-tmp_file_path="$(mktemp -t top_commons.XXXXX)"
-
-# Used to enforce an exit code of 255, required by xargs.
-trap 'trap_handler ERROR $LINENO $? ${tmp_file_path}; return 255' ERR
-
-# -----------------------------------------------------------------------------
-
 # Runs as
-# .../xpack.github/packages/docusaurus-template-liquid.git/maintenance-scripts/projects-generate-top-commons.sh
+# .../xpack.github/packages/npm-packages-helper.git/maintenance/scripts/projects-generate-top-commons.sh
 
-my_projects_folder_path="$(dirname $(dirname $(dirname $(dirname "${script_folder_path}"))))"
+my_projects_folder_path="$(dirname $(dirname $(dirname $(dirname $(dirname $(dirname $(dirname $(dirname $(dirname $(dirname "${script_folder_path}"))))))))))"
 stamps_folder_name="$(echo "${script_name}" | sed -e 's|\.sh$||')"
 
 xpack_dev_tools_github_folder_path="${my_projects_folder_path}/xpack-dev-tools.github"
 export stamps_folder_path="${xpack_dev_tools_github_folder_path}/stamps/${stamps_folder_name}"
-export xpacks_folder_path="${xpack_dev_tools_github_folder_path}/xPacks"
+# export xpacks_folder_path="${xpack_dev_tools_github_folder_path}/xPacks"
 
-for folder_path in "${xpacks_folder_path}"/*/.git
-do
-  git_folder_name="$(basename "$(dirname ${folder_path})")"
+project_folder_path="$(dirname $(dirname $(dirname $(dirname $(dirname "${script_folder_path}")))))"
 
-  if [ -f "${stamps_folder_path}/${git_folder_name}" ]
-  then
-    echo "${git_folder_name} already generated..."
-    continue
-  fi
-
-  import_releases "$(dirname ${folder_path})"
-
-  run_verbose mkdir -pv "${stamps_folder_path}"
-  run_verbose touch "${stamps_folder_path}/${git_folder_name}"
-
-done
-
-rm -rf "${tmp_file_path}"
+import_releases "${project_folder_path}"
 
 echo
 echo "'${script_name} ${argv}' done"

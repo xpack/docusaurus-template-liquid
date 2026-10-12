@@ -31,15 +31,15 @@ const scriptName = path.basename(scriptPath);
 const scriptFolderPath = path.dirname(scriptPath);
 
 // Runs as
-// .../website/node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/import-releases.mjs
+// .../website/node_modules/@xpack/docusaurus-template-liquid/maintenance/scripts/import-releases.mjs
 const nodeModulesFolderPath = path.dirname(
-  path.dirname(path.dirname(scriptFolderPath)),
+  path.dirname(path.dirname(path.dirname(scriptFolderPath))),
 );
 const npmHelperMaintenanceScriptsPath = path.join(
   nodeModulesFolderPath,
   "@xpack",
   "npm-packages-helper",
-  "maintenance-scripts",
+  "maintenance/scripts",
 );
 
 const { parseOptions, importReleases } = await import(
@@ -58,9 +58,9 @@ const argv = process.argv.slice(2);
 parseOptions(argv);
 
 // Runs as
-// .../website/node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/import-releases.mjs
+// .../website/node_modules/@xpack/docusaurus-template-liquid/maintenance/scripts/import-releases.mjs
 const projectFolderPath = path.dirname(
-  path.dirname(path.dirname(path.dirname(path.dirname(scriptFolderPath)))),
+  path.dirname(path.dirname(path.dirname(path.dirname(path.dirname(scriptFolderPath))))),
 );
 
 importReleases(projectFolderPath, scriptFolderPath);

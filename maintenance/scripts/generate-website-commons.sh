@@ -53,10 +53,10 @@ export script_folder_name="$(basename "${script_folder_path}")"
 argv="$@"
 
 # Runs as
-# .../node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-website-commons.sh
-helper_folder_path="$(dirname $(dirname "${script_folder_path}"))/npm-packages-helper"
+# .../node_modules/@xpack/docusaurus-template-liquid/maintenance/scripts/generate-website-commons.sh
+helper_folder_path="$(dirname $(dirname $(dirname "${script_folder_path}")))/npm-packages-helper"
 
-source "${helper_folder_path}/maintenance-scripts/scripts-helper-source.sh"
+source "${helper_folder_path}/maintenance/scripts/scripts-helper-source.sh"
 
 # Parse --init, --dry-run, --xpack, --xpack-dev-tools
 # and leave variables in the environment.

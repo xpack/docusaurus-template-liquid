@@ -49,9 +49,9 @@ for (const arg of argv) {
 // ----------------------------------------------------------------------------
 
 // The script is invoked from the website via the following npm script:
-// "generate-dependencies-details": "node node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-dependencies-details.mjs"
+// "generate-dependencies-details": "node node_modules/@xpack/docusaurus-template-liquid/maintenance/scripts/generate-dependencies-details.mjs"
 const currentFolderPath = path.dirname(
-  path.dirname(path.dirname(path.dirname(scriptFolderPath))),
+  path.dirname(path.dirname(path.dirname(path.dirname(scriptFolderPath)))),
 );
 
 let projectFolderPath;

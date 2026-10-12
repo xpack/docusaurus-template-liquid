@@ -35,15 +35,15 @@ const scriptName = path.basename(scriptPath);
 const scriptFolderPath = path.dirname(scriptPath);
 
 // Runs as
-// .../website/node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-blog-post.mjs
+// .../website/node_modules/@xpack/docusaurus-template-liquid/maintenance/scripts/generate-blog-post.mjs
 const nodeModulesFolderPath = path.dirname(
-  path.dirname(path.dirname(scriptFolderPath)),
+  path.dirname(path.dirname(path.dirname(scriptFolderPath))),
 );
 const npmHelperMaintenanceScriptsPath = path.join(
   nodeModulesFolderPath,
   "@xpack",
   "npm-packages-helper",
-  "maintenance-scripts",
+  "maintenance/scripts",
 );
 
 const { parseOptions, computeContext, downloadBinaries } = await import(
@@ -99,9 +99,9 @@ const argv = process.argv.slice(2);
 const options = parseOptions(argv);
 
 // The script is invoked via the following website npm script:
-// "generate-website-blog-post": "node node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-blog-post.mjs --micro-os-plus"
+// "generate-website-blog-post": "node node_modules/@xpack/docusaurus-template-liquid/maintenance/scripts/generate-blog-post.mjs --micro-os-plus"
 const currentFolderPath = path.dirname(
-  path.dirname(path.dirname(path.dirname(scriptFolderPath))),
+  path.dirname(path.dirname(path.dirname(path.dirname(scriptFolderPath)))),
 );
 
 let websiteFolderPath;

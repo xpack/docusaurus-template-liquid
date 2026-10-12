@@ -7,7 +7,7 @@ This is the Docusaurus template for the xPack, xPack Development Tools and µOS+
 ## Folder Structure
 
 - `/templates`: Contains the LiquidJS templates
-- `/maintenance-scripts`: Contains the bash maintenance scripts
+- `/maintenance/scripts`: Contains the bash maintenance scripts
 
 ## Language and Tone
 

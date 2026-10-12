@@ -33,15 +33,15 @@ const scriptName = path.basename(scriptPath);
 const scriptFolderPath = path.dirname(scriptPath);
 
 // Runs as
-// .../website/node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-releases-for-tags.mjs
+// .../website/node_modules/@xpack/docusaurus-template-liquid/maintenance/scripts/generate-releases-for-tags.mjs
 const nodeModulesFolderPath = path.dirname(
-  path.dirname(path.dirname(scriptFolderPath)),
+  path.dirname(path.dirname(path.dirname(scriptFolderPath))),
 );
 const npmHelperMaintenanceScriptsPath = path.join(
   nodeModulesFolderPath,
   "@xpack",
   "npm-packages-helper",
-  "maintenance-scripts",
+  "maintenance/scripts",
 );
 
 const { parseOptions, computeContext, substitute } = await import(
@@ -86,9 +86,9 @@ const argv = process.argv.slice(2);
 const options = parseOptions(argv);
 
 // Runs as
-// .../website/node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-releases-for-tags.mjs
+// .../website/node_modules/@xpack/docusaurus-template-liquid/maintenance/scripts/generate-releases-for-tags.mjs
 const projectFolderPath = path.dirname(
-  path.dirname(path.dirname(path.dirname(path.dirname(scriptFolderPath)))),
+  path.dirname(path.dirname(path.dirname(path.dirname(path.dirname(path.dirname(scriptFolderPath)))))),
 );
 const websiteFolderPath = path.join(projectFolderPath, "website");
 
