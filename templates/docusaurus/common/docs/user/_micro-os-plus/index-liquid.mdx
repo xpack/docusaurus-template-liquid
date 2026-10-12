@@ -4,18 +4,13 @@
 # Automatically generated from docusaurus-template-liquid/templates/docusaurus.
 
 title: User's Guide{% if websiteConfig.usePluralGuides %}s{% endif %}
-description: {% if websiteConfig.userGuideDescription != '' %}{{websiteConfig.userGuideDescription}}{% else %}User information, including how to integrate it in a project, how to instantiate objects, how to call various functions.{% endif %}
+description: {% if websiteConfig.userGuideDescription != '' %}{{websiteConfig.userGuideDescription | json}}{% else %}{{"How to use the " | append: topConfig.preferredName | append: ", with examples and a summary of the API." | json}}{% endif %}
 keywords:
-{%- if githubProjectOrganization == "micro-os-plus" %}
   - micro-os-plus
-{%- endif %}
   - xpack
   - {% if topConfig.permalinkName != '' %}{{topConfig.permalinkName}}{% else %}{{packageName}}{% endif %}
   - user
-  - guide{% if isXpackBinary %}
-  - versioning
-  - shared
-  - rpath{% endif %}
+  - guide
 
 date: 2024-10-24 23:58:00 +0300
 
@@ -37,21 +32,13 @@ import ProjectContent from './_project/_content.mdx';
 
 {%- else %}
 
-{%- if isXpackBinary %}
-
-import Content from './_common/_content.mdx';
-
-{%- else %}
-
 import Content from './_project/_content.mdx';
-
-{%- endif %}
 
 {/* ------------------------------------------------------------------------ */}
 
-# How to use {{topConfig.preferredName}}
+# How to use the {{topConfig.preferredName}}
 
-{%- if isXpackBinary or topConfig.hasCli %}
+{%- if topConfig.hasCli %}
 
 This page is intended for those who plan to integrate
 **{{topConfig.preferredName}}** into their workflows.
@@ -65,16 +52,5 @@ own projects.
 {%- endif %}
 
 <Content />
-
-{%- endif %}
-
-{%- if websiteConfig.hasTypedocApi %}
-
-### Reference
-
-For further details on the available class definitions, including all methods,
-accessors, properties, etc.,
-please refer to the TypeDoc
-[API](/docs/api/) pages.
 
 {%- endif %}
