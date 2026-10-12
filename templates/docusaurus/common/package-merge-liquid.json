@@ -54,7 +54,7 @@
     "typescript": "~5.9.3"
   },
   "scripts": {
-    "generate-website-commons": "node node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-website-commons.mjs --{{githubProjectOrganization}}",
+    "generate-website-commons": "node node_modules/@xpack/docusaurus-template-liquid/maintenance/scripts/generate-website-commons.mjs --{{githubProjectOrganization}}",
     "npm-outdated": "npm outdated",
     "npm-install": "npm install",
     "npm-link-helpers": "npm link @xpack/docusaurus-template-liquid @xpack/npm-packages-helper",
@@ -96,12 +96,12 @@
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "import-website-releases": "node node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/import-releases.mjs --{{githubProjectOrganization}}",
+    "import-website-releases": "node node_modules/@xpack/docusaurus-template-liquid/maintenance/scripts/import-releases.mjs --{{githubProjectOrganization}}",
 {%- if githubProjectOrganization == 'micro-os-plus' %}
-    "generate-website-releases-from-tags": "node node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-releases-for-tags.mjs --{{githubProjectOrganization}}",
+    "generate-website-releases-from-tags": "node node_modules/@xpack/docusaurus-template-liquid/maintenance/scripts/generate-releases-for-tags.mjs --{{githubProjectOrganization}}",
 {%- endif %}
-    "generate-website-blog-post": "node node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-blog-post.mjs --{{githubProjectOrganization}}",
-    "generate-dependencies-details": "node node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-dependencies-details.mjs --{{githubProjectOrganization}}"
+    "generate-website-blog-post": "node node_modules/@xpack/docusaurus-template-liquid/maintenance/scripts/generate-blog-post.mjs --{{githubProjectOrganization}}",
+    "generate-dependencies-details": "node node_modules/@xpack/docusaurus-template-liquid/maintenance/scripts/generate-dependencies-details.mjs --{{githubProjectOrganization}}"
   },
   "browserslist": {
     "production": [
