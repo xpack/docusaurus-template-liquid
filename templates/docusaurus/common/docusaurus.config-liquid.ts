@@ -167,9 +167,9 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl: 'https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/edit/{{branchWebsite}}/website/',
+          // No `editUrl`, to have no "edit this page" links: most pages are
+          // generated from templates, and the links would lead to files whose
+          // changes are overwritten.
           // showLastUpdateAuthor: true,
           showLastUpdateTime: true,
         },
@@ -181,9 +181,9 @@ const config: Config = {
             type: ['rss', 'atom'],
             xslt: true,
           },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl: 'https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/edit/{{branchWebsite}}/website/',
+          // No `editUrl`, to have no "edit this page" links: most pages are
+          // generated from templates, and the links would lead to files whose
+          // changes are overwritten.
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',

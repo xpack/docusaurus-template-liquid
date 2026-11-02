@@ -47,7 +47,7 @@
     "@microsoft/api-extractor": "^7.55.2",
 {%- endif %}
 {%- if websiteConfig.hasDoxygenDocusaurusApi %}
-    "@xpack/doxygen2docusaurus": "^2.2.2",
+    "@xpack/doxygen2docusaurus": "^2.2.6",
 {%- endif %}
     "@xpack/docusaurus-template-liquid": "github:xpack/docusaurus-template-liquid",
     "@xpack/npm-packages-helper": "github:xpack/npm-packages-helper",

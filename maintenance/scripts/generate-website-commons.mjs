@@ -628,9 +628,13 @@ templatesRelativeFolderPath = templatesRelativeFolderPath.replace(
 // ----------------------------------------------------------------------------
 
 // Process package.json files and leave results in the context object.
+// The tests configuration, if any, is also available to the templates,
+// for example to list the test platforms.
+const testsFolderPath = path.join(projectFolderPath, "tests");
 const context = computeContext({
   projectFolderPath,
   websiteFolderPath,
+  testsFolderPath: existsSync(testsFolderPath) ? testsFolderPath : undefined,
   options,
 });
 

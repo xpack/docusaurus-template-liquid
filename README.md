@@ -43,15 +43,15 @@ Note: for unknown reasons, `npm --prefix website` fails.
 in website/package.json:
 
 ```json
-    "generate-website-commons-init": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-website-commons.sh --micro-os-plus --init",
+    "generate-website-commons-init": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance/scripts/generate-website-commons.sh --micro-os-plus --init",
 ```
 
 ```sh
-    "generate-website-commons-init": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-website-commons.sh --xpack --init",
+    "generate-website-commons-init": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance/scripts/generate-website-commons.sh --xpack --init",
 ```
 
 ```json
-    "generate-website-commons-init": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-website-commons.sh --xpack-dev-tools --dry-run",
+    "generate-website-commons-init": "bash node_modules/@xpack/docusaurus-template-liquid/maintenance/scripts/generate-website-commons.sh --xpack-dev-tools --dry-run",
 ```
 
 Be sure topConfig.descriptiveName is defined.
