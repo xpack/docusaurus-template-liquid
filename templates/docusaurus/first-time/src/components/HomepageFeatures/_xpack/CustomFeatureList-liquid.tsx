@@ -22,7 +22,7 @@ export const FeatureList: FeatureItem[] = [
 {% if topConfig.hasCli -%}
         The CLI application is compatible with any shell, and can be utilized across multiple platforms (<b>Windows</b>, <b>macOS</b>, <b>GNU/Linux</b>).
 {% else -%}
-        The module is compatible with <b>TypeScript</b> and <b>JavaScript</b> projects, and can be utilised across multiple platforms (<b>Windows</b>, <b>macOS</b>, <b>GNU/Linux</b>).
+        The module is compatible with <b>TypeScript</b> and <b>JavaScript</b> projects, and can be used across multiple platforms (<b>Windows</b>, <b>macOS</b>, <b>GNU/Linux</b>).
  {% endif -%}
       </>
     ),

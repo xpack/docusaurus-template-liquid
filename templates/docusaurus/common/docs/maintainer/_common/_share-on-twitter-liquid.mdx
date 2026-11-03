@@ -5,14 +5,14 @@
 
 {%- if websiteConfig.shareOnTwitter %}
 
-## Share on X/Twitter
+### Share on X/Twitter
 
 - In a separate browser window, open 
 [X/Twitter](https://x.com/{% if githubProjectOrganization == 'xpack' or githubProjectOrganization == 'xpack-dev-tools' %}xpack_project{% elsif githubProjectOrganization == 'micro-os-plus' %}micro_os_plus{% endif %}/)
 {%- if githubProjectOrganization == 'xpack' or githubProjectOrganization == 'xpack-dev-tools' %}
-- Utilising the `@xpack_project` account
+- Using the `@xpack_project` account
 {%- elsif githubProjectOrganization == 'micro-os-plus' %}
-- Utilising the `@micro_os_plus` account
+- Using the `@micro_os_plus` account
 {%- endif %}
 - Paste the release name such as **{{topConfig.descriptiveName}} v{{releaseVersion}} released**
 - Paste the link to the web page

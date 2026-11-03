@@ -5,11 +5,11 @@
 
 title: Contributor's Guide{% if websiteConfig.usePluralGuides %}s{% endif %}
 {%- if topConfig.isTypescript or topConfig.isJavascript %}
-description: Guidance for developers aiming to contribute new features or bug fixes, detailing how to build the {% if isNpmExecutable %}project{% else %}module{% endif %}, including prerequisites, repositories utilised, and scripts.
+description: Guidance for contributors adding new features or fixing bugs, detailing how to build the {% if isNpmExecutable %}project{% else %}module{% endif %}, including prerequisites, repositories used, and scripts.
 {%- elsif isXpackBinary %}
-description: Guidance for developers aiming to contribute new features or bug fixes, detailing how to build the binaries, including prerequisites, repositories utilised, and scripts.
+description: Guidance for contributors adding new features or fixing bugs, detailing how to build the binaries, including prerequisites, repositories used, and scripts.
 {%- else %}
-description: Guidance for developers aiming to contribute new features or bug fixes.
+description: Guidance for contributors adding new features or fixing bugs.
 {%- endif %}
 keywords:
 {%- if githubProjectOrganization == 'micro-os-plus' %}
@@ -63,7 +63,7 @@ import CommonContent from './_common/_content.mdx';
 [![GitHub package.json version](https://img.shields.io/github/package-json/v/{{githubProjectOrganization}}/{{githubProjectName}}?color=blue)](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/package.json)
 [![NPM Version](https://img.shields.io/npm/v/{% if packageScope != '' %}%40{{packageScope}}%2F{% endif %}{{packageName}}?color=blue)](https://www.npmjs.com/package/{{packageScopedName}}/)
 {%- endif %}
-[![license](https://img.shields.io/github/license/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/LICENSE)
+[![licence](https://img.shields.io/github/license/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/issues)
 [![GitHub pulls](https://img.shields.io/github/issues-pr/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/pulls/)
 {%- unless topConfig.skipCiTests %}
@@ -80,7 +80,7 @@ import CommonContent from './_common/_content.mdx';
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen)](https://standardjs.com)
 {%- endif %}
 
-This page is designed for developers who intend to contribute new features
+This page is designed for contributors who intend to add new features
 or resolve bugs within the
 **{{longXpackName}}**
 project and provides documentation on building and testing the package.

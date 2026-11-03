@@ -175,7 +175,7 @@ To manually fix compliance with the style guide (where possible):
 {%- if topConfig.useApiExtractor or websiteConfig.useApiDocumenter %}
 {%- if topConfig.isTypescript %}
 
-The documentation metadata utilises the
+The documentation metadata uses the
 [TSDoc](https://tsdoc.org) tags, without
 explicit types, as they are provided by TypeScript.
 
@@ -183,7 +183,7 @@ explicit types, as they are provided by TypeScript.
 {%- else %}
 {%- if topConfig.isTypescript %}
 
-The documentation metadata utilises the
+The documentation metadata uses the
 [TypeDoc](https://typedoc.org/guides/doccomments/) tags, without
 explicit types, as they are provided by TypeScript.
 
@@ -225,7 +225,7 @@ TBD
 
 ## Tests
 
-The tests utilise the [`node-tap`](http://www.node-tap.org) framework
+The tests use the [`node-tap`](http://www.node-tap.org) framework
 (_A Test-Anything-Protocol library for Node.js_, written by Isaac Schlueter).
 
 Tests can be written in TypeScript, provided `ts-node` is also installed.
@@ -269,7 +269,7 @@ and `/* c8 ignore start */` `/* c8 ignore stop */` for
 The module is {% if websiteConfig.has100coverage %}tested with 100% coverage and is{% endif %}
 subject to CI testing on every push via
 [GitHub Actions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions), on Ubuntu,
-Windows and macOS, utilising node {{ topConfig.githubActionsNodeVersions | join: ", " | replace_last: ", ", " and " }}.
+Windows and macOS, using node {{ topConfig.githubActionsNodeVersions | join: ", " | replace_last: ", ", " and " }}.
 
 {%- endunless %}
 

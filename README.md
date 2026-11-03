@@ -139,6 +139,7 @@ if missing, the long name is used
 For the xpm web
 
 - hasCustomHomepageFeatures
+- hasCompatibilityNoticesPage
 - hasCustomUserSidebar
 - hasCustomUserInformation
 

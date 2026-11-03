@@ -56,7 +56,7 @@ For a **specific version**, use the explicit version numbers:
 ### Global installation
 
 Since the {% if isXpackBinary %}package provides executables{% elsif topConfig.hasCli %}package includes command-line tools{% endif %}, it may also
-be installed globally and utilised in any project.
+be installed globally and used in any project.
 
 ```sh
 npm install --location=global {{packageScopedName}}@latest
@@ -110,7 +110,7 @@ already have this path configured and the programme should start normally:
 
 On macOS, if you executed the `install-nvm-node-npm-xpm.sh` scripts described
 in the previous section, you should
-already have **npm** correctly configured to utilise a location in the home folder.
+already have **npm** correctly configured to use a location in the home folder.
 
 <CodeBlock language="console"> {
 `% which {{websiteConfig.programName}}
@@ -130,7 +130,7 @@ The default location used to install the global packages is
 below `~/Library`, a folder that, due to an unfortunate Apple decision,
 is hidden for regular browsing in Finder.
 
-To make it visible again, utilise:
+To make it visible again, use:
 
 ```sh
 /usr/bin/chflags nohidden ~/Library
@@ -167,7 +167,7 @@ global Node.js packages are installed in
 `/usr/local`, and managing them requires administrative rights,
 but if you executed the `install-nvm-node-npm-xpm.sh` scripts described
 in the previous section, you should
-already have **npm** correctly configured to utilise a location in the home folder.
+already have **npm** correctly configured to use a location in the home folder.
 
 {%- if topConfig.permalinkName == 'xpm' %}
 
@@ -218,7 +218,7 @@ npm uninstall --location=global {{packageScopedName}}
 ## npx
 
 If, for any reason, you decide not to install **{{packageScopedName}}**, you can still
-benefit from it by utilising the `npx` command, as a trampoline to start **{{websiteConfig.programName}}**:
+benefit from it by using the `npx` command, as a trampoline to start **{{websiteConfig.programName}}**:
 
 <CodeBlock language="console"> {
 `$ npx --package {{packageScopedName}} -- {{websiteConfig.programName}} --version

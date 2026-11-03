@@ -6,14 +6,14 @@
 ### Publish the website
 
 The website deployment is performed automatically when pushing to the
-`{{branchWebsite}}` branch, utilising a dedicated workflow in
+`{{branchWebsite}}` branch, using a dedicated workflow in
 [GitHub Actions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions/workflows/publish-github-pages.yml).
 
 - Open {{packageHomepage}}docs/maintainer/#publish-the-website in a separate window
 - **Stop** the local web server
 {%- if hasBranchWebpreview %}
 - Switch to the `{{branchWebpreview}}` branch
-- **Rebase** the `{{branchDevelopment}}` branch onto the `{{branchWebpreview}}` branch
+- **Rebase** the `{{branchWebpreview}}` branch onto the `{{branchDevelopment}}` branch (`git rebase {{branchDevelopment}}`)
 - **Push** the `{{branchWebpreview}}` branch to GitHub
   :::info
   At this point, an automated GitHub Action will generate and publish 
@@ -21,8 +21,8 @@ The website deployment is performed automatically when pushing to the
   :::
 {%- endif %}
 - Switch to the `{{branchWebsite}}` branch
-- run the `npm install` command, to ensure `package-lock.json` is up to date
-- **Rebase** the `{{branchDevelopment}}` branch onto the `{{branchWebsite}}` branch
+- **Run** the `npm install` command, to ensure `package-lock.json` is up to date
+- **Rebase** the `{{branchWebsite}}` branch onto the `{{branchDevelopment}}` branch (`git rebase {{branchDevelopment}}`)
 - **Push** the `{{branchWebsite}}` branch to GitHub
   :::info
   At this point, an automated forwarding GitHub Action will trigger 
@@ -30,13 +30,11 @@ The website deployment is performed automatically when pushing to the
   the [website]({{packageHomepage}}).
   :::
 - Check out the `{{branchDevelopment}}` branch
-- **Wait** for the publication to complete 
-- check [GitHub Pages](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions/workflows/publish-github-pages.yml) workflow
+- **Wait** for the publication to complete
+- **Check** the [GitHub Pages](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions/workflows/publish-github-pages.yml) workflow
 - **Refresh** the web page
-- The new release blog post is available
-at {{packageHomepage}}blog/
-- Record the post URL, as it must be used to update the release page
-and the X/Twitter announcement
+- **Open** the new release blog post, available at {{packageHomepage}}blog/
+- **Record** the post URL, as it must be used to update the release page and the X/Twitter announcement
 
 The `{{branchWebsite}}` branch may be subsequently updated, provided the
 version in `package.json` remains unchanged.

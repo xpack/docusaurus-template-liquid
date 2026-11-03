@@ -75,7 +75,7 @@ import ProjectPatches from '../_project/_patches.mdx';
 
 {% if isLinux and isMacOS %}The build scripts execute on GNU/Linux and macOS.{% else %}{% if isLinux %}The build scripts execute on GNU/Linux.{% endif %}{% if isMacOS %}The build scripts execute on macOS.{% endif %}{% endif %}
 {% if isWindows %}The Windows binaries are
-compiled on x64 GNU/Linux, utilising [mingw-w64](https://mingw-w64.org).{% endif %}
+compiled on x64 GNU/Linux, using [mingw-w64](https://mingw-w64.org).{% endif %}
 
 For details on installing the prerequisites, please read the
 [Build Prerequisites](https://xpack-dev-tools.github.io/docs/developer/install/prerequisites/)
@@ -178,7 +178,7 @@ Before the actual build, execute {% if names_array.size > 1 %}test/development b
 ### Visual Studio Code extension
 
 All actions are defined as **xpm/xPack actions** and can be conveniently
-triggered via the VS Code graphical interface, utilising the
+triggered via the VS Code graphical interface, using the
 [xPack C/C++ Managed Build Tools extension](https://marketplace.visualstudio.com/items?itemName=ilg-vscode.xpack).
 
 <ProjectPatches/>
@@ -422,13 +422,13 @@ In some cases it is necessary to execute a debug session with the binaries.
 
 For these cases, the build script accepts the `--debug` options.
 
-There are also xpm actions that utilise this option (**build-development-debug**
+There are also xpm actions that use this option (**build-development-debug**
 and **docker-build-development-debug**).
 
 ### Files cache
 
-The XBB build scripts utilise a local cache such that files are downloaded only
-during the initial execution, with subsequent executions utilising the cached files.
+The XBB build scripts use a local cache such that files are downloaded only
+during the initial execution, with subsequent executions using the cached files.
 
 However, occasionally some servers may not be available, and the builds
 may fail.
@@ -605,13 +605,13 @@ df -BG -H /
 
 </Tabs>
 
-To free the space utilised by all previous builds of all `{{githubProjectOrganization}}` packages:
+To free the space used by all previous builds of all `{{githubProjectOrganization}}` packages:
 
 ```sh
 xpm run clear-all-projects-builds -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/build-assets
 ```
 
-This is equivalent to executing a comprehensive `rm` to remove the `build` folders:
+This is equivalent to executing a full `rm` to remove the `build` folders:
 
 ```sh
 rm -rf ~/Work/{{githubProjectOrganization}}/*/build-assets/build
@@ -638,7 +638,7 @@ The helper `xpack` branch must be updated and the npm package published.
 
 ### Manually trigger the build GitHub Actions
 
-To trigger the GitHub Actions builds, utilise the xpm actions:
+To trigger the GitHub Actions builds, use the xpm actions:
 
 {%- assign platforms_array = platforms | split: "," %}
 {%- assign names_array = "" | split: "" %}
@@ -660,7 +660,7 @@ Settings → Action →
 [Secrets](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/settings/secrets/actions)
 page.
 
-These commands utilise the `xpack-development` branch of this repository.
+These commands use the `xpack-development` branch of this repository.
 
 ### Durations & resulting binaries
 
@@ -720,7 +720,7 @@ xpm run trigger-workflow-test-docker-linux-arm64 -C ~/Work/{{githubProjectOrgani
 The scripts behind these actions require the `GITHUB_API_DISPATCH_TOKEN` variable to be present
 in the environment.
 
-These actions utilise the `xpack-development` branch of this repository and the
+These actions use the `xpack-development` branch of this repository and the
 [pre-releases/test](https://github.com/xpack-dev-tools/pre-releases/releases/tag/test/)
 binaries.
 
@@ -740,12 +740,12 @@ Since the macOS builds were performed on more recent versions and rely on
 `MACOSX_DEPLOYMENT_TARGET`, it is recommended to also run the tests on an
 actual macOS 11 machine (like the `xbbmi11` virtual machine).
 
-To download the pre-release archive and execute the tests, utilise:
+To download the pre-release archive and execute the tests, use:
 
 {%- else %}
 
 To download the pre-release archive for the specific platform
-and execute the tests, utilise:
+and execute the tests, use:
 
 {%- endif %}
 
@@ -878,7 +878,7 @@ The test results are available from the
 
 ### Copy the test results
 
-For the toolchain projects, utilise the **Artifact download URL**
+For the toolchain projects, use the **Artifact download URL**
 from the **Generate tests report** GitHub Action to
 download the `test-report.zip` file, unzip it
 and copy the markdown file to `website/docs/tests`.
@@ -904,7 +904,7 @@ Commit with the message _**website: add test results**_
 
 - Navigate to the [GitHub Releases](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/releases) page
 - Check the download counter; it should match the number of tests
-- Add a link to the Web blog `[Continue reading »]()`; utilise the same blog URL
+- Add a link to the Web blog `[Continue reading »]()`; use the same blog URL
 - Remove the _tests only_ notice
 - **Disable** the **Set as a pre-release** button
 - **Enable** the **Set as the latest release** button

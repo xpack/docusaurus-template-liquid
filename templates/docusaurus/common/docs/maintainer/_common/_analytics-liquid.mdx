@@ -3,7 +3,7 @@
 
 {/* ------------------------------------------------------------------------ */}
 
-## Analytics
+### Analytics
 
 {% if isXpackBinary %}
 - GitHub [`{{githubProjectOrganization}}/{{githubProjectName}}`](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/) repository
@@ -14,10 +14,10 @@
   - [individual file counters](https://somsubhra.github.io/github-release-stats/?username={{githubProjectOrganization}}&repository={{githubProjectName}}) (grouped by release)
 {%- endif %}
 - npmjs.com [`{{packageScopedName}}`](https://www.npmjs.com/package/{{packageScopedName}}/) package
-  - latest release, per month
+  - latest version
 [![NPM Version](https://img.shields.io/npm/v/{% if packageScope != '' %}%40{{packageScope}}%2F{% endif %}{{packageName}}?color=blue)](https://www.npmjs.com/package/{{packageScopedName}}/)
-[![NPM Downloads](https://img.shields.io/npm/dm/{% if packageScope != '' %}%40{{packageScope}}%2F{% endif %}{{packageName}}?color=green)](https://www.npmjs.com/package/{{packageScopedName}}/)
-  - all releases [![NPM Downloads](https://img.shields.io/npm/dt/{% if packageScope != '' %}%40{{packageScope}}%2F{% endif %}{{packageName}}?color=green)](https://www.npmjs.com/package/{{packageScopedName}}/)
+  - last month downloads [![NPM Downloads](https://img.shields.io/npm/dm/{% if packageScope != '' %}%40{{packageScope}}%2F{% endif %}{{packageName}}?color=green)](https://www.npmjs.com/package/{{packageScopedName}}/)
+  - total downloads, all releases [![NPM Downloads](https://img.shields.io/npm/dt/{% if packageScope != '' %}%40{{packageScope}}%2F{% endif %}{{packageName}}?color=green)](https://www.npmjs.com/package/{{packageScopedName}}/)
 
 Credits to [Shields IO](https://shields.io) for the badges{% if isXpackBinary %} and to
 [Somsubhra/github-release-stats](https://github.com/Somsubhra/github-release-stats)

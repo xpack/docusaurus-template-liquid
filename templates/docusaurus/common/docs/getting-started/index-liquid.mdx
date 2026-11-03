@@ -59,7 +59,10 @@ import CommonCreditsMacStadium from './_common/_credits-mac-stadium.mdx';
 import ProjectMoreCredits from './_project/_more-credits.mdx';
 import ProjectMoreLicenses from './_project/_more-licenses.mdx';
 import ProjectStatus from './_project/_status.mdx';
-{%- if githubProjectOrganization != 'xpack-dev-tools' %}
+{%- if githubProjectOrganization == 'micro-os-plus' %}
+import ProjectWhereToGoNext from './_project/_where-to-go-next.mdx';
+{%- endif %}
+{%- if githubProjectOrganization != 'xpack-dev-tools' and websiteConfig.hasCompatibilityNoticesPage != true %}
 import ProjectCompatibilityNotices from './_project/_compatibility-notices.mdx';
 {%- endif %}
 
@@ -81,7 +84,7 @@ import CommonContent from './_common/_content.mdx';
 
 {%- endif %}
 
-[![license](https://img.shields.io/github/license/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/LICENSE)
+[![licence](https://img.shields.io/github/license/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/LICENSE)
 [![GitHub Repo stars](https://img.shields.io/github/stars/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}})
 
 <CommonUserDeveloperMaintainer />
@@ -89,6 +92,10 @@ import CommonContent from './_common/_content.mdx';
 <CommonContent />
 
 <ProjectStatus />
+{%- if githubProjectOrganization == 'micro-os-plus' %}
+
+<ProjectWhereToGoNext />
+{%- endif %}
 
 {%- unless topConfig.skipCiTests %}
 
@@ -121,32 +128,32 @@ import CommonContent from './_common/_content.mdx';
 {%- if githubProjectOrganization != 'xpack-dev-tools' %}
 
 ## Compatibility notices
-
+{% if websiteConfig.hasCompatibilityNoticesPage %}
+The breaking changes introduced in each major release, with the old and new
+names, are listed in reverse chronological order on the
+[Compatibility notices](/docs/getting-started/compatibility-notices/) page.
+{% else %}
 According to [SemVer](https://semver.org) rules:
 
 > Major version X (X.y.z | X > 0) MUST be incremented if any
 backwards incompatible changes are introduced to the public API.
 
 The breaking changes introduced in each major release are documented
-in reverse chronological order. This information provides a comprehensive
-overview of significant modifications and is readily available in the
-respective release notes.
+in reverse chronological order. The details are in the respective release notes.
 
 <ProjectCompatibilityNotices />
-
+{% endif %}
 {%- endif %}
 
 <CommonLicense />
 
 <ProjectMoreLicenses />
+{%- if githubProjectOrganization == 'xpack' or githubProjectOrganization == 'xpack-dev-tools' %}
 
-{% if githubProjectOrganization == 'xpack' or githubProjectOrganization == 'xpack-dev-tools' -%}
 <CommonCreditsMacStadium />
-
 {%- else %}
 
 ## Credits
-
 {%- endif %}
 
 <ProjectMoreCredits />

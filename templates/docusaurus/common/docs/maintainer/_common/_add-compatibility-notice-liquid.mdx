@@ -6,8 +6,9 @@
 ### Add a compatibility notice
 
 For the major and minor releases, add a compatibility notice for the version
-under development, in the **Compatibility notices** section of the
-**Getting Started** page (for example `v6.0 (not yet released)`), and update it
+under development, {% if websiteConfig.hasCompatibilityNoticesPage %}on the
+**Compatibility notices** page, in the **Getting Started** category{% else %}in the
+**Compatibility notices** section of the **Getting Started** page{% endif %} (for example `v6.0 (not yet released)`), and update it
 with each issue and each commit that breaks the compatibility of existing
 code, changes its behaviour, deprecates a definition, or adds a new feature:
 
