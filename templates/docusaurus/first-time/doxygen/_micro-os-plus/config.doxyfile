@@ -16,6 +16,6 @@
 # This tag requires that the tag ENABLE_PREPROCESSING is set to YES.
 
 PREDEFINED += \
-MICRO_OS_PLUS_DIAG_TRACE_ENABLED \
+MICRO_OS_PLUS_XXX_ENABLED
 
 #------------------------------------------------------------------------------

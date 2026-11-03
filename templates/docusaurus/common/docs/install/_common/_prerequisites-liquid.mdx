@@ -27,8 +27,7 @@ npm install --location=global xpm@latest
 
 Although not mandated by **xpm**, it is also recommended to upgrade
 **npm** to the latest version, and
-**node** to a reasonably recent version (currently **npm** requires
-a **node** >=20.0).
+**node** to a currently supported LTS version.
 
 :::
 
@@ -72,9 +71,9 @@ settings such as **Show Hidden Files**.
 <details>
 <summary>The `xpacks/.bin` folder</summary>
 
-If multiple binary packages are installed, in order to allow
-the executables to be accessed, one possible solution is to add
-all `<package>/.content/bin` folders to the `PATH`.
+If multiple binary packages are installed, to access their executables,
+one possible solution is to add all `<package>/.content/bin` folders to the
+`PATH`.
 
 To simplify matters, **npm** employs a separate `<project>/node_modules/.bin` folder
 where it places links/forwarders
@@ -101,7 +100,7 @@ into a user's global xPacks store (a platform-dependent folder
 within the home folder), thereby conserving disk space when the same
 tools are used across multiple projects.
 
-In order to allow the projects to access the binary tools installed in the
+To allow the projects to access the binary tools installed in the
 user's global xPacks store, instead of unpacking the archives in `xpacks`,
 **xpm** adds symbolic links pointing to the **user's global xPacks store**.
 

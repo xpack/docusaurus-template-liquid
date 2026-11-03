@@ -22,16 +22,16 @@ export const FeatureList: FeatureItem[] = [
     Svg: require('@site/static/img/mosaic.svg').default,
     description: (
       <>
-        The modern <b>C++</b> code is highly portable and compiles seamlessly with the latest versions of <b>GCC</b> and <b>clang</b>. To facilitate integration, both <b>CMake</b> and <b>meson</b> configurations are provided.
+        The modern <b>C++</b> code is portable, and compiles with the latest versions of <b>GCC</b> and <b>clang</b>. <b>CMake</b> and <b>meson</b> configurations are provided, to simplify the integration.
       </>
     ),
   },
   {
-    title: 'Easy to use & reproducible',
+    title: 'Reproducible',
     Svg: require('@site/static/img/check-badge.svg').default,
     description: (
       <>
-        Projects can reference this library through an explicitly versioned <b>dependency</b>. This ensures reproducibility, which is particularly advantageous in <b>CI/CD</b> environments.
+        Projects can reference this library through an explicitly versioned <b>dependency</b>, which makes the builds reproducible, in particular in <b>CI/CD</b> environments.
       </>
     ),
   },
@@ -43,9 +43,9 @@ export const FeatureList: FeatureItem[] = [
         The <b><Link to="https://xpack.github.io/xpm/">xpm</Link></b> CLI tool
         complements <b><Link to="https://docs.npmjs.com/cli/">npm</Link></b> with
         several additional features tailored for <b>C/C++ projects</b>.
-        This enables the
-        source package to integrate seamlessly into the Node.js ecosystem,
-        whilst still permitting manual installation of the library.
+        The
+        source package thus integrates into the Node.js ecosystem, and can still
+        be installed manually.
       </>
     ),
   },

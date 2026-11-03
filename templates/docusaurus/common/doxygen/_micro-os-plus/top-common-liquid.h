@@ -35,8 +35,7 @@ source libraries maintained as separate repositories within the
 Additionally, it documents the `micro_os_plus` namespace, which acts as the
 primary scope for all classes, functions, variables, enumerations, type
 definitions, and related entities within the framework. The namespace is
-further organised into nested namespaces to promote modularity, reduce
-redundancy, and enhance maintainability.
+further organised into nested namespaces.
 
 All definitions and documentation topics in this file are maintained in the
 `website/doxygen` folder to ensure a consistent and modular structure
@@ -49,7 +48,7 @@ throughout the project's documentation.
 @details
 The `include` folder contains all public header files for the µOS++ libraries.
 
-To provide isolation with other projects, the header files for the µOS++ 
+To provide isolation with other projects, the header files for the µOS++
 libraries are located in the `micro-os-plus` sub-folder.
 
 {%- if packageName != 'web-docusaurus' %}
@@ -58,14 +57,14 @@ libraries are located in the `micro-os-plus` sub-folder.
 @brief Folder with C/C++ header files for the µOS++ libraries.
 
 @details
-The `include/micro-os-plus` folder contains the public C++ header files for 
+The `include/micro-os-plus` folder contains the public C++ header files for
 the µOS++ libraries.
 
-These headers define the APIs, data structures, data types and inline 
+These headers define the APIs, data structures, data types and inline
 implementations that are available to users of the libraries.
 
-All files in this folder are intended for inclusion in user projects and 
-provide the main interface to the utilities functionality.
+All files in this folder are intended for inclusion in user projects and
+provide the main interface of the libraries.
 
 {%- endif %}
 
@@ -76,25 +75,18 @@ provide the main interface to the utilities functionality.
 ## Description
 
 The [µOS++ Framework](https://micro-os-plus.github.io) is the principal project
-within the µOS++ (micro-os-plus) ecosystem, providing a comprehensive suite 
-of modern C++ libraries for embedded systems development.
+within the µOS++ (micro-os-plus) ecosystem, providing modern C++ libraries for embedded systems development.
 
-µOS++ is organised as a **collection of modular source libraries**, each 
+µOS++ is organised as a **collection of modular source libraries**, each
 maintained in its own repository on GitHub and collectively managed under the
-[micro-os-plus](https://github.com/micro-os-plus) GitHub organization.
+[micro-os-plus](https://github.com/micro-os-plus) GitHub organisation.
 This modular structure
-enables developers to select and integrate only the components relevant to
-their projects, promoting flexibility and maintainability.
+allows the developers to select only the components that they need.
 
 The framework covers a wide range of topics, including **core operating system**
 functionality, **POSIX I/O**, **testing** frameworks, **utilities**,
-and supporting **tools**. Detailed
-documentation is provided for each library, ensuring that users have access to
-clear guidance, usage examples, and best practices for professional embedded
-software development.
-
-By adopting µOS++, developers benefit from a robust, scalable, and
-well-documented foundation for building high-quality embedded applications.
+and supporting **tools**. Each library has its own documentation, with usage
+examples.
 
 {%- if packageName != 'web-docusaurus' %}
 
@@ -107,13 +99,7 @@ the µOS++ framework, encompassing classes, functions, variables, enumerations,
 type definitions, and related entities.
 
 This namespace is further structured into nested namespaces, each dedicated to
-specific modules or subsystems. By encapsulating all definitions within
-well-defined namespaces, the framework achieves clear code organisation,
-minimises naming conflicts, and enhances overall maintainability.
-
-This approach promotes modular development, facilitates code reuse, and ensures
-seamless integration of components within the µOS++ ecosystem, supporting the
-creation of efficient, robust, and scalable embedded systems.
+a module or subsystem, which avoids the naming conflicts between the libraries.
 
 {%- endif %}
 

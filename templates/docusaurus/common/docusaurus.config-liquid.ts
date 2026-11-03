@@ -271,7 +271,7 @@ const config: Config = {
       tagName: 'meta',
       attributes: {
         name: 'apple-mobile-web-app-title',
-        content: 'xPack'
+        content: '{% if githubProjectOrganization == "micro-os-plus" %}µOS++{% else %}xPack{% endif %}'
       }
     },
     {
@@ -524,7 +524,7 @@ const config: Config = {
             },
             {
               label: 'X/Twitter',
-              href: 'https://twitter.com/xpack_project',
+              href: 'https://x.com/xpack_project',
             },
 {%- elsif githubProjectOrganization == 'micro-os-plus' %}
             {
@@ -537,7 +537,7 @@ const config: Config = {
             },
             {
               label: 'X/Twitter',
-              href: 'https://twitter.com/micro_os_plus',
+              href: 'https://x.com/micro_os_plus',
             },
 {%- endif %}
           ],
@@ -625,11 +625,13 @@ const config: Config = {
 {%- endunless %}
   } satisfies Preset.ThemeConfig,
 
-  // TODO: find out how to disable cascade CSSs.
-  // future: {
-  //   v4: true,
-  //   experimental_faster: true,
-  // },
+  // https://docusaurus.io/blog/releases/3.6#docusaurus-faster
+  future: {
+    v4: {
+      removeLegacyPostBuildHeadAttribute: true,
+    },
+    faster: true,
+  },
 
   customFields: customFields,
 };

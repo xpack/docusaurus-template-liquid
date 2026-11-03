@@ -5,7 +5,7 @@
 {%- endunless  %}
 [![NPM Version](https://img.shields.io/npm/v/{{packageScopedName}}?color=blue)](https://www.npmjs.com/package/{{packageScopedName}}/)
 {%- endif  %}
-[![license](https://img.shields.io/github/license/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/LICENSE)
+[![licence](https://img.shields.io/github/license/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/LICENSE)
 [![Website](https://img.shields.io/website?url=https%3A%2F%2F{{githubProjectOrganization}}.github.io%2F{{githubProjectName}}%2F)]({{packageHomepage}})
 
 {%- if topConfig.isOrganisationWeb  %}
@@ -63,9 +63,9 @@ GitHub as [{{githubProjectOrganization}}/{{githubProjectName}}](https://github.c
 
 {%- endif  %}
 
-## License
+## Licence
 
 Unless otherwise stated, the original content is released under the terms of the
-[MIT License](https://opensource.org/licenses/mit),
+[MIT License](https://opensource.org/license/mit),
 with all rights reserved to
 [Liviu Ionescu](https://github.com/ilg-ul).

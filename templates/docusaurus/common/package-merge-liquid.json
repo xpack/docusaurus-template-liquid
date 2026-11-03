@@ -72,7 +72,7 @@
     "generate-webpreview-doxygen": "npm run doxygen && npm run convert-webpreview-doxygen",
 {%- endif %}
 {%- endif %}
-    "check-urls": "blc {{packageHomepage}} --recursive --ordered --filter-level 2 --exclude 'https://twitter.com*'",
+    "check-urls": "blc {{packageHomepage}} --recursive --ordered --filter-level 2 --exclude 'https://x.com*'",
 {%- endif %}
 {%- if websiteConfig.hasTSDocDocusaurusApi %}
     "compile-tsdoc": "del-cli --force tsdoc/dist && tsc --project config/tsconfig-api-extractor.json",

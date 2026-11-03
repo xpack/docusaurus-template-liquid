@@ -16,7 +16,7 @@ The website deployment is performed automatically when pushing to the
 - **Rebase** the `{{branchWebpreview}}` branch onto the `{{branchDevelopment}}` branch (`git rebase {{branchDevelopment}}`)
 - **Push** the `{{branchWebpreview}}` branch to GitHub
   :::info
-  At this point, an automated GitHub Action will generate and publish 
+  At this point, an automated GitHub Action will generate and publish
   the [preview website]({{packageHomepagePreview}}).
   :::
 {%- endif %}
@@ -25,8 +25,8 @@ The website deployment is performed automatically when pushing to the
 - **Rebase** the `{{branchWebsite}}` branch onto the `{{branchDevelopment}}` branch (`git rebase {{branchDevelopment}}`)
 - **Push** the `{{branchWebsite}}` branch to GitHub
   :::info
-  At this point, an automated forwarding GitHub Action will trigger 
-  a GitHub Action in the separate project to generate and publish 
+  At this point, an automated forwarding GitHub Action will trigger
+  a GitHub Action in the separate project to generate and publish
   the [website]({{packageHomepage}}).
   :::
 - Check out the `{{branchDevelopment}}` branch

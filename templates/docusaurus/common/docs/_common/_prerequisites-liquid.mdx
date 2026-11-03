@@ -14,7 +14,7 @@ a portable Node.js {% if isNpmExecutable %}project{% else %}module{% endif %};
 an xpm package that provides a C++ source code library;
 {%- endif %}
 development can be
-conducted on macOS, GNU/Linux and Windows (although some npm scripts
+conducted on macOS, GNU/Linux, and Windows (although some npm scripts
 must be executed within a Git Bash terminal).
 
 The prerequisites are:
@@ -24,7 +24,7 @@ The prerequisites are:
 - npm
 
 {% if githubProjectOrganization == 'xpack' or githubProjectOrganization == 'xpack-dev-tools' %}
-To ensure compatibility with older node versions, it is preferable to revert to an older one:
+To check the compatibility with the oldest supported node version, switch to it:
 
 <CodeBlock language="console"> {
 `nvm use --lts ${props.nodeVersionMajor || 'NN'}

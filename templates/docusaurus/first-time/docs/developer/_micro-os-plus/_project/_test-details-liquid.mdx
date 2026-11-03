@@ -1,49 +1,22 @@
 
 {/* ------------------------------------------------------------------------ */}
 
-### Tests details
+### Test details
 
-```console
-> xpm run test --config native-cmake-sys-release
-> ctest -V --test-dir build/native-cmake-sys-release
-...
-Constructing a list of tests
-Done constructing a list of tests
-Updating test list for fixtures
-Added 0 tests to meet fixture requirements
-Checking test dependency graph...
-Checking test dependency graph end
+The tests are built and run for each platform and toolchain. To build and run
+the native tests with the system compiler, use:
+
+```sh
+xpm run test -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/tests
 ```
 
-#### sample-test
+The test programs are in the
+[`tests/sources`](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/tree/{{branchDevelopment}}/tests/sources)
+folder, one folder for each program, with the sources in `src/`.
 
-The [sample/src/main.cpp](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/xpack/tests/src/sample/src/main.cpp)
-file is a straightforward application designed to demonstrate
-how to use some of the primitives available in the library.
+#### The test programs
 
-A typical run looks like:
-
-```console
-test 1
-    Start 1: sample-test
-...
-1/2 Test #1: sample-test ......................   Passed    0.00 sec
-```
-
-#### unit-test
-
-The [unit/src/main.cpp](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/xpack/tests/src/unit/src/main.cpp)
-file is an exhaustive test designed to validate that all the
-library functions operate as expected. It uses the
-[µTest++](https://github.com/micro-os-plus/micro-test-plus-xpack)
-testing framework.
-
-A typical run looks like:
-
-```console
-test 2
-    Start 2: unit-test
-...
-2/2 Test #2: unit-test ........................   Passed    0.29 sec
-```
-
+| Program | What it tests |
+| --- | --- |
+| [`sample`](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchDevelopment}}/tests/sources/sample/src/main.cpp) | the main primitives of the library, in a short application |
+| [`unit`](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchDevelopment}}/tests/sources/unit/src/main.cpp) | all the library functions, with the [µTest++](https://github.com/micro-os-plus/micro-test-plus-xpack) testing framework |

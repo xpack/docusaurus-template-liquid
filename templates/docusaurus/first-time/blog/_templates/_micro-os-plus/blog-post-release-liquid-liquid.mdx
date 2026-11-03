@@ -2,7 +2,7 @@
 
 title: {{topConfig.descriptiveName}} {% raw %}v{{releaseVersion}}{% endraw %} released
 seo_title: Version {% raw %}{{releaseVersion}}{% endraw %} released
-description: Version {% raw %}v{{releaseVersion}}{% endraw %} is a TODO new/maintenance release
+description: Version {% raw %}{{releaseVersion}}{% endraw %} is a TODO new/maintenance release
 keywords:
   - micro-os-plus
   - xpack
@@ -35,9 +35,9 @@ import CommonDownloadAnalytics from './_common/_download-analytics.mdx';
 
 TODO: select one summary
 
-Version **{% raw %}{{releaseVersion}}{% endraw %}** is a maintenance release; it fixes ...
+Version **{% raw %}{{releaseVersion}}{% endraw %}** is a maintenance release, addressing the following issues ...
 
-Version **{% raw %}{{releaseVersion}}{% endraw %}** is a new release; it adds ....
+Version **{% raw %}{{releaseVersion}}{% endraw %}** is a new release, introducing the following features ...
 
 <!-- truncate -->
 
@@ -48,10 +48,10 @@ project is a C++ source code library.
 
 <CommonPrerequisites nodeVersion="{{packageEnginesNodeVersion}}"/>
 
-## Install
+## Installation
 
 The most convenient way to integrate the `{{packageScopedName}}`
-package into a project is to add it as a dependency via **xpm**.
+package into a project is to add it as a dependency with **xpm**.
 
 <CodeBlock language="console"> {
 `xpm install {{packageScopedName}}@${frontMatter.version} --verbose
@@ -62,27 +62,31 @@ integrated into another project in the traditional manner, either
 by copying the relevant files into the target project or by
 linking the entire project as a Git submodule.
 
-Detailed instructions can be found in the [{% if websiteConfig.customInstallLabel != "" %}{{websiteConfig.customInstallLabel}}{% else %}Installation Guide{% endif %}](/docs/install/).
+Detailed instructions are available in the [{% if websiteConfig.customInstallLabel != "" %}{{websiteConfig.customInstallLabel}}{% else %}Installation Guide{% endif %}](/docs/install/).
 
 ## Source code
 
 - <Link to={frontMatter.release_tag_url}>GitHub tag v{frontMatter.version} tree</Link>
 
+## Major changes
+
+- None.
+
 ## Bug fixes
 
-- none
+- None.
 
 ## Enhancements
 
-- none
+- None.
 
-## Known problems
+## Known issues
 
-- none
+- None.
 
-## CI tests
+## Continuous integration tests
 
-Before publishing, a set of tests were performed.
+Before publishing, a set of tests was run.
 The results are available from:
 
 - [GitHub Actions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions)

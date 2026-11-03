@@ -4,7 +4,7 @@
 # Automatically generated from docusaurus-template-liquid/templates/docusaurus.
 
 title: Maintainer's Guide{% if websiteConfig.usePluralGuides %}s{% endif %}
-description: Assistance for project maintainers, including the release schedule, versioning scheme, and instructions on how to build, test, and publish.
+description: How to prepare, test, and publish a new release, including the release schedule and the versioning scheme.
 keywords:
 {%- if githubProjectOrganization == 'micro-os-plus' %}
   - micro-os-plus
@@ -50,18 +50,13 @@ import CommonContent from './_common/_content.mdx';
 
 {%- else %}
 
-# How to make a new release on unsupported organization.
+# How to make a new release on an unsupported organisation
 
 {%- endif %}
 
 {% if isNpmPublished -%}
 [![GitHub package.json version](https://img.shields.io/github/package-json/v/{{githubProjectOrganization}}/{{githubProjectName}}?color=blue)](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/package.json)
 [![NPM Version](https://img.shields.io/npm/v/{% if packageScope != "" %}%40{{packageScope}}%2F{% endif %}{{packageName}}?color=blue)](https://www.npmjs.com/package/{{packageScopedName}}/)
-{%- endif %}
-{%- if topConfig.isTypescript or topConfig.isJavascript %}
-{%- unless topConfig.skipCiTests %}
-[![CI on Push](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions/workflows/test-ci.yml/badge.svg)](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions/workflows/test-ci.yml)
-{%- endunless %}
 {%- endif %}
 [![GitHub issues](https://img.shields.io/github/issues/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/issues)
 [![GitHub pulls](https://img.shields.io/github/issues-pr/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/pulls)
@@ -80,13 +75,13 @@ import CommonContent from './_common/_content.mdx';
 [![licence](https://img.shields.io/github/license/{{githubProjectOrganization}}/{{githubProjectName}})](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/blob/{{branchMain}}/LICENSE)
 [![Website](https://img.shields.io/website?url=https%3A%2F%2F{{githubProjectOrganization}}.github.io%2F{{githubProjectName}}%2F)]({{packageHomepage}})
 
-This page is designed for maintainers of the
+This page is for the maintainers of the
 {%- if githubProjectOrganization == 'xpack' or githubProjectOrganization == 'xpack-dev-tools' %}
 **{{longXpackName}}**
 {%- elsif githubProjectOrganization == "micro-os-plus" %}
 **{{topConfig.descriptiveName}}**
 {%- endif %}
-project and provides documentation on creating new releases.
+project, and describes how to create new releases.
 
 <CommonContent />
 
