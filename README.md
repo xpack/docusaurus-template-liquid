@@ -141,6 +141,9 @@ For the xpm web
 - hasCustomHomepageFeatures
 - hasCompatibilityNoticesPage
 - hasCustomUserSidebar
+- hasCustomDeveloperSidebar (with `sidebar-docs-developer-custom.js`, and
+  `docs/developer/_project/_pages.mdx`, which lists the pages of the
+  category on the Contributor's Guide page)
 - hasCustomUserInformation
 
 For the organisation web

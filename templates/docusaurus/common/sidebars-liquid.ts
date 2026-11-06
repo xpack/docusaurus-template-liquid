@@ -17,6 +17,9 @@ import {customDocsGettingStartedSidebarCategory} from "./sidebar-docs-getting-st
 {%- if websiteConfig.hasCustomUserSidebar %}
 import {customDocsUserSidebarCategory} from "./sidebar-docs-user-custom";
 {%- endif %}
+{%- if websiteConfig.hasCustomDeveloperSidebar %}
+import {customDocsDeveloperSidebarCategory} from "./sidebar-docs-developer-custom";
+{%- endif %}
 {%- if websiteConfig.hasCustomSidebar %}
 import {customDocsSidebar} from "./sidebar-docs-custom";
 {%- endif %}
@@ -104,11 +107,15 @@ const sidebars: SidebarsConfig = {
     },
 {%- endif %}
 {%- unless websiteConfig.skipContributorGuide %}
+{%- if websiteConfig.hasCustomDeveloperSidebar %}
+    customDocsDeveloperSidebarCategory,
+{%- else %}
     {
       type: 'doc',
       id: 'developer/index',
       label: 'Contributor\'s Guide'
     },
+{%- endif %}
 {%- endunless %}
 {%- unless websiteConfig.skipMaintainerGuide %}
     {

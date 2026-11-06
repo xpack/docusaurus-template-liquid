@@ -81,7 +81,14 @@ the list is taken from `tests/config/tests-templates.json`.
 {%- assign hasNative = false %}
 {%- assign hasQemu = false %}
 {%- assign hasBoards = false %}
+{%- assign hasRaspberryPiZero2W = false %}
+{%- assign raspberryPiZero2WPrefix = 'raspberry-pi-zero-2-w-' %}
+{%- assign raspberryPiZero2WPrefixLength = raspberryPiZero2WPrefix | size %}
 {%- for platform in testsConfig.platforms %}
+{%- assign platformPrefix = platform | slice: 0, raspberryPiZero2WPrefixLength %}
+{%- if platformPrefix == raspberryPiZero2WPrefix %}
+{%- assign hasRaspberryPiZero2W = true %}
+{%- endif %}
 {%- if platform == 'synthetic-posix' %}
 {%- assign hasNative = true %}
 {%- elsif platform contains 'qemu-' %}
@@ -92,8 +99,8 @@ the list is taken from `tests/config/tests-templates.json`.
 {%- endfor %}
 {%- if hasNative %}
 
-The test applications are executed as **native processes** on the
-development machine with:
+The test applications are executed as **native processes** on macOS and
+GNU/Linux development machines with:
 {% for platform in testsConfig.platforms %}
 {%- if platform contains 'synthetic-' %}
 - `platforms/{{platform}}`
@@ -119,6 +126,11 @@ to run them, the board must be connected and powered up:
 - `platforms/{{platform}}`
 {%- endunless %}
 {%- endfor %}
+{%- endif %}
+
+{%- if hasRaspberryPiZero2W %}
+
+Note: The Raspberry Pi Zero 2 W platform is work in progress.
 {%- endif %}
 
 The build configurations use exactly the same source files on all platforms,
@@ -165,4 +177,3 @@ reference pages are generated with [Doxygen](https://www.doxygen.nl/).
 <CommonBuildWebsiteLocally />
 
 <CommonStartLocalWebServer />
-
