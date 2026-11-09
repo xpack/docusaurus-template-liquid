@@ -15,6 +15,7 @@ Start with a clean-up (not needed after the initial `git clone`):
 ```sh
 npm --prefix ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/tests install
 npm --prefix ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/tests run deep-clean
+npm --prefix ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/tests install
 ```
 
 :::tip
@@ -51,6 +52,13 @@ To execute all tests with all toolchain versions:
 ```sh
 xpm run install-all -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/tests
 xpm run test-all -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/tests
+```
+
+To build the physical boards binaries with the latest versions of toolchains:
+
+```sh
+xpm run install-boards -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/tests
+xpm run build-boards -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/tests
 ```
 
 ### Clean-ups
