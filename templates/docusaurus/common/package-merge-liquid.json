@@ -10,17 +10,17 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@docusaurus/core": "3.10.1",
-    "@docusaurus/faster": "3.10.1",
-    "@docusaurus/plugin-client-redirects": "3.10.1",
-    "@docusaurus/plugin-ideal-image": "3.10.1",
-    "@docusaurus/preset-classic": "3.10.1",
-    "@docusaurus/theme-search-algolia": "3.10.1",
+    "@docusaurus/core": "3.10.2",
+    "@docusaurus/faster": "3.10.2",
+    "@docusaurus/plugin-client-redirects": "3.10.2",
+    "@docusaurus/plugin-ideal-image": "3.10.2",
+    "@docusaurus/preset-classic": "3.10.2",
+    "@docusaurus/theme-search-algolia": "3.10.2",
     "@mdx-js/react": "^3.1.1",
     "clsx": "^2.0.0",
     "prism-react-renderer": "^2.3.0",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3"
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
   },
   "$dependenciesUrls": {
     "del-cli": "https://www.npmjs.com/package/del-cli",
@@ -35,12 +35,12 @@
     "open-cli": "^8.0.0",
     "broken-link-checker": "^0.7.8",
 {%- endif %}
-    "@docusaurus/module-type-aliases": "3.10.1",
-    "@docusaurus/tsconfig": "3.10.1",
-    "@docusaurus/types": "3.10.1",
+    "@docusaurus/module-type-aliases": "3.10.2",
+    "@docusaurus/tsconfig": "3.10.2",
+    "@docusaurus/types": "3.10.2",
     "json": "^11.0.0",
-    "liquidjs": "^10.25.0",
-    "glob": "^13.0.6",
+    "liquidjs": "^10.30.1",
+    "glob": "^14.0.4",
 {%- if topConfig.isTypescript %}
     "@xpack/tsdoc2docusaurus-cli": "^1.3.2",
     "@microsoft/api-documenter": "^7.28.2",
