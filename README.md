@@ -76,7 +76,7 @@ Add a `websiteConfig` object to `website/package.json`, just before `engines`.
     "nodeVersion": "20.19.4"
   },
   "engines": {
-    "node": ">=20.0"
+    "node": ">=22.12"
   }
 }
 ```
