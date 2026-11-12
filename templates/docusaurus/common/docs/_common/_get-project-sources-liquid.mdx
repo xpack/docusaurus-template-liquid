@@ -13,21 +13,22 @@ The project is hosted on GitHub:
 
 <BranchesDetails />
 
-To clone the stable branch (`{{branchMain}}`), execute the following
-commands in a terminal (on Windows use the _Git Bash_ console):
+To contribute **Pull Requests**, fork the project and make sure the
+**Copy the {{branchMain}} branch only** option is **disabled**, so that
+the `{{branchDevelopment}}` branch is also copied and can be used for
+contributions.
 
-```sh
-rm -rf ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git && \
-mkdir -p ~/Work/{{githubProjectOrganization}} && \
-git clone \
-  --branch {{branchMain}} \
-  https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}.git \
-  ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git
-```
+:::tip
 
-<details>
-<summary>For development purposes, clone the
-`{{branchDevelopment}}` branch.</summary>
+After making changes, direct the Pull Requests to the
+`{{branchDevelopment}}` branch.
+
+:::
+
+The next step would normally be to **clone the forked repository**.
+
+However, if Pull Requests are not intended, directly clone the
+`{{branchDevelopment}}` branch of the original repository:
 
 ```sh
 rm -rf ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git && \
@@ -38,44 +39,37 @@ git clone \
   ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git
 ```
 
-</details>
-
-Alternatively, if the repository has already been cloned:
+If the repository has already been cloned, update it with:
 
 ```sh
 git -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git pull
 ```
 
-:::tip
-
-To contribute Pull Requests, fork the project and ensure that
-**Copy the {{branchMain}} branch only** is **disabled**.
-
-Use the `{{branchDevelopment}}` branch, and direct the Pull Requests to the
-same branch.
-
-:::
-
-## Add links for development
+<details>
+<summary>Add links for development</summary>
 
 {%- if isXpack %}
 
 By default, to prevent inadvertent changes, xpm dependencies are
-installed in read-only folders.
+installed in read-only folders with filtered content; developer-related
+files are not installed
 
 However, during development, it is convenient to maintain a writable
 instance of the code to enable changes in parallel with the parent
 project.
 
-Similarly to the npm link mechanism, xpm allows linking local
-development folders to the global xPacks store, enabling changes to
-be reflected in dependent projects without reinstalling.
+Therefore, during development, if this project is used as a dependency
+of another project, it is convenient to use the full version of the
+project and make changes directly in the local development folder.
+
+The mechanism xpm uses for this is called _linking_, and is similar
+to the npm link mechanism.
 
 The process has two steps:
 
 1. Tell the global xpm configuration where the local development
    folder is located.
-2. Tell the local project to use the linked development folder
+2. Tell the top project to use the linked development folder
    instead of the installed read-only dependency.
 
 The first step requires executing the `xpm link` command in the
@@ -95,7 +89,7 @@ For example:
 lrwxr-xr-x  1 ilg  staff  75 Oct 26 21:57 xPacks/{{githubProjectOrganization}}/{{githubProjectName}}/.link -> /Users/ilg/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git
 ```
 
-For the second step, in the local project, instead of adding the
+For the second step, in the top project, instead of adding the
 dependency by installing it, run the command to link it:
 
 ```sh
@@ -104,36 +98,35 @@ xpm link {{packageScopedName}}
 
 {%- else %}
 
-By default, to prevent inadvertent changes, npm dependencies are
-installed in read-only folders.
+By default, npm dependencies are installed as sub-folders of
+`node_modules`, with filtered content; developer-related files are not
+installed. These sub-folders are also overwritten on each `npm install`,
+so any changes made there are lost.
 
-However, during development, it is convenient to maintain a writable
-instance of the code to enable changes in parallel with the parent
-project.
+Therefore, during development, if this project is used as a dependency
+of another project, it is convenient to use the full version of the
+project and make changes directly in the local development folder.
 
-npm allows linking local development folders to the global npm store,
-enabling changes to be reflected in dependent projects without
-reinstalling.
+The mechanism npm uses for this is called _linking_.
 
 The process has two steps:
 
 1. Tell the global npm configuration where the local development
    folder is located.
-2. Tell the local project to use the linked development folder
-   instead of the installed read-only dependency.
+2. Tell the top project to use the linked development folder
+   instead of the installed filtered dependency.
 
 The first step requires executing the `npm link` command in the
 local development folder, as shown below:
 
 ```sh
-npm --prefix ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git \
-  link
+npm --prefix ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git link
 ```
 
 The result is the creation of a symbolic link in the global npm
 store pointing to the local development folder.
 
-For the second step, in the local project, instead of adding the
+For the second step, in the top project, instead of adding the
 dependency by installing it, run the command to link it:
 
 ```sh
@@ -141,3 +134,4 @@ npm link {{packageScopedName}}
 ```
 
 {%- endif %}
+</details>
