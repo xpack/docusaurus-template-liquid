@@ -5,7 +5,9 @@
 
 :::note
 
-Compatibility with legacy CommonJS is required until VS Code extensions
-are updated to import ES6 modules.
+The `{{packageScopedName}}` package is an ES module only, without a
+CommonJS build. CommonJS applications can load it with `require()`, in the
+versions of Node.js that support loading ES modules, or with a dynamic
+`import()`.
 
 :::
