@@ -30,7 +30,7 @@
     "typescript": "https://www.npmjs.com/package/typescript"
   },
   "devDependencies": {
-    "del-cli": "^7.0.0",
+    "del-cli": "^8.0.1",
 {%- if githubProjectOrganization == 'micro-os-plus' %}
     "open-cli": "^8.0.0",
     "broken-link-checker": "^0.7.8",
@@ -49,8 +49,6 @@
 {%- if websiteConfig.hasDoxygenDocusaurusApi %}
     "@xpack/doxygen2docusaurus": "^2.2.8",
 {%- endif %}
-    "@xpack/docusaurus-template-liquid": "github:xpack/docusaurus-template-liquid",
-    "@xpack/npm-packages-helper": "github:xpack/npm-packages-helper",
     "typescript": "~5.9.3"
   },
   "scripts": {
@@ -116,6 +114,6 @@
     ]
   },
   "engines": {
-    "node": ">=20.0"
+    "node": ">=22.12"
   }
 }
