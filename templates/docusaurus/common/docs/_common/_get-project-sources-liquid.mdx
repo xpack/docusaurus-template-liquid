@@ -25,16 +25,25 @@ After making changes, direct the Pull Requests to the
 
 :::
 
-The next step would normally be to **clone the forked repository**.
-
-However, if Pull Requests are not intended, directly clone the
-`{{branchDevelopment}}` branch of the original repository:
+The next step would normally be to **clone the forked repository**:
 
 ```sh
 rm -rf ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git && \
 mkdir -p ~/Work/{{githubProjectOrganization}} && \
 git clone \
-  --branch {{branchDevelopment}} \
+  --branch {{branchMain}} \
+  https://github.com/<your-account>/{{githubProjectName}}.git \
+  ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git
+```
+
+However, if Pull Requests are not intended, you can directly clone the
+`{{branchMain}}` branch of the original repository:
+
+```sh
+rm -rf ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git && \
+mkdir -p ~/Work/{{githubProjectOrganization}} && \
+git clone \
+  --branch {{branchMain}} \
   https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}.git \
   ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git
 ```
