@@ -3,40 +3,70 @@
 
 import BranchesDetails from './_branches-details.mdx'
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+export const OnlyForKind = (props) =>
+  props.kind === props.show ? <>{props.children}</> : null;
+
 {/* ------------------------------------------------------------------------ */}
 
 ## Obtain project sources
 
-The project is hosted on GitHub:
+The **{{packageScopedName}}** project is hosted on GitHub:
 
 - https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}.git
 
 <BranchesDetails />
 
-To contribute **Pull Requests**, fork the project and make sure the
-**Copy the {{branchMain}} branch only** option is **disabled**, so that
-the `{{branchDevelopment}}` branch is also copied and can be used for
-contributions.
+<OnlyForKind kind={props.kind} show="developer">
+
+<Tabs groupId="clone">
+
+<TabItem value="fork" label="Use Fork" default>
+
+To contribute **Pull Requests**, fork the project. For this, go to the
+GitHub project page and click on the
+**[Fork](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/fork)**
+button.
 
 :::tip
 
-After making changes, direct the Pull Requests to the
-`{{branchDevelopment}}` branch.
+To get all the branches of the repository, be sure to **disable** the
+**Copy the {{branchMain}} branch only** option in the fork dialog.
 
 :::
 
-The next step would normally be to **clone the forked repository**:
+After creating the fork, the next step is to **clone the forked repository**.
+First set your GitHub account name:
+
+```sh
+USER_ACCOUNT_ID=<your-account>
+```
+
+Then clone the `{{branchDevelopment}}` branch:
 
 ```sh
 rm -rf ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git && \
 mkdir -p ~/Work/{{githubProjectOrganization}} && \
 git clone \
-  --branch {{branchMain}} \
-  https://github.com/<your-account>/{{githubProjectName}}.git \
+  --branch {{branchDevelopment}} \
+  https://github.com/${USER_ACCOUNT_ID}/{{githubProjectName}}.git \
   ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git
 ```
 
-However, if Pull Requests are not intended, you can directly clone the
+:::tip
+
+After making changes, be sure to direct the Pull Requests to the
+`{{branchDevelopment}}` branch, otherwise they may be rejected.
+
+:::
+
+</TabItem>
+
+<TabItem value="original" label="Use Original">
+
+If Pull Requests are not intended, you can directly clone the
 `{{branchMain}}` branch of the original repository:
 
 ```sh
@@ -48,20 +78,45 @@ git clone \
   ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git
 ```
 
+To work from the development branch instead, clone `{{branchDevelopment}}`
+from the original repository.
+
+</TabItem>
+
+</Tabs>
+
+</OnlyForKind>
+
+<OnlyForKind kind={props.kind} show="maintainer">
+
+Clone the
+`{{branchDevelopment}}` branch of the original repository:
+
+```sh
+rm -rf ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git && \
+mkdir -p ~/Work/{{githubProjectOrganization}} && \
+git clone \
+  --branch {{branchDevelopment}} \
+  https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}.git \
+  ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git
+```
+
+</OnlyForKind>
+
 If the repository has already been cloned, update it with:
 
 ```sh
 git -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git pull
 ```
 
-<details>
-<summary>Add links for development</summary>
-
 {%- if isXpack %}
+
+<details>
+<summary>What are npm/xpm links?</summary>
 
 By default, to prevent inadvertent changes, xpm dependencies are
 installed in read-only folders with filtered content; developer-related
-files are not installed
+files are not installed.
 
 However, during development, it is convenient to maintain a writable
 instance of the code to enable changes in parallel with the parent
@@ -105,7 +160,24 @@ dependency by installing it, run the command to link it:
 xpm link {{packageScopedName}}
 ```
 
+Similarly, this project, which uses multiple xpm dependencies, can also
+benefit from linking them during development.
+
+For this, clone each xpm dependency in a local folder and run the
+`xpm link` command in each cloned folder, as described above.
+
+Then, in the `tests` folder, run `xpm link <dependency>` for each linked
+dependency.
+
+As a shortcut, the configuration provides `link-dependencies` xpm actions
+that link multiple dependencies at once.
+
+</details>
+
 {%- else %}
+
+<details>
+<summary>What are npm links?</summary>
 
 By default, npm dependencies are installed as sub-folders of
 `node_modules`, with filtered content; developer-related files are not
@@ -142,5 +214,6 @@ dependency by installing it, run the command to link it:
 npm link {{packageScopedName}}
 ```
 
-{%- endif %}
 </details>
+
+{%- endif %}

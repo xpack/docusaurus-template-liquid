@@ -8,21 +8,23 @@
 {% if topConfig.isTypescript -%}
 - Terminate all running tasks (**Terminal** → **Terminate Task...**)
 {% endif -%}
-- Switch to the `{{branchDevelopment}}` branch
+- Switch to the `{{branchDevelopment}}` branch (`git checkout {{branchDevelopment}}`)
 {% if topConfig.isTypescript or topConfig.isJavascript -%}
 - `npm run fix`
 {% endif -%}
-- If there are changes, **commit** all changes to the `{{branchDevelopment}}` branch
+- If there are changes, **commit** them to the `{{branchDevelopment}}` branch
 {% if topConfig.isTypescript or topConfig.isJavascript -%}
 - `npm run test`
 {% endif -%}
-- Check the latest commits with `npm run git-log`
-- Update `CHANGELOG.md`, add a line such as _**\* v{{releaseVersion}} published on npmjs.com**_
+- Update the latest commits with `npm run update-changelog`
+- Update `CHANGELOG.md`; add a line such as _**\* v{{releaseVersion}} published on npmjs.com**_
 - **Commit** with the message _**CHANGELOG: publish npm v{{releaseVersion}}**_
 - Check the list of files included in the npm package:
   ```sh
   npm run npm-pack
   ```
 - If the list is not correct, fix `.npmignore`; since this file is generated,
-  change its template in the helper project, and regenerate it with the
+  change its template in the helper project and regenerate it with the
   **generate-top-commons** npm script
+- Redo `npm install` to ensure `package-lock.json` is up-to-date
+- Redo `npm run npm-link-helpers` to update to the linked helpers

@@ -100,8 +100,18 @@ import CommonContent from './_common/_content.mdx';
 {%- unless topConfig.skipCiTests %}
 
 ## Testing
+{%- if githubProjectOrganization == 'micro-os-plus' and websiteConfig.skipContributorGuide != true %}
+
+The library is tested with every push, with
+[GitHub Actions](https://github.com/{{githubProjectOrganization}}/{{githubProjectName}}/actions),
+natively on Ubuntu, macOS, and Windows, and on the 32-bit and 64-bit Arm and
+RISC-V platforms emulated by QEMU; the details are in the
+[Continuous integration](/docs/developer/#continuous-integration-ci) section of
+the Contributor's Guide{% if websiteConfig.usePluralGuides %}s{% endif %}.
+{%- else %}
 
 <CommonContinuousIntegration />
+{%- endif %}
 
 {%- endunless %}
 

@@ -78,12 +78,24 @@ import ProjectPatches from '../_project/_patches.mdx';
 compiled on x64 GNU/Linux, using [mingw-w64](https://mingw-w64.org).{% endif %}
 
 For details on installing the prerequisites, please read the
-[Build Prerequisites](https://xpack-dev-tools.github.io/docs/developer/install/prerequisites/)
+**[Build Prerequisites](https://xpack-dev-tools.github.io/docs/developer/install/prerequisites/)**
 page.
 
-<CommonGetProjectSources />
+<CommonGetProjectSources kind="maintainer" />
+
+<details>
+<summary>How to obtain the writable helper sources?</summary>
+
+The project has a dependency on a common helper, which is normally installed
+as a read-only dependency; for development purposes, to enable modifications
+to the scripts located within the helper, clone the
+<code>xpack-development</code> branch and link it to the
+global packages location:
 
 <CommonGetHelperSources helperOrganizationName="xpack-dev-tools"  helperProjectName="xbb-helper-xpack" helperBranchName="xpack-development" />
+
+After this, run the `npm-link-helpers` script to link all the local helper sources.
+</details>
 
 <ProjectMoreRepos/>
 

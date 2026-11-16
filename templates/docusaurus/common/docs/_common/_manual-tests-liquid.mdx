@@ -26,12 +26,16 @@ can be relatively large, up to several hundred megabytes.
 
 :::
 
+#### Native system compiler tests
+
 To execute the tests with the system compiler (usually not available on Windows):
 
 ```sh
 xpm run install -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/tests
 xpm run test -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/tests
 ```
+
+#### More native and QEMU tests
 
 To execute a selection of tests with the latest versions of toolchains:
 
@@ -54,12 +58,28 @@ xpm run install-all -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}
 xpm run test-all -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/tests
 ```
 
+{%- if testsConfig.boardConfigurations and testsConfig.boardConfigurations.size > 0 %}
+
+#### Physical boards tests
+
 To build the physical boards binaries with the latest versions of toolchains:
 
 ```sh
 xpm run install-boards -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/tests
 xpm run build-boards -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/tests
 ```
+
+Running the tests on a physical board requires the board to be connected and
+powered up. To execute the tests for a specific board configuration with the
+latest versions of toolchains:
+{%- for boardConfiguration in testsConfig.boardConfigurations %}
+
+```sh
+xpm run install-{{boardConfiguration}}-cmake-gcc -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/tests
+xpm run test-{{boardConfiguration}}-cmake-gcc -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/tests
+```
+{%- endfor %}
+{%- endif %}
 
 ### Clean-ups
 
@@ -70,6 +90,7 @@ To clean up the tests folder, use:
 ```sh
 npm --prefix ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/tests install
 npm --prefix ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/tests run deep-clean
+npm --prefix ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/tests install
 ```
 
 A considerable amount of space may also be used by the toolchains.

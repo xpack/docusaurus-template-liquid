@@ -8,12 +8,13 @@ import CommonPrerequisites from '@site/docs/_common/_prerequisites.mdx';
 import CommonGetProjectSources from '@site/docs/_common/_get-project-sources.mdx';
 import CommonGetHelperSources from '@site/docs/_common/_get-helper-sources-details.mdx';
 import CommonCodeFormatting from '@site/docs/_common/_code-formatting.mdx';
-import CommonPrepareWebsite from '@site/docs/_common/_prepare-website.mdx';
 import CommonBuildWebsiteLocally from '@site/docs/_common/_build-website-locally.mdx';
 import CommonRegenerateDoxygen from '@site/docs/_common/_regenerate-doxygen.mdx';
 import CommonPublishWebsite from '@site/docs/_common/_publish-website.mdx';
 import CommonStartLocalWebServer from '@site/docs/_common/_start-local-web-server.mdx';
 import CommonContinuousIntegration from '@site/docs/_common/_continuous-integration.mdx';
+
+import CodeBlock from '@theme/CodeBlock';
 
 import ProjectTestDetails from '../_project/_test-details.mdx';
 
@@ -24,9 +25,31 @@ uses the xPack Framework tools during development.
 
 <CommonPrerequisites nodeVersion="{{packageEnginesNodeVersion}}" nodeVersionMajor="{{packageEnginesNodeVersionMajor}}"/>
 
-<CommonGetProjectSources />
+<CommonGetProjectSources kind="developer" />
+
+<details>
+<summary>How to obtain the writable helper sources?</summary>
+
+The project has a dependency on a common helper, which is normally installed
+as a read-only dependency; for development purposes, to enable modifications
+to the scripts located within the helper, clone the
+<code>xpack-development</code> branch and link it to the
+global packages location:
 
 <CommonGetHelperSources helperOrganizationName="micro-os-plus"  helperProjectName="build-helper-xpack" helperBranchName="xpack-development" />
+
+{%- if topConfig.hasWebsite %}
+
+Similarly, for the website helper, clone the
+<code>master</code> branch and link it to the
+global packages location:
+
+<CommonGetHelperSources helperOrganizationName="xpack"  helperProjectName="docusaurus-template-liquid" helperBranchName="master" />
+
+{%- endif %}
+
+After this, run the `npm-link-helpers` script to link all the local helper sources.
+</details>
 
 ## Satisfy dependencies
 
@@ -35,14 +58,14 @@ Execute the following commands:
 ```sh
 npm --prefix ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git install
 npm --prefix ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/tests install
-xpm install -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/tests
+xpm install -C ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git
 ```
 
-The last two commands install the dependencies of the tests project, such as the
-build tools. The toolchains required by each build configuration are
-installed later, by the `install` actions, as described in
-[Manual tests](#manual-tests); those actions also run `xpm install`, so
-repeating it is harmless.
+The first two commands install the npm dependencies of the project and of the
+tests project, and the third one installs the xpm development dependencies of
+the project, such as the code formatters. The build tools and the toolchains
+required by each build configuration are installed later, by the `install`
+actions of the tests project, as described in [Manual tests](#manual-tests).
 
 ## Language standard compliance
 
@@ -56,14 +79,23 @@ The µOS++ testing strategy involves compiling the sources with
 as many toolchains as possible and executing them on a wide
 range of platforms.
 
+Therefore, **after making any changes**, it is necessary to **run the tests**.
+
+For simple changes, it may be sufficient to run the tests only on the
+host platforms (`xpm run test`).
+
+For more complex changes it is necessary to run the tests on both the host
+and target platforms to ensure correctness (`xpm run test-selected` or
+`xpm run test-latest`).
+
 ### Host platforms
 
 The tests may be executed on any of the supported host
 platforms:
 
 - GNU/Linux (x64 and arm64, **GLIBC>=2.28**); to execute the native
-tests, a C++ development environment is required
-(on Ubuntu install `build-essential`)
+tests, **a C++ development environment** is required
+(on Ubuntu install `build-essential`, on Arch/Manjaro install `base-devel`)
 - macOS (>= **11.0**);
 as C++ development environment use **Command Line Tools**
 - Windows 10, Windows 11
@@ -127,8 +159,11 @@ to run them, the board must be connected and powered up:
 Note: The Raspberry Pi Zero 2 W platform is work in progress.
 {%- endif %}
 
-The build configurations use exactly the same source files on all platforms,
-without changes.
+### Portable test sources
+
+The test sources are **highly portable**: they are identical on all platforms
+and in all build configurations; only the platform-specific code and the
+build configuration files differ.
 
 ### Semihosting
 
@@ -136,6 +171,16 @@ On embedded platforms, the applications interact with the
 host via the
 [semihosting mechanism](https://github.com/ARM-software/abi-aa/blob/main/semihosting/semihosting.rst),
 defined by Arm and used with the same protocol on RISC-V.
+
+The semihosting implementation must support at least
+`SYS_GETCMDLINE` (to pass the command-line arguments),
+`SYS_EXIT` (to return the exit code),
+and the file operations `SYS_OPEN`, `SYS_WRITE`, and `SYS_CLOSE`
+(to write the test output).
+
+A complete implementation is provided by the
+[@micro-os-plus/semihosting](https://github.com/micro-os-plus/semihosting-xpack)
+package.
 
 ### Toolchains
 
@@ -174,7 +219,10 @@ npm --prefix ~/Work/{{githubProjectOrganization}}/{{githubProjectName}}.git/webs
 
 <CommonRegenerateDoxygen />
 
-<CommonPrepareWebsite />
+The pages generated from templates, marked `DO NOT EDIT!`, are regenerated by
+the maintainers when the website is published (see the
+[Maintainer's Guide{% if websiteConfig.usePluralGuides %}s{% endif %}](/docs/maintainer/#publish-the-website));
+change only the pages of the project, which do not have this mark.
 
 <CommonBuildWebsiteLocally />
 
